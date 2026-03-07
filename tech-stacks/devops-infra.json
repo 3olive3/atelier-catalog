@@ -1,0 +1,18 @@
+{
+  "catalogID": "devops-infra",
+  "name": "DevOps / Infrastructure",
+  "description": "Infrastructure automation: Bash, Terraform, Ansible, Docker, Kubernetes",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "tool",
+  "iconName": "gearshape.2",
+  "technologies": [
+    { "name": "Bash", "category": "language" },
+    { "name": "Terraform", "category": "tool" },
+    { "name": "Ansible", "category": "tool" },
+    { "name": "Docker", "category": "tool" },
+    { "name": "Kubernetes", "category": "tool" },
+    { "name": "Prometheus", "category": "tool" },
+    { "name": "Grafana", "category": "tool" }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "catalogID": "mdn-web-docs",
+  "name": "MDN Web Docs",
+  "description": "Mozilla Developer Network — comprehensive web technology reference (HTML, CSS, JavaScript, Web APIs)",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "url": "https://developer.mozilla.org",
+  "iconName": "globe"
+}

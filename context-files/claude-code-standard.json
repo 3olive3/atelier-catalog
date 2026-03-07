@@ -1,0 +1,8 @@
+{
+  "catalogID": "claude-code-standard",
+  "name": "CLAUDE.md Standard Template",
+  "description": "Standard CLAUDE.md template for Claude Code agents with build commands, architecture, and coding conventions",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "templateContent": "# CLAUDE.md\n\n## Commands\n\n```bash\n# Build\n{{build_command}}\n\n# Test\n{{test_command}}\n\n# Lint\n{{lint_command}}\n```\n\n## Architecture\n\n{{architecture_description}}\n\n## Coding Conventions\n\n- {{convention_1}}\n- {{convention_2}}\n- {{convention_3}}\n"
+}

@@ -1,0 +1,10 @@
+{
+  "catalogID": "datadog-default",
+  "name": "Datadog",
+  "description": "Datadog APM and logging configuration for full-stack observability",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "provider": "datadog",
+  "defaultEndpoint": "https://api.datadoghq.com",
+  "defaultPath": "/api/v1/logs"
+}

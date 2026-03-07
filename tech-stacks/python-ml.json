@@ -1,0 +1,17 @@
+{
+  "catalogID": "python-ml",
+  "name": "Python / ML",
+  "description": "Python data science and ML: PyTorch, scikit-learn, pandas, FastAPI",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "language",
+  "iconName": "brain",
+  "technologies": [
+    { "name": "Python", "category": "language", "version": "3.12" },
+    { "name": "PyTorch", "category": "framework" },
+    { "name": "scikit-learn", "category": "framework" },
+    { "name": "pandas", "category": "framework" },
+    { "name": "FastAPI", "category": "framework" },
+    { "name": "Docker", "category": "tool" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "catalogID": "swift-ios",
+  "name": "Swift / iOS",
+  "description": "Apple ecosystem: Swift, SwiftUI, UIKit, Xcode, SPM",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "language",
+  "iconName": "swift",
+  "technologies": [
+    { "name": "Swift", "category": "language", "version": "6.0" },
+    { "name": "SwiftUI", "category": "framework" },
+    { "name": "UIKit", "category": "framework" },
+    { "name": "SPM", "category": "tool" },
+    { "name": "Xcode", "category": "tool" }
+  ]
+}

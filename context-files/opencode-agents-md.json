@@ -1,0 +1,8 @@
+{
+  "catalogID": "opencode-agents-md",
+  "name": "AGENTS.md Standard Template",
+  "description": "Standard AGENTS.md template for OpenCode agents with role, tools, and workflow instructions",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "templateContent": "# AGENTS.md\n\n## Role\n\n{{role_description}}\n\n## Tools\n\n{{available_tools}}\n\n## Workflow\n\n1. {{step_1}}\n2. {{step_2}}\n3. {{step_3}}\n\n## Constraints\n\n- {{constraint_1}}\n- {{constraint_2}}\n"
+}

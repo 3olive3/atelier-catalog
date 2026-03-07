@@ -1,0 +1,13 @@
+{
+  "catalogID": "deny-env-files",
+  "name": "Deny .env File Access",
+  "description": "Prevent reading or writing .env files that may contain secrets",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "rules": [
+    { "permissionKey": "read", "pattern": "*.env", "value": "deny" },
+    { "permissionKey": "read", "pattern": "*.env.*", "value": "deny" },
+    { "permissionKey": "edit", "pattern": "*.env", "value": "deny" },
+    { "permissionKey": "edit", "pattern": "*.env.*", "value": "deny" }
+  ]
+}

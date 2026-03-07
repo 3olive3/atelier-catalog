@@ -1,0 +1,20 @@
+{
+  "catalogID": "full-autonomy",
+  "name": "Full Autonomy",
+  "description": "Agent has full access to all tools without prompting (use with trusted agents only)",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "rules": [
+    { "permissionKey": "read", "pattern": "*", "value": "allow" },
+    { "permissionKey": "edit", "pattern": "*", "value": "allow" },
+    { "permissionKey": "glob", "pattern": "*", "value": "allow" },
+    { "permissionKey": "grep", "pattern": "*", "value": "allow" },
+    { "permissionKey": "list", "pattern": "*", "value": "allow" },
+    { "permissionKey": "bash", "pattern": "*", "value": "allow" },
+    { "permissionKey": "task", "pattern": "*", "value": "allow" },
+    { "permissionKey": "skill", "pattern": "*", "value": "allow" },
+    { "permissionKey": "lsp", "pattern": "*", "value": "allow" },
+    { "permissionKey": "webfetch", "pattern": "*", "value": "allow" },
+    { "permissionKey": "websearch", "pattern": "*", "value": "allow" }
+  ]
+}

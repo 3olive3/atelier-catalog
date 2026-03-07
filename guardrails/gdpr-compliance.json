@@ -1,0 +1,9 @@
+{
+  "catalogID": "gdpr-compliance",
+  "name": "GDPR Compliance",
+  "description": "Ensure agents do not log, store, or transmit personally identifiable information (PII)",
+  "version": "1.0.0",
+  "source": "marketplace",
+  "iconName": "person.badge.shield.checkmark",
+  "defaultValue": false
+}

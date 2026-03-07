@@ -1,0 +1,18 @@
+{
+  "catalogID": "swift-server",
+  "name": "Swift Server-Side",
+  "description": "Server-side Swift: Vapor, SwiftNIO, Fluent, SQLite/PostgreSQL",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "framework",
+  "iconName": "server.rack",
+  "technologies": [
+    { "name": "Swift", "category": "language", "version": "6.0" },
+    { "name": "Vapor", "category": "framework", "version": "4.x" },
+    { "name": "SwiftNIO", "category": "framework" },
+    { "name": "Fluent", "category": "framework" },
+    { "name": "SQLite", "category": "database" },
+    { "name": "PostgreSQL", "category": "database" },
+    { "name": "Docker", "category": "tool" }
+  ]
+}

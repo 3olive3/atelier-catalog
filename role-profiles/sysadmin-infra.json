@@ -1,0 +1,22 @@
+{
+  "catalogID": "sysadmin-infra",
+  "name": "Infrastructure SysAdmin",
+  "description": "Infrastructure management agent for servers, networking, monitoring, and deployment",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "baseRole": "sysadmin",
+  "defaultModel": "claude-sonnet-4",
+  "defaultExecutionMode": "supervised",
+  "defaultReasoningMode": "standard",
+  "allowedTiers": ["builder", "operative"],
+  "suggestedTechStacks": ["devops-infra"],
+  "guardrailPresets": {
+    "allowShellExecution": true,
+    "allowFileCreation": true,
+    "allowNetworkAccess": true,
+    "allowPackageInstall": false,
+    "requireHumanApproval": true,
+    "readOnlyMode": false,
+    "sandboxMode": false
+  }
+}

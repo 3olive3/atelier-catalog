@@ -1,0 +1,18 @@
+{
+  "name": "Atelier Official Catalog",
+  "version": "1.0.0",
+  "description": "Built-in and community catalog entries for the Atelier platform",
+  "repository": "https://github.com/3olive3/atelier-catalog",
+  "types": [
+    "guardrails",
+    "permissions",
+    "mcps",
+    "skills",
+    "role-profiles",
+    "git-repositories",
+    "tech-stacks",
+    "knowledge-bases",
+    "context-files",
+    "observability"
+  ]
+}

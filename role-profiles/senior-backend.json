@@ -1,0 +1,13 @@
+{
+  "catalogID": "senior-backend",
+  "name": "Senior Backend Engineer",
+  "description": "Experienced backend developer with API design, database, and system architecture focus",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "baseRole": "backend",
+  "defaultModel": "claude-sonnet-4",
+  "defaultExecutionMode": "autonomous",
+  "defaultReasoningMode": "extended",
+  "allowedTiers": ["coordinator", "builder"],
+  "suggestedTechStacks": ["swift-server", "typescript-fullstack", "python-ml"]
+}

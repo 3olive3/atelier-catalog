@@ -1,0 +1,9 @@
+{
+  "catalogID": "no-force-push",
+  "name": "No Force Push",
+  "description": "Prevent agents from running git push --force or git push -f",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "exclamationmark.shield",
+  "defaultValue": true
+}

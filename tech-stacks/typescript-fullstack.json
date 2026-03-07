@@ -1,0 +1,18 @@
+{
+  "catalogID": "typescript-fullstack",
+  "name": "TypeScript Full-Stack",
+  "description": "Modern TypeScript: Node.js, React/Next.js, Express, PostgreSQL",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "language",
+  "iconName": "chevron.left.forwardslash.chevron.right",
+  "technologies": [
+    { "name": "TypeScript", "category": "language", "version": "5.x" },
+    { "name": "Node.js", "category": "runtime", "version": "22.x" },
+    { "name": "React", "category": "framework" },
+    { "name": "Next.js", "category": "framework" },
+    { "name": "Express", "category": "framework" },
+    { "name": "PostgreSQL", "category": "database" },
+    { "name": "Docker", "category": "tool" }
+  ]
+}

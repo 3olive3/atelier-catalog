@@ -1,0 +1,9 @@
+{
+  "catalogID": "apple-developer",
+  "name": "Apple Developer Documentation",
+  "description": "Official Apple developer documentation for Swift, SwiftUI, UIKit, and Apple frameworks",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "url": "https://developer.apple.com/documentation",
+  "iconName": "apple.logo"
+}

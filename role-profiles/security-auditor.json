@@ -1,0 +1,21 @@
+{
+  "catalogID": "security-auditor",
+  "name": "Security Auditor",
+  "description": "Security-focused agent for code review, vulnerability scanning, and compliance checks",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "baseRole": "qa",
+  "defaultModel": "claude-opus-4",
+  "defaultExecutionMode": "supervised",
+  "defaultReasoningMode": "extended",
+  "allowedTiers": ["builder"],
+  "guardrailPresets": {
+    "allowShellExecution": false,
+    "allowFileCreation": false,
+    "allowNetworkAccess": true,
+    "allowPackageInstall": false,
+    "requireHumanApproval": true,
+    "readOnlyMode": true,
+    "sandboxMode": true
+  }
+}

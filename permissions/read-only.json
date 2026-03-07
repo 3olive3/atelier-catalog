@@ -1,0 +1,17 @@
+{
+  "catalogID": "read-only",
+  "name": "Read-Only Access",
+  "description": "Agent can read and search but cannot modify files or run shell commands",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "rules": [
+    { "permissionKey": "read", "pattern": "*", "value": "allow" },
+    { "permissionKey": "glob", "pattern": "*", "value": "allow" },
+    { "permissionKey": "grep", "pattern": "*", "value": "allow" },
+    { "permissionKey": "list", "pattern": "*", "value": "allow" },
+    { "permissionKey": "edit", "pattern": "*", "value": "deny" },
+    { "permissionKey": "bash", "pattern": "*", "value": "deny" },
+    { "permissionKey": "webfetch", "pattern": "*", "value": "deny" },
+    { "permissionKey": "websearch", "pattern": "*", "value": "deny" }
+  ]
+}
