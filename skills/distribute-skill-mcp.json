@@ -1,0 +1,10 @@
+{
+  "catalogID": "distribute-skill-mcp",
+  "name": "Distribute Skill & MCP",
+  "description": "Publishing skills and MCP servers across project configurations",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": ["distribution", "skills", "mcp", "config"],
+  "author": "Atelier"
+}

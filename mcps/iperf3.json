@@ -1,0 +1,19 @@
+{
+  "catalogID": "iperf3",
+  "name": "iPerf3",
+  "description": "Network bandwidth diagnostics via SSH and Docker exec",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "UNRAID_HOST": "",
+    "UNRAID_PORT": "",
+    "UNRAID_USER": "",
+    "UNRAID_PASSWORD": "",
+    "IPERF3_CONTAINER": ""
+  },
+  "category": "networking",
+  "toolCount": 3
+}

@@ -1,0 +1,10 @@
+{
+  "catalogID": "llm-app-patterns",
+  "name": "LLM App Patterns",
+  "description": "RAG, agents, prompt chains, and LLMOps patterns",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "data-ai",
+  "tags": ["llm", "rag", "agents", "llmops"],
+  "author": "Atelier"
+}

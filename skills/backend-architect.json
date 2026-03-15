@@ -1,0 +1,10 @@
+{
+  "catalogID": "backend-architect",
+  "name": "Backend Architect",
+  "description": "API design, microservices architecture, and distributed systems",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "backend",
+  "tags": ["api", "microservices", "distributed-systems", "architecture"],
+  "author": "Atelier"
+}

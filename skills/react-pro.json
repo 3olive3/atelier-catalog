@@ -1,0 +1,10 @@
+{
+  "catalogID": "react-pro",
+  "name": "React Pro",
+  "description": "React, Next.js, hooks, and performance optimization",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "frontend",
+  "tags": ["react", "nextjs", "hooks", "javascript", "typescript"],
+  "author": "Atelier"
+}

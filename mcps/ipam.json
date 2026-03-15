@@ -1,0 +1,16 @@
+{
+  "catalogID": "ipam",
+  "name": "IPAM",
+  "description": "IP address management, network prefixes, VLANs, and device inventory via NetBox",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "NETBOX_URL": "",
+    "NETBOX_TOKEN": ""
+  },
+  "category": "networking",
+  "toolCount": 23
+}

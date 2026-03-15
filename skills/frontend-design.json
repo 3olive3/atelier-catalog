@@ -1,0 +1,10 @@
+{
+  "catalogID": "frontend-design",
+  "name": "Frontend Design",
+  "description": "Visual design, aesthetics, layout principles, and UI polish",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "frontend",
+  "tags": ["design", "ui", "visual", "aesthetics"],
+  "author": "Atelier"
+}

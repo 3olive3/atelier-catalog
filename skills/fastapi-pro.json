@@ -1,0 +1,10 @@
+{
+  "catalogID": "fastapi-pro",
+  "name": "FastAPI Pro",
+  "description": "FastAPI, SQLAlchemy, Pydantic, and async Python APIs",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "backend",
+  "tags": ["fastapi", "sqlalchemy", "pydantic", "python"],
+  "author": "Atelier"
+}

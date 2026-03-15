@@ -1,0 +1,10 @@
+{
+  "catalogID": "prompt-engineering",
+  "name": "Prompt Engineering",
+  "description": "LLM prompt design, tool calling, and chain-of-thought techniques",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "data-ai",
+  "tags": ["prompts", "llm", "tool-calling", "cot"],
+  "author": "Atelier"
+}

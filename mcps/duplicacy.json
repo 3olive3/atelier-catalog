@@ -1,0 +1,22 @@
+{
+  "catalogID": "duplicacy",
+  "name": "Duplicacy",
+  "description": "Backup health monitoring, job status, and storage stats via SSH and HTTP API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "UNRAID_HOST": "",
+    "UNRAID_PORT": "",
+    "UNRAID_USER": "",
+    "UNRAID_PASSWORD": "",
+    "DUPLICACY_CONTAINER": "",
+    "DUPLICACY_CONFIG_PATH": "",
+    "DUPLICACY_LOGS_PATH": "",
+    "DUPLICACY_WEB_PORT": ""
+  },
+  "category": "ops",
+  "toolCount": 6
+}

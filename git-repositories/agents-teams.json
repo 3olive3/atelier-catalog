@@ -1,0 +1,9 @@
+{
+  "catalogID": "agents-teams",
+  "name": "Agents & Teams",
+  "description": "SysAdmin coordination hub for multi-agent workflows",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/Agents-Teams"
+}

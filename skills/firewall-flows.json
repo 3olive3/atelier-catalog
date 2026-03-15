@@ -1,0 +1,10 @@
+{
+  "catalogID": "firewall-flows",
+  "name": "Firewall Flows",
+  "description": "Cross-VLAN traffic rules, service groups, and 504 debugging",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima",
+  "tags": ["firewall", "fortigate", "vlans", "traffic"],
+  "author": "Atelier"
+}

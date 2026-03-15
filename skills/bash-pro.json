@@ -1,0 +1,10 @@
+{
+  "catalogID": "bash-pro",
+  "name": "Bash Pro",
+  "description": "Shell scripting, automation, and CLI tool development",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": ["bash", "shell", "scripting", "automation"],
+  "author": "Atelier"
+}

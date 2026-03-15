@@ -1,0 +1,10 @@
+{
+  "catalogID": "terraform-skill",
+  "name": "Terraform",
+  "description": "Infrastructure as Code with Terraform and HCL",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": ["terraform", "iac", "hcl", "infrastructure"],
+  "author": "Atelier"
+}

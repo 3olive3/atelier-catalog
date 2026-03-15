@@ -1,0 +1,10 @@
+{
+  "catalogID": "golang-pro",
+  "name": "Go Pro",
+  "description": "Go development best practices, concurrency, and idioms",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "backend",
+  "tags": ["go", "golang", "concurrency"],
+  "author": "Atelier"
+}

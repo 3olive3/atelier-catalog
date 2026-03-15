@@ -1,0 +1,10 @@
+{
+  "catalogID": "java-pro",
+  "name": "Java Pro",
+  "description": "Java and Spring Boot development",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "backend",
+  "tags": ["java", "spring-boot", "jvm"],
+  "author": "Atelier"
+}

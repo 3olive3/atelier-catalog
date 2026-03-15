@@ -1,0 +1,10 @@
+{
+  "catalogID": "ui-ux-designer",
+  "name": "UI/UX Designer",
+  "description": "Interface design, wireframes, user research, and usability testing",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "design",
+  "tags": ["ui", "ux", "wireframes", "usability"],
+  "author": "Atelier"
+}

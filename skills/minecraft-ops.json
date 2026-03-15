@@ -1,0 +1,10 @@
+{
+  "catalogID": "minecraft-ops",
+  "name": "Minecraft Ops",
+  "description": "Paper server management, DMZ networking, plugins, and RCON",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima",
+  "tags": ["minecraft", "paper", "rcon", "gaming"],
+  "author": "Atelier"
+}

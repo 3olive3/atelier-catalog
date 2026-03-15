@@ -1,0 +1,10 @@
+{
+  "catalogID": "incidents-methodology",
+  "name": "Incidents",
+  "description": "Incident management, post-mortem templates, and SLA tracking",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "foundations",
+  "tags": ["incidents", "postmortem", "sla", "oncall"],
+  "author": "Atelier"
+}

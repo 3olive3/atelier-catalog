@@ -1,0 +1,18 @@
+{
+  "catalogID": "unraid",
+  "name": "UNRAID",
+  "description": "Docker containers, VMs, shares, and system management via SSH",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "UNRAID_HOST": "",
+    "UNRAID_PORT": "",
+    "UNRAID_USER": "",
+    "UNRAID_PASSWORD": ""
+  },
+  "category": "core",
+  "toolCount": 24
+}

@@ -1,0 +1,10 @@
+{
+  "catalogID": "swift-client",
+  "name": "Swift Client",
+  "description": "SwiftUI, UIKit, iOS/macOS client development",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "swift",
+  "tags": ["swift", "swiftui", "uikit", "ios", "macos"],
+  "author": "Atelier"
+}

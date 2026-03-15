@@ -1,0 +1,10 @@
+{
+  "catalogID": "deploy-container",
+  "name": "Deploy Container",
+  "description": "UNRAID container deployment, updates, and lifecycle management",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": ["docker", "unraid", "deployment", "containers"],
+  "author": "Atelier"
+}

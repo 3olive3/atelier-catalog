@@ -1,0 +1,18 @@
+{
+  "catalogID": "fortigate",
+  "name": "Fortigate",
+  "description": "Firewall policies, address/service objects, DHCP, routes, VPN, FortiSwitch, and FortiAP management",
+  "version": "2.2.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "FORTIGATE_BASE_URL": "",
+    "FORTIGATE_VDOM": "",
+    "FORTIGATE_API_TOKEN": "",
+    "FORTIGATE_INSECURE_TLS": ""
+  },
+  "category": "core",
+  "toolCount": 43
+}

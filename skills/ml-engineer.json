@@ -1,0 +1,10 @@
+{
+  "catalogID": "ml-engineer",
+  "name": "ML Engineer",
+  "description": "PyTorch, TensorFlow, MLOps, and model training",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "data-ai",
+  "tags": ["ml", "pytorch", "tensorflow", "mlops"],
+  "author": "Atelier"
+}

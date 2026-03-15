@@ -1,0 +1,10 @@
+{
+  "catalogID": "tailwind-patterns",
+  "name": "Tailwind Patterns",
+  "description": "Tailwind CSS utility-first styling patterns and responsive design",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "frontend",
+  "tags": ["tailwind", "css", "styling", "responsive"],
+  "author": "Atelier"
+}

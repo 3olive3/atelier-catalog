@@ -1,0 +1,10 @@
+{
+  "catalogID": "mobile-design",
+  "name": "Mobile Design",
+  "description": "Mobile-first design patterns, gestures, and platform conventions",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "design",
+  "tags": ["mobile", "ios", "android", "responsive"],
+  "author": "Atelier"
+}

@@ -1,0 +1,21 @@
+{
+  "catalogID": "pihole",
+  "name": "Pi-hole",
+  "description": "DNS management and ad blocking via SSH and Docker exec",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "UNRAID_HOST": "",
+    "UNRAID_PORT": "",
+    "UNRAID_USER": "",
+    "UNRAID_PASSWORD": "",
+    "PIHOLE_CONTAINER": "",
+    "PIHOLE_API_HOST": "",
+    "PIHOLE_API_PASSWORD": ""
+  },
+  "category": "core",
+  "toolCount": 10
+}

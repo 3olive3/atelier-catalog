@@ -1,0 +1,10 @@
+{
+  "catalogID": "swift-server",
+  "name": "Swift Server",
+  "description": "Vapor, SwiftNIO, and server-side Swift development",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "swift",
+  "tags": ["swift", "vapor", "swiftnio", "server"],
+  "author": "Atelier"
+}

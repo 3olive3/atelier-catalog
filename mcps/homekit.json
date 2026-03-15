@@ -1,0 +1,17 @@
+{
+  "catalogID": "homekit",
+  "name": "HomeKit",
+  "description": "Smart home accessory control and status monitoring via Homebridge REST API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "HOMEBRIDGE_URL": "",
+    "HOMEBRIDGE_USERNAME": "",
+    "HOMEBRIDGE_PASSWORD": ""
+  },
+  "category": "core",
+  "toolCount": 13
+}

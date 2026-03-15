@@ -1,0 +1,10 @@
+{
+  "catalogID": "systematic-debugging",
+  "name": "Systematic Debugging",
+  "description": "Hypothesis-driven debugging, bisection, and root cause analysis",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "foundations",
+  "tags": ["debugging", "rca", "bisect", "troubleshooting"],
+  "author": "Atelier"
+}

@@ -1,0 +1,18 @@
+{
+  "catalogID": "uptime-kuma",
+  "name": "Uptime Kuma",
+  "description": "Uptime monitoring, alerting, and status page management via Socket.IO",
+  "version": "2.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "tsx",
+  "args": ["src/index.ts"],
+  "env": {
+    "UPTIME_KUMA_URL": "",
+    "UPTIME_KUMA_USERNAME": "",
+    "UPTIME_KUMA_PASSWORD": "",
+    "UPTIME_KUMA_API_KEY": ""
+  },
+  "category": "ops",
+  "toolCount": 16
+}

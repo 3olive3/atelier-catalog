@@ -1,0 +1,10 @@
+{
+  "catalogID": "docker-expert",
+  "name": "Docker Expert",
+  "description": "Dockerfiles, multi-stage builds, image optimization, and Compose",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": ["docker", "dockerfile", "compose", "containers"],
+  "author": "Atelier"
+}

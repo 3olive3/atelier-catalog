@@ -1,0 +1,10 @@
+{
+  "catalogID": "home-docs",
+  "name": "Home Docs",
+  "description": "MkDocs Material site management, page creation, and sync workflow",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima",
+  "tags": ["mkdocs", "documentation", "docs"],
+  "author": "Atelier"
+}

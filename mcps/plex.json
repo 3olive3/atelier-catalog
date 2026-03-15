@@ -1,0 +1,16 @@
+{
+  "catalogID": "plex",
+  "name": "Plex",
+  "description": "Media library search, metadata, on-deck, playlists, and scanning via REST API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "PLEX_URL": "",
+    "PLEX_TOKEN": ""
+  },
+  "category": "media",
+  "toolCount": 13
+}

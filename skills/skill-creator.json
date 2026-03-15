@@ -1,0 +1,10 @@
+{
+  "catalogID": "skill-creator",
+  "name": "Skill Creator",
+  "description": "Creating and publishing new Atelier skills",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "data-ai",
+  "tags": ["skills", "atelier", "authoring"],
+  "author": "Atelier"
+}

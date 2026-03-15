@@ -1,0 +1,16 @@
+{
+  "catalogID": "unimus",
+  "name": "Unimus",
+  "description": "Network device config backups, inventory, config diffs, and change tracking via REST API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "UNIMUS_URL": "",
+    "UNIMUS_API_TOKEN": ""
+  },
+  "category": "networking",
+  "toolCount": 12
+}

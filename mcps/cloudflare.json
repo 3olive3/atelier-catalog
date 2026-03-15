@@ -1,0 +1,16 @@
+{
+  "catalogID": "cloudflare",
+  "name": "Cloudflare",
+  "description": "DNS zones, tunnels, WAF rules, SSL/TLS, cache purge, and zone analytics",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "CLOUDFLARE_API_TOKEN": "",
+    "CLOUDFLARE_ZONE_NAME": ""
+  },
+  "category": "networking",
+  "toolCount": 63
+}

@@ -1,0 +1,9 @@
+{
+  "catalogID": "home-docs",
+  "name": "Home Docs",
+  "description": "MkDocs Material knowledge base at docs.3olive3.com",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/home-docs"
+}

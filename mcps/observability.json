@@ -1,0 +1,19 @@
+{
+  "catalogID": "observability",
+  "name": "Observability",
+  "description": "Infrastructure metrics, alerting, and time-series observability via Prometheus, Grafana, Loki, and Alertmanager",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "PROMETHEUS_URL": "",
+    "GRAFANA_URL": "",
+    "GRAFANA_API_KEY": "",
+    "LOKI_URL": "",
+    "ALERTMANAGER_URL": ""
+  },
+  "category": "ops",
+  "toolCount": 34
+}

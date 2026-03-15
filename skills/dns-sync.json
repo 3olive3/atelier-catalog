@@ -1,0 +1,10 @@
+{
+  "catalogID": "dns-sync",
+  "name": "DNS Sync & IPAM",
+  "description": "DHCP-to-NetBox-to-Pihole pipeline and IP address management",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima",
+  "tags": ["dns", "dhcp", "netbox", "pihole", "ipam"],
+  "author": "Atelier"
+}

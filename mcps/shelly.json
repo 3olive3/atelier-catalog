@@ -1,0 +1,16 @@
+{
+  "catalogID": "shelly",
+  "name": "Shelly",
+  "description": "Local Shelly device energy monitoring, power metrics, and switch control via Gen2/Gen3 RPC API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "SHELLY_DEVICE_WATER_PUMPS": "",
+    "SHELLY_TIMEOUT": ""
+  },
+  "category": "ops",
+  "toolCount": 12
+}

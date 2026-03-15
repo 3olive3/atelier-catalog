@@ -1,0 +1,10 @@
+{
+  "catalogID": "prometheus-configuration",
+  "name": "Prometheus Config",
+  "description": "Metrics collection, scrape configs, alert rules, and recording rules",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": ["prometheus", "metrics", "alerting", "monitoring"],
+  "author": "Atelier"
+}

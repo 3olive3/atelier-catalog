@@ -1,0 +1,17 @@
+{
+  "catalogID": "nginx",
+  "name": "NGINX Proxy Manager",
+  "description": "Reverse proxy hosts, SSL certificates, and redirect management via REST API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "NPM_URL": "",
+    "NPM_EMAIL": "",
+    "NPM_PASSWORD": ""
+  },
+  "category": "core",
+  "toolCount": 15
+}

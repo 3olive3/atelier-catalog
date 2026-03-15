@@ -1,0 +1,16 @@
+{
+  "catalogID": "overseerr",
+  "name": "Overseerr",
+  "description": "Media request management, search, approval workflows, and user quotas via REST API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "OVERSEERR_URL": "",
+    "OVERSEERR_API_KEY": ""
+  },
+  "category": "media",
+  "toolCount": 13
+}

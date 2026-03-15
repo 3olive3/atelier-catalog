@@ -1,0 +1,10 @@
+{
+  "catalogID": "architecture-decision-records",
+  "name": "ADR",
+  "description": "Documenting architectural design decisions with ADR templates",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "foundations",
+  "tags": ["adr", "architecture", "documentation", "decisions"],
+  "author": "Atelier"
+}

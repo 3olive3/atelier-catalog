@@ -1,0 +1,10 @@
+{
+  "catalogID": "api-design-principles",
+  "name": "API Design",
+  "description": "REST, GraphQL, and gRPC API design patterns and best practices",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "foundations",
+  "tags": ["api", "rest", "graphql", "grpc"],
+  "author": "Atelier"
+}

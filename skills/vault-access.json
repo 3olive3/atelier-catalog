@@ -1,0 +1,10 @@
+{
+  "catalogID": "vault-access",
+  "name": "Vault Access",
+  "description": "Vaultwarden credential retrieval patterns and shared secrets",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima",
+  "tags": ["vaultwarden", "secrets", "credentials"],
+  "author": "Atelier"
+}

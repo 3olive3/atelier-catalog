@@ -1,0 +1,17 @@
+{
+  "catalogID": "vaultwarden",
+  "name": "Vaultwarden",
+  "description": "Password vault management with client-side end-to-end encryption",
+  "version": "1.1.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "VAULTWARDEN_URL": "",
+    "VAULTWARDEN_EMAIL": "",
+    "VAULTWARDEN_MASTER_PASSWORD": ""
+  },
+  "category": "security",
+  "toolCount": 18
+}

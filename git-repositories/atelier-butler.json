@@ -1,0 +1,9 @@
+{
+  "catalogID": "atelier-butler",
+  "name": "Atelier Butler",
+  "description": "AI home automation agent with 19 MCP servers and 377+ tools",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/atelier-butler"
+}

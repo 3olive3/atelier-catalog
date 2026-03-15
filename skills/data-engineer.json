@@ -1,0 +1,10 @@
+{
+  "catalogID": "data-engineer",
+  "name": "Data Engineer",
+  "description": "Data pipelines, Spark, dbt, and data infrastructure",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "data-ai",
+  "tags": ["data", "spark", "dbt", "pipelines", "etl"],
+  "author": "Atelier"
+}

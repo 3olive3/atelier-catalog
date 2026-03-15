@@ -1,0 +1,10 @@
+{
+  "catalogID": "python-pro",
+  "name": "Python Pro",
+  "description": "Python development, packaging, and best practices",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "backend",
+  "tags": ["python", "packaging", "pip"],
+  "author": "Atelier"
+}

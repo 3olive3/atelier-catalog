@@ -1,0 +1,10 @@
+{
+  "catalogID": "home-network",
+  "name": "Home Network",
+  "description": "VLANs, Fortigate, DNS, NGINX Proxy Manager, and Cloudflare configuration",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima",
+  "tags": ["network", "vlans", "fortigate", "dns", "nginx"],
+  "author": "Atelier"
+}

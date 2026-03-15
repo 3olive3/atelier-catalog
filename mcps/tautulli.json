@@ -1,0 +1,16 @@
+{
+  "catalogID": "tautulli",
+  "name": "Tautulli",
+  "description": "Plex media monitoring, activity tracking, and usage analytics via REST API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "TAUTULLI_URL": "",
+    "TAUTULLI_API_KEY": ""
+  },
+  "category": "media",
+  "toolCount": 11
+}

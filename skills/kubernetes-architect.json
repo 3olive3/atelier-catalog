@@ -1,0 +1,10 @@
+{
+  "catalogID": "kubernetes-architect",
+  "name": "Kubernetes Architect",
+  "description": "Kubernetes, GitOps, service mesh, and cluster management",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": ["kubernetes", "k8s", "gitops", "service-mesh"],
+  "author": "Atelier"
+}

@@ -1,0 +1,10 @@
+{
+  "catalogID": "test-driven-development",
+  "name": "TDD",
+  "description": "Test-driven development methodology and cross-repo quality assurance",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "quality",
+  "tags": ["testing", "tdd", "quality", "ci"],
+  "author": "Atelier"
+}

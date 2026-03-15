@@ -1,0 +1,18 @@
+{
+  "catalogID": "ilo",
+  "name": "HPE iLO",
+  "description": "Out-of-band server hardware management, health monitoring, and power control via Redfish API",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {
+    "ILO_BASE_URL": "",
+    "ILO_USERNAME": "",
+    "ILO_PASSWORD": "",
+    "ILO_INSECURE_TLS": ""
+  },
+  "category": "hardware",
+  "toolCount": 21
+}

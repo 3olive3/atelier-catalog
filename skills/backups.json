@@ -1,0 +1,10 @@
+{
+  "catalogID": "backups",
+  "name": "Backups",
+  "description": "Duplicacy backup management, Unimus config backups, and restore procedures",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima",
+  "tags": ["duplicacy", "unimus", "backups", "restore"],
+  "author": "Atelier"
+}

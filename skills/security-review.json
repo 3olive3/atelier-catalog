@@ -1,0 +1,10 @@
+{
+  "catalogID": "security-review",
+  "name": "Security Review",
+  "description": "Bug hunting, insecure defaults, OWASP top 10, and Semgrep analysis",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "security",
+  "tags": ["security", "owasp", "semgrep", "vulnerabilities"],
+  "author": "Atelier"
+}

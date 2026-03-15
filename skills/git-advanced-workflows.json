@@ -1,0 +1,10 @@
+{
+  "catalogID": "git-advanced-workflows",
+  "name": "Git Advanced",
+  "description": "Rebase, cherry-pick, bisect, worktrees, and advanced Git workflows",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "foundations",
+  "tags": ["git", "rebase", "cherry-pick", "bisect"],
+  "author": "Atelier"
+}
