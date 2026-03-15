@@ -1,0 +1,9 @@
+{
+  "catalogID": "atelier-mcps",
+  "name": "Atelier MCPs",
+  "description": "MCP server distribution catalog with installable packages",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/atelier-mcps"
+}

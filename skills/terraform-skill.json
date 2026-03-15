@@ -1,0 +1,18 @@
+{
+  "catalogID": "terraform-skill",
+  "name": "Terraform",
+  "description": "Infrastructure as Code with Terraform — modules, state management, providers, and cloud deployment patterns.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": [
+    "terraform",
+    "iac",
+    "infrastructure",
+    "devops"
+  ],
+  "author": "antonbabenko",
+  "license": "MIT",
+  "sourceURL": "https://github.com/antonbabenko/terraform-skill",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/terraform-skill/SKILL.md"
+}

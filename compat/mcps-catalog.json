@@ -1,0 +1,386 @@
+{
+  "version": "2.0.0",
+  "lastUpdated": "2026-03-15T18:52:22Z",
+  "mcps": [
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "version": "3.0.0",
+      "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
+      "toolCount": 63,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "dns",
+        "cdn",
+        "security",
+        "networking",
+        "tunnels",
+        "zero-trust",
+        "warp",
+        "gateway",
+        "device-profiles",
+        "access-groups"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/cloudflare-3.0.0.tar.gz",
+      "size": "75KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "duplicacy",
+      "name": "Duplicacy",
+      "version": "2.0.0",
+      "description": "Duplicacy backup monitoring — storage configs, schedules, backup status, backup history, job logs, and health checks via SSH + HTTP API",
+      "toolCount": 6,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "backup",
+        "storage",
+        "infrastructure"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/duplicacy-2.0.0.tar.gz",
+      "size": "20KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "fortigate",
+      "name": "FortiGate",
+      "version": "2.2.0",
+      "description": "FortiGate 60F firewall — policies, address objects, service objects, DHCP, static routes, VPN, bandwidth stats, system health, FortiSwitch management, and FortiAP/WiFi management via REST API",
+      "toolCount": 43,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "infrastructure",
+        "firewall",
+        "networking",
+        "security",
+        "dhcp",
+        "vpn",
+        "fortiswitch",
+        "fortiap",
+        "wifi"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/fortigate-2.2.0.tar.gz",
+      "size": "60KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "homekit",
+      "name": "HomeKit",
+      "version": "2.0.0",
+      "description": "Homebridge smart home control — accessory listing, characteristic control, bridge management, plugin config, and system monitoring via REST API",
+      "toolCount": 13,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "smart-home",
+        "homebridge",
+        "iot",
+        "automation"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/homekit-2.0.0.tar.gz",
+      "size": "30KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "ilo",
+      "name": "HPE iLO",
+      "version": "1.0.0",
+      "description": "HPE iLO 4 server management — system info, processors, memory, storage, network adapters, temperatures, fans, power supplies, power control, indicator LED, iLO management, event logs, firmware inventory, virtual media, and license info via Redfish REST API",
+      "toolCount": 21,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "infrastructure",
+        "server",
+        "hardware",
+        "monitoring",
+        "redfish",
+        "ilo"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/ilo-1.0.0.tar.gz",
+      "size": "35KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "ipam",
+      "name": "NetBox",
+      "version": "2.1.0",
+      "description": "NetBox IPAM — IP addresses, prefixes, VLANs, VRFs, IP ranges, services, devices, interfaces, sites, and infrastructure search via REST API. Supports NetBox 4.5+ v2 tokens (auto-detects nbt_ prefix, uses Bearer vs Token header).",
+      "toolCount": 23,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "networking",
+        "ipam",
+        "infrastructure",
+        "inventory"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.1.0/netbox-2.1.0.tar.gz",
+      "size": "38KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "iperf3",
+      "name": "iperf3",
+      "version": "2.0.0",
+      "description": "iperf3 network diagnostics — bandwidth testing between hosts with configurable protocols, duration, and parallel streams via SSH + docker exec",
+      "toolCount": 3,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "networking",
+        "diagnostics",
+        "bandwidth"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/iperf3-2.0.0.tar.gz",
+      "size": "15KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "media-stack",
+      "name": "Media Stack",
+      "version": "2.0.0",
+      "description": "Unified media automation — Sonarr (TV series), Radarr (movies), and SABnzbd (downloads) management with queue monitoring and health checks via REST APIs",
+      "toolCount": 27,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "media",
+        "automation",
+        "sonarr",
+        "radarr",
+        "sabnzbd"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-stack-2.0.0.tar.gz",
+      "size": "45KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "minecraft",
+      "name": "Minecraft",
+      "version": "1.0.0",
+      "description": "Minecraft Paper server management — player whitelist, bans, world management, weather, time, mob morphing, teleport, game modes, server status via RCON commands over SSH + docker exec",
+      "toolCount": 27,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "gaming",
+        "minecraft",
+        "paper",
+        "rcon",
+        "kids",
+        "entertainment"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/minecraft-1.0.0.tar.gz",
+      "size": "25KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "nginx",
+      "name": "NGINX Proxy Manager",
+      "version": "2.0.0",
+      "description": "NGINX Proxy Manager — reverse proxy hosts, SSL certificates, redirection hosts, streams, and health monitoring via REST API",
+      "toolCount": 15,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "infrastructure",
+        "reverse-proxy",
+        "ssl",
+        "networking"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/nginx-2.0.0.tar.gz",
+      "size": "30KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "version": "3.0.0",
+      "description": "Full observability stack — Prometheus (PromQL queries, metric discovery, targets, alerts, rules, TSDB stats), Loki (log queries, label discovery, series, stats), Alertmanager (alerts, silences, receivers, status), and Grafana (dashboard search, annotations, folders) via HTTP APIs",
+      "toolCount": 34,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "monitoring",
+        "observability",
+        "metrics",
+        "alerting",
+        "logs",
+        "dashboards",
+        "grafana",
+        "loki",
+        "alertmanager"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/prometheus-3.0.0.tar.gz",
+      "size": "60KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "overseerr",
+      "name": "Overseerr",
+      "version": "2.0.0",
+      "description": "Overseerr media requests — search, movie/TV details, request management, approval workflows, user quotas, and health monitoring via REST API",
+      "toolCount": 13,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "media",
+        "requests",
+        "automation"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/overseerr-2.0.0.tar.gz",
+      "size": "28KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "pihole",
+      "name": "Pi-hole",
+      "version": "2.0.0",
+      "description": "Pi-hole DNS management — CNAME records, ad-blocking, domain blocking, client stats, and upstream health via SSH + docker exec",
+      "toolCount": 10,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "infrastructure",
+        "dns",
+        "ad-blocking",
+        "network"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/pihole-2.0.0.tar.gz",
+      "size": "25KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "plex",
+      "name": "Plex",
+      "version": "2.0.0",
+      "description": "Plex Media Server — library browsing, search, metadata, on-deck, playlists, active sessions, and library scanning via REST API",
+      "toolCount": 13,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "media",
+        "streaming",
+        "library"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/plex-2.0.0.tar.gz",
+      "size": "30KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "shelly",
+      "name": "Shelly",
+      "version": "2.0.0",
+      "description": "Shelly device management — energy monitoring, power metrics, switch control, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
+      "toolCount": 12,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "smart-home",
+        "energy",
+        "iot",
+        "switches"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/shelly-2.0.0.tar.gz",
+      "size": "28KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "tautulli",
+      "name": "Tautulli",
+      "version": "2.0.0",
+      "description": "Tautulli Plex monitoring — current activity, watch history, library stats, recently added, user analytics, and server health via REST API",
+      "toolCount": 11,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "media",
+        "monitoring",
+        "plex",
+        "analytics"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/tautulli-2.0.0.tar.gz",
+      "size": "25KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "unimus",
+      "name": "Unimus",
+      "version": "2.0.0",
+      "description": "Unimus network config management — device inventory, config backups, diffs, change tracking, scheduled backups, and discovery via REST API",
+      "toolCount": 12,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "networking",
+        "config-management",
+        "backup",
+        "infrastructure"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unimus-2.0.0.tar.gz",
+      "size": "28KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "unraid",
+      "name": "UNRAID",
+      "version": "2.0.0",
+      "description": "UNRAID server management — containers, VMs, shares, disks, temperatures, and system commands via SSH",
+      "toolCount": 24,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "infrastructure",
+        "server",
+        "containers",
+        "virtualization",
+        "storage"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unraid-2.0.0.tar.gz",
+      "size": "45KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "uptime-kuma",
+      "name": "Uptime Kuma",
+      "version": "2.0.0",
+      "description": "Uptime Kuma monitoring — monitors, heartbeats, uptime stats, status pages, Docker hosts, and Prometheus metrics via Socket.IO",
+      "toolCount": 16,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "monitoring",
+        "uptime",
+        "infrastructure",
+        "alerts"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/uptime-kuma-2.0.0.tar.gz",
+      "size": "35KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "vaultwarden",
+      "name": "Vaultwarden",
+      "version": "1.1.0",
+      "description": "Vaultwarden/Bitwarden secrets management — vault auth, item/folder CRUD, search, credential retrieval, TOTP, password generation with full client-side encryption (PBKDF2/Argon2, AES-CBC, HMAC-SHA256). Supports Vaultwarden 1.32+ camelCase API.",
+      "toolCount": 18,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "secrets",
+        "passwords",
+        "security",
+        "encryption",
+        "bitwarden",
+        "totp"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.1.0/vaultwarden-1.1.0.tar.gz",
+      "size": "256KB",
+      "checksum": "sha256:placeholder"
+    }
+  ]
+}

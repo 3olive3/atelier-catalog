@@ -1,0 +1,20 @@
+{
+  "catalogID": "react-pro",
+  "name": "React Pro",
+  "description": "Modern React and Next.js development — hooks, composition, state management, performance optimization (45 Vercel rules), TypeScript, and best practices.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "frontend",
+  "tags": [
+    "react",
+    "nextjs",
+    "hooks",
+    "typescript",
+    "performance",
+    "frontend"
+  ],
+  "author": "Atelier",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/react-pro/SKILL.md"
+}

@@ -1,0 +1,18 @@
+{
+  "catalogID": "golang-pro",
+  "name": "Go Pro",
+  "description": "Master Go 1.21+ — modern patterns, advanced concurrency, performance optimization, and production microservices.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "backend",
+  "tags": [
+    "go",
+    "golang",
+    "concurrency",
+    "backend"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/golang-pro/SKILL.md"
+}

@@ -1,0 +1,21 @@
+{
+  "catalogID": "dns-sync",
+  "name": "DNS Sync & IPAM",
+  "description": "FortiGate → NetBox → Pihole DHCP/DNS synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima-ops",
+  "tags": [
+    "dns",
+    "ipam",
+    "netbox",
+    "pihole",
+    "dhcp",
+    "sync",
+    "casa-lima"
+  ],
+  "author": "casa-lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/dns-sync/SKILL.md"
+}

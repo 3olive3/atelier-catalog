@@ -1,0 +1,9 @@
+{
+  "catalogID": "atelier",
+  "name": "Atelier",
+  "description": "Designer and Runtime — macOS SwiftUI app with Vapor 4 backend",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/atelier"
+}

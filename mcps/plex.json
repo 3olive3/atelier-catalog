@@ -1,0 +1,27 @@
+{
+  "catalogID": "plex",
+  "name": "Plex",
+  "description": "Plex Media Server — library browsing, search, metadata, on-deck, playlists, active sessions, and library scanning via REST API",
+  "version": "2.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": [
+    "dist/index.js"
+  ],
+  "env": {
+    "PLEX_URL": "",
+    "PLEX_TOKEN": ""
+  },
+  "category": "media",
+  "toolCount": 13,
+  "runtime": "node",
+  "tags": [
+    "media",
+    "streaming",
+    "library"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/plex-2.0.0.tar.gz",
+  "size": "30KB",
+  "checksum": "sha256:placeholder"
+}

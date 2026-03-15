@@ -1,0 +1,18 @@
+{
+  "catalogID": "ml-engineer",
+  "name": "ML Engineer",
+  "description": "Production ML systems — PyTorch 2.x, TensorFlow, model serving, feature engineering, A/B testing, monitoring.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "data-ai",
+  "tags": [
+    "ml",
+    "pytorch",
+    "tensorflow",
+    "mlops"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/ml-engineer/SKILL.md"
+}

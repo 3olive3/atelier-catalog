@@ -1,0 +1,9 @@
+{
+  "catalogID": "atelier-bridge",
+  "name": "Atelier Bridge",
+  "description": "Bridge skills for atelier-bridge and atelier-controller integration",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/atelier-bridge"
+}

@@ -1,0 +1,18 @@
+{
+  "catalogID": "api-design-principles",
+  "name": "API Design",
+  "description": "REST and GraphQL API design — resource modeling, versioning, pagination, error handling, and developer experience.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "foundations",
+  "tags": [
+    "api",
+    "rest",
+    "graphql",
+    "design"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/api-design-principles/SKILL.md"
+}

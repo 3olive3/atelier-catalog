@@ -1,0 +1,20 @@
+{
+  "catalogID": "security-review",
+  "name": "Security Review",
+  "description": "Comprehensive security review — bug hunting, insecure defaults detection, and Semgrep static analysis for security audits and code reviews.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "security",
+  "tags": [
+    "security",
+    "bugs",
+    "static-analysis",
+    "semgrep",
+    "vulnerabilities",
+    "sast"
+  ],
+  "author": "Atelier",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/security-review/SKILL.md"
+}

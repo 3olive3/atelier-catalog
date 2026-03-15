@@ -1,0 +1,18 @@
+{
+  "catalogID": "radix-ui-design-system",
+  "name": "Radix UI Design System",
+  "description": "Build accessible design systems with Radix UI primitives — headless components, theming, compound patterns.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "frontend",
+  "tags": [
+    "radix",
+    "ui",
+    "accessibility",
+    "design-system"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/radix-ui-design-system/SKILL.md"
+}

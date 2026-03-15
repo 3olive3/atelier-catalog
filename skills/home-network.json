@@ -1,0 +1,21 @@
+{
+  "catalogID": "home-network",
+  "name": "Home Network",
+  "description": "Casa Lima network architecture — VLANs, Fortigate firewall, FortiSwitch, FortiAP, DNS (Pihole + Cloudflare), NGINX reverse proxy, and Cloudflare tunnels/Zero Trust.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima-ops",
+  "tags": [
+    "network",
+    "vlans",
+    "fortigate",
+    "dns",
+    "nginx",
+    "cloudflare",
+    "casa-lima"
+  ],
+  "author": "casa-lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/home-network/SKILL.md"
+}

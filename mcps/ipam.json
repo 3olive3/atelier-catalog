@@ -1,0 +1,28 @@
+{
+  "catalogID": "ipam",
+  "name": "NetBox",
+  "description": "NetBox IPAM — IP addresses, prefixes, VLANs, VRFs, IP ranges, services, devices, interfaces, sites, and infrastructure search via REST API. Supports NetBox 4.5+ v2 tokens (auto-detects nbt_ prefix, uses Bearer vs Token header).",
+  "version": "2.1.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": [
+    "dist/index.js"
+  ],
+  "env": {
+    "NETBOX_URL": "",
+    "NETBOX_TOKEN": ""
+  },
+  "category": "networking",
+  "toolCount": 23,
+  "runtime": "node",
+  "tags": [
+    "networking",
+    "ipam",
+    "infrastructure",
+    "inventory"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.1.0/netbox-2.1.0.tar.gz",
+  "size": "38KB",
+  "checksum": "sha256:placeholder"
+}

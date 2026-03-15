@@ -1,0 +1,18 @@
+{
+  "catalogID": "home-docs",
+  "name": "Home Docs",
+  "description": "MkDocs Material documentation site — page creation, navigation, sync workflow, container management, and content conventions for docs.3olive3.com.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "casa-lima-ops",
+  "tags": [
+    "mkdocs",
+    "documentation",
+    "docs",
+    "casa-lima"
+  ],
+  "author": "casa-lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/home-docs/SKILL.md"
+}

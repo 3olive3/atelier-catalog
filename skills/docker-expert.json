@@ -1,0 +1,18 @@
+{
+  "catalogID": "docker-expert",
+  "name": "Docker Expert",
+  "description": "Docker containerization — multi-stage builds, image optimization, security hardening, Compose orchestration.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": [
+    "docker",
+    "containers",
+    "devops",
+    "security"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/docker-expert/SKILL.md"
+}

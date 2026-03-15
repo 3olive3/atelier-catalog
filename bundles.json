@@ -1,0 +1,170 @@
+[
+  {
+    "id": "swift-development",
+    "name": "Swift Development",
+    "description": "Complete Swift development toolkit for iOS and macOS applications.",
+    "skillIds": [
+      "swift-client",
+      "swift-server",
+      "mobile-design"
+    ],
+    "tags": [
+      "swift",
+      "ios",
+      "macos"
+    ]
+  },
+  {
+    "id": "frontend",
+    "name": "Frontend",
+    "description": "Modern frontend development with React, Tailwind, and accessible design systems.",
+    "skillIds": [
+      "react-pro",
+      "tailwind-patterns",
+      "radix-ui-design-system",
+      "frontend-design"
+    ],
+    "tags": [
+      "react",
+      "css",
+      "ui"
+    ]
+  },
+  {
+    "id": "backend",
+    "name": "Backend",
+    "description": "Backend development across Go, Python, Java, and FastAPI with architectural patterns.",
+    "skillIds": [
+      "backend-architect",
+      "golang-pro",
+      "python-pro",
+      "fastapi-pro",
+      "java-pro"
+    ],
+    "tags": [
+      "api",
+      "microservices",
+      "server"
+    ]
+  },
+  {
+    "id": "data-ai",
+    "name": "Data & AI",
+    "description": "Data engineering, machine learning, LLM applications, and AI tooling.",
+    "skillIds": [
+      "data-engineer",
+      "ml-engineer",
+      "llm-app-patterns",
+      "mcp-builder",
+      "skill-creator",
+      "prompt-engineering"
+    ],
+    "tags": [
+      "data",
+      "ml",
+      "llm",
+      "ai",
+      "mcp"
+    ]
+  },
+  {
+    "id": "devops-infra",
+    "name": "DevOps & Infrastructure",
+    "description": "Container orchestration, IaC, monitoring, and automation for production systems.",
+    "skillIds": [
+      "docker-expert",
+      "deploy-container",
+      "distribute-skill-mcp",
+      "terraform-skill",
+      "kubernetes-architect",
+      "bash-pro",
+      "prometheus-configuration"
+    ],
+    "tags": [
+      "docker",
+      "kubernetes",
+      "terraform",
+      "monitoring"
+    ]
+  },
+  {
+    "id": "design-ux",
+    "name": "Design & UX",
+    "description": "UI/UX design, mobile design patterns, and frontend visual design.",
+    "skillIds": [
+      "ui-ux-designer",
+      "frontend-design",
+      "mobile-design"
+    ],
+    "tags": [
+      "design",
+      "ux",
+      "mobile"
+    ]
+  },
+  {
+    "id": "code-quality",
+    "name": "Code Quality",
+    "description": "Testing methodology and security review.",
+    "skillIds": [
+      "test-driven-development",
+      "security-review"
+    ],
+    "tags": [
+      "quality",
+      "testing",
+      "security"
+    ]
+  },
+  {
+    "id": "security",
+    "name": "Security",
+    "description": "Comprehensive security review — bug hunting, insecure defaults, and static analysis.",
+    "skillIds": [
+      "security-review"
+    ],
+    "tags": [
+      "security",
+      "sast",
+      "vulnerabilities"
+    ]
+  },
+  {
+    "id": "foundations",
+    "name": "Foundations",
+    "description": "Core engineering practices — git workflows, debugging, incident management, and API design.",
+    "skillIds": [
+      "git-advanced-workflows",
+      "incidents-methodology",
+      "architecture-decision-records",
+      "systematic-debugging",
+      "api-design-principles"
+    ],
+    "tags": [
+      "git",
+      "documentation",
+      "methodology"
+    ]
+  },
+  {
+    "id": "casa-lima-ops",
+    "name": "Casa Lima Operations",
+    "description": "Infrastructure operations for Casa Lima — network, firewall, DNS/IPAM, backups, secrets, documentation, and service-specific ops.",
+    "skillIds": [
+      "home-network",
+      "firewall-flows",
+      "dns-sync",
+      "vault-access",
+      "deploy-container",
+      "backups",
+      "home-docs",
+      "minecraft-ops",
+      "incidents-methodology"
+    ],
+    "tags": [
+      "casa-lima",
+      "infrastructure",
+      "operations"
+    ]
+  }
+]

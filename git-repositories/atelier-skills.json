@@ -1,0 +1,9 @@
+{
+  "catalogID": "atelier-skills",
+  "name": "Atelier Skills",
+  "description": "Skill catalog with 40 skills and 10 bundles for on-demand agent knowledge",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/atelier-skills"
+}

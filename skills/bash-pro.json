@@ -1,0 +1,18 @@
+{
+  "catalogID": "bash-pro",
+  "name": "Bash Pro",
+  "description": "Defensive Bash scripting for production automation, CI/CD pipelines, and system utilities.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": [
+    "bash",
+    "shell",
+    "automation",
+    "scripting"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/bash-pro/SKILL.md"
+}

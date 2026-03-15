@@ -1,18 +1,2139 @@
 {
   "name": "Atelier Official Catalog",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "lastUpdated": "2026-03-15T18:52:22Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "types": [
-    "guardrails",
-    "permissions",
-    "mcps",
-    "skills",
-    "role-profiles",
-    "git-repositories",
-    "tech-stacks",
-    "knowledge-bases",
-    "context-files",
-    "observability"
+  "totalEntries": 91,
+  "types": {
+    "guardrails": [
+      {
+        "catalogID": "gdpr-compliance",
+        "name": "GDPR Compliance",
+        "description": "Ensure agents do not log, store, or transmit personally identifiable information (PII)",
+        "version": "1.0.0",
+        "source": "marketplace",
+        "iconName": "person.badge.shield.checkmark",
+        "defaultValue": false
+      },
+      {
+        "catalogID": "no-force-push",
+        "name": "No Force Push",
+        "description": "Prevent agents from running git push --force or git push -f",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "exclamationmark.shield",
+        "defaultValue": true
+      },
+      {
+        "catalogID": "no-secrets-in-code",
+        "name": "No Secrets in Code",
+        "description": "Prevent agents from writing API keys, tokens, passwords, or credentials to source files",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "key.slash",
+        "defaultValue": true
+      }
+    ],
+    "permissions": [
+      {
+        "catalogID": "deny-env-files",
+        "name": "Deny .env File Access",
+        "description": "Prevent reading or writing .env files that may contain secrets",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "rules": [
+          {
+            "permissionKey": "read",
+            "pattern": "*.env",
+            "value": "deny"
+          },
+          {
+            "permissionKey": "read",
+            "pattern": "*.env.*",
+            "value": "deny"
+          },
+          {
+            "permissionKey": "edit",
+            "pattern": "*.env",
+            "value": "deny"
+          },
+          {
+            "permissionKey": "edit",
+            "pattern": "*.env.*",
+            "value": "deny"
+          }
+        ]
+      },
+      {
+        "catalogID": "full-autonomy",
+        "name": "Full Autonomy",
+        "description": "Agent has full access to all tools without prompting (use with trusted agents only)",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "rules": [
+          {
+            "permissionKey": "read",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "edit",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "glob",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "grep",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "list",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "bash",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "task",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "skill",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "lsp",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "webfetch",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "websearch",
+            "pattern": "*",
+            "value": "allow"
+          }
+        ]
+      },
+      {
+        "catalogID": "read-only",
+        "name": "Read-Only Access",
+        "description": "Agent can read and search but cannot modify files or run shell commands",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "rules": [
+          {
+            "permissionKey": "read",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "glob",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "grep",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "list",
+            "pattern": "*",
+            "value": "allow"
+          },
+          {
+            "permissionKey": "edit",
+            "pattern": "*",
+            "value": "deny"
+          },
+          {
+            "permissionKey": "bash",
+            "pattern": "*",
+            "value": "deny"
+          },
+          {
+            "permissionKey": "webfetch",
+            "pattern": "*",
+            "value": "deny"
+          },
+          {
+            "permissionKey": "websearch",
+            "pattern": "*",
+            "value": "deny"
+          }
+        ]
+      }
+    ],
+    "mcps": [
+      {
+        "catalogID": "cloudflare",
+        "name": "Cloudflare",
+        "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
+        "version": "3.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "CLOUDFLARE_API_TOKEN": "",
+          "CLOUDFLARE_ZONE_NAME": ""
+        },
+        "category": "networking",
+        "toolCount": 63,
+        "runtime": "node",
+        "tags": [
+          "dns",
+          "cdn",
+          "security",
+          "networking",
+          "tunnels",
+          "zero-trust",
+          "warp",
+          "gateway",
+          "device-profiles",
+          "access-groups"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/cloudflare-3.0.0.tar.gz",
+        "size": "75KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "duplicacy",
+        "name": "Duplicacy",
+        "description": "Duplicacy backup monitoring — storage configs, schedules, backup status, backup history, job logs, and health checks via SSH + HTTP API",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "UNRAID_HOST": "",
+          "UNRAID_PORT": "",
+          "UNRAID_USER": "",
+          "UNRAID_PASSWORD": "",
+          "DUPLICACY_CONTAINER": "",
+          "DUPLICACY_CONFIG_PATH": "",
+          "DUPLICACY_LOGS_PATH": "",
+          "DUPLICACY_WEB_PORT": ""
+        },
+        "category": "ops",
+        "toolCount": 6,
+        "runtime": "node",
+        "tags": [
+          "backup",
+          "storage",
+          "infrastructure"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/duplicacy-2.0.0.tar.gz",
+        "size": "20KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "fortigate",
+        "name": "FortiGate",
+        "description": "FortiGate 60F firewall — policies, address objects, service objects, DHCP, static routes, VPN, bandwidth stats, system health, FortiSwitch management, and FortiAP/WiFi management via REST API",
+        "version": "2.2.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "FORTIGATE_BASE_URL": "",
+          "FORTIGATE_VDOM": "",
+          "FORTIGATE_API_TOKEN": "",
+          "FORTIGATE_INSECURE_TLS": ""
+        },
+        "category": "core",
+        "toolCount": 43,
+        "runtime": "node",
+        "tags": [
+          "infrastructure",
+          "firewall",
+          "networking",
+          "security",
+          "dhcp",
+          "vpn",
+          "fortiswitch",
+          "fortiap",
+          "wifi"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/fortigate-2.2.0.tar.gz",
+        "size": "60KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "homekit",
+        "name": "HomeKit",
+        "description": "Homebridge smart home control — accessory listing, characteristic control, bridge management, plugin config, and system monitoring via REST API",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "HOMEBRIDGE_URL": "",
+          "HOMEBRIDGE_USERNAME": "",
+          "HOMEBRIDGE_PASSWORD": ""
+        },
+        "category": "core",
+        "toolCount": 13,
+        "runtime": "node",
+        "tags": [
+          "smart-home",
+          "homebridge",
+          "iot",
+          "automation"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/homekit-2.0.0.tar.gz",
+        "size": "30KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "ilo",
+        "name": "HPE iLO",
+        "description": "HPE iLO 4 server management — system info, processors, memory, storage, network adapters, temperatures, fans, power supplies, power control, indicator LED, iLO management, event logs, firmware inventory, virtual media, and license info via Redfish REST API",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "ILO_BASE_URL": "",
+          "ILO_USERNAME": "",
+          "ILO_PASSWORD": "",
+          "ILO_INSECURE_TLS": ""
+        },
+        "category": "hardware",
+        "toolCount": 21,
+        "runtime": "node",
+        "tags": [
+          "infrastructure",
+          "server",
+          "hardware",
+          "monitoring",
+          "redfish",
+          "ilo"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/ilo-1.0.0.tar.gz",
+        "size": "35KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "ipam",
+        "name": "NetBox",
+        "description": "NetBox IPAM — IP addresses, prefixes, VLANs, VRFs, IP ranges, services, devices, interfaces, sites, and infrastructure search via REST API. Supports NetBox 4.5+ v2 tokens (auto-detects nbt_ prefix, uses Bearer vs Token header).",
+        "version": "2.1.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "NETBOX_URL": "",
+          "NETBOX_TOKEN": ""
+        },
+        "category": "networking",
+        "toolCount": 23,
+        "runtime": "node",
+        "tags": [
+          "networking",
+          "ipam",
+          "infrastructure",
+          "inventory"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.1.0/netbox-2.1.0.tar.gz",
+        "size": "38KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "iperf3",
+        "name": "iperf3",
+        "description": "iperf3 network diagnostics — bandwidth testing between hosts with configurable protocols, duration, and parallel streams via SSH + docker exec",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "UNRAID_HOST": "",
+          "UNRAID_PORT": "",
+          "UNRAID_USER": "",
+          "UNRAID_PASSWORD": "",
+          "IPERF3_CONTAINER": ""
+        },
+        "category": "networking",
+        "toolCount": 3,
+        "runtime": "node",
+        "tags": [
+          "networking",
+          "diagnostics",
+          "bandwidth"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/iperf3-2.0.0.tar.gz",
+        "size": "15KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "media-stack",
+        "name": "Media Stack",
+        "description": "Unified media automation — Sonarr (TV series), Radarr (movies), and SABnzbd (downloads) management with queue monitoring and health checks via REST APIs",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "SONARR_URL": "",
+          "SONARR_API_KEY": "",
+          "RADARR_URL": "",
+          "RADARR_API_KEY": "",
+          "SABNZBD_URL": "",
+          "SABNZBD_API_KEY": ""
+        },
+        "category": "media",
+        "toolCount": 27,
+        "runtime": "node",
+        "tags": [
+          "media",
+          "automation",
+          "sonarr",
+          "radarr",
+          "sabnzbd"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-stack-2.0.0.tar.gz",
+        "size": "45KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "minecraft",
+        "name": "Minecraft",
+        "description": "Minecraft Paper server management — player whitelist, bans, world management, weather, time, mob morphing, teleport, game modes, server status via RCON commands over SSH + docker exec",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "UNRAID_HOST": "",
+          "UNRAID_PORT": "",
+          "UNRAID_USER": "",
+          "UNRAID_PASSWORD": "",
+          "MINECRAFT_CONTAINER": ""
+        },
+        "category": "gaming",
+        "toolCount": 27,
+        "runtime": "node",
+        "tags": [
+          "gaming",
+          "minecraft",
+          "paper",
+          "rcon",
+          "kids",
+          "entertainment"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/minecraft-1.0.0.tar.gz",
+        "size": "25KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "nginx",
+        "name": "NGINX Proxy Manager",
+        "description": "NGINX Proxy Manager — reverse proxy hosts, SSL certificates, redirection hosts, streams, and health monitoring via REST API",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "NPM_URL": "",
+          "NPM_EMAIL": "",
+          "NPM_PASSWORD": ""
+        },
+        "category": "core",
+        "toolCount": 15,
+        "runtime": "node",
+        "tags": [
+          "infrastructure",
+          "reverse-proxy",
+          "ssl",
+          "networking"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/nginx-2.0.0.tar.gz",
+        "size": "30KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "observability",
+        "name": "Observability",
+        "description": "Full observability stack — Prometheus (PromQL queries, metric discovery, targets, alerts, rules, TSDB stats), Loki (log queries, label discovery, series, stats), Alertmanager (alerts, silences, receivers, status), and Grafana (dashboard search, annotations, folders) via HTTP APIs",
+        "version": "3.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "PROMETHEUS_URL": "",
+          "GRAFANA_URL": "",
+          "GRAFANA_API_KEY": "",
+          "LOKI_URL": "",
+          "ALERTMANAGER_URL": ""
+        },
+        "category": "ops",
+        "toolCount": 34,
+        "runtime": "node",
+        "tags": [
+          "monitoring",
+          "observability",
+          "metrics",
+          "alerting",
+          "logs",
+          "dashboards",
+          "grafana",
+          "loki",
+          "alertmanager"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/prometheus-3.0.0.tar.gz",
+        "size": "60KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "overseerr",
+        "name": "Overseerr",
+        "description": "Overseerr media requests — search, movie/TV details, request management, approval workflows, user quotas, and health monitoring via REST API",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "OVERSEERR_URL": "",
+          "OVERSEERR_API_KEY": ""
+        },
+        "category": "media",
+        "toolCount": 13,
+        "runtime": "node",
+        "tags": [
+          "media",
+          "requests",
+          "automation"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/overseerr-2.0.0.tar.gz",
+        "size": "28KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "pihole",
+        "name": "Pi-hole",
+        "description": "Pi-hole DNS management — CNAME records, ad-blocking, domain blocking, client stats, and upstream health via SSH + docker exec",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "UNRAID_HOST": "",
+          "UNRAID_PORT": "",
+          "UNRAID_USER": "",
+          "UNRAID_PASSWORD": "",
+          "PIHOLE_CONTAINER": "",
+          "PIHOLE_API_HOST": "",
+          "PIHOLE_API_PASSWORD": ""
+        },
+        "category": "core",
+        "toolCount": 10,
+        "runtime": "node",
+        "tags": [
+          "infrastructure",
+          "dns",
+          "ad-blocking",
+          "network"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/pihole-2.0.0.tar.gz",
+        "size": "25KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "plex",
+        "name": "Plex",
+        "description": "Plex Media Server — library browsing, search, metadata, on-deck, playlists, active sessions, and library scanning via REST API",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "PLEX_URL": "",
+          "PLEX_TOKEN": ""
+        },
+        "category": "media",
+        "toolCount": 13,
+        "runtime": "node",
+        "tags": [
+          "media",
+          "streaming",
+          "library"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/plex-2.0.0.tar.gz",
+        "size": "30KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "shelly",
+        "name": "Shelly",
+        "description": "Shelly device management — energy monitoring, power metrics, switch control, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "SHELLY_DEVICE_WATER_PUMPS": "",
+          "SHELLY_TIMEOUT": ""
+        },
+        "category": "ops",
+        "toolCount": 12,
+        "runtime": "node",
+        "tags": [
+          "smart-home",
+          "energy",
+          "iot",
+          "switches"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/shelly-2.0.0.tar.gz",
+        "size": "28KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "tautulli",
+        "name": "Tautulli",
+        "description": "Tautulli Plex monitoring — current activity, watch history, library stats, recently added, user analytics, and server health via REST API",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "TAUTULLI_URL": "",
+          "TAUTULLI_API_KEY": ""
+        },
+        "category": "media",
+        "toolCount": 11,
+        "runtime": "node",
+        "tags": [
+          "media",
+          "monitoring",
+          "plex",
+          "analytics"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/tautulli-2.0.0.tar.gz",
+        "size": "25KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "unimus",
+        "name": "Unimus",
+        "description": "Unimus network config management — device inventory, config backups, diffs, change tracking, scheduled backups, and discovery via REST API",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "UNIMUS_URL": "",
+          "UNIMUS_API_TOKEN": ""
+        },
+        "category": "networking",
+        "toolCount": 12,
+        "runtime": "node",
+        "tags": [
+          "networking",
+          "config-management",
+          "backup",
+          "infrastructure"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unimus-2.0.0.tar.gz",
+        "size": "28KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "unraid",
+        "name": "UNRAID",
+        "description": "UNRAID server management — containers, VMs, shares, disks, temperatures, and system commands via SSH",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "UNRAID_HOST": "",
+          "UNRAID_PORT": "",
+          "UNRAID_USER": "",
+          "UNRAID_PASSWORD": ""
+        },
+        "category": "core",
+        "toolCount": 24,
+        "runtime": "node",
+        "tags": [
+          "infrastructure",
+          "server",
+          "containers",
+          "virtualization",
+          "storage"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unraid-2.0.0.tar.gz",
+        "size": "45KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "uptime-kuma",
+        "name": "Uptime Kuma",
+        "description": "Uptime Kuma monitoring — monitors, heartbeats, uptime stats, status pages, Docker hosts, and Prometheus metrics via Socket.IO",
+        "version": "2.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "tsx",
+        "args": [
+          "src/index.ts"
+        ],
+        "env": {
+          "UPTIME_KUMA_URL": "",
+          "UPTIME_KUMA_USERNAME": "",
+          "UPTIME_KUMA_PASSWORD": "",
+          "UPTIME_KUMA_API_KEY": ""
+        },
+        "category": "ops",
+        "toolCount": 16,
+        "runtime": "node",
+        "tags": [
+          "monitoring",
+          "uptime",
+          "infrastructure",
+          "alerts"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/uptime-kuma-2.0.0.tar.gz",
+        "size": "35KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "vaultwarden",
+        "name": "Vaultwarden",
+        "description": "Vaultwarden/Bitwarden secrets management — vault auth, item/folder CRUD, search, credential retrieval, TOTP, password generation with full client-side encryption (PBKDF2/Argon2, AES-CBC, HMAC-SHA256). Supports Vaultwarden 1.32+ camelCase API.",
+        "version": "1.1.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "VAULTWARDEN_URL": "",
+          "VAULTWARDEN_EMAIL": "",
+          "VAULTWARDEN_MASTER_PASSWORD": ""
+        },
+        "category": "security",
+        "toolCount": 18,
+        "runtime": "node",
+        "tags": [
+          "secrets",
+          "passwords",
+          "security",
+          "encryption",
+          "bitwarden",
+          "totp"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.1.0/vaultwarden-1.1.0.tar.gz",
+        "size": "256KB",
+        "checksum": "sha256:placeholder"
+      }
+    ],
+    "skills": [
+      {
+        "catalogID": "api-design-principles",
+        "name": "API Design",
+        "description": "REST and GraphQL API design — resource modeling, versioning, pagination, error handling, and developer experience.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "foundations",
+        "tags": [
+          "api",
+          "rest",
+          "graphql",
+          "design"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/api-design-principles/SKILL.md"
+      },
+      {
+        "catalogID": "architecture-decision-records",
+        "name": "ADR",
+        "description": "Document architectural decisions using ADR format with context, decision, consequences, and status tracking.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "foundations",
+        "tags": [
+          "architecture",
+          "documentation",
+          "adr",
+          "decisions"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/architecture-decision-records/SKILL.md"
+      },
+      {
+        "catalogID": "backend-architect",
+        "name": "Backend Architect",
+        "description": "Scalable API design, microservices architecture, distributed systems, event-driven patterns, and observability.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "backend",
+        "tags": [
+          "backend",
+          "architecture",
+          "microservices",
+          "api"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/backend-architect/SKILL.md"
+      },
+      {
+        "catalogID": "backups",
+        "name": "Backups",
+        "description": "Duplicacy backup management (Backblaze B2), Unimus network config backups, health checks, restore procedures, and backup verification.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "casa-lima-ops",
+        "tags": [
+          "backups",
+          "duplicacy",
+          "unimus",
+          "b2",
+          "disaster-recovery",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/backups/SKILL.md"
+      },
+      {
+        "catalogID": "bash-pro",
+        "name": "Bash Pro",
+        "description": "Defensive Bash scripting for production automation, CI/CD pipelines, and system utilities.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "bash",
+          "shell",
+          "automation",
+          "scripting"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/bash-pro/SKILL.md"
+      },
+      {
+        "catalogID": "data-engineer",
+        "name": "Data Engineer",
+        "description": "Scalable data pipelines, modern data warehouses, streaming architectures — Spark, dbt, Airflow, cloud-native.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "data-ai",
+        "tags": [
+          "data",
+          "pipelines",
+          "spark",
+          "dbt",
+          "airflow"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/data-engineer/SKILL.md"
+      },
+      {
+        "catalogID": "deploy-container",
+        "name": "Deploy Container",
+        "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "unraid",
+          "docker",
+          "deployment",
+          "gitops",
+          "infrastructure",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/casa-lima-infra",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/deploy-container/SKILL.md"
+      },
+      {
+        "catalogID": "distribute-skill-mcp",
+        "name": "Distribute Skill & MCP",
+        "description": "The ONLY official way to distribute skill and MCP changes across Casa Lima's 3 required locations — atelier repos, OpenCode global skills, and Claude Code project configs.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "distribution",
+          "skills",
+          "mcps",
+          "workflow",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/casa-lima-infra",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/distribute-skill-mcp/SKILL.md"
+      },
+      {
+        "catalogID": "dns-sync",
+        "name": "DNS Sync & IPAM",
+        "description": "FortiGate → NetBox → Pihole DHCP/DNS synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "casa-lima-ops",
+        "tags": [
+          "dns",
+          "ipam",
+          "netbox",
+          "pihole",
+          "dhcp",
+          "sync",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/dns-sync/SKILL.md"
+      },
+      {
+        "catalogID": "docker-expert",
+        "name": "Docker Expert",
+        "description": "Docker containerization — multi-stage builds, image optimization, security hardening, Compose orchestration.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "docker",
+          "containers",
+          "devops",
+          "security"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/docker-expert/SKILL.md"
+      },
+      {
+        "catalogID": "fastapi-pro",
+        "name": "FastAPI Pro",
+        "description": "High-performance async APIs with FastAPI, SQLAlchemy 2.0, Pydantic V2 — microservices, WebSockets, and async patterns.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "backend",
+        "tags": [
+          "fastapi",
+          "python",
+          "api",
+          "async"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/fastapi-pro/SKILL.md"
+      },
+      {
+        "catalogID": "firewall-flows",
+        "name": "Firewall Flows",
+        "description": "Fortigate firewall traffic flows for UNRAID services — NGINX reverse proxy path, service objects, service groups, cross-VLAN policies, and mandatory steps to open a new container port.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "casa-lima-ops",
+        "tags": [
+          "fortigate",
+          "firewall",
+          "nginx",
+          "proxy",
+          "policies",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/firewall-flows/SKILL.md"
+      },
+      {
+        "catalogID": "frontend-design",
+        "name": "Frontend Design",
+        "description": "Create distinctive, production-grade frontend interfaces with intentional aesthetics and high craft.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "frontend",
+        "tags": [
+          "design",
+          "frontend",
+          "aesthetics",
+          "ui"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/frontend-design/SKILL.md"
+      },
+      {
+        "catalogID": "git-advanced-workflows",
+        "name": "Git Advanced",
+        "description": "Advanced git operations — rebasing, cherry-picking, bisect, worktrees, submodules, and conflict resolution.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "foundations",
+        "tags": [
+          "git",
+          "workflows",
+          "advanced",
+          "version-control"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/git-advanced-workflows/SKILL.md"
+      },
+      {
+        "catalogID": "golang-pro",
+        "name": "Go Pro",
+        "description": "Master Go 1.21+ — modern patterns, advanced concurrency, performance optimization, and production microservices.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "backend",
+        "tags": [
+          "go",
+          "golang",
+          "concurrency",
+          "backend"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/golang-pro/SKILL.md"
+      },
+      {
+        "catalogID": "home-docs",
+        "name": "Home Docs",
+        "description": "MkDocs Material documentation site — page creation, navigation, sync workflow, container management, and content conventions for docs.3olive3.com.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "casa-lima-ops",
+        "tags": [
+          "mkdocs",
+          "documentation",
+          "docs",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/home-docs/SKILL.md"
+      },
+      {
+        "catalogID": "home-network",
+        "name": "Home Network",
+        "description": "Casa Lima network architecture — VLANs, Fortigate firewall, FortiSwitch, FortiAP, DNS (Pihole + Cloudflare), NGINX reverse proxy, and Cloudflare tunnels/Zero Trust.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "casa-lima-ops",
+        "tags": [
+          "network",
+          "vlans",
+          "fortigate",
+          "dns",
+          "nginx",
+          "cloudflare",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/home-network/SKILL.md"
+      },
+      {
+        "catalogID": "incidents-methodology",
+        "name": "Incidents",
+        "description": "Incident management — severity levels, post-mortem format, post-incident protocol, and troubleshooting workflow.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "foundations",
+        "tags": [
+          "incidents",
+          "post-mortem",
+          "troubleshooting",
+          "methodology"
+        ],
+        "author": "Atelier",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/incidents-methodology/SKILL.md"
+      },
+      {
+        "catalogID": "java-pro",
+        "name": "Java Pro",
+        "description": "Master Java 21+ — virtual threads, pattern matching, Spring Boot 3.x, GraalVM, and cloud-native patterns.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "backend",
+        "tags": [
+          "java",
+          "spring",
+          "graalvm",
+          "backend"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/java-pro/SKILL.md"
+      },
+      {
+        "catalogID": "kubernetes-architect",
+        "name": "Kubernetes Architect",
+        "description": "Cloud-native infrastructure with Kubernetes — GitOps, service mesh, multi-tenancy, and container orchestration.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "kubernetes",
+          "k8s",
+          "gitops",
+          "cloud-native"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/kubernetes-architect/SKILL.md"
+      },
+      {
+        "catalogID": "llm-app-patterns",
+        "name": "LLM App Patterns",
+        "description": "Production-ready LLM application patterns — RAG pipelines, agent architectures, prompt IDEs, LLMOps monitoring.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "data-ai",
+        "tags": [
+          "llm",
+          "rag",
+          "agents",
+          "ai"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/llm-app-patterns/SKILL.md"
+      },
+      {
+        "catalogID": "mcp-builder",
+        "name": "MCP Builder",
+        "description": "Build Model Context Protocol servers with proper tool definitions, transport handling, and error patterns.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "ai-agent",
+        "tags": [
+          "mcp",
+          "ai",
+          "tools",
+          "protocol"
+        ],
+        "author": "Anthropic",
+        "license": "MIT",
+        "sourceURL": "https://github.com/anthropics/skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/mcp-builder/SKILL.md"
+      },
+      {
+        "catalogID": "minecraft-ops",
+        "name": "Minecraft Ops",
+        "description": "Minecraft Paper server management on UNRAID — DMZ networking, macvlan, plugins, RCON, security layers, and Fortigate VIP configuration.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "casa-lima-ops",
+        "tags": [
+          "minecraft",
+          "gaming",
+          "unraid",
+          "dmz",
+          "macvlan",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/minecraft-ops/SKILL.md"
+      },
+      {
+        "catalogID": "ml-engineer",
+        "name": "ML Engineer",
+        "description": "Production ML systems — PyTorch 2.x, TensorFlow, model serving, feature engineering, A/B testing, monitoring.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "data-ai",
+        "tags": [
+          "ml",
+          "pytorch",
+          "tensorflow",
+          "mlops"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/ml-engineer/SKILL.md"
+      },
+      {
+        "catalogID": "mobile-design",
+        "name": "Mobile Design",
+        "description": "Mobile-first design for iOS and Android — touch interaction, performance, platform conventions, offline behavior.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "design",
+        "tags": [
+          "mobile",
+          "design",
+          "ios",
+          "android"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/mobile-design/SKILL.md"
+      },
+      {
+        "catalogID": "prometheus-configuration",
+        "name": "Prometheus Config",
+        "description": "Prometheus setup — metric collection, scrape configs, recording rules, alert rules, and monitoring best practices.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "prometheus",
+          "monitoring",
+          "metrics",
+          "observability"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/prometheus-configuration/SKILL.md"
+      },
+      {
+        "catalogID": "prompt-engineering",
+        "name": "Prompt Engineering",
+        "description": "Prompt design techniques, chain-of-thought reasoning, few-shot examples, and LLM interaction optimization.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "ai-agent",
+        "tags": [
+          "prompts",
+          "ai",
+          "llm",
+          "optimization"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/prompt-engineering/SKILL.md"
+      },
+      {
+        "catalogID": "python-pro",
+        "name": "Python Pro",
+        "description": "Master Python 3.12+ — modern features, async programming, uv, ruff, pydantic, and production practices.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "backend",
+        "tags": [
+          "python",
+          "async",
+          "fastapi",
+          "backend"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/python-pro/SKILL.md"
+      },
+      {
+        "catalogID": "radix-ui-design-system",
+        "name": "Radix UI Design System",
+        "description": "Build accessible design systems with Radix UI primitives — headless components, theming, compound patterns.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "frontend",
+        "tags": [
+          "radix",
+          "ui",
+          "accessibility",
+          "design-system"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/radix-ui-design-system/SKILL.md"
+      },
+      {
+        "catalogID": "react-pro",
+        "name": "React Pro",
+        "description": "Modern React and Next.js development — hooks, composition, state management, performance optimization (45 Vercel rules), TypeScript, and best practices.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "frontend",
+        "tags": [
+          "react",
+          "nextjs",
+          "hooks",
+          "typescript",
+          "performance",
+          "frontend"
+        ],
+        "author": "Atelier",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/react-pro/SKILL.md"
+      },
+      {
+        "catalogID": "security-review",
+        "name": "Security Review",
+        "description": "Comprehensive security review — bug hunting, insecure defaults detection, and Semgrep static analysis for security audits and code reviews.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "security",
+        "tags": [
+          "security",
+          "bugs",
+          "static-analysis",
+          "semgrep",
+          "vulnerabilities",
+          "sast"
+        ],
+        "author": "Atelier",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/security-review/SKILL.md"
+      },
+      {
+        "catalogID": "skill-creator",
+        "name": "Skill Creator",
+        "description": "Create well-structured agent skills with proper frontmatter, instructions, and behavioral guidelines.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "ai-agent",
+        "tags": [
+          "skills",
+          "ai",
+          "agents",
+          "authoring"
+        ],
+        "author": "Anthropic",
+        "license": "MIT",
+        "sourceURL": "https://github.com/anthropics/skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/skill-creator/SKILL.md"
+      },
+      {
+        "catalogID": "swift-client",
+        "name": "Swift Client",
+        "description": "Build, review, and improve Swift client apps (iOS/macOS) — SwiftUI, UIKit integration, state management, performance, animations, accessibility, Liquid Glass, and App Store patterns.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "swift",
+        "tags": [
+          "swift",
+          "swiftui",
+          "ios",
+          "macos",
+          "uikit",
+          "ui"
+        ],
+        "author": "Atelier",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/swift-client/SKILL.md"
+      },
+      {
+        "catalogID": "swift-server",
+        "name": "Swift Server",
+        "description": "Server-side Swift with Vapor, Hummingbird, Swift NIO, and production deployment patterns.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "swift",
+        "tags": [
+          "swift",
+          "server",
+          "vapor",
+          "hummingbird",
+          "backend"
+        ],
+        "author": "Joannis",
+        "license": "MIT",
+        "sourceURL": "https://github.com/Joannis/claude-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/swift-server/SKILL.md"
+      },
+      {
+        "catalogID": "systematic-debugging",
+        "name": "Systematic Debugging",
+        "description": "Methodical debugging approach — hypothesis formation, evidence gathering, bisection, and root cause analysis.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "foundations",
+        "tags": [
+          "debugging",
+          "methodology",
+          "troubleshooting"
+        ],
+        "author": "obra",
+        "license": "MIT",
+        "sourceURL": "https://github.com/obra/superpowers",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/systematic-debugging/SKILL.md"
+      },
+      {
+        "catalogID": "tailwind-patterns",
+        "name": "Tailwind Patterns",
+        "description": "Tailwind CSS v4 patterns — CSS-first config, container queries, OKLCH colors, design token architecture.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "frontend",
+        "tags": [
+          "tailwind",
+          "css",
+          "design-tokens",
+          "frontend"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/tailwind-patterns/SKILL.md"
+      },
+      {
+        "catalogID": "terraform-skill",
+        "name": "Terraform",
+        "description": "Infrastructure as Code with Terraform — modules, state management, providers, and cloud deployment patterns.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "terraform",
+          "iac",
+          "infrastructure",
+          "devops"
+        ],
+        "author": "antonbabenko",
+        "license": "MIT",
+        "sourceURL": "https://github.com/antonbabenko/terraform-skill",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/terraform-skill/SKILL.md"
+      },
+      {
+        "catalogID": "test-driven-development",
+        "name": "TDD",
+        "description": "TDD methodology with red-green-refactor cycle, test patterns, mocking strategies, and coverage practices.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "code-quality",
+        "tags": [
+          "testing",
+          "tdd",
+          "quality",
+          "methodology"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/test-driven-development/SKILL.md"
+      },
+      {
+        "catalogID": "ui-ux-designer",
+        "name": "UI/UX Designer",
+        "description": "Interface design, wireframes, design systems — user research, accessibility, and modern design tools.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "design",
+        "tags": [
+          "design",
+          "ux",
+          "ui",
+          "accessibility"
+        ],
+        "author": "Antigravity",
+        "license": "MIT",
+        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/ui-ux-designer/SKILL.md"
+      },
+      {
+        "catalogID": "vault-access",
+        "name": "Vault Access",
+        "description": "Vaultwarden credential retrieval patterns — MCP tools for vault operations, bw CLI fallback for bootstrap scenarios, and secret lookup conventions.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "casa-lima-ops",
+        "tags": [
+          "vaultwarden",
+          "secrets",
+          "credentials",
+          "security",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-skills",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/vault-access/SKILL.md"
+      }
+    ],
+    "role-profiles": [
+      {
+        "catalogID": "security-auditor",
+        "name": "Security Auditor",
+        "description": "Security-focused agent for code review, vulnerability scanning, and compliance checks",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "qa",
+        "defaultModel": "claude-opus-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "builder"
+        ],
+        "guardrailPresets": {
+          "allowShellExecution": false,
+          "allowFileCreation": false,
+          "allowNetworkAccess": true,
+          "allowPackageInstall": false,
+          "requireHumanApproval": true,
+          "readOnlyMode": true,
+          "sandboxMode": true
+        }
+      },
+      {
+        "catalogID": "senior-backend",
+        "name": "Senior Backend Engineer",
+        "description": "Experienced backend developer with API design, database, and system architecture focus",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "backend",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "autonomous",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "coordinator",
+          "builder"
+        ],
+        "suggestedTechStacks": [
+          "swift-server",
+          "typescript-fullstack",
+          "python-ml"
+        ]
+      },
+      {
+        "catalogID": "sysadmin-infra",
+        "name": "Infrastructure SysAdmin",
+        "description": "Infrastructure management agent for servers, networking, monitoring, and deployment",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "sysadmin",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "standard",
+        "allowedTiers": [
+          "builder",
+          "operative"
+        ],
+        "suggestedTechStacks": [
+          "devops-infra"
+        ],
+        "guardrailPresets": {
+          "allowShellExecution": true,
+          "allowFileCreation": true,
+          "allowNetworkAccess": true,
+          "allowPackageInstall": false,
+          "requireHumanApproval": true,
+          "readOnlyMode": false,
+          "sandboxMode": false
+        }
+      }
+    ],
+    "git-repositories": [
+      {
+        "catalogID": "agents-teams",
+        "name": "Agents & Teams",
+        "description": "SysAdmin coordination hub for multi-agent workflows",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/Agents-Teams"
+      },
+      {
+        "catalogID": "atelier-bridge",
+        "name": "Atelier Bridge",
+        "description": "Bridge skills for atelier-bridge and atelier-controller integration",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/atelier-bridge"
+      },
+      {
+        "catalogID": "atelier-butler",
+        "name": "Atelier Butler",
+        "description": "AI home automation agent with 19 MCP servers and 377+ tools",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/atelier-butler"
+      },
+      {
+        "catalogID": "atelier-catalog",
+        "name": "Atelier Catalog",
+        "description": "Unified resource distribution catalog for 10 Atelier resource types",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/atelier-catalog"
+      },
+      {
+        "catalogID": "atelier-companion",
+        "name": "Atelier Companion",
+        "description": "iOS, iPad, and tvOS companion app for home control and agent runtime",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/atelier-companion"
+      },
+      {
+        "catalogID": "atelier-mcps",
+        "name": "Atelier MCPs",
+        "description": "MCP server distribution catalog with installable packages",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/atelier-mcps"
+      },
+      {
+        "catalogID": "atelier-skills",
+        "name": "Atelier Skills",
+        "description": "Skill catalog with 40 skills and 10 bundles for on-demand agent knowledge",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/atelier-skills"
+      },
+      {
+        "catalogID": "atelier",
+        "name": "Atelier",
+        "description": "Designer and Runtime — macOS SwiftUI app with Vapor 4 backend",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/atelier"
+      },
+      {
+        "catalogID": "home-docs",
+        "name": "Home Docs",
+        "description": "MkDocs Material knowledge base at docs.3olive3.com",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/home-docs"
+      },
+      {
+        "catalogID": "minecraft-server",
+        "name": "Minecraft Server",
+        "description": "Minecraft Paper game server configuration on UNRAID",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/minecraft-server"
+      },
+      {
+        "catalogID": "pando",
+        "name": "Pando",
+        "description": "Homebridge plugin for Pando kitchen hood integration",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "defaultBranch": "main",
+        "remoteURL": "https://github.com/3olive3/Pando"
+      }
+    ],
+    "tech-stacks": [
+      {
+        "catalogID": "devops-infra",
+        "name": "DevOps / Infrastructure",
+        "description": "Infrastructure automation: Bash, Terraform, Ansible, Docker, Kubernetes",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "tool",
+        "iconName": "gearshape.2",
+        "technologies": [
+          {
+            "name": "Bash",
+            "category": "language"
+          },
+          {
+            "name": "Terraform",
+            "category": "tool"
+          },
+          {
+            "name": "Ansible",
+            "category": "tool"
+          },
+          {
+            "name": "Docker",
+            "category": "tool"
+          },
+          {
+            "name": "Kubernetes",
+            "category": "tool"
+          },
+          {
+            "name": "Prometheus",
+            "category": "tool"
+          },
+          {
+            "name": "Grafana",
+            "category": "tool"
+          }
+        ]
+      },
+      {
+        "catalogID": "python-ml",
+        "name": "Python / ML",
+        "description": "Python data science and ML: PyTorch, scikit-learn, pandas, FastAPI",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "language",
+        "iconName": "brain",
+        "technologies": [
+          {
+            "name": "Python",
+            "category": "language",
+            "version": "3.12"
+          },
+          {
+            "name": "PyTorch",
+            "category": "framework"
+          },
+          {
+            "name": "scikit-learn",
+            "category": "framework"
+          },
+          {
+            "name": "pandas",
+            "category": "framework"
+          },
+          {
+            "name": "FastAPI",
+            "category": "framework"
+          },
+          {
+            "name": "Docker",
+            "category": "tool"
+          }
+        ]
+      },
+      {
+        "catalogID": "swift-ios",
+        "name": "Swift / iOS",
+        "description": "Apple ecosystem: Swift, SwiftUI, UIKit, Xcode, SPM",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "language",
+        "iconName": "swift",
+        "technologies": [
+          {
+            "name": "Swift",
+            "category": "language",
+            "version": "6.0"
+          },
+          {
+            "name": "SwiftUI",
+            "category": "framework"
+          },
+          {
+            "name": "UIKit",
+            "category": "framework"
+          },
+          {
+            "name": "SPM",
+            "category": "tool"
+          },
+          {
+            "name": "Xcode",
+            "category": "tool"
+          }
+        ]
+      },
+      {
+        "catalogID": "swift-server",
+        "name": "Swift Server-Side",
+        "description": "Server-side Swift: Vapor, SwiftNIO, Fluent, SQLite/PostgreSQL",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "framework",
+        "iconName": "server.rack",
+        "technologies": [
+          {
+            "name": "Swift",
+            "category": "language",
+            "version": "6.0"
+          },
+          {
+            "name": "Vapor",
+            "category": "framework",
+            "version": "4.x"
+          },
+          {
+            "name": "SwiftNIO",
+            "category": "framework"
+          },
+          {
+            "name": "Fluent",
+            "category": "framework"
+          },
+          {
+            "name": "SQLite",
+            "category": "database"
+          },
+          {
+            "name": "PostgreSQL",
+            "category": "database"
+          },
+          {
+            "name": "Docker",
+            "category": "tool"
+          }
+        ]
+      },
+      {
+        "catalogID": "typescript-fullstack",
+        "name": "TypeScript Full-Stack",
+        "description": "Modern TypeScript: Node.js, React/Next.js, Express, PostgreSQL",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "language",
+        "iconName": "chevron.left.forwardslash.chevron.right",
+        "technologies": [
+          {
+            "name": "TypeScript",
+            "category": "language",
+            "version": "5.x"
+          },
+          {
+            "name": "Node.js",
+            "category": "runtime",
+            "version": "22.x"
+          },
+          {
+            "name": "React",
+            "category": "framework"
+          },
+          {
+            "name": "Next.js",
+            "category": "framework"
+          },
+          {
+            "name": "Express",
+            "category": "framework"
+          },
+          {
+            "name": "PostgreSQL",
+            "category": "database"
+          },
+          {
+            "name": "Docker",
+            "category": "tool"
+          }
+        ]
+      }
+    ],
+    "knowledge-bases": [
+      {
+        "catalogID": "apple-developer",
+        "name": "Apple Developer Documentation",
+        "description": "Official Apple developer documentation for Swift, SwiftUI, UIKit, and Apple frameworks",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "url": "https://developer.apple.com/documentation",
+        "iconName": "apple.logo"
+      },
+      {
+        "catalogID": "mdn-web-docs",
+        "name": "MDN Web Docs",
+        "description": "Mozilla Developer Network — comprehensive web technology reference (HTML, CSS, JavaScript, Web APIs)",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "url": "https://developer.mozilla.org",
+        "iconName": "globe"
+      }
+    ],
+    "context-files": [
+      {
+        "catalogID": "claude-code-standard",
+        "name": "CLAUDE.md Standard Template",
+        "description": "Standard CLAUDE.md template for Claude Code agents with build commands, architecture, and coding conventions",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "templateContent": "# CLAUDE.md\n\n## Commands\n\n```bash\n# Build\n{{build_command}}\n\n# Test\n{{test_command}}\n\n# Lint\n{{lint_command}}\n```\n\n## Architecture\n\n{{architecture_description}}\n\n## Coding Conventions\n\n- {{convention_1}}\n- {{convention_2}}\n- {{convention_3}}\n"
+      },
+      {
+        "catalogID": "opencode-agents-md",
+        "name": "AGENTS.md Standard Template",
+        "description": "Standard AGENTS.md template for OpenCode agents with role, tools, and workflow instructions",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "templateContent": "# AGENTS.md\n\n## Role\n\n{{role_description}}\n\n## Tools\n\n{{available_tools}}\n\n## Workflow\n\n1. {{step_1}}\n2. {{step_2}}\n3. {{step_3}}\n\n## Constraints\n\n- {{constraint_1}}\n- {{constraint_2}}\n"
+      }
+    ],
+    "observability": [
+      {
+        "catalogID": "datadog-default",
+        "name": "Datadog",
+        "description": "Datadog APM and logging configuration for full-stack observability",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "provider": "datadog",
+        "defaultEndpoint": "https://api.datadoghq.com",
+        "defaultPath": "/api/v1/logs"
+      },
+      {
+        "catalogID": "prometheus-default",
+        "name": "Prometheus",
+        "description": "Default Prometheus configuration for metrics monitoring and alerting",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "provider": "prometheus",
+        "defaultEndpoint": "http://localhost:9090",
+        "defaultPath": "/api/v1/query"
+      }
+    ]
+  },
+  "bundles": [
+    {
+      "id": "swift-development",
+      "name": "Swift Development",
+      "description": "Complete Swift development toolkit for iOS and macOS applications.",
+      "skillIds": [
+        "swift-client",
+        "swift-server",
+        "mobile-design"
+      ],
+      "tags": [
+        "swift",
+        "ios",
+        "macos"
+      ]
+    },
+    {
+      "id": "frontend",
+      "name": "Frontend",
+      "description": "Modern frontend development with React, Tailwind, and accessible design systems.",
+      "skillIds": [
+        "react-pro",
+        "tailwind-patterns",
+        "radix-ui-design-system",
+        "frontend-design"
+      ],
+      "tags": [
+        "react",
+        "css",
+        "ui"
+      ]
+    },
+    {
+      "id": "backend",
+      "name": "Backend",
+      "description": "Backend development across Go, Python, Java, and FastAPI with architectural patterns.",
+      "skillIds": [
+        "backend-architect",
+        "golang-pro",
+        "python-pro",
+        "fastapi-pro",
+        "java-pro"
+      ],
+      "tags": [
+        "api",
+        "microservices",
+        "server"
+      ]
+    },
+    {
+      "id": "data-ai",
+      "name": "Data & AI",
+      "description": "Data engineering, machine learning, LLM applications, and AI tooling.",
+      "skillIds": [
+        "data-engineer",
+        "ml-engineer",
+        "llm-app-patterns",
+        "mcp-builder",
+        "skill-creator",
+        "prompt-engineering"
+      ],
+      "tags": [
+        "data",
+        "ml",
+        "llm",
+        "ai",
+        "mcp"
+      ]
+    },
+    {
+      "id": "devops-infra",
+      "name": "DevOps & Infrastructure",
+      "description": "Container orchestration, IaC, monitoring, and automation for production systems.",
+      "skillIds": [
+        "docker-expert",
+        "deploy-container",
+        "distribute-skill-mcp",
+        "terraform-skill",
+        "kubernetes-architect",
+        "bash-pro",
+        "prometheus-configuration"
+      ],
+      "tags": [
+        "docker",
+        "kubernetes",
+        "terraform",
+        "monitoring"
+      ]
+    },
+    {
+      "id": "design-ux",
+      "name": "Design & UX",
+      "description": "UI/UX design, mobile design patterns, and frontend visual design.",
+      "skillIds": [
+        "ui-ux-designer",
+        "frontend-design",
+        "mobile-design"
+      ],
+      "tags": [
+        "design",
+        "ux",
+        "mobile"
+      ]
+    },
+    {
+      "id": "code-quality",
+      "name": "Code Quality",
+      "description": "Testing methodology and security review.",
+      "skillIds": [
+        "test-driven-development",
+        "security-review"
+      ],
+      "tags": [
+        "quality",
+        "testing",
+        "security"
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "description": "Comprehensive security review — bug hunting, insecure defaults, and static analysis.",
+      "skillIds": [
+        "security-review"
+      ],
+      "tags": [
+        "security",
+        "sast",
+        "vulnerabilities"
+      ]
+    },
+    {
+      "id": "foundations",
+      "name": "Foundations",
+      "description": "Core engineering practices — git workflows, debugging, incident management, and API design.",
+      "skillIds": [
+        "git-advanced-workflows",
+        "incidents-methodology",
+        "architecture-decision-records",
+        "systematic-debugging",
+        "api-design-principles"
+      ],
+      "tags": [
+        "git",
+        "documentation",
+        "methodology"
+      ]
+    },
+    {
+      "id": "casa-lima-ops",
+      "name": "Casa Lima Operations",
+      "description": "Infrastructure operations for Casa Lima — network, firewall, DNS/IPAM, backups, secrets, documentation, and service-specific ops.",
+      "skillIds": [
+        "home-network",
+        "firewall-flows",
+        "dns-sync",
+        "vault-access",
+        "deploy-container",
+        "backups",
+        "home-docs",
+        "minecraft-ops",
+        "incidents-methodology"
+      ],
+      "tags": [
+        "casa-lima",
+        "infrastructure",
+        "operations"
+      ]
+    }
   ]
 }

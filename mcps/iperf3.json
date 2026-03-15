@@ -1,0 +1,30 @@
+{
+  "catalogID": "iperf3",
+  "name": "iperf3",
+  "description": "iperf3 network diagnostics — bandwidth testing between hosts with configurable protocols, duration, and parallel streams via SSH + docker exec",
+  "version": "2.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": [
+    "dist/index.js"
+  ],
+  "env": {
+    "UNRAID_HOST": "",
+    "UNRAID_PORT": "",
+    "UNRAID_USER": "",
+    "UNRAID_PASSWORD": "",
+    "IPERF3_CONTAINER": ""
+  },
+  "category": "networking",
+  "toolCount": 3,
+  "runtime": "node",
+  "tags": [
+    "networking",
+    "diagnostics",
+    "bandwidth"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/iperf3-2.0.0.tar.gz",
+  "size": "15KB",
+  "checksum": "sha256:placeholder"
+}
