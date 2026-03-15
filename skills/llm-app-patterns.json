@@ -1,10 +1,18 @@
 {
   "catalogID": "llm-app-patterns",
   "name": "LLM App Patterns",
-  "description": "RAG, agents, prompt chains, and LLMOps patterns",
+  "description": "Production-ready LLM application patterns — RAG pipelines, agent architectures, prompt IDEs, LLMOps monitoring.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "data-ai",
-  "tags": ["llm", "rag", "agents", "llmops"],
-  "author": "Atelier"
+  "tags": [
+    "llm",
+    "rag",
+    "agents",
+    "ai"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/llm-app-patterns/SKILL.md"
 }

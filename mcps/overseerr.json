@@ -1,16 +1,27 @@
 {
   "catalogID": "overseerr",
   "name": "Overseerr",
-  "description": "Media request management, search, approval workflows, and user quotas via REST API",
-  "version": "1.0.0",
+  "description": "Overseerr media requests — search, movie/TV details, request management, approval workflows, user quotas, and health monitoring via REST API",
+  "version": "2.0.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "OVERSEERR_URL": "",
     "OVERSEERR_API_KEY": ""
   },
   "category": "media",
-  "toolCount": 13
+  "toolCount": 13,
+  "runtime": "node",
+  "tags": [
+    "media",
+    "requests",
+    "automation"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/overseerr-2.0.0.tar.gz",
+  "size": "28KB",
+  "checksum": "sha256:placeholder"
 }

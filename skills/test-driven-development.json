@@ -1,10 +1,18 @@
 {
   "catalogID": "test-driven-development",
   "name": "TDD",
-  "description": "Test-driven development methodology and cross-repo quality assurance",
+  "description": "TDD methodology with red-green-refactor cycle, test patterns, mocking strategies, and coverage practices.",
   "version": "1.0.0",
   "source": "builtIn",
-  "category": "quality",
-  "tags": ["testing", "tdd", "quality", "ci"],
-  "author": "Atelier"
+  "category": "code-quality",
+  "tags": [
+    "testing",
+    "tdd",
+    "quality",
+    "methodology"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/test-driven-development/SKILL.md"
 }

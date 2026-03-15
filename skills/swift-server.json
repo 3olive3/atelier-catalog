@@ -1,10 +1,19 @@
 {
   "catalogID": "swift-server",
   "name": "Swift Server",
-  "description": "Vapor, SwiftNIO, and server-side Swift development",
+  "description": "Server-side Swift with Vapor, Hummingbird, Swift NIO, and production deployment patterns.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "swift",
-  "tags": ["swift", "vapor", "swiftnio", "server"],
-  "author": "Atelier"
+  "tags": [
+    "swift",
+    "server",
+    "vapor",
+    "hummingbird",
+    "backend"
+  ],
+  "author": "Joannis",
+  "license": "MIT",
+  "sourceURL": "https://github.com/Joannis/claude-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/swift-server/SKILL.md"
 }

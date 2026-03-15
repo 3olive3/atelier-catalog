@@ -1,10 +1,19 @@
 {
   "catalogID": "distribute-skill-mcp",
   "name": "Distribute Skill & MCP",
-  "description": "Publishing skills and MCP servers across project configurations",
+  "description": "The ONLY official way to distribute skill and MCP changes across Casa Lima's 3 required locations — atelier repos, OpenCode global skills, and Claude Code project configs.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "devops",
-  "tags": ["distribution", "skills", "mcp", "config"],
-  "author": "Atelier"
+  "tags": [
+    "distribution",
+    "skills",
+    "mcps",
+    "workflow",
+    "casa-lima"
+  ],
+  "author": "casa-lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/casa-lima-infra",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/distribute-skill-mcp/SKILL.md"
 }

@@ -1,10 +1,18 @@
 {
   "catalogID": "python-pro",
   "name": "Python Pro",
-  "description": "Python development, packaging, and best practices",
+  "description": "Master Python 3.12+ — modern features, async programming, uv, ruff, pydantic, and production practices.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "backend",
-  "tags": ["python", "packaging", "pip"],
-  "author": "Atelier"
+  "tags": [
+    "python",
+    "async",
+    "fastapi",
+    "backend"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/python-pro/SKILL.md"
 }

@@ -1,10 +1,18 @@
 {
   "catalogID": "ui-ux-designer",
   "name": "UI/UX Designer",
-  "description": "Interface design, wireframes, user research, and usability testing",
+  "description": "Interface design, wireframes, design systems — user research, accessibility, and modern design tools.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "design",
-  "tags": ["ui", "ux", "wireframes", "usability"],
-  "author": "Atelier"
+  "tags": [
+    "design",
+    "ux",
+    "ui",
+    "accessibility"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/ui-ux-designer/SKILL.md"
 }

@@ -1,17 +1,31 @@
 {
   "catalogID": "vaultwarden",
   "name": "Vaultwarden",
-  "description": "Password vault management with client-side end-to-end encryption",
+  "description": "Vaultwarden/Bitwarden secrets management — vault auth, item/folder CRUD, search, credential retrieval, TOTP, password generation with full client-side encryption (PBKDF2/Argon2, AES-CBC, HMAC-SHA256). Supports Vaultwarden 1.32+ camelCase API.",
   "version": "1.1.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "VAULTWARDEN_URL": "",
     "VAULTWARDEN_EMAIL": "",
     "VAULTWARDEN_MASTER_PASSWORD": ""
   },
   "category": "security",
-  "toolCount": 18
+  "toolCount": 18,
+  "runtime": "node",
+  "tags": [
+    "secrets",
+    "passwords",
+    "security",
+    "encryption",
+    "bitwarden",
+    "totp"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.1.0/vaultwarden-1.1.0.tar.gz",
+  "size": "256KB",
+  "checksum": "sha256:placeholder"
 }

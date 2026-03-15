@@ -1,12 +1,14 @@
 {
   "catalogID": "unraid",
   "name": "UNRAID",
-  "description": "Docker containers, VMs, shares, and system management via SSH",
-  "version": "1.0.0",
+  "description": "UNRAID server management — containers, VMs, shares, disks, temperatures, and system commands via SSH",
+  "version": "2.0.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "UNRAID_HOST": "",
     "UNRAID_PORT": "",
@@ -14,5 +16,16 @@
     "UNRAID_PASSWORD": ""
   },
   "category": "core",
-  "toolCount": 24
+  "toolCount": 24,
+  "runtime": "node",
+  "tags": [
+    "infrastructure",
+    "server",
+    "containers",
+    "virtualization",
+    "storage"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unraid-2.0.0.tar.gz",
+  "size": "45KB",
+  "checksum": "sha256:placeholder"
 }

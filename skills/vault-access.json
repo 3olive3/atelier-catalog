@@ -1,10 +1,19 @@
 {
   "catalogID": "vault-access",
   "name": "Vault Access",
-  "description": "Vaultwarden credential retrieval patterns and shared secrets",
+  "description": "Vaultwarden credential retrieval patterns — MCP tools for vault operations, bw CLI fallback for bootstrap scenarios, and secret lookup conventions.",
   "version": "1.0.0",
   "source": "builtIn",
-  "category": "casa-lima",
-  "tags": ["vaultwarden", "secrets", "credentials"],
-  "author": "Atelier"
+  "category": "casa-lima-ops",
+  "tags": [
+    "vaultwarden",
+    "secrets",
+    "credentials",
+    "security",
+    "casa-lima"
+  ],
+  "author": "casa-lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/vault-access/SKILL.md"
 }

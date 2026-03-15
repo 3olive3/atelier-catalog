@@ -1,12 +1,14 @@
 {
   "catalogID": "duplicacy",
   "name": "Duplicacy",
-  "description": "Backup health monitoring, job status, and storage stats via SSH and HTTP API",
-  "version": "1.0.0",
+  "description": "Duplicacy backup monitoring — storage configs, schedules, backup status, backup history, job logs, and health checks via SSH + HTTP API",
+  "version": "2.0.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "UNRAID_HOST": "",
     "UNRAID_PORT": "",
@@ -18,5 +20,14 @@
     "DUPLICACY_WEB_PORT": ""
   },
   "category": "ops",
-  "toolCount": 6
+  "toolCount": 6,
+  "runtime": "node",
+  "tags": [
+    "backup",
+    "storage",
+    "infrastructure"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/duplicacy-2.0.0.tar.gz",
+  "size": "20KB",
+  "checksum": "sha256:placeholder"
 }

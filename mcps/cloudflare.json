@@ -1,16 +1,34 @@
 {
   "catalogID": "cloudflare",
   "name": "Cloudflare",
-  "description": "DNS zones, tunnels, WAF rules, SSL/TLS, cache purge, and zone analytics",
-  "version": "1.0.0",
+  "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
+  "version": "3.0.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "CLOUDFLARE_API_TOKEN": "",
     "CLOUDFLARE_ZONE_NAME": ""
   },
   "category": "networking",
-  "toolCount": 63
+  "toolCount": 63,
+  "runtime": "node",
+  "tags": [
+    "dns",
+    "cdn",
+    "security",
+    "networking",
+    "tunnels",
+    "zero-trust",
+    "warp",
+    "gateway",
+    "device-profiles",
+    "access-groups"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/cloudflare-3.0.0.tar.gz",
+  "size": "75KB",
+  "checksum": "sha256:placeholder"
 }

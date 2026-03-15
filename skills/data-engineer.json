@@ -1,10 +1,19 @@
 {
   "catalogID": "data-engineer",
   "name": "Data Engineer",
-  "description": "Data pipelines, Spark, dbt, and data infrastructure",
+  "description": "Scalable data pipelines, modern data warehouses, streaming architectures — Spark, dbt, Airflow, cloud-native.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "data-ai",
-  "tags": ["data", "spark", "dbt", "pipelines", "etl"],
-  "author": "Atelier"
+  "tags": [
+    "data",
+    "pipelines",
+    "spark",
+    "dbt",
+    "airflow"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/data-engineer/SKILL.md"
 }

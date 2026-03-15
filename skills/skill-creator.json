@@ -1,10 +1,18 @@
 {
   "catalogID": "skill-creator",
   "name": "Skill Creator",
-  "description": "Creating and publishing new Atelier skills",
+  "description": "Create well-structured agent skills with proper frontmatter, instructions, and behavioral guidelines.",
   "version": "1.0.0",
   "source": "builtIn",
-  "category": "data-ai",
-  "tags": ["skills", "atelier", "authoring"],
-  "author": "Atelier"
+  "category": "ai-agent",
+  "tags": [
+    "skills",
+    "ai",
+    "agents",
+    "authoring"
+  ],
+  "author": "Anthropic",
+  "license": "MIT",
+  "sourceURL": "https://github.com/anthropics/skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/skill-creator/SKILL.md"
 }

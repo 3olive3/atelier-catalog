@@ -1,12 +1,14 @@
 {
   "catalogID": "uptime-kuma",
   "name": "Uptime Kuma",
-  "description": "Uptime monitoring, alerting, and status page management via Socket.IO",
+  "description": "Uptime Kuma monitoring — monitors, heartbeats, uptime stats, status pages, Docker hosts, and Prometheus metrics via Socket.IO",
   "version": "2.0.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "tsx",
-  "args": ["src/index.ts"],
+  "args": [
+    "src/index.ts"
+  ],
   "env": {
     "UPTIME_KUMA_URL": "",
     "UPTIME_KUMA_USERNAME": "",
@@ -14,5 +16,15 @@
     "UPTIME_KUMA_API_KEY": ""
   },
   "category": "ops",
-  "toolCount": 16
+  "toolCount": 16,
+  "runtime": "node",
+  "tags": [
+    "monitoring",
+    "uptime",
+    "infrastructure",
+    "alerts"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/uptime-kuma-2.0.0.tar.gz",
+  "size": "35KB",
+  "checksum": "sha256:placeholder"
 }

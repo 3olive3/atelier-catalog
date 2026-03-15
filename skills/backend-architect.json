@@ -1,10 +1,18 @@
 {
   "catalogID": "backend-architect",
   "name": "Backend Architect",
-  "description": "API design, microservices architecture, and distributed systems",
+  "description": "Scalable API design, microservices architecture, distributed systems, event-driven patterns, and observability.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "backend",
-  "tags": ["api", "microservices", "distributed-systems", "architecture"],
-  "author": "Atelier"
+  "tags": [
+    "backend",
+    "architecture",
+    "microservices",
+    "api"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/backend-architect/SKILL.md"
 }

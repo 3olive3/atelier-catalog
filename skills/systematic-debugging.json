@@ -1,10 +1,17 @@
 {
   "catalogID": "systematic-debugging",
   "name": "Systematic Debugging",
-  "description": "Hypothesis-driven debugging, bisection, and root cause analysis",
+  "description": "Methodical debugging approach — hypothesis formation, evidence gathering, bisection, and root cause analysis.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "foundations",
-  "tags": ["debugging", "rca", "bisect", "troubleshooting"],
-  "author": "Atelier"
+  "tags": [
+    "debugging",
+    "methodology",
+    "troubleshooting"
+  ],
+  "author": "obra",
+  "license": "MIT",
+  "sourceURL": "https://github.com/obra/superpowers",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/systematic-debugging/SKILL.md"
 }

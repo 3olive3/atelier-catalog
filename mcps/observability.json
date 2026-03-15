@@ -1,12 +1,14 @@
 {
   "catalogID": "observability",
   "name": "Observability",
-  "description": "Infrastructure metrics, alerting, and time-series observability via Prometheus, Grafana, Loki, and Alertmanager",
-  "version": "1.0.0",
+  "description": "Full observability stack — Prometheus (PromQL queries, metric discovery, targets, alerts, rules, TSDB stats), Loki (log queries, label discovery, series, stats), Alertmanager (alerts, silences, receivers, status), and Grafana (dashboard search, annotations, folders) via HTTP APIs",
+  "version": "3.0.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "PROMETHEUS_URL": "",
     "GRAFANA_URL": "",
@@ -15,5 +17,20 @@
     "ALERTMANAGER_URL": ""
   },
   "category": "ops",
-  "toolCount": 34
+  "toolCount": 34,
+  "runtime": "node",
+  "tags": [
+    "monitoring",
+    "observability",
+    "metrics",
+    "alerting",
+    "logs",
+    "dashboards",
+    "grafana",
+    "loki",
+    "alertmanager"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/prometheus-3.0.0.tar.gz",
+  "size": "60KB",
+  "checksum": "sha256:placeholder"
 }

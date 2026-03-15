@@ -1,10 +1,18 @@
 {
   "catalogID": "tailwind-patterns",
   "name": "Tailwind Patterns",
-  "description": "Tailwind CSS utility-first styling patterns and responsive design",
+  "description": "Tailwind CSS v4 patterns — CSS-first config, container queries, OKLCH colors, design token architecture.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "frontend",
-  "tags": ["tailwind", "css", "styling", "responsive"],
-  "author": "Atelier"
+  "tags": [
+    "tailwind",
+    "css",
+    "design-tokens",
+    "frontend"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/tailwind-patterns/SKILL.md"
 }

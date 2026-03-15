@@ -1,10 +1,20 @@
 {
   "catalogID": "minecraft-ops",
   "name": "Minecraft Ops",
-  "description": "Paper server management, DMZ networking, plugins, and RCON",
+  "description": "Minecraft Paper server management on UNRAID — DMZ networking, macvlan, plugins, RCON, security layers, and Fortigate VIP configuration.",
   "version": "1.0.0",
   "source": "builtIn",
-  "category": "casa-lima",
-  "tags": ["minecraft", "paper", "rcon", "gaming"],
-  "author": "Atelier"
+  "category": "casa-lima-ops",
+  "tags": [
+    "minecraft",
+    "gaming",
+    "unraid",
+    "dmz",
+    "macvlan",
+    "casa-lima"
+  ],
+  "author": "casa-lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/minecraft-ops/SKILL.md"
 }

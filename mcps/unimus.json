@@ -1,16 +1,28 @@
 {
   "catalogID": "unimus",
   "name": "Unimus",
-  "description": "Network device config backups, inventory, config diffs, and change tracking via REST API",
-  "version": "1.0.0",
+  "description": "Unimus network config management — device inventory, config backups, diffs, change tracking, scheduled backups, and discovery via REST API",
+  "version": "2.0.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "UNIMUS_URL": "",
     "UNIMUS_API_TOKEN": ""
   },
   "category": "networking",
-  "toolCount": 12
+  "toolCount": 12,
+  "runtime": "node",
+  "tags": [
+    "networking",
+    "config-management",
+    "backup",
+    "infrastructure"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unimus-2.0.0.tar.gz",
+  "size": "28KB",
+  "checksum": "sha256:placeholder"
 }

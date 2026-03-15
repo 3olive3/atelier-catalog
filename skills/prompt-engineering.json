@@ -1,10 +1,18 @@
 {
   "catalogID": "prompt-engineering",
   "name": "Prompt Engineering",
-  "description": "LLM prompt design, tool calling, and chain-of-thought techniques",
+  "description": "Prompt design techniques, chain-of-thought reasoning, few-shot examples, and LLM interaction optimization.",
   "version": "1.0.0",
   "source": "builtIn",
-  "category": "data-ai",
-  "tags": ["prompts", "llm", "tool-calling", "cot"],
-  "author": "Atelier"
+  "category": "ai-agent",
+  "tags": [
+    "prompts",
+    "ai",
+    "llm",
+    "optimization"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/prompt-engineering/SKILL.md"
 }

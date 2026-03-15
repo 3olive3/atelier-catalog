@@ -1,0 +1,879 @@
+{
+  "version": "1.3.0",
+  "lastUpdated": "2026-03-15T03:26:06Z",
+  "skills": [
+    {
+      "id": "api-design-principles",
+      "name": "API Design",
+      "version": "1.0.0",
+      "description": "REST and GraphQL API design — resource modeling, versioning, pagination, error handling, and developer experience.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "api",
+        "rest",
+        "graphql",
+        "design"
+      ],
+      "category": "foundations",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/api-design-principles/SKILL.md"
+    },
+    {
+      "id": "architecture-decision-records",
+      "name": "ADR",
+      "version": "1.0.0",
+      "description": "Document architectural decisions using ADR format with context, decision, consequences, and status tracking.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "architecture",
+        "documentation",
+        "adr",
+        "decisions"
+      ],
+      "category": "foundations",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/architecture-decision-records/SKILL.md"
+    },
+    {
+      "id": "backend-architect",
+      "name": "Backend Architect",
+      "version": "1.0.0",
+      "description": "Scalable API design, microservices architecture, distributed systems, event-driven patterns, and observability.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "backend",
+        "architecture",
+        "microservices",
+        "api"
+      ],
+      "category": "backend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/backend-architect/SKILL.md"
+    },
+    {
+      "id": "backups",
+      "name": "Backups",
+      "version": "1.0.0",
+      "description": "Duplicacy backup management (Backblaze B2), Unimus network config backups, health checks, restore procedures, and backup verification.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "backups",
+        "duplicacy",
+        "unimus",
+        "b2",
+        "disaster-recovery",
+        "casa-lima"
+      ],
+      "category": "casa-lima-ops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/backups/SKILL.md"
+    },
+    {
+      "id": "bash-pro",
+      "name": "Bash Pro",
+      "version": "1.0.0",
+      "description": "Defensive Bash scripting for production automation, CI/CD pipelines, and system utilities.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "bash",
+        "shell",
+        "automation",
+        "scripting"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/bash-pro/SKILL.md"
+    },
+    {
+      "id": "data-engineer",
+      "name": "Data Engineer",
+      "version": "1.0.0",
+      "description": "Scalable data pipelines, modern data warehouses, streaming architectures — Spark, dbt, Airflow, cloud-native.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "data",
+        "pipelines",
+        "spark",
+        "dbt",
+        "airflow"
+      ],
+      "category": "data-ai",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/data-engineer/SKILL.md"
+    },
+    {
+      "id": "deploy-container",
+      "name": "Deploy Container",
+      "version": "1.0.0",
+      "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/casa-lima-infra",
+      "tags": [
+        "unraid",
+        "docker",
+        "deployment",
+        "gitops",
+        "infrastructure",
+        "casa-lima"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/deploy-container/SKILL.md"
+    },
+    {
+      "id": "distribute-skill-mcp",
+      "name": "Distribute Skill & MCP",
+      "version": "1.0.0",
+      "description": "The ONLY official way to distribute skill and MCP changes across Casa Lima's 3 required locations — atelier repos, OpenCode global skills, and Claude Code project configs.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/casa-lima-infra",
+      "tags": [
+        "distribution",
+        "skills",
+        "mcps",
+        "workflow",
+        "casa-lima"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/distribute-skill-mcp/SKILL.md"
+    },
+    {
+      "id": "dns-sync",
+      "name": "DNS Sync & IPAM",
+      "version": "1.0.0",
+      "description": "FortiGate → NetBox → Pihole DHCP/DNS synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "dns",
+        "ipam",
+        "netbox",
+        "pihole",
+        "dhcp",
+        "sync",
+        "casa-lima"
+      ],
+      "category": "casa-lima-ops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/dns-sync/SKILL.md"
+    },
+    {
+      "id": "docker-expert",
+      "name": "Docker Expert",
+      "version": "1.0.0",
+      "description": "Docker containerization — multi-stage builds, image optimization, security hardening, Compose orchestration.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "docker",
+        "containers",
+        "devops",
+        "security"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/docker-expert/SKILL.md"
+    },
+    {
+      "id": "fastapi-pro",
+      "name": "FastAPI Pro",
+      "version": "1.0.0",
+      "description": "High-performance async APIs with FastAPI, SQLAlchemy 2.0, Pydantic V2 — microservices, WebSockets, and async patterns.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "fastapi",
+        "python",
+        "api",
+        "async"
+      ],
+      "category": "backend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/fastapi-pro/SKILL.md"
+    },
+    {
+      "id": "firewall-flows",
+      "name": "Firewall Flows",
+      "version": "1.0.0",
+      "description": "Fortigate firewall traffic flows for UNRAID services — NGINX reverse proxy path, service objects, service groups, cross-VLAN policies, and mandatory steps to open a new container port.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "fortigate",
+        "firewall",
+        "nginx",
+        "proxy",
+        "policies",
+        "casa-lima"
+      ],
+      "category": "casa-lima-ops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/firewall-flows/SKILL.md"
+    },
+    {
+      "id": "frontend-design",
+      "name": "Frontend Design",
+      "version": "1.0.0",
+      "description": "Create distinctive, production-grade frontend interfaces with intentional aesthetics and high craft.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "design",
+        "frontend",
+        "aesthetics",
+        "ui"
+      ],
+      "category": "frontend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/frontend-design/SKILL.md"
+    },
+    {
+      "id": "git-advanced-workflows",
+      "name": "Git Advanced",
+      "version": "1.0.0",
+      "description": "Advanced git operations — rebasing, cherry-picking, bisect, worktrees, submodules, and conflict resolution.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "git",
+        "workflows",
+        "advanced",
+        "version-control"
+      ],
+      "category": "foundations",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/git-advanced-workflows/SKILL.md"
+    },
+    {
+      "id": "golang-pro",
+      "name": "Go Pro",
+      "version": "1.0.0",
+      "description": "Master Go 1.21+ — modern patterns, advanced concurrency, performance optimization, and production microservices.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "go",
+        "golang",
+        "concurrency",
+        "backend"
+      ],
+      "category": "backend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/golang-pro/SKILL.md"
+    },
+    {
+      "id": "home-docs",
+      "name": "Home Docs",
+      "version": "1.0.0",
+      "description": "MkDocs Material documentation site — page creation, navigation, sync workflow, container management, and content conventions for docs.3olive3.com.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "mkdocs",
+        "documentation",
+        "docs",
+        "casa-lima"
+      ],
+      "category": "casa-lima-ops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/home-docs/SKILL.md"
+    },
+    {
+      "id": "home-network",
+      "name": "Home Network",
+      "version": "1.0.0",
+      "description": "Casa Lima network architecture — VLANs, Fortigate firewall, FortiSwitch, FortiAP, DNS (Pihole + Cloudflare), NGINX reverse proxy, and Cloudflare tunnels/Zero Trust.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "network",
+        "vlans",
+        "fortigate",
+        "dns",
+        "nginx",
+        "cloudflare",
+        "casa-lima"
+      ],
+      "category": "casa-lima-ops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/home-network/SKILL.md"
+    },
+    {
+      "id": "incidents-methodology",
+      "name": "Incidents",
+      "version": "1.0.0",
+      "description": "Incident management — severity levels, post-mortem format, post-incident protocol, and troubleshooting workflow.",
+      "author": "Atelier",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "incidents",
+        "post-mortem",
+        "troubleshooting",
+        "methodology"
+      ],
+      "category": "foundations",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/incidents-methodology/SKILL.md"
+    },
+    {
+      "id": "java-pro",
+      "name": "Java Pro",
+      "version": "1.0.0",
+      "description": "Master Java 21+ — virtual threads, pattern matching, Spring Boot 3.x, GraalVM, and cloud-native patterns.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "java",
+        "spring",
+        "graalvm",
+        "backend"
+      ],
+      "category": "backend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/java-pro/SKILL.md"
+    },
+    {
+      "id": "kubernetes-architect",
+      "name": "Kubernetes Architect",
+      "version": "1.0.0",
+      "description": "Cloud-native infrastructure with Kubernetes — GitOps, service mesh, multi-tenancy, and container orchestration.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "kubernetes",
+        "k8s",
+        "gitops",
+        "cloud-native"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/kubernetes-architect/SKILL.md"
+    },
+    {
+      "id": "llm-app-patterns",
+      "name": "LLM App Patterns",
+      "version": "1.0.0",
+      "description": "Production-ready LLM application patterns — RAG pipelines, agent architectures, prompt IDEs, LLMOps monitoring.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "llm",
+        "rag",
+        "agents",
+        "ai"
+      ],
+      "category": "data-ai",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/llm-app-patterns/SKILL.md"
+    },
+    {
+      "id": "mcp-builder",
+      "name": "MCP Builder",
+      "version": "1.0.0",
+      "description": "Build Model Context Protocol servers with proper tool definitions, transport handling, and error patterns.",
+      "author": "Anthropic",
+      "license": "MIT",
+      "sourceURL": "https://github.com/anthropics/skills",
+      "tags": [
+        "mcp",
+        "ai",
+        "tools",
+        "protocol"
+      ],
+      "category": "ai-agent",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/mcp-builder/SKILL.md"
+    },
+    {
+      "id": "minecraft-ops",
+      "name": "Minecraft Ops",
+      "version": "1.0.0",
+      "description": "Minecraft Paper server management on UNRAID — DMZ networking, macvlan, plugins, RCON, security layers, and Fortigate VIP configuration.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "minecraft",
+        "gaming",
+        "unraid",
+        "dmz",
+        "macvlan",
+        "casa-lima"
+      ],
+      "category": "casa-lima-ops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/minecraft-ops/SKILL.md"
+    },
+    {
+      "id": "ml-engineer",
+      "name": "ML Engineer",
+      "version": "1.0.0",
+      "description": "Production ML systems — PyTorch 2.x, TensorFlow, model serving, feature engineering, A/B testing, monitoring.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "ml",
+        "pytorch",
+        "tensorflow",
+        "mlops"
+      ],
+      "category": "data-ai",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/ml-engineer/SKILL.md"
+    },
+    {
+      "id": "mobile-design",
+      "name": "Mobile Design",
+      "version": "1.0.0",
+      "description": "Mobile-first design for iOS and Android — touch interaction, performance, platform conventions, offline behavior.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "mobile",
+        "design",
+        "ios",
+        "android"
+      ],
+      "category": "design",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/mobile-design/SKILL.md"
+    },
+    {
+      "id": "prometheus-configuration",
+      "name": "Prometheus Config",
+      "version": "1.0.0",
+      "description": "Prometheus setup — metric collection, scrape configs, recording rules, alert rules, and monitoring best practices.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "prometheus",
+        "monitoring",
+        "metrics",
+        "observability"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/prometheus-configuration/SKILL.md"
+    },
+    {
+      "id": "prompt-engineering",
+      "name": "Prompt Engineering",
+      "version": "1.0.0",
+      "description": "Prompt design techniques, chain-of-thought reasoning, few-shot examples, and LLM interaction optimization.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "prompts",
+        "ai",
+        "llm",
+        "optimization"
+      ],
+      "category": "ai-agent",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/prompt-engineering/SKILL.md"
+    },
+    {
+      "id": "python-pro",
+      "name": "Python Pro",
+      "version": "1.0.0",
+      "description": "Master Python 3.12+ — modern features, async programming, uv, ruff, pydantic, and production practices.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "python",
+        "async",
+        "fastapi",
+        "backend"
+      ],
+      "category": "backend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/python-pro/SKILL.md"
+    },
+    {
+      "id": "radix-ui-design-system",
+      "name": "Radix UI Design System",
+      "version": "1.0.0",
+      "description": "Build accessible design systems with Radix UI primitives — headless components, theming, compound patterns.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "radix",
+        "ui",
+        "accessibility",
+        "design-system"
+      ],
+      "category": "frontend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/radix-ui-design-system/SKILL.md"
+    },
+    {
+      "id": "react-pro",
+      "name": "React Pro",
+      "version": "1.0.0",
+      "description": "Modern React and Next.js development — hooks, composition, state management, performance optimization (45 Vercel rules), TypeScript, and best practices.",
+      "author": "Atelier",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "react",
+        "nextjs",
+        "hooks",
+        "typescript",
+        "performance",
+        "frontend"
+      ],
+      "category": "frontend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/react-pro/SKILL.md"
+    },
+    {
+      "id": "security-review",
+      "name": "Security Review",
+      "version": "1.0.0",
+      "description": "Comprehensive security review — bug hunting, insecure defaults detection, and Semgrep static analysis for security audits and code reviews.",
+      "author": "Atelier",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "security",
+        "bugs",
+        "static-analysis",
+        "semgrep",
+        "vulnerabilities",
+        "sast"
+      ],
+      "category": "security",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/security-review/SKILL.md"
+    },
+    {
+      "id": "skill-creator",
+      "name": "Skill Creator",
+      "version": "1.0.0",
+      "description": "Create well-structured agent skills with proper frontmatter, instructions, and behavioral guidelines.",
+      "author": "Anthropic",
+      "license": "MIT",
+      "sourceURL": "https://github.com/anthropics/skills",
+      "tags": [
+        "skills",
+        "ai",
+        "agents",
+        "authoring"
+      ],
+      "category": "ai-agent",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/skill-creator/SKILL.md"
+    },
+    {
+      "id": "swift-client",
+      "name": "Swift Client",
+      "version": "1.0.0",
+      "description": "Build, review, and improve Swift client apps (iOS/macOS) — SwiftUI, UIKit integration, state management, performance, animations, accessibility, Liquid Glass, and App Store patterns.",
+      "author": "Atelier",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "swift",
+        "swiftui",
+        "ios",
+        "macos",
+        "uikit",
+        "ui"
+      ],
+      "category": "swift",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/swift-client/SKILL.md"
+    },
+    {
+      "id": "swift-server",
+      "name": "Swift Server",
+      "version": "1.0.0",
+      "description": "Server-side Swift with Vapor, Hummingbird, Swift NIO, and production deployment patterns.",
+      "author": "Joannis",
+      "license": "MIT",
+      "sourceURL": "https://github.com/Joannis/claude-skills",
+      "tags": [
+        "swift",
+        "server",
+        "vapor",
+        "hummingbird",
+        "backend"
+      ],
+      "category": "swift",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/swift-server/SKILL.md"
+    },
+    {
+      "id": "systematic-debugging",
+      "name": "Systematic Debugging",
+      "version": "1.0.0",
+      "description": "Methodical debugging approach — hypothesis formation, evidence gathering, bisection, and root cause analysis.",
+      "author": "obra",
+      "license": "MIT",
+      "sourceURL": "https://github.com/obra/superpowers",
+      "tags": [
+        "debugging",
+        "methodology",
+        "troubleshooting"
+      ],
+      "category": "foundations",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/systematic-debugging/SKILL.md"
+    },
+    {
+      "id": "tailwind-patterns",
+      "name": "Tailwind Patterns",
+      "version": "1.0.0",
+      "description": "Tailwind CSS v4 patterns — CSS-first config, container queries, OKLCH colors, design token architecture.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "tailwind",
+        "css",
+        "design-tokens",
+        "frontend"
+      ],
+      "category": "frontend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/tailwind-patterns/SKILL.md"
+    },
+    {
+      "id": "terraform-skill",
+      "name": "Terraform",
+      "version": "1.0.0",
+      "description": "Infrastructure as Code with Terraform — modules, state management, providers, and cloud deployment patterns.",
+      "author": "antonbabenko",
+      "license": "MIT",
+      "sourceURL": "https://github.com/antonbabenko/terraform-skill",
+      "tags": [
+        "terraform",
+        "iac",
+        "infrastructure",
+        "devops"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/terraform-skill/SKILL.md"
+    },
+    {
+      "id": "test-driven-development",
+      "name": "TDD",
+      "version": "1.0.0",
+      "description": "TDD methodology with red-green-refactor cycle, test patterns, mocking strategies, and coverage practices.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "testing",
+        "tdd",
+        "quality",
+        "methodology"
+      ],
+      "category": "code-quality",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/test-driven-development/SKILL.md"
+    },
+    {
+      "id": "ui-ux-designer",
+      "name": "UI/UX Designer",
+      "version": "1.0.0",
+      "description": "Interface design, wireframes, design systems — user research, accessibility, and modern design tools.",
+      "author": "Antigravity",
+      "license": "MIT",
+      "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+      "tags": [
+        "design",
+        "ux",
+        "ui",
+        "accessibility"
+      ],
+      "category": "design",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/ui-ux-designer/SKILL.md"
+    },
+    {
+      "id": "vault-access",
+      "name": "Vault Access",
+      "version": "1.0.0",
+      "description": "Vaultwarden credential retrieval patterns — MCP tools for vault operations, bw CLI fallback for bootstrap scenarios, and secret lookup conventions.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-skills",
+      "tags": [
+        "vaultwarden",
+        "secrets",
+        "credentials",
+        "security",
+        "casa-lima"
+      ],
+      "category": "casa-lima-ops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/vault-access/SKILL.md"
+    }
+  ],
+  "bundles": [
+    {
+      "id": "swift-development",
+      "name": "Swift Development",
+      "description": "Complete Swift development toolkit for iOS and macOS applications.",
+      "skillIds": [
+        "swift-client",
+        "swift-server",
+        "mobile-design"
+      ],
+      "tags": [
+        "swift",
+        "ios",
+        "macos"
+      ]
+    },
+    {
+      "id": "frontend",
+      "name": "Frontend",
+      "description": "Modern frontend development with React, Tailwind, and accessible design systems.",
+      "skillIds": [
+        "react-pro",
+        "tailwind-patterns",
+        "radix-ui-design-system",
+        "frontend-design"
+      ],
+      "tags": [
+        "react",
+        "css",
+        "ui"
+      ]
+    },
+    {
+      "id": "backend",
+      "name": "Backend",
+      "description": "Backend development across Go, Python, Java, and FastAPI with architectural patterns.",
+      "skillIds": [
+        "backend-architect",
+        "golang-pro",
+        "python-pro",
+        "fastapi-pro",
+        "java-pro"
+      ],
+      "tags": [
+        "api",
+        "microservices",
+        "server"
+      ]
+    },
+    {
+      "id": "data-ai",
+      "name": "Data & AI",
+      "description": "Data engineering, machine learning, LLM applications, and AI tooling.",
+      "skillIds": [
+        "data-engineer",
+        "ml-engineer",
+        "llm-app-patterns",
+        "mcp-builder",
+        "skill-creator",
+        "prompt-engineering"
+      ],
+      "tags": [
+        "data",
+        "ml",
+        "llm",
+        "ai",
+        "mcp"
+      ]
+    },
+    {
+      "id": "devops-infra",
+      "name": "DevOps & Infrastructure",
+      "description": "Container orchestration, IaC, monitoring, and automation for production systems.",
+      "skillIds": [
+        "docker-expert",
+        "deploy-container",
+        "distribute-skill-mcp",
+        "terraform-skill",
+        "kubernetes-architect",
+        "bash-pro",
+        "prometheus-configuration"
+      ],
+      "tags": [
+        "docker",
+        "kubernetes",
+        "terraform",
+        "monitoring"
+      ]
+    },
+    {
+      "id": "design-ux",
+      "name": "Design & UX",
+      "description": "UI/UX design, mobile design patterns, and frontend visual design.",
+      "skillIds": [
+        "ui-ux-designer",
+        "frontend-design",
+        "mobile-design"
+      ],
+      "tags": [
+        "design",
+        "ux",
+        "mobile"
+      ]
+    },
+    {
+      "id": "code-quality",
+      "name": "Code Quality",
+      "description": "Testing methodology and security review.",
+      "skillIds": [
+        "test-driven-development",
+        "security-review"
+      ],
+      "tags": [
+        "quality",
+        "testing",
+        "security"
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "description": "Comprehensive security review — bug hunting, insecure defaults, and static analysis.",
+      "skillIds": [
+        "security-review"
+      ],
+      "tags": [
+        "security",
+        "sast",
+        "vulnerabilities"
+      ]
+    },
+    {
+      "id": "foundations",
+      "name": "Foundations",
+      "description": "Core engineering practices — git workflows, debugging, incident management, and API design.",
+      "skillIds": [
+        "git-advanced-workflows",
+        "incidents-methodology",
+        "architecture-decision-records",
+        "systematic-debugging",
+        "api-design-principles"
+      ],
+      "tags": [
+        "git",
+        "documentation",
+        "methodology"
+      ]
+    },
+    {
+      "id": "casa-lima-ops",
+      "name": "Casa Lima Operations",
+      "description": "Infrastructure operations for Casa Lima — network, firewall, DNS/IPAM, backups, secrets, documentation, and service-specific ops.",
+      "skillIds": [
+        "home-network",
+        "firewall-flows",
+        "dns-sync",
+        "vault-access",
+        "deploy-container",
+        "backups",
+        "home-docs",
+        "minecraft-ops",
+        "incidents-methodology"
+      ],
+      "tags": [
+        "casa-lima",
+        "infrastructure",
+        "operations"
+      ]
+    }
+  ]
+}

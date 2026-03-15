@@ -1,12 +1,14 @@
 {
   "catalogID": "fortigate",
-  "name": "Fortigate",
-  "description": "Firewall policies, address/service objects, DHCP, routes, VPN, FortiSwitch, and FortiAP management",
+  "name": "FortiGate",
+  "description": "FortiGate 60F firewall — policies, address objects, service objects, DHCP, static routes, VPN, bandwidth stats, system health, FortiSwitch management, and FortiAP/WiFi management via REST API",
   "version": "2.2.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "FORTIGATE_BASE_URL": "",
     "FORTIGATE_VDOM": "",
@@ -14,5 +16,20 @@
     "FORTIGATE_INSECURE_TLS": ""
   },
   "category": "core",
-  "toolCount": 43
+  "toolCount": 43,
+  "runtime": "node",
+  "tags": [
+    "infrastructure",
+    "firewall",
+    "networking",
+    "security",
+    "dhcp",
+    "vpn",
+    "fortiswitch",
+    "fortiap",
+    "wifi"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/fortigate-2.2.0.tar.gz",
+  "size": "60KB",
+  "checksum": "sha256:placeholder"
 }

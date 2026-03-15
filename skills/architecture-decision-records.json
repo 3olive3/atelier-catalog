@@ -1,10 +1,18 @@
 {
   "catalogID": "architecture-decision-records",
   "name": "ADR",
-  "description": "Documenting architectural design decisions with ADR templates",
+  "description": "Document architectural decisions using ADR format with context, decision, consequences, and status tracking.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "foundations",
-  "tags": ["adr", "architecture", "documentation", "decisions"],
-  "author": "Atelier"
+  "tags": [
+    "architecture",
+    "documentation",
+    "adr",
+    "decisions"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/architecture-decision-records/SKILL.md"
 }

@@ -1,12 +1,14 @@
 {
   "catalogID": "media-stack",
   "name": "Media Stack",
-  "description": "Unified interface for Sonarr, Radarr, and SABnzbd media automation via REST APIs",
-  "version": "1.0.0",
+  "description": "Unified media automation — Sonarr (TV series), Radarr (movies), and SABnzbd (downloads) management with queue monitoring and health checks via REST APIs",
+  "version": "2.0.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
-  "args": ["dist/index.js"],
+  "args": [
+    "dist/index.js"
+  ],
   "env": {
     "SONARR_URL": "",
     "SONARR_API_KEY": "",
@@ -16,5 +18,16 @@
     "SABNZBD_API_KEY": ""
   },
   "category": "media",
-  "toolCount": 27
+  "toolCount": 27,
+  "runtime": "node",
+  "tags": [
+    "media",
+    "automation",
+    "sonarr",
+    "radarr",
+    "sabnzbd"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-stack-2.0.0.tar.gz",
+  "size": "45KB",
+  "checksum": "sha256:placeholder"
 }
