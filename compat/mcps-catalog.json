@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-03-15T03:26:06Z",
+  "lastUpdated": "2026-03-15T18:52:22Z",
   "mcps": [
     {
       "id": "cloudflare",
@@ -156,6 +156,26 @@
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-stack-2.0.0.tar.gz",
       "size": "45KB",
+      "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "minecraft",
+      "name": "Minecraft",
+      "version": "1.0.0",
+      "description": "Minecraft Paper server management — player whitelist, bans, world management, weather, time, mob morphing, teleport, game modes, server status via RCON commands over SSH + docker exec",
+      "toolCount": 27,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "gaming",
+        "minecraft",
+        "paper",
+        "rcon",
+        "kids",
+        "entertainment"
+      ],
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/minecraft-1.0.0.tar.gz",
+      "size": "25KB",
       "checksum": "sha256:placeholder"
     },
     {

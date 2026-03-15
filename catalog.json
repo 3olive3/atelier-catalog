@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-03-15T03:26:06Z",
+  "lastUpdated": "2026-03-15T18:52:22Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 90,
+  "totalEntries": 91,
   "types": {
     "guardrails": [
       {
@@ -432,6 +432,39 @@
         ],
         "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-stack-2.0.0.tar.gz",
         "size": "45KB",
+        "checksum": "sha256:placeholder"
+      },
+      {
+        "catalogID": "minecraft",
+        "name": "Minecraft",
+        "description": "Minecraft Paper server management — player whitelist, bans, world management, weather, time, mob morphing, teleport, game modes, server status via RCON commands over SSH + docker exec",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "UNRAID_HOST": "",
+          "UNRAID_PORT": "",
+          "UNRAID_USER": "",
+          "UNRAID_PASSWORD": "",
+          "MINECRAFT_CONTAINER": ""
+        },
+        "category": "gaming",
+        "toolCount": 27,
+        "runtime": "node",
+        "tags": [
+          "gaming",
+          "minecraft",
+          "paper",
+          "rcon",
+          "kids",
+          "entertainment"
+        ],
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/minecraft-1.0.0.tar.gz",
+        "size": "25KB",
         "checksum": "sha256:placeholder"
       },
       {
