@@ -1,0 +1,11 @@
+{
+  "name": "visual-diagram",
+  "description": "Generate beautiful, illustration-quality diagrams using SVG blueprints + Nano Banana 2. Hand-drawn + digital aesthetic for presentations, docs, and explainers.",
+  "type": "skill",
+  "source": "casa-lima",
+  "risk": "low",
+  "date_added": "2026-03-16",
+  "tags": ["diagram", "image-generation", "nano-banana", "gemini", "svg", "illustration"],
+  "dependencies": ["gemini-api", "tavily-api", "python"],
+  "path": "skills/visual-diagram"
+}
