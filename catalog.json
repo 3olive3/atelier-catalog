@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-03-16T17:50:24Z",
+  "lastUpdated": "2026-03-16T20:12:01Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 96,
@@ -1764,8 +1764,8 @@
       },
       {
         "catalogID": "atelier-skills",
-        "name": "Atelier Skills",
-        "description": "Skill catalog with 40 skills and 10 bundles for on-demand agent knowledge",
+        "name": "Atelier Skills (ARCHIVED)",
+        "description": "ARCHIVED — merged into atelier-catalog (2026-03-16). Skills now live in atelier-catalog/skills/.",
         "version": "1.0.0",
         "source": "builtIn",
         "defaultBranch": "main",

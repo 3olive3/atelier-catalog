@@ -1,7 +1,7 @@
 {
   "catalogID": "atelier-skills",
-  "name": "Atelier Skills",
-  "description": "Skill catalog with 40 skills and 10 bundles for on-demand agent knowledge",
+  "name": "Atelier Skills (ARCHIVED)",
+  "description": "ARCHIVED — merged into atelier-catalog (2026-03-16). Skills now live in atelier-catalog/skills/.",
   "version": "1.0.0",
   "source": "builtIn",
   "defaultBranch": "main",

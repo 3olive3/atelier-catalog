@@ -6,7 +6,9 @@ Unified distribution catalog for the [Atelier](https://github.com/3olive3/atelie
 
 This repository contains community and built-in catalog entries for all 10 Atelier resource types. The Atelier Designer app fetches `catalog.json` in a single HTTP request to populate its resource library across all types.
 
-**90 entries** across **10 types**, with **10 skill bundles**.
+**96 entries** across **10 types**, with **45 skills** and **10 skill bundles**.
+
+> **Note:** As of 2026-03-16, all skills from the former `atelier-skills` repo have been merged here. Skills now live natively in `skills/` with both metadata (`.json`) and content (`SKILL.md`). The `atelier-skills` repo is archived.
 
 ## Repository Structure
 
@@ -22,8 +24,8 @@ atelier-catalog/
 │   └── enrich-entries.py     # One-time enrichment from legacy repos
 ├── guardrails/               # 3 entries
 ├── permissions/              # 3 entries
-├── mcps/                     # 19 entries
-├── skills/                   # 40 entries
+├── mcps/                     # 20 entries
+├── skills/                   # 45 entries (metadata + SKILL.md content)
 ├── role-profiles/            # 3 entries
 ├── git-repositories/         # 11 entries
 ├── tech-stacks/              # 5 entries
@@ -38,8 +40,8 @@ atelier-catalog/
 |-----------|--------------|-------|-------------|
 | `guardrails/` | Custom Guardrails | 3 | Reusable guardrail toggle definitions |
 | `permissions/` | Permission Overrides | 3 | Pre-configured permission rule sets |
-| `mcps/` | MCP Servers | 19 | Model Context Protocol server configurations |
-| `skills/` | Skills | 40 | On-demand knowledge modules (SKILL.md files) |
+| `mcps/` | MCP Servers | 20 | Model Context Protocol server configurations |
+| `skills/` | Skills | 45 | On-demand knowledge modules (metadata + SKILL.md content) |
 | `role-profiles/` | Role Profiles | 3 | Agent role archetype presets |
 | `git-repositories/` | Git Repositories | 11 | Repository templates and references |
 | `tech-stacks/` | Tech Stacks | 5 | Approved technology bundles |
@@ -64,7 +66,7 @@ GET https://raw.githubusercontent.com/3olive3/atelier-catalog/main/catalog.json
   "lastUpdated": "2026-03-15T00:00:00Z",
   "description": "...",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 90,
+  "totalEntries": 96,
   "types": {
     "guardrails": [ ...entries... ],
     "permissions": [ ...entries... ],
@@ -102,13 +104,13 @@ The `compat/` directory contains shim catalogs that match the legacy formats:
 | File | Matches | Used by |
 |------|---------|---------|
 | `compat/mcps-catalog.json` | `atelier-mcps/catalog.json` | `DefaultMCPManager` |
-| `compat/skills-catalog.json` | `atelier-skills/catalog.json` | `DefaultSkillManager` |
+| `compat/skills-catalog.json` | Legacy `atelier-skills/catalog.json` format | `DefaultSkillManager` |
 
 These allow gradual migration — existing app versions can point to the compat URLs while new versions use the unified `catalog.json`.
 
 ## How Atelier Syncs
 
-1. **Fetch**: App fetches `catalog.json` (single HTTP request, ~90 entries)
+1. **Fetch**: App fetches `catalog.json` (single HTTP request, ~96 entries)
 2. **Decode**: `CatalogSyncService` parses typed arrays per resource type
 3. **Distribute**: Type-specific managers receive their entries (MCPManager gets MCPs, SkillManager gets skills, etc.)
 4. **Merge**: Entries merge into `AppSettings` with `source: .marketplace` and `catalogID` for tracking

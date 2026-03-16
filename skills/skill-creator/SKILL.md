@@ -8,7 +8,7 @@ description: Create new skills, modify and improve existing skills, and measure 
 A skill for creating new skills and iteratively improving them.
 
 **Distribution rule:** Every new skill must be registered in:
-1. `atelier-skills` catalog (`~/Developer/atelier-skills/skills/<skill-id>/`) with a `catalog.json` entry — source of truth
+1. `atelier-catalog` (`~/Developer/atelier-catalog/skills/<skill-id>/`) with a `catalog.json` entry — source of truth
 2. Global Claude Code config (`~/.claude/CLAUDE.md` Skills table) — loaded on demand in Claude Code
 3. Global OpenCode config (`AGENTS.md` skills section) — loaded on demand in OpenCode sessions
 

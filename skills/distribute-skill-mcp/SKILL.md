@@ -1,6 +1,6 @@
 ---
 name: distribute-skill-mcp
-description: "The ONLY official way to distribute skill and MCP changes across Casa Lima's 3 required locations — atelier repos (atelier-skills / atelier-mcps), OpenCode global skills, and Claude Code project configs."
+description: "The ONLY official way to distribute skill and MCP changes across Casa Lima's 3 required locations — atelier repos (atelier-catalog / atelier-mcps), OpenCode global skills, and Claude Code project configs."
 ---
 
 # Distribute Skill & MCP
@@ -11,7 +11,7 @@ Every skill or MCP change MUST be reflected in 3 locations. This skill is the ch
 
 | # | Location | What goes here | Path |
 |---|----------|---------------|------|
-| 1 | **Atelier repos** | Canonical source for distribution | `~/Developer/atelier-skills/` (skills) or `~/Developer/atelier-mcps/` (MCPs) |
+| 1 | **Atelier repos** | Canonical source for distribution | `~/Developer/atelier-catalog/skills/` (skills) or `~/Developer/atelier-mcps/` (MCPs) |
 | 2 | **OpenCode** | Global/project skill files consumed by OpenCode sessions | `~/.config/opencode/skills/<id>/SKILL.md` |
 | 3 | **Claude Code** | Project CLAUDE.md or global instructions consumed by Claude Code | `~/.claude/CLAUDE.md` (global) or `<repo>/CLAUDE.md` (project) or `~/.claude/projects/<project>/memory/` (memory files) |
 
@@ -21,17 +21,17 @@ Every skill or MCP change MUST be reflected in 3 locations. This skill is the ch
 
 ### Step 1: Update the source skill
 
-Edit the SKILL.md in the atelier-skills repo:
+Edit the SKILL.md in the atelier-catalog repo:
 
 ```
-~/Developer/atelier-skills/skills/<skill-id>/SKILL.md
+~/Developer/atelier-catalog/skills/<skill-id>/SKILL.md
 ```
 
 If creating a new skill:
-1. Create directory: `skills/<skill-id>/`
+1. Create directory: `~/Developer/atelier-catalog/skills/<skill-id>/`
 2. Write `SKILL.md` with YAML frontmatter (`name`, `description`) + markdown body
-3. Add entry to `catalog.json` (10 fields: id, name, version, description, author, license, sourceURL, tags, category, downloadURL)
-4. If it belongs to a bundle, add the skill ID to the bundle's `skillIds` array
+3. Add entry to `catalog.json` (required fields: catalogID, name, version, description, source, category, tags, author)
+4. If it belongs to a bundle, add the skill ID to the bundle's `skillIds` array in `bundles.json`
 
 ### Step 2: Copy to OpenCode global skills
 
@@ -40,7 +40,7 @@ If creating a new skill:
 mkdir -p ~/.config/opencode/skills/<skill-id>/
 
 # Copy the skill file
-cp ~/Developer/atelier-skills/skills/<skill-id>/SKILL.md \
+cp ~/Developer/atelier-catalog/skills/<skill-id>/SKILL.md \
    ~/.config/opencode/skills/<skill-id>/SKILL.md
 ```
 
@@ -59,8 +59,8 @@ For skills that define **procedures** (like deploy-container, vault-access), ens
 ### Step 4: Commit all changes
 
 ```bash
-# Atelier repo
-cd ~/Developer/atelier-skills
+# Atelier catalog repo
+cd ~/Developer/atelier-catalog
 git add skills/<skill-id>/SKILL.md catalog.json
 git commit -m "feat: add <skill-id> skill to catalog"
 
@@ -119,20 +119,18 @@ MCP processes cache code at startup. After changing `dist/index.js`:
 
 ## Catalog Formats
 
-### atelier-skills/catalog.json entry
+### atelier-catalog skills entry (in catalog.json types.skills)
 
 ```json
 {
-  "id": "skill-id",
+  "catalogID": "skill-id",
   "name": "Human Name",
   "version": "1.0.0",
   "description": "One-line description.",
-  "author": "casa-lima",
-  "license": "MIT",
-  "sourceURL": "https://github.com/3olive3/atelier-skills",
-  "tags": ["tag1", "tag2"],
+  "source": "builtIn",
   "category": "devops",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/skill-id/SKILL.md"
+  "tags": ["tag1", "tag2"],
+  "author": "Atelier"
 }
 ```
 
@@ -186,11 +184,11 @@ Use this checklist when distributing any change:
 ## Distribution Checklist — <name> v<version>
 
 ### Skill changes
-- [ ] `atelier-skills/skills/<id>/SKILL.md` updated
-- [ ] `atelier-skills/catalog.json` version + description updated
+- [ ] `atelier-catalog/skills/<id>/SKILL.md` updated
+- [ ] `atelier-catalog/catalog.json` version + description updated
 - [ ] `~/.config/opencode/skills/<id>/SKILL.md` copied
 - [ ] Claude Code CLAUDE.md or memory updated (if applicable)
-- [ ] Committed to atelier-skills repo
+- [ ] Committed to atelier-catalog repo
 
 ### MCP changes
 - [ ] `blok-butler/mcp/<name>/` code changed + built
@@ -208,15 +206,15 @@ Use this checklist when distributing any change:
 
 | Change type | Places affected |
 |------------|----------------|
-| New skill | atelier-skills (SKILL.md + catalog.json) → OpenCode skill dir → Claude Code CLAUDE.md |
+| New skill | atelier-catalog (skills/<id>/SKILL.md + catalog.json) → OpenCode skill dir → Claude Code CLAUDE.md |
 | Skill update | Same 3 places, update content + version in catalog |
 | New MCP | blok-butler (source) → atelier-mcps (dist + manifest + catalog) → OpenCode/Claude MCP configs |
 | MCP bug fix | blok-butler (source + build) → atelier-mcps (dist + version bump) → restart sessions |
-| MCP + skill | All of the above — MCP code + atelier-mcps + atelier-skills + OpenCode + Claude Code |
+| MCP + skill | All of the above — MCP code + atelier-mcps + atelier-catalog + OpenCode + Claude Code |
 
 ## Git Conventions
 
-- **atelier-skills**: `feat: add <id> skill` / `fix: update <id> skill to vX.Y.Z`
+- **atelier-catalog**: `feat: add <id> skill` / `fix: update <id> skill to vX.Y.Z`
 - **atelier-mcps**: `feat: add <name> MCP vX.Y.Z` / `fix: bump <name> MCP to vX.Y.Z`
 - **blok-butler**: `feat:` / `fix:` on `develop` branch, PR to `main`
 - All repos use conventional commits and develop→main PR flow

@@ -2,9 +2,7 @@
 
 On-demand knowledge modules (SKILL.md files) that agents load via the `skill()` tool.
 
-See also: [atelier-skills](https://github.com/3olive3/atelier-skills) for the full skill catalog with SKILL.md content files.
-
-Entries here reference the skill metadata. The actual SKILL.md content is fetched from the skills repo at install time.
+Skills live here natively in `atelier-catalog/skills/` with their full `SKILL.md` content files. The previous `atelier-skills` repo has been archived and merged into this repository.
 
 ## Entry Format
 
