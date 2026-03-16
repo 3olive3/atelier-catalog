@@ -4,7 +4,7 @@
   "lastUpdated": "2026-03-15T18:52:22Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 91,
+  "totalEntries": 92,
   "types": {
     "guardrails": [
       {
@@ -183,7 +183,7 @@
       {
         "catalogID": "cloudflare",
         "name": "Cloudflare",
-        "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
+        "description": "Cloudflare management \u2014 DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
         "version": "3.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -217,7 +217,7 @@
       {
         "catalogID": "duplicacy",
         "name": "Duplicacy",
-        "description": "Duplicacy backup monitoring — storage configs, schedules, backup status, backup history, job logs, and health checks via SSH + HTTP API",
+        "description": "Duplicacy backup monitoring \u2014 storage configs, schedules, backup status, backup history, job logs, and health checks via SSH + HTTP API",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -250,7 +250,7 @@
       {
         "catalogID": "fortigate",
         "name": "FortiGate",
-        "description": "FortiGate 60F firewall — policies, address objects, service objects, DHCP, static routes, VPN, bandwidth stats, system health, FortiSwitch management, and FortiAP/WiFi management via REST API",
+        "description": "FortiGate 60F firewall \u2014 policies, address objects, service objects, DHCP, static routes, VPN, bandwidth stats, system health, FortiSwitch management, and FortiAP/WiFi management via REST API",
         "version": "2.2.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -285,7 +285,7 @@
       {
         "catalogID": "homekit",
         "name": "HomeKit",
-        "description": "Homebridge smart home control — accessory listing, characteristic control, bridge management, plugin config, and system monitoring via REST API",
+        "description": "Homebridge smart home control \u2014 accessory listing, characteristic control, bridge management, plugin config, and system monitoring via REST API",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -314,7 +314,7 @@
       {
         "catalogID": "ilo",
         "name": "HPE iLO",
-        "description": "HPE iLO 4 server management — system info, processors, memory, storage, network adapters, temperatures, fans, power supplies, power control, indicator LED, iLO management, event logs, firmware inventory, virtual media, and license info via Redfish REST API",
+        "description": "HPE iLO 4 server management \u2014 system info, processors, memory, storage, network adapters, temperatures, fans, power supplies, power control, indicator LED, iLO management, event logs, firmware inventory, virtual media, and license info via Redfish REST API",
         "version": "1.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -346,7 +346,7 @@
       {
         "catalogID": "ipam",
         "name": "NetBox",
-        "description": "NetBox IPAM — IP addresses, prefixes, VLANs, VRFs, IP ranges, services, devices, interfaces, sites, and infrastructure search via REST API. Supports NetBox 4.5+ v2 tokens (auto-detects nbt_ prefix, uses Bearer vs Token header).",
+        "description": "NetBox IPAM \u2014 IP addresses, prefixes, VLANs, VRFs, IP ranges, services, devices, interfaces, sites, and infrastructure search via REST API. Supports NetBox 4.5+ v2 tokens (auto-detects nbt_ prefix, uses Bearer vs Token header).",
         "version": "2.1.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -374,7 +374,7 @@
       {
         "catalogID": "iperf3",
         "name": "iperf3",
-        "description": "iperf3 network diagnostics — bandwidth testing between hosts with configurable protocols, duration, and parallel streams via SSH + docker exec",
+        "description": "iperf3 network diagnostics \u2014 bandwidth testing between hosts with configurable protocols, duration, and parallel streams via SSH + docker exec",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -404,7 +404,7 @@
       {
         "catalogID": "media-stack",
         "name": "Media Stack",
-        "description": "Unified media automation — Sonarr (TV series), Radarr (movies), and SABnzbd (downloads) management with queue monitoring and health checks via REST APIs",
+        "description": "Unified media automation \u2014 Sonarr (TV series), Radarr (movies), and SABnzbd (downloads) management with queue monitoring and health checks via REST APIs",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -437,7 +437,7 @@
       {
         "catalogID": "minecraft",
         "name": "Minecraft",
-        "description": "Minecraft Paper server management — player whitelist, bans, world management, weather, time, mob morphing, teleport, game modes, server status via RCON commands over SSH + docker exec",
+        "description": "Minecraft Paper server management \u2014 player whitelist, bans, world management, weather, time, mob morphing, teleport, game modes, server status via RCON commands over SSH + docker exec",
         "version": "1.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -470,7 +470,7 @@
       {
         "catalogID": "nginx",
         "name": "NGINX Proxy Manager",
-        "description": "NGINX Proxy Manager — reverse proxy hosts, SSL certificates, redirection hosts, streams, and health monitoring via REST API",
+        "description": "NGINX Proxy Manager \u2014 reverse proxy hosts, SSL certificates, redirection hosts, streams, and health monitoring via REST API",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -499,7 +499,7 @@
       {
         "catalogID": "observability",
         "name": "Observability",
-        "description": "Full observability stack — Prometheus (PromQL queries, metric discovery, targets, alerts, rules, TSDB stats), Loki (log queries, label discovery, series, stats), Alertmanager (alerts, silences, receivers, status), and Grafana (dashboard search, annotations, folders) via HTTP APIs",
+        "description": "Full observability stack \u2014 Prometheus (PromQL queries, metric discovery, targets, alerts, rules, TSDB stats), Loki (log queries, label discovery, series, stats), Alertmanager (alerts, silences, receivers, status), and Grafana (dashboard search, annotations, folders) via HTTP APIs",
         "version": "3.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -535,7 +535,7 @@
       {
         "catalogID": "overseerr",
         "name": "Overseerr",
-        "description": "Overseerr media requests — search, movie/TV details, request management, approval workflows, user quotas, and health monitoring via REST API",
+        "description": "Overseerr media requests \u2014 search, movie/TV details, request management, approval workflows, user quotas, and health monitoring via REST API",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -562,7 +562,7 @@
       {
         "catalogID": "pihole",
         "name": "Pi-hole",
-        "description": "Pi-hole DNS management — CNAME records, ad-blocking, domain blocking, client stats, and upstream health via SSH + docker exec",
+        "description": "Pi-hole DNS management \u2014 CNAME records, ad-blocking, domain blocking, client stats, and upstream health via SSH + docker exec",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -595,7 +595,7 @@
       {
         "catalogID": "plex",
         "name": "Plex",
-        "description": "Plex Media Server — library browsing, search, metadata, on-deck, playlists, active sessions, and library scanning via REST API",
+        "description": "Plex Media Server \u2014 library browsing, search, metadata, on-deck, playlists, active sessions, and library scanning via REST API",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -622,7 +622,7 @@
       {
         "catalogID": "shelly",
         "name": "Shelly",
-        "description": "Shelly device management — energy monitoring, power metrics, switch control, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
+        "description": "Shelly device management \u2014 energy monitoring, power metrics, switch control, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -650,7 +650,7 @@
       {
         "catalogID": "tautulli",
         "name": "Tautulli",
-        "description": "Tautulli Plex monitoring — current activity, watch history, library stats, recently added, user analytics, and server health via REST API",
+        "description": "Tautulli Plex monitoring \u2014 current activity, watch history, library stats, recently added, user analytics, and server health via REST API",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -678,7 +678,7 @@
       {
         "catalogID": "unimus",
         "name": "Unimus",
-        "description": "Unimus network config management — device inventory, config backups, diffs, change tracking, scheduled backups, and discovery via REST API",
+        "description": "Unimus network config management \u2014 device inventory, config backups, diffs, change tracking, scheduled backups, and discovery via REST API",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -706,7 +706,7 @@
       {
         "catalogID": "unraid",
         "name": "UNRAID",
-        "description": "UNRAID server management — containers, VMs, shares, disks, temperatures, and system commands via SSH",
+        "description": "UNRAID server management \u2014 containers, VMs, shares, disks, temperatures, and system commands via SSH",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -737,7 +737,7 @@
       {
         "catalogID": "uptime-kuma",
         "name": "Uptime Kuma",
-        "description": "Uptime Kuma monitoring — monitors, heartbeats, uptime stats, status pages, Docker hosts, and Prometheus metrics via Socket.IO",
+        "description": "Uptime Kuma monitoring \u2014 monitors, heartbeats, uptime stats, status pages, Docker hosts, and Prometheus metrics via Socket.IO",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -767,7 +767,7 @@
       {
         "catalogID": "vaultwarden",
         "name": "Vaultwarden",
-        "description": "Vaultwarden/Bitwarden secrets management — vault auth, item/folder CRUD, search, credential retrieval, TOTP, password generation with full client-side encryption (PBKDF2/Argon2, AES-CBC, HMAC-SHA256). Supports Vaultwarden 1.32+ camelCase API.",
+        "description": "Vaultwarden/Bitwarden secrets management \u2014 vault auth, item/folder CRUD, search, credential retrieval, TOTP, password generation with full client-side encryption (PBKDF2/Argon2, AES-CBC, HMAC-SHA256). Supports Vaultwarden 1.32+ camelCase API.",
         "version": "1.1.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -800,7 +800,7 @@
       {
         "catalogID": "api-design-principles",
         "name": "API Design",
-        "description": "REST and GraphQL API design — resource modeling, versioning, pagination, error handling, and developer experience.",
+        "description": "REST and GraphQL API design \u2014 resource modeling, versioning, pagination, error handling, and developer experience.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "foundations",
@@ -892,7 +892,7 @@
       {
         "catalogID": "data-engineer",
         "name": "Data Engineer",
-        "description": "Scalable data pipelines, modern data warehouses, streaming architectures — Spark, dbt, Airflow, cloud-native.",
+        "description": "Scalable data pipelines, modern data warehouses, streaming architectures \u2014 Spark, dbt, Airflow, cloud-native.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "data-ai",
@@ -911,7 +911,7 @@
       {
         "catalogID": "deploy-container",
         "name": "Deploy Container",
-        "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
+        "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID \u2014 manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "devops",
@@ -931,7 +931,7 @@
       {
         "catalogID": "distribute-skill-mcp",
         "name": "Distribute Skill & MCP",
-        "description": "The ONLY official way to distribute skill and MCP changes across Casa Lima's 3 required locations — atelier repos, OpenCode global skills, and Claude Code project configs.",
+        "description": "The ONLY official way to distribute skill and MCP changes across Casa Lima's 3 required locations \u2014 atelier repos, OpenCode global skills, and Claude Code project configs.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "devops",
@@ -950,7 +950,7 @@
       {
         "catalogID": "dns-sync",
         "name": "DNS Sync & IPAM",
-        "description": "FortiGate → NetBox → Pihole DHCP/DNS synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
+        "description": "FortiGate \u2192 NetBox \u2192 Pihole DHCP/DNS synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "casa-lima-ops",
@@ -971,7 +971,7 @@
       {
         "catalogID": "docker-expert",
         "name": "Docker Expert",
-        "description": "Docker containerization — multi-stage builds, image optimization, security hardening, Compose orchestration.",
+        "description": "Docker containerization \u2014 multi-stage builds, image optimization, security hardening, Compose orchestration.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "devops",
@@ -989,7 +989,7 @@
       {
         "catalogID": "fastapi-pro",
         "name": "FastAPI Pro",
-        "description": "High-performance async APIs with FastAPI, SQLAlchemy 2.0, Pydantic V2 — microservices, WebSockets, and async patterns.",
+        "description": "High-performance async APIs with FastAPI, SQLAlchemy 2.0, Pydantic V2 \u2014 microservices, WebSockets, and async patterns.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "backend",
@@ -1007,7 +1007,7 @@
       {
         "catalogID": "firewall-flows",
         "name": "Firewall Flows",
-        "description": "Fortigate firewall traffic flows for UNRAID services — NGINX reverse proxy path, service objects, service groups, cross-VLAN policies, and mandatory steps to open a new container port.",
+        "description": "Fortigate firewall traffic flows for UNRAID services \u2014 NGINX reverse proxy path, service objects, service groups, cross-VLAN policies, and mandatory steps to open a new container port.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "casa-lima-ops",
@@ -1045,7 +1045,7 @@
       {
         "catalogID": "git-advanced-workflows",
         "name": "Git Advanced",
-        "description": "Advanced git operations — rebasing, cherry-picking, bisect, worktrees, submodules, and conflict resolution.",
+        "description": "Advanced git operations \u2014 rebasing, cherry-picking, bisect, worktrees, submodules, and conflict resolution.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "foundations",
@@ -1063,7 +1063,7 @@
       {
         "catalogID": "golang-pro",
         "name": "Go Pro",
-        "description": "Master Go 1.21+ — modern patterns, advanced concurrency, performance optimization, and production microservices.",
+        "description": "Master Go 1.21+ \u2014 modern patterns, advanced concurrency, performance optimization, and production microservices.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "backend",
@@ -1081,7 +1081,7 @@
       {
         "catalogID": "home-docs",
         "name": "Home Docs",
-        "description": "MkDocs Material documentation site — page creation, navigation, sync workflow, container management, and content conventions for docs.3olive3.com.",
+        "description": "MkDocs Material documentation site \u2014 page creation, navigation, sync workflow, container management, and content conventions for docs.3olive3.com.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "casa-lima-ops",
@@ -1099,7 +1099,7 @@
       {
         "catalogID": "home-network",
         "name": "Home Network",
-        "description": "Casa Lima network architecture — VLANs, Fortigate firewall, FortiSwitch, FortiAP, DNS (Pihole + Cloudflare), NGINX reverse proxy, and Cloudflare tunnels/Zero Trust.",
+        "description": "Casa Lima network architecture \u2014 VLANs, Fortigate firewall, FortiSwitch, FortiAP, DNS (Pihole + Cloudflare), NGINX reverse proxy, and Cloudflare tunnels/Zero Trust.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "casa-lima-ops",
@@ -1120,7 +1120,7 @@
       {
         "catalogID": "incidents-methodology",
         "name": "Incidents",
-        "description": "Incident management — severity levels, post-mortem format, post-incident protocol, and troubleshooting workflow.",
+        "description": "Incident management \u2014 severity levels, post-mortem format, post-incident protocol, and troubleshooting workflow.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "foundations",
@@ -1138,7 +1138,7 @@
       {
         "catalogID": "java-pro",
         "name": "Java Pro",
-        "description": "Master Java 21+ — virtual threads, pattern matching, Spring Boot 3.x, GraalVM, and cloud-native patterns.",
+        "description": "Master Java 21+ \u2014 virtual threads, pattern matching, Spring Boot 3.x, GraalVM, and cloud-native patterns.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "backend",
@@ -1156,7 +1156,7 @@
       {
         "catalogID": "kubernetes-architect",
         "name": "Kubernetes Architect",
-        "description": "Cloud-native infrastructure with Kubernetes — GitOps, service mesh, multi-tenancy, and container orchestration.",
+        "description": "Cloud-native infrastructure with Kubernetes \u2014 GitOps, service mesh, multi-tenancy, and container orchestration.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "devops",
@@ -1174,7 +1174,7 @@
       {
         "catalogID": "llm-app-patterns",
         "name": "LLM App Patterns",
-        "description": "Production-ready LLM application patterns — RAG pipelines, agent architectures, prompt IDEs, LLMOps monitoring.",
+        "description": "Production-ready LLM application patterns \u2014 RAG pipelines, agent architectures, prompt IDEs, LLMOps monitoring.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "data-ai",
@@ -1210,7 +1210,7 @@
       {
         "catalogID": "minecraft-ops",
         "name": "Minecraft Ops",
-        "description": "Minecraft Paper server management on UNRAID — DMZ networking, macvlan, plugins, RCON, security layers, and Fortigate VIP configuration.",
+        "description": "Minecraft Paper server management on UNRAID \u2014 DMZ networking, macvlan, plugins, RCON, security layers, and Fortigate VIP configuration.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "casa-lima-ops",
@@ -1230,7 +1230,7 @@
       {
         "catalogID": "ml-engineer",
         "name": "ML Engineer",
-        "description": "Production ML systems — PyTorch 2.x, TensorFlow, model serving, feature engineering, A/B testing, monitoring.",
+        "description": "Production ML systems \u2014 PyTorch 2.x, TensorFlow, model serving, feature engineering, A/B testing, monitoring.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "data-ai",
@@ -1248,7 +1248,7 @@
       {
         "catalogID": "mobile-design",
         "name": "Mobile Design",
-        "description": "Mobile-first design for iOS and Android — touch interaction, performance, platform conventions, offline behavior.",
+        "description": "Mobile-first design for iOS and Android \u2014 touch interaction, performance, platform conventions, offline behavior.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "design",
@@ -1266,7 +1266,7 @@
       {
         "catalogID": "prometheus-configuration",
         "name": "Prometheus Config",
-        "description": "Prometheus setup — metric collection, scrape configs, recording rules, alert rules, and monitoring best practices.",
+        "description": "Prometheus setup \u2014 metric collection, scrape configs, recording rules, alert rules, and monitoring best practices.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "devops",
@@ -1302,7 +1302,7 @@
       {
         "catalogID": "python-pro",
         "name": "Python Pro",
-        "description": "Master Python 3.12+ — modern features, async programming, uv, ruff, pydantic, and production practices.",
+        "description": "Master Python 3.12+ \u2014 modern features, async programming, uv, ruff, pydantic, and production practices.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "backend",
@@ -1320,7 +1320,7 @@
       {
         "catalogID": "radix-ui-design-system",
         "name": "Radix UI Design System",
-        "description": "Build accessible design systems with Radix UI primitives — headless components, theming, compound patterns.",
+        "description": "Build accessible design systems with Radix UI primitives \u2014 headless components, theming, compound patterns.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "frontend",
@@ -1338,7 +1338,7 @@
       {
         "catalogID": "react-pro",
         "name": "React Pro",
-        "description": "Modern React and Next.js development — hooks, composition, state management, performance optimization (45 Vercel rules), TypeScript, and best practices.",
+        "description": "Modern React and Next.js development \u2014 hooks, composition, state management, performance optimization (45 Vercel rules), TypeScript, and best practices.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "frontend",
@@ -1358,7 +1358,7 @@
       {
         "catalogID": "security-review",
         "name": "Security Review",
-        "description": "Comprehensive security review — bug hunting, insecure defaults detection, and Semgrep static analysis for security audits and code reviews.",
+        "description": "Comprehensive security review \u2014 bug hunting, insecure defaults detection, and Semgrep static analysis for security audits and code reviews.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "security",
@@ -1396,7 +1396,7 @@
       {
         "catalogID": "swift-client",
         "name": "Swift Client",
-        "description": "Build, review, and improve Swift client apps (iOS/macOS) — SwiftUI, UIKit integration, state management, performance, animations, accessibility, Liquid Glass, and App Store patterns.",
+        "description": "Build, review, and improve Swift client apps (iOS/macOS) \u2014 SwiftUI, UIKit integration, state management, performance, animations, accessibility, Liquid Glass, and App Store patterns.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "swift",
@@ -1435,7 +1435,7 @@
       {
         "catalogID": "systematic-debugging",
         "name": "Systematic Debugging",
-        "description": "Methodical debugging approach — hypothesis formation, evidence gathering, bisection, and root cause analysis.",
+        "description": "Methodical debugging approach \u2014 hypothesis formation, evidence gathering, bisection, and root cause analysis.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "foundations",
@@ -1452,7 +1452,7 @@
       {
         "catalogID": "tailwind-patterns",
         "name": "Tailwind Patterns",
-        "description": "Tailwind CSS v4 patterns — CSS-first config, container queries, OKLCH colors, design token architecture.",
+        "description": "Tailwind CSS v4 patterns \u2014 CSS-first config, container queries, OKLCH colors, design token architecture.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "frontend",
@@ -1470,7 +1470,7 @@
       {
         "catalogID": "terraform-skill",
         "name": "Terraform",
-        "description": "Infrastructure as Code with Terraform — modules, state management, providers, and cloud deployment patterns.",
+        "description": "Infrastructure as Code with Terraform \u2014 modules, state management, providers, and cloud deployment patterns.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "devops",
@@ -1506,7 +1506,7 @@
       {
         "catalogID": "ui-ux-designer",
         "name": "UI/UX Designer",
-        "description": "Interface design, wireframes, design systems — user research, accessibility, and modern design tools.",
+        "description": "Interface design, wireframes, design systems \u2014 user research, accessibility, and modern design tools.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "design",
@@ -1524,7 +1524,7 @@
       {
         "catalogID": "vault-access",
         "name": "Vault Access",
-        "description": "Vaultwarden credential retrieval patterns — MCP tools for vault operations, bw CLI fallback for bootstrap scenarios, and secret lookup conventions.",
+        "description": "Vaultwarden credential retrieval patterns \u2014 MCP tools for vault operations, bw CLI fallback for bootstrap scenarios, and secret lookup conventions.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "casa-lima-ops",
@@ -1539,6 +1539,25 @@
         "license": "MIT",
         "sourceURL": "https://github.com/3olive3/atelier-skills",
         "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/vault-access/SKILL.md"
+      },
+      {
+        "catalogID": "excalidraw-diagram",
+        "name": "Excalidraw Diagram",
+        "description": "Generate beautiful Excalidraw architecture diagrams with Atelier brand colors. Renders to PNG via Playwright.",
+        "version": "1.0.0",
+        "source": "marketplace",
+        "category": "design",
+        "tags": [
+          "diagrams",
+          "excalidraw",
+          "architecture",
+          "visualization",
+          "design"
+        ],
+        "author": "coleam00 (customized for Atelier)",
+        "license": "MIT",
+        "sourceURL": "https://github.com/coleam00/excalidraw-diagram-skill",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/excalidraw-diagram/SKILL.md"
       }
     ],
     "role-profiles": [
@@ -1680,7 +1699,7 @@
       {
         "catalogID": "atelier",
         "name": "Atelier",
-        "description": "Designer and Runtime — macOS SwiftUI app with Vapor 4 backend",
+        "description": "Designer and Runtime \u2014 macOS SwiftUI app with Vapor 4 backend",
         "version": "1.0.0",
         "source": "builtIn",
         "defaultBranch": "main",
@@ -1918,7 +1937,7 @@
       {
         "catalogID": "mdn-web-docs",
         "name": "MDN Web Docs",
-        "description": "Mozilla Developer Network — comprehensive web technology reference (HTML, CSS, JavaScript, Web APIs)",
+        "description": "Mozilla Developer Network \u2014 comprehensive web technology reference (HTML, CSS, JavaScript, Web APIs)",
         "version": "1.0.0",
         "source": "builtIn",
         "url": "https://developer.mozilla.org",
@@ -2087,7 +2106,7 @@
     {
       "id": "security",
       "name": "Security",
-      "description": "Comprehensive security review — bug hunting, insecure defaults, and static analysis.",
+      "description": "Comprehensive security review \u2014 bug hunting, insecure defaults, and static analysis.",
       "skillIds": [
         "security-review"
       ],
@@ -2100,7 +2119,7 @@
     {
       "id": "foundations",
       "name": "Foundations",
-      "description": "Core engineering practices — git workflows, debugging, incident management, and API design.",
+      "description": "Core engineering practices \u2014 git workflows, debugging, incident management, and API design.",
       "skillIds": [
         "git-advanced-workflows",
         "incidents-methodology",
@@ -2117,7 +2136,7 @@
     {
       "id": "casa-lima-ops",
       "name": "Casa Lima Operations",
-      "description": "Infrastructure operations for Casa Lima — network, firewall, DNS/IPAM, backups, secrets, documentation, and service-specific ops.",
+      "description": "Infrastructure operations for Casa Lima \u2014 network, firewall, DNS/IPAM, backups, secrets, documentation, and service-specific ops.",
       "skillIds": [
         "home-network",
         "firewall-flows",
