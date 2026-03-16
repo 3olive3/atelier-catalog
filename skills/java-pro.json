@@ -1,7 +1,7 @@
 {
   "catalogID": "java-pro",
   "name": "Java Pro",
-  "description": "Master Java 21+ — virtual threads, pattern matching, Spring Boot 3.x, GraalVM, and cloud-native patterns.",
+  "description": "Master Java 21+ \u2014 virtual threads, pattern matching, Spring Boot 3.x, GraalVM, and cloud-native patterns.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "backend",
@@ -14,5 +14,5 @@
   "author": "Antigravity",
   "license": "MIT",
   "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/java-pro/SKILL.md"
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/java-pro/SKILL.md"
 }

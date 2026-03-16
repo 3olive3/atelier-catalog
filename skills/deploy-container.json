@@ -1,7 +1,7 @@
 {
   "catalogID": "deploy-container",
   "name": "Deploy Container",
-  "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
+  "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID \u2014 manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "devops",
@@ -16,5 +16,5 @@
   "author": "casa-lima",
   "license": "MIT",
   "sourceURL": "https://github.com/3olive3/casa-lima-infra",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/deploy-container/SKILL.md"
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/deploy-container/SKILL.md"
 }

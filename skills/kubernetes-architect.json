@@ -1,7 +1,7 @@
 {
   "catalogID": "kubernetes-architect",
   "name": "Kubernetes Architect",
-  "description": "Cloud-native infrastructure with Kubernetes — GitOps, service mesh, multi-tenancy, and container orchestration.",
+  "description": "Cloud-native infrastructure with Kubernetes \u2014 GitOps, service mesh, multi-tenancy, and container orchestration.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "devops",
@@ -14,5 +14,5 @@
   "author": "Antigravity",
   "license": "MIT",
   "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/kubernetes-architect/SKILL.md"
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/kubernetes-architect/SKILL.md"
 }

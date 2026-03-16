@@ -1,7 +1,7 @@
 {
   "catalogID": "fastapi-pro",
   "name": "FastAPI Pro",
-  "description": "High-performance async APIs with FastAPI, SQLAlchemy 2.0, Pydantic V2 — microservices, WebSockets, and async patterns.",
+  "description": "High-performance async APIs with FastAPI, SQLAlchemy 2.0, Pydantic V2 \u2014 microservices, WebSockets, and async patterns.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "backend",
@@ -14,5 +14,5 @@
   "author": "Antigravity",
   "license": "MIT",
   "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/fastapi-pro/SKILL.md"
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/fastapi-pro/SKILL.md"
 }

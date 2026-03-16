@@ -1,0 +1,19 @@
+{
+  "catalogID": "visual-generation",
+  "name": "Visual Generation",
+  "description": "Guide for using visual generation MCP — illustrations, thumbnails, scene images for videos, batch generation, and style selection.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "ai-agent",
+  "tags": [
+    "content-factory",
+    "visual",
+    "images",
+    "thumbnails",
+    "generation"
+  ],
+  "author": "Atelier",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/visual-generation/SKILL.md"
+}

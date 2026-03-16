@@ -1,7 +1,7 @@
 {
   "catalogID": "firewall-flows",
   "name": "Firewall Flows",
-  "description": "Fortigate firewall traffic flows for UNRAID services — NGINX reverse proxy path, service objects, service groups, cross-VLAN policies, and mandatory steps to open a new container port.",
+  "description": "Fortigate firewall traffic flows for UNRAID services \u2014 NGINX reverse proxy path, service objects, service groups, cross-VLAN policies, and mandatory steps to open a new container port.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "casa-lima-ops",
@@ -15,6 +15,6 @@
   ],
   "author": "casa-lima",
   "license": "MIT",
-  "sourceURL": "https://github.com/3olive3/atelier-skills",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/firewall-flows/SKILL.md"
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/firewall-flows/SKILL.md"
 }

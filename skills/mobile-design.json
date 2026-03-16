@@ -1,7 +1,7 @@
 {
   "catalogID": "mobile-design",
   "name": "Mobile Design",
-  "description": "Mobile-first design for iOS and Android — touch interaction, performance, platform conventions, offline behavior.",
+  "description": "Mobile-first design for iOS and Android \u2014 touch interaction, performance, platform conventions, offline behavior.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "design",
@@ -14,5 +14,5 @@
   "author": "Antigravity",
   "license": "MIT",
   "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/mobile-design/SKILL.md"
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/mobile-design/SKILL.md"
 }

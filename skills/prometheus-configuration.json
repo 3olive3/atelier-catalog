@@ -1,7 +1,7 @@
 {
   "catalogID": "prometheus-configuration",
   "name": "Prometheus Config",
-  "description": "Prometheus setup — metric collection, scrape configs, recording rules, alert rules, and monitoring best practices.",
+  "description": "Prometheus setup \u2014 metric collection, scrape configs, recording rules, alert rules, and monitoring best practices.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "devops",
@@ -14,5 +14,5 @@
   "author": "Antigravity",
   "license": "MIT",
   "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/prometheus-configuration/SKILL.md"
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/prometheus-configuration/SKILL.md"
 }

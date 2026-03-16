@@ -1,7 +1,7 @@
 {
   "catalogID": "incidents-methodology",
   "name": "Incidents",
-  "description": "Incident management — severity levels, post-mortem format, post-incident protocol, and troubleshooting workflow.",
+  "description": "Incident management \u2014 severity levels, post-mortem format, post-incident protocol, and troubleshooting workflow.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "foundations",
@@ -13,6 +13,6 @@
   ],
   "author": "Atelier",
   "license": "MIT",
-  "sourceURL": "https://github.com/3olive3/atelier-skills",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/incidents-methodology/SKILL.md"
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/incidents-methodology/SKILL.md"
 }

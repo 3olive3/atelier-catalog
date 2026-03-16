@@ -1,7 +1,7 @@
 {
   "catalogID": "git-advanced-workflows",
   "name": "Git Advanced",
-  "description": "Advanced git operations — rebasing, cherry-picking, bisect, worktrees, submodules, and conflict resolution.",
+  "description": "Advanced git operations \u2014 rebasing, cherry-picking, bisect, worktrees, submodules, and conflict resolution.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "foundations",
@@ -14,5 +14,5 @@
   "author": "Antigravity",
   "license": "MIT",
   "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
-  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/git-advanced-workflows/SKILL.md"
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/git-advanced-workflows/SKILL.md"
 }

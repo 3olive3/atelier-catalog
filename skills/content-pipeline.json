@@ -1,0 +1,19 @@
+{
+  "catalogID": "content-pipeline",
+  "name": "Content Pipeline",
+  "description": "End-to-end Content Factory orchestration — 8-step pipeline, DAG structure, inter-step data flow, format selection, monitoring, and quality assurance.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "ai-agent",
+  "tags": [
+    "content-factory",
+    "pipeline",
+    "dag",
+    "automation",
+    "media"
+  ],
+  "author": "Atelier",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/content-pipeline/SKILL.md"
+}
