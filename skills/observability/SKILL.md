@@ -293,7 +293,7 @@ Receivers:
 
 Dashboards are file-provisioned (not API-created):
 - JSON files: `/mnt/user/appdata/grafana/data/dashboards/` on UNRAID
-- Source of truth: `dashboards/` directory in Butler repo (migrating from `casa-lima-infra`)
+- Source of truth: `dashboards/` directory in Butler repo (`infra/dashboards/`)
 - Provider: `Casa Lima` folder, `disableDeletion: true`, `editable: false`
 
 ### Dashboard JSON Requirements

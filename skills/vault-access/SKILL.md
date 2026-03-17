@@ -108,7 +108,7 @@ SERVICE_PASSWORD=...    # or SERVICE_API_KEY, SERVICE_TOKEN
 SERVICE_INSECURE_TLS=true  # only for self-signed certs (e.g., iLO)
 ```
 
-## Shared Secrets (casa-lima-infra)
+## Shared Secrets (atelier-butler/infra)
 
 Stack-level secrets are defined once in `stack.yml` and referenced by any manifest that needs them. This avoids duplicating Vaultwarden item names across manifests.
 

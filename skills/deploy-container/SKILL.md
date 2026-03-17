@@ -1,6 +1,6 @@
 ---
 name: deploy-container
-description: "The ONLY official way to deploy, update, or redeploy containers on UNRAID. Reads the manifest from casa-lima-infra as the single source of truth and applies container, DNS, proxy, monitoring, and secrets."
+description: "The ONLY official way to deploy, update, or redeploy containers on UNRAID. Reads the manifest from atelier-butler/infra as the single source of truth and applies container, DNS, proxy, monitoring, and secrets."
 ---
 
 # Deploy Container
@@ -9,7 +9,7 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 
 ## Rules
 
-1. **No manifest, no deploy.** Create one in `casa-lima-infra/manifests/` first.
+1. **No manifest, no deploy.** Create one in `atelier-butler/infra/manifests/` first.
 2. **No raw `docker run` or `docker create`.** Use XML templates — raw containers are unmanaged in UNRAID UI.
 3. **No firewall changes** without explicit user approval.
 4. **No secrets** in git, logs, or chat. Fetch from Vaultwarden at deploy time.
@@ -18,7 +18,7 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 ## Source of Truth
 
 ```
-~/Developer/casa-lima-infra/
+~/Developer/atelier-butler/infra/
 ├── manifests/<layer>/<container>.yml   # Container desired state
 ├── stack.yml                           # Master inventory
 ├── templates/my-*.xml                  # UNRAID XML templates (sanitized)
@@ -29,7 +29,7 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 
 | Step | Action | Tools |
 |------|--------|-------|
-| 1 | **Read manifest** — `casa-lima-infra/manifests/<layer>/<container>.yml`. Missing = STOP. | Read |
+| 1 | **Read manifest** — `atelier-butler/infra/manifests/<layer>/<container>.yml`. Missing = STOP. | Read |
 | 2 | **Drift check** — compare manifest vs running state. Present diff. | `unraid_inspect_container`, `pihole_list_cnames`, `nginx_list_proxy_hosts`, `uptime-kuma_list_monitors` |
 | 3 | **Fetch secrets** — for each `manifest.secrets[]`, get from Vaultwarden. For `shared:` refs, resolve via `stack.yml` `shared_secrets` → vault item + field. Memory only. | `vaultwarden_vault_get_password` |
 | 4 | **Apply container** — write XML template to UNRAID, create container via `xmlToCommand` (see "Creating Managed Containers" below). | `unraid_run_command` |
@@ -38,7 +38,7 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 | 7 | **Validate firewall** — READ-ONLY check. Never create/modify — warn user instead. | `fortigate_get_policy` |
 | 8 | **Apply monitoring** — Uptime Kuma monitor (MANDATORY, every container). Prometheus scrape job if `/metrics` exposed. | `uptime-kuma_create_monitor` |
 | 9 | **Health check** — HTTP `curl -sf`, TCP `nc -z`, or skip for headless. | `unraid_run_command` |
-| 10 | **Commit** — export XML, sanitize secrets (`Mask="true"` → `__VAULTWARDEN__`), commit to `casa-lima-infra`. | git |
+| 10 | **Commit** — export XML, sanitize secrets (`Mask="true"` → `__VAULTWARDEN__`), commit to `atelier-butler` (infra/). | git |
 
 ## XML Template
 
@@ -172,11 +172,11 @@ Naming: `Service Name (Description)`. Interval: 60s HTTP/TCP, 120s Docker.
 
 **Logs (automatic):** Promtail collects all container logs via Docker service discovery — no per-container config needed.
 
-**Alerting:** Uptime Kuma notifications handle availability alerts (globally configured). For critical services that need custom alerts (error rate, resource exhaustion, SLO breaches), add Alertmanager rules in `casa-lima-infra/configs/alertmanager/`.
+**Alerting:** Uptime Kuma notifications handle availability alerts (globally configured). For critical services that need custom alerts (error rate, resource exhaustion, SLO breaches), add Alertmanager rules in `atelier-butler/infra/configs/alertmanager/`.
 
 ## New Container Checklist
 
-1. Create manifest in `casa-lima-infra/manifests/<layer>/`
+1. Create manifest in `atelier-butler/infra/manifests/<layer>/`
 2. Add to `stack.yml`
 3. Create Vaultwarden entries for secrets (or use `shared:` refs from `stack.yml` `shared_secrets`)
 4. Run pipeline (steps 1-10)
