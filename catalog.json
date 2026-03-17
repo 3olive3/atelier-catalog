@@ -4,7 +4,7 @@
   "lastUpdated": "2026-03-16T20:12:01Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 96,
+  "totalEntries": 97,
   "types": {
     "guardrails": [
       {
@@ -1339,6 +1339,33 @@
         "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/notebooklm-content/SKILL.md"
       },
       {
+        "catalogID": "observability-skill",
+        "name": "Observability",
+        "description": "Casa Lima platform observability — Prometheus alerts, Grafana dashboards, Loki logs, metric instrumentation, manifest integration, five-layer architecture.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "prometheus",
+          "grafana",
+          "loki",
+          "alertmanager",
+          "observability",
+          "monitoring",
+          "metrics",
+          "dashboards"
+        ],
+        "path": "skills/observability/SKILL.md",
+        "iconName": "waveform.path.ecg",
+        "isBuiltIn": true,
+        "isEnabled": true,
+        "defaultValue": true,
+        "author": "Atelier",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-catalog",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/observability/SKILL.md"
+      },
+      {
         "catalogID": "prometheus-configuration",
         "name": "Prometheus Config",
         "description": "Prometheus setup — metric collection, scrape configs, recording rules, alert rules, and monitoring best practices.",
@@ -2140,7 +2167,8 @@
         "terraform-skill",
         "kubernetes-architect",
         "bash-pro",
-        "prometheus-configuration"
+        "prometheus-configuration",
+        "observability-skill"
       ],
       "tags": [
         "docker",
