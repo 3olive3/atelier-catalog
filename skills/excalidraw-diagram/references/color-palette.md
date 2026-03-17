@@ -1,6 +1,10 @@
-# Color Palette & Brand Style — Atelier Platform
+# Color Palette — Excalidraw Diagrams
 
-**This is the single source of truth for all colors and brand-specific styles.** Customized for the Atelier Platform's three-pillar architecture (Core, Butler, Bridge).
+> **This file is a quick reference.** The full diagram design system is at:
+> `atelier-catalog/references/diagram-design-system.md`
+>
+> The master brand design system (app colors, typography, surfaces) is at:
+> `docs.3olive3.com/atelier/design-system/`
 
 ---
 
@@ -32,8 +36,6 @@ Colors encode meaning, not decoration. Each semantic purpose has a fill/stroke p
 
 ## Text Colors (Hierarchy)
 
-Use color on free-floating text to create visual hierarchy without containers.
-
 | Level | Color | Use For |
 |-------|-------|---------|
 | Title | `#c9a227` | Major section headings, platform title (Atelier gold) |
@@ -47,8 +49,6 @@ Use color on free-floating text to create visual hierarchy without containers.
 ---
 
 ## Evidence Artifact Colors
-
-Used for code snippets, data examples, and other concrete evidence inside technical diagrams.
 
 | Artifact | Background | Text Color |
 |----------|-----------|------------|
