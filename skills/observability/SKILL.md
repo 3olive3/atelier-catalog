@@ -441,11 +441,11 @@ cron triggers → cron-wrapper.sh <job-name> <command>
 
 | Metric | Type | Description |
 |--------|------|-------------|
-| `casa_cron_last_run_timestamp{job}` | gauge | Unix timestamp of last execution |
-| `casa_cron_last_success_timestamp{job}` | gauge | Unix timestamp of last successful run |
-| `casa_cron_last_duration_seconds{job}` | gauge | Duration of last run in seconds |
-| `casa_cron_last_exit_code{job}` | gauge | Exit code (0 = success) |
-| `casa_cron_runs_total{job,status}` | counter | Cumulative runs by success/failure |
+| `casa_cron_last_run_timestamp{cron_job}` | gauge | Unix timestamp of last execution |
+| `casa_cron_last_success_timestamp{cron_job}` | gauge | Unix timestamp of last successful run |
+| `casa_cron_last_duration_seconds{cron_job}` | gauge | Duration of last run in seconds |
+| `casa_cron_last_exit_code{cron_job}` | gauge | Exit code (0 = success) |
+| `casa_cron_runs_total{cron_job,status}` | counter | Cumulative runs by success/failure |
 
 ### Adding a New Cron Job (Mandatory Steps)
 
@@ -459,7 +459,7 @@ When creating a new recurring script:
 3. **Add a staleness alert** to `infra/configs/prometheus/rules/cron.yml`:
    ```yaml
    - alert: CronJobStale<Interval>
-     expr: (time() - casa_cron_last_run_timestamp{job="<job-name>"}) > <3x_interval_seconds>
+     expr: (time() - casa_cron_last_run_timestamp{cron_job="<job-name>"}) > <3x_interval_seconds>
      for: 5m
      labels:
        severity: warning
