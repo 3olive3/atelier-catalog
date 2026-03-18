@@ -185,9 +185,11 @@ configs/prometheus/rules/
 ├── recording.yml          # 16 casa:* recording rules
 ├── infrastructure.yml     # Host, SMART, hardware alerts
 ├── containers.yml         # Container resource alerts
+├── cron.yml               # Cron job health (staleness, failures)
 ├── network.yml            # DNS, Cloudflare, WAN alerts
 ├── network-security.yml   # Fortigate deny patterns (Loki Ruler)
 ├── applications.yml       # PostgreSQL, Plex, Vaultwarden, Butler, Atelier
+├── storage.yml            # SMART disk health alerts
 └── smarthome.yml          # Homebridge alerts
 ```
 
@@ -316,7 +318,11 @@ dashboards/
 ├── service-availability.json
 ├── pihole-dns.json
 ├── infrastructure/
-│   └── hardware-health.json
+│   ├── hardware-health.json
+│   ├── cron-job-health.json
+│   ├── cloud-costs.json
+│   ├── smart-disk-health.json
+│   └── ...
 ├── network/
 │   ├── cloudflare-analytics.json
 │   ├── fortigate-security.json
@@ -414,6 +420,78 @@ app.get("metrics") { req async -> Response in
 | `casa:` | Recording rules (pre-computed, colon separator) |
 
 **Units**: `_seconds` for durations, `_bytes` for sizes, `_total` for counters, `_percent` for ratios (0-100).
+
+---
+
+## Cron Job Observability
+
+All UNRAID cron jobs are wrapped with `cron-wrapper.sh` for Prometheus metrics and alerting. **Any new recurring script MUST be integrated into this system.**
+
+### How It Works
+
+```
+cron triggers → cron-wrapper.sh <job-name> <command>
+                    ├── Runs the command
+                    ├── Captures exit code + duration
+                    ├── Writes metrics to cron.prom (textfile collector)
+                    └── Persists state in /mnt/user/appdata/cron-metrics/<job>.state
+```
+
+### Metrics Exported
+
+| Metric | Type | Description |
+|--------|------|-------------|
+| `casa_cron_last_run_timestamp{job}` | gauge | Unix timestamp of last execution |
+| `casa_cron_last_success_timestamp{job}` | gauge | Unix timestamp of last successful run |
+| `casa_cron_last_duration_seconds{job}` | gauge | Duration of last run in seconds |
+| `casa_cron_last_exit_code{job}` | gauge | Exit code (0 = success) |
+| `casa_cron_runs_total{job,status}` | counter | Cumulative runs by success/failure |
+
+### Adding a New Cron Job (Mandatory Steps)
+
+When creating a new recurring script:
+
+1. **Create the script** in `infra/scripts/<name>.sh`
+2. **Add a wrapped cron entry** to `infra/configs/cron/casa-lima`:
+   ```cron
+   */N * * * * root /bin/bash $WRAPPER <job-name> /bin/bash $SCRIPTS/<name>.sh > /dev/null 2>&1
+   ```
+3. **Add a staleness alert** to `infra/configs/prometheus/rules/cron.yml`:
+   ```yaml
+   - alert: CronJobStale<Interval>
+     expr: (time() - casa_cron_last_run_timestamp{job="<job-name>"}) > <3x_interval_seconds>
+     for: 5m
+     labels:
+       severity: warning
+       system: cron
+       layer: infrastructure
+     annotations:
+       summary: "<job-name> stale"
+       description: "<job-name> hasn't run in expected window."
+       dashboard_url: "/d/cron-job-health/cron-job-health"
+   ```
+4. **Update cron-strategy.md** — add the job to the inventory table
+5. **Deploy**:
+   - Sync repo to UNRAID
+   - `cp .../casa-lima /etc/cron.d/casa-lima` (or wait for next reboot)
+   - `cp cron.yml to /mnt/user/appdata/prometheus/rules/ && docker kill --signal=SIGHUP prometheus`
+
+### Current Alert Rules (cron.yml)
+
+| Alert | Trigger | Severity |
+|-------|---------|----------|
+| `CronJobFailed` | Any job exits non-zero | warning |
+| `CronJobPersistentFailure` | 3+ failures in 30 min | critical |
+| `CronJobStale5m` | 5-min jobs not run in 15 min | warning |
+| `CronJobStale10m` | repo-sync not run in 30 min | warning |
+| `CronJobStale15m` | mkdocs-sync not run in 45 min | warning |
+| `CronJobStaleWeekly` | Weekly jobs not run in 8 days | warning |
+| `CronJobStaleMonthly` | test-restore not run in 35 days | warning |
+| `CronMetricsMissing` | No cron metrics at all for 30 min | critical |
+
+### Dashboard
+
+**Cron Job Health** (`/d/cron-job-health/cron-job-health`) — shows status, staleness, duration trends, failure counts for all wrapped jobs.
 
 ---
 
