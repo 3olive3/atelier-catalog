@@ -54,23 +54,24 @@
       "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/backend-architect/SKILL.md"
     },
     {
-      "id": "backups",
-      "name": "Backups",
-      "version": "1.0.0",
-      "description": "Duplicacy backup management (Backblaze B2), Unimus network config backups, health checks, restore procedures, and backup verification.",
+      "id": "backups-dr",
+      "name": "Backups & DR",
+      "version": "2.0.0",
+      "description": "Full backup management and disaster recovery — 7-layer architecture, Duplicacy (local + R2), USB boot backup, test restores, Unimus network configs, full server rebuild runbook.",
       "author": "casa-lima",
       "license": "MIT",
       "sourceURL": "https://github.com/3olive3/atelier-catalog",
       "tags": [
         "backups",
+        "disaster-recovery",
         "duplicacy",
         "unimus",
-        "b2",
-        "disaster-recovery",
+        "r2",
+        "cloudflare",
         "casa-lima"
       ],
       "category": "casa-lima-ops",
-      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/backups/SKILL.md"
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/backups-dr/SKILL.md"
     },
     {
       "id": "bash-pro",
@@ -952,7 +953,7 @@
         "dns-sync",
         "vault-access",
         "deploy-container",
-        "backups",
+        "backups-dr",
         "home-docs",
         "minecraft-ops",
         "incidents-methodology"

@@ -156,7 +156,7 @@
       "dns-sync",
       "vault-access",
       "deploy-container",
-      "backups",
+      "backups-dr",
       "home-docs",
       "minecraft-ops",
       "incidents-methodology"

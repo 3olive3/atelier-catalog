@@ -11,7 +11,7 @@
 Layer 1: USB Boot Drive
 ├── What: UNRAID license keys, network config, Docker XML templates, go script, SSH keys
 ├── Backup: Weekly script → /mnt/user/appdata/boot-backup/ → Duplicacy → R2
-├── Script: deploy/unraid/scripts/backup-usb-boot.sh
+├── Script: atelier-butler/infra/scripts/backup-usb-boot.sh
 └── Schedule: Sundays 3:00 AM
 
 Layer 2: Container Appdata (Local)
@@ -32,9 +32,9 @@ Layer 3: Container Appdata (Cloud — Offsite)
 
 Layer 4: Code & Configuration (Git)
 ├── What: All repo source code, IaC configs, Docker templates, deploy scripts
-├── Backup: Git → GitHub (8 repos)
-├── Repos: atelier-butler, atelier, atelier-companion, atelier-bridge,
-│          atelier-catalog, atelier-mcps, home-docs, minecraft-server
+├── Backup: Git → GitHub (9 repos, auto-synced to UNRAID every 10 min)
+├── Repos: atelier, atelier-bridge, atelier-butler, atelier-catalog,
+│          atelier-companion, atelier-mcps, home-docs, homebridge-pando-hood, minecraft-server
 └── Status: Continuous (on every commit)
 
 Layer 5: Secrets
@@ -137,7 +137,7 @@ Monthly test restore validates the full backup chain:
 
 ```
 1. Run test restore script on UNRAID:
-   → unraid.run_command("/mnt/user/appdata/casa-lima-infra/scripts/test-restore.sh vaultwarden")
+   → unraid.run_command("/mnt/user/repos/atelier-butler/infra/scripts/test-restore.sh vaultwarden")
 
 2. Check results:
    → unraid.run_command("tail -20 /var/log/test-restore.log")
@@ -206,7 +206,7 @@ Monthly test restore validates the full backup chain:
 
 ```
 10. Clone atelier-butler repo:
-    git clone https://github.com/3olive3/atelier-butler.git /mnt/user/appdata/atelier-butler
+    git clone https://github.com/3olive3/atelier-butler.git /mnt/user/repos/atelier-butler
 
 11. Restore USB boot config from backup:
     cp -r /mnt/user/appdata/boot-backup/config/* /boot/config/
@@ -282,13 +282,13 @@ Monthly test restore validates the full backup chain:
 
 | File | Path | Purpose |
 |------|------|---------|
-| USB boot backup script | `deploy/unraid/scripts/backup-usb-boot.sh` | Weekly /boot/ backup |
-| Test restore script | `deploy/unraid/scripts/test-restore.sh` | Monthly restore validation |
+| USB boot backup script | `atelier-butler/infra/scripts/backup-usb-boot.sh` | Weekly /boot/ backup |
+| Test restore script | `atelier-butler/infra/scripts/test-restore.sh` | Monthly restore validation |
 | Duplicacy config | `/mnt/user/appdata/Duplicacy/duplicacy.json` | Backup schedules + storage |
 | Duplicacy preferences | `/mnt/user/appdata/Duplicacy/cache/localhost/0/.duplicacy/preferences` | Storage mapping |
 | Duplicacy logs | `/mnt/user/appdata/Duplicacy/logs/` | Daily backup/check/prune logs |
 | Boot backup output | `/mnt/user/appdata/boot-backup/` | Weekly USB boot snapshot |
-| Alertmanager rules | `deploy/prometheus/config/rules/infrastructure.yml` | R2 storage alerts |
-| Cloud Costs dashboard | `deploy/grafana/dashboards/cloud-costs.json` | R2 cost tracking |
+| Alertmanager rules | `atelier-butler/infra/configs/prometheus/rules/infrastructure.yml` | R2 storage alerts |
+| Cloud Costs dashboard | `atelier-butler/infra/dashboards/cloud-costs.json` | R2 cost tracking |
 | DR runbook (docs) | `docs.3olive3.com → Platform → Disaster Recovery` | Full recovery guide |
 | Backup docs | `docs.3olive3.com → Server → Backups` | Configuration reference |
