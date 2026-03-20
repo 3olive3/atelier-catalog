@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
-  "version": "2.0.0",
-  "lastUpdated": "2026-03-16T20:12:01Z",
+  "version": "2.1.0",
+  "lastUpdated": "2026-03-20T15:30:00Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 97,
+  "totalEntries": 115,
   "types": {
     "guardrails": [
       {
@@ -1664,6 +1664,129 @@
       }
     ],
     "role-profiles": [
+      {
+        "catalogID": "architect",
+        "name": "Architect",
+        "description": "Top-level system architect — designs architecture, reviews patterns, guides technical decisions",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "architect",
+        "defaultModel": "claude-opus-4",
+        "defaultExecutionMode": "plan",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "coordinator",
+          "builder"
+        ]
+      },
+      {
+        "catalogID": "backend",
+        "name": "Backend Engineer",
+        "description": "Server-side development — APIs, databases, business logic, backend services",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "backend",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "build",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "coordinator",
+          "builder",
+          "operative"
+        ]
+      },
+      {
+        "catalogID": "frontend",
+        "name": "Frontend Engineer",
+        "description": "Client-side development — UI components, styling, state management, accessibility",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "frontend",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "build",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "coordinator",
+          "builder",
+          "operative"
+        ]
+      },
+      {
+        "catalogID": "qa",
+        "name": "QA Engineer",
+        "description": "Quality assurance — test writing, bug reproduction, coverage analysis, test infrastructure",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "qa",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "build",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "builder",
+          "operative"
+        ]
+      },
+      {
+        "catalogID": "design",
+        "name": "Design Engineer",
+        "description": "UI/UX design — wireframes, design systems, component patterns, user flows",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "design",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "plan",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "builder",
+          "operative"
+        ]
+      },
+      {
+        "catalogID": "sysadmin",
+        "name": "SysAdmin",
+        "description": "System administration — server management, networking, monitoring, deployment",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "sysadmin",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "builder",
+          "operative"
+        ]
+      },
+      {
+        "catalogID": "devops",
+        "name": "DevOps Engineer",
+        "description": "CI/CD pipelines, infrastructure as code, container orchestration, monitoring",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "devops",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "build",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "builder",
+          "operative"
+        ]
+      },
+      {
+        "catalogID": "custom",
+        "name": "Custom Role",
+        "description": "Blank slate role — fully configurable model, mode, and guardrail defaults",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "custom",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "build",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "coordinator",
+          "builder",
+          "operative"
+        ]
+      },
       {
         "catalogID": "security-auditor",
         "name": "Security Auditor",
