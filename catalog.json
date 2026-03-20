@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
-  "version": "2.2.0",
-  "lastUpdated": "2026-03-20T16:00:00Z",
+  "version": "2.3.0",
+  "lastUpdated": "2026-03-20T18:00:00Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 123,
+  "totalEntries": 133,
   "types": {
     "guardrails": [
       {
@@ -2298,6 +2298,98 @@
         "trigger": "rateLimit",
         "action": "warn",
         "priority": 60
+      }
+    ],
+    "commands": [
+      {
+        "catalogID": "review-code",
+        "name": "Review Code",
+        "description": "Perform a thorough code review of the current changes — check for bugs, security issues, performance, and style",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Review the current code changes thoroughly. Check for:\n- Bugs and logic errors\n- Security vulnerabilities\n- Performance issues\n- Code style and conventions\n- Missing error handling\n- Test coverage gaps\n\nProvide specific, actionable feedback with file:line references."
+      },
+      {
+        "catalogID": "write-tests",
+        "name": "Write Tests",
+        "description": "Generate comprehensive tests for the current code — unit tests, edge cases, and integration tests",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Write comprehensive tests for the current code. Include:\n- Unit tests for all public functions\n- Edge case tests (null, empty, boundary values)\n- Error path tests\n- Integration tests where appropriate\n\nUse the projects existing test framework and conventions."
+      },
+      {
+        "catalogID": "fix-bug",
+        "name": "Fix Bug",
+        "description": "Analyze and fix the described bug — identify root cause, implement fix, verify with tests",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Analyze the described bug:\n1. Reproduce the issue\n2. Identify the root cause\n3. Implement the minimal fix\n4. Add a regression test\n5. Verify the fix doesnt break existing tests"
+      },
+      {
+        "catalogID": "refactor",
+        "name": "Refactor",
+        "description": "Refactor the specified code — improve structure, reduce duplication, enhance readability",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Refactor the specified code to improve:\n- Code structure and organization\n- Reduce duplication (DRY)\n- Enhance readability and naming\n- Simplify complex logic\n- Extract reusable components\n\nKeep the public API unchanged unless explicitly requested."
+      },
+      {
+        "catalogID": "document",
+        "name": "Document",
+        "description": "Add documentation to the current code — inline comments, docstrings, README updates",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Add comprehensive documentation:\n- Public API docstrings with parameter descriptions\n- Inline comments for complex logic\n- Update README if the public interface changed\n- Add usage examples where helpful\n\nFollow the projects existing documentation style."
+      },
+      {
+        "catalogID": "create-pr",
+        "name": "Create PR",
+        "description": "Create a pull request from the current branch with a summary of changes",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Create a pull request:\n1. Review all commits on this branch\n2. Write a concise PR title (under 70 chars)\n3. Write a description summarizing the changes\n4. Include a test plan\n5. Create the PR using gh cli"
+      },
+      {
+        "catalogID": "security-scan",
+        "name": "Security Scan",
+        "description": "Scan the codebase for security vulnerabilities — OWASP top 10, secrets, insecure patterns",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Perform a security scan of the codebase:\n- Check for OWASP top 10 vulnerabilities\n- Scan for hardcoded secrets, API keys, tokens\n- Identify insecure default configurations\n- Check dependency vulnerabilities\n- Review authentication and authorization logic\n- Flag SQL injection, XSS, command injection risks"
+      },
+      {
+        "catalogID": "explain",
+        "name": "Explain",
+        "description": "Explain the specified code or concept in detail — architecture, data flow, design decisions",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Explain the specified code or concept:\n- What it does and why\n- How the data flows through it\n- Key design decisions and trade-offs\n- Dependencies and interactions\n- Potential gotchas or edge cases"
+      },
+      {
+        "catalogID": "migrate",
+        "name": "Migrate",
+        "description": "Plan and execute a migration — database schema, API version, dependency upgrade",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Plan and execute the migration:\n1. Analyze what needs to change\n2. Create a migration plan with rollback steps\n3. Implement the migration incrementally\n4. Update affected tests\n5. Verify backward compatibility where required"
+      },
+      {
+        "catalogID": "deploy-check",
+        "name": "Deploy Check",
+        "description": "Pre-deployment verification — run tests, check build, verify configs, validate environment",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "cliTarget": "both",
+        "templateContent": "Pre-deployment verification checklist:\n1. Run full test suite\n2. Verify build succeeds\n3. Check for uncommitted changes\n4. Validate configuration files\n5. Review environment variables\n6. Check dependency versions\n7. Verify database migrations are up to date"
       }
     ]
   },
