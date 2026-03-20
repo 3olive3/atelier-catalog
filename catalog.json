@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
-  "version": "2.1.0",
-  "lastUpdated": "2026-03-20T15:30:00Z",
+  "version": "2.2.0",
+  "lastUpdated": "2026-03-20T16:00:00Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 115,
+  "totalEntries": 123,
   "types": {
     "guardrails": [
       {
@@ -2208,6 +2208,96 @@
         "provider": "prometheus",
         "defaultEndpoint": "http://localhost:9090",
         "defaultPath": "/api/v1/query"
+      }
+    ],
+    "policy-templates": [
+      {
+        "catalogID": "budget-escalate-80",
+        "name": "Escalate on budget > 80%",
+        "description": "Escalates to coordinator when an agent budget usage exceeds 80%",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "budget",
+        "trigger": "budgetThreshold",
+        "action": "escalate",
+        "priority": 90
+      },
+      {
+        "catalogID": "gate-destructive-ops",
+        "name": "Gate destructive operations",
+        "description": "Flags bash tool usage for human review before execution",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "safety",
+        "trigger": "toolUsage",
+        "action": "flag",
+        "priority": 95
+      },
+      {
+        "catalogID": "prod-deploy-approval",
+        "name": "Require production deploy approval",
+        "description": "Flags operations matching production deployment patterns for review",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "approval",
+        "trigger": "contentPattern",
+        "action": "flag",
+        "priority": 100
+      },
+      {
+        "catalogID": "block-external-access",
+        "name": "Block unapproved external access",
+        "description": "Blocks web fetch and search tools to prevent unauthorized external access",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "safety",
+        "trigger": "toolUsage",
+        "action": "block",
+        "priority": 80
+      },
+      {
+        "catalogID": "cost-cap-session",
+        "name": "Session cost cap",
+        "description": "Blocks agent execution when session cost exceeds the configured limit",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "budget",
+        "trigger": "budgetThreshold",
+        "action": "block",
+        "priority": 99
+      },
+      {
+        "catalogID": "require-tests",
+        "name": "Require test coverage",
+        "description": "Flags code changes that do not include corresponding test updates",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "compliance",
+        "trigger": "contentPattern",
+        "action": "flag",
+        "priority": 50
+      },
+      {
+        "catalogID": "no-main-push",
+        "name": "No direct push to main",
+        "description": "Blocks any git push targeting main or master branches",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "safety",
+        "trigger": "contentPattern",
+        "action": "block",
+        "priority": 95
+      },
+      {
+        "catalogID": "rate-limit-tools",
+        "name": "Tool call rate limit",
+        "description": "Warns when an agent exceeds 100 tool calls per minute",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "safety",
+        "trigger": "rateLimit",
+        "action": "warn",
+        "priority": 60
       }
     ]
   },
