@@ -5,6 +5,6 @@
   "version": "1.0.0",
   "source": "builtIn",
   "provider": "grafana",
-  "defaultEndpoint": "http://10.0.10.3:3000",
+  "defaultEndpoint": "https://grafana.3olive3.com",
   "defaultPath": "/api/dashboards"
 }

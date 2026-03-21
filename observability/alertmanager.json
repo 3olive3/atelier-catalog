@@ -5,6 +5,6 @@
   "version": "1.0.0",
   "source": "builtIn",
   "provider": "alertmanager",
-  "defaultEndpoint": "http://10.0.10.3:9093",
+  "defaultEndpoint": "https://alerts.3olive3.com",
   "defaultPath": "/api/v2/alerts"
 }

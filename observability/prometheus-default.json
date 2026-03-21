@@ -5,6 +5,6 @@
   "version": "1.0.0",
   "source": "builtIn",
   "provider": "prometheus",
-  "defaultEndpoint": "http://10.0.10.3:9090",
+  "defaultEndpoint": "https://prometheus.3olive3.com",
   "defaultPath": "/api/v1/query"
 }

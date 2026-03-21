@@ -2294,7 +2294,7 @@
         "version": "1.0.0",
         "source": "builtIn",
         "provider": "prometheus",
-        "defaultEndpoint": "http://10.0.10.3:9090",
+        "defaultEndpoint": "https://prometheus.3olive3.com",
         "defaultPath": "/api/v1/query"
       },
       {
@@ -2304,7 +2304,7 @@
         "version": "1.0.0",
         "source": "builtIn",
         "provider": "loki",
-        "defaultEndpoint": "http://10.0.10.3:3101",
+        "defaultEndpoint": "http://10.1.3.100:3101",
         "defaultPath": "/loki/api/v1/query"
       },
       {
@@ -2314,7 +2314,7 @@
         "version": "1.0.0",
         "source": "builtIn",
         "provider": "alertmanager",
-        "defaultEndpoint": "http://10.0.10.3:9093",
+        "defaultEndpoint": "https://alerts.3olive3.com",
         "defaultPath": "/api/v2/alerts"
       },
       {
@@ -2324,7 +2324,7 @@
         "version": "1.0.0",
         "source": "builtIn",
         "provider": "uptimeKuma",
-        "defaultEndpoint": "http://10.0.10.3:3001",
+        "defaultEndpoint": "https://uptime.3olive3.com",
         "defaultPath": "/api/status-page/heartbeat"
       },
       {
@@ -2334,7 +2334,7 @@
         "version": "1.0.0",
         "source": "builtIn",
         "provider": "dozzle",
-        "defaultEndpoint": "http://10.0.10.3:8080",
+        "defaultEndpoint": "https://logs.3olive3.com",
         "defaultPath": "/"
       },
       {
@@ -2344,7 +2344,7 @@
         "version": "1.0.0",
         "source": "builtIn",
         "provider": "grafana",
-        "defaultEndpoint": "http://10.0.10.3:3000",
+        "defaultEndpoint": "https://grafana.3olive3.com",
         "defaultPath": "/api/dashboards"
       },
       {
