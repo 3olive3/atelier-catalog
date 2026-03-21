@@ -2338,6 +2338,16 @@
         "defaultPath": "/"
       },
       {
+        "catalogID": "grafana",
+        "name": "Grafana",
+        "description": "Dashboard and visualization platform — metrics, logs, and alerts in unified dashboards",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "provider": "grafana",
+        "defaultEndpoint": "http://grafana:3000",
+        "defaultPath": "/api/dashboards"
+      },
+      {
         "catalogID": "datadog-default",
         "name": "Datadog",
         "description": "Datadog APM and logging — full-stack observability with metrics, logs, and traces",
