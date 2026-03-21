@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
-  "version": "2.3.0",
-  "lastUpdated": "2026-03-20T18:00:00Z",
+  "version": "2.4.0",
+  "lastUpdated": "2026-03-21T13:30:00Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 133,
@@ -1677,7 +1677,8 @@
         "allowedTiers": [
           "coordinator",
           "builder"
-        ]
+        ],
+        "vaultFolders": []
       },
       {
         "catalogID": "backend",
@@ -1693,6 +1694,9 @@
           "coordinator",
           "builder",
           "operative"
+        ],
+        "vaultFolders": [
+          "Agents"
         ]
       },
       {
@@ -1709,6 +1713,9 @@
           "coordinator",
           "builder",
           "operative"
+        ],
+        "vaultFolders": [
+          "Agents"
         ]
       },
       {
@@ -1724,6 +1731,9 @@
         "allowedTiers": [
           "builder",
           "operative"
+        ],
+        "vaultFolders": [
+          "Agents"
         ]
       },
       {
@@ -1739,6 +1749,9 @@
         "allowedTiers": [
           "builder",
           "operative"
+        ],
+        "vaultFolders": [
+          "Agents"
         ]
       },
       {
@@ -1754,6 +1767,10 @@
         "allowedTiers": [
           "builder",
           "operative"
+        ],
+        "vaultFolders": [
+          "Agents",
+          "Infrastructure"
         ]
       },
       {
@@ -1769,6 +1786,11 @@
         "allowedTiers": [
           "builder",
           "operative"
+        ],
+        "vaultFolders": [
+          "Agents",
+          "Infrastructure",
+          "Platform"
         ]
       },
       {
@@ -1785,7 +1807,8 @@
           "coordinator",
           "builder",
           "operative"
-        ]
+        ],
+        "vaultFolders": []
       },
       {
         "catalogID": "security-auditor",
@@ -1808,7 +1831,10 @@
           "requireHumanApproval": true,
           "readOnlyMode": true,
           "sandboxMode": true
-        }
+        },
+        "vaultFolders": [
+          "Agents"
+        ]
       },
       {
         "catalogID": "senior-backend",
@@ -1828,6 +1854,10 @@
           "swift-server",
           "typescript-fullstack",
           "python-ml"
+        ],
+        "vaultFolders": [
+          "Agents",
+          "Platform"
         ]
       },
       {
@@ -1855,7 +1885,12 @@
           "requireHumanApproval": true,
           "readOnlyMode": false,
           "sandboxMode": false
-        }
+        },
+        "vaultFolders": [
+          "Agents",
+          "Infrastructure",
+          "Platform"
+        ]
       }
     ],
     "git-repositories": [
