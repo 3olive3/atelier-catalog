@@ -2346,7 +2346,6 @@
         "provider": "grafana",
         "defaultEndpoint": "https://grafana.3olive3.com",
         "defaultPath": "/api/dashboards"
-      },
       }
     ],
     "policy-templates": [
