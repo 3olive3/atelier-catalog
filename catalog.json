@@ -2347,15 +2347,6 @@
         "defaultEndpoint": "https://grafana.3olive3.com",
         "defaultPath": "/api/dashboards"
       },
-      {
-        "catalogID": "datadog-default",
-        "name": "Datadog",
-        "description": "Datadog APM and logging — full-stack observability with metrics, logs, and traces",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "provider": "datadog",
-        "defaultEndpoint": "https://api.datadoghq.com",
-        "defaultPath": "/api/v1/logs"
       }
     ],
     "policy-templates": [
