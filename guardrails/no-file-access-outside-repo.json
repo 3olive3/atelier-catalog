@@ -1,0 +1,9 @@
+{
+  "catalogID": "guardrail-no-file-access-outside-repo",
+  "name": "No File Access Outside Repo",
+  "description": "Prevents the agent from creating or modifying files outside the project repository directory.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "folder.badge.minus",
+  "defaultValue": true
+}

@@ -1,0 +1,9 @@
+{
+  "catalogID": "guardrail-no-package-install",
+  "name": "No Package Installation",
+  "description": "Prevents the agent from installing new packages, dependencies, or modules (npm install, pip install, etc.).",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "shippingbox",
+  "defaultValue": false
+}

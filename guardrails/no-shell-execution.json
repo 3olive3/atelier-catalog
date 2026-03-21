@@ -1,0 +1,9 @@
+{
+  "catalogID": "guardrail-no-shell-execution",
+  "name": "No Shell Execution",
+  "description": "Prevents the agent from executing arbitrary shell commands and scripts.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "terminal",
+  "defaultValue": false
+}

@@ -1,12 +1,75 @@
 {
   "name": "Atelier Official Catalog",
-  "version": "2.4.0",
-  "lastUpdated": "2026-03-21T13:30:00Z",
+  "version": "2.5.0",
+  "lastUpdated": "2026-03-21T18:00:00Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 133,
+  "totalEntries": 140,
   "types": {
     "guardrails": [
+      {
+        "catalogID": "guardrail-no-destructive-ops",
+        "name": "No Destructive Operations",
+        "description": "Prevents the agent from deleting files, dropping database tables, or performing other irreversible destructive operations.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "exclamationmark.triangle",
+        "defaultValue": true
+      },
+      {
+        "catalogID": "guardrail-no-package-install",
+        "name": "No Package Installation",
+        "description": "Prevents the agent from installing new packages, dependencies, or modules (npm install, pip install, etc.).",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "shippingbox",
+        "defaultValue": false
+      },
+      {
+        "catalogID": "guardrail-no-network-access",
+        "name": "No Network Access",
+        "description": "Prevents the agent from making outbound network requests (HTTP calls, API access, web fetches).",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "network.slash",
+        "defaultValue": false
+      },
+      {
+        "catalogID": "guardrail-no-secret-access",
+        "name": "No Secret Access",
+        "description": "Prevents the agent from reading secrets, credentials, or vault entries.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "lock.shield",
+        "defaultValue": true
+      },
+      {
+        "catalogID": "guardrail-no-git-push",
+        "name": "No Git Push",
+        "description": "Prevents the agent from pushing commits to remote git repositories.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "arrow.up.circle",
+        "defaultValue": true
+      },
+      {
+        "catalogID": "guardrail-no-shell-execution",
+        "name": "No Shell Execution",
+        "description": "Prevents the agent from executing arbitrary shell commands and scripts.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "terminal",
+        "defaultValue": false
+      },
+      {
+        "catalogID": "guardrail-no-file-access-outside-repo",
+        "name": "No File Access Outside Repo",
+        "description": "Prevents the agent from creating or modifying files outside the project repository directory.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "folder.badge.minus",
+        "defaultValue": true
+      },
       {
         "catalogID": "gdpr-compliance",
         "name": "GDPR Compliance",

@@ -1,0 +1,9 @@
+{
+  "catalogID": "guardrail-no-network-access",
+  "name": "No Network Access",
+  "description": "Prevents the agent from making outbound network requests (HTTP calls, API access, web fetches).",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "network.slash",
+  "defaultValue": false
+}
