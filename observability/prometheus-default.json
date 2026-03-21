@@ -1,10 +1,10 @@
 {
   "catalogID": "prometheus-default",
   "name": "Prometheus",
-  "description": "Default Prometheus configuration for metrics monitoring and alerting",
+  "description": "Metrics collection and querying — PromQL queries for system and application metrics",
   "version": "1.0.0",
   "source": "builtIn",
   "provider": "prometheus",
-  "defaultEndpoint": "http://localhost:9090",
+  "defaultEndpoint": "http://prometheus:9090",
   "defaultPath": "/api/v1/query"
 }

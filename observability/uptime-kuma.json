@@ -1,0 +1,10 @@
+{
+  "catalogID": "uptime-kuma",
+  "name": "Uptime Kuma",
+  "description": "Uptime monitoring — service health checks, response times, and availability tracking",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "provider": "uptimeKuma",
+  "defaultEndpoint": "http://uptime-kuma:3001",
+  "defaultPath": "/api/status-page/heartbeat"
+}

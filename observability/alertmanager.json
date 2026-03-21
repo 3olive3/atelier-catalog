@@ -1,0 +1,10 @@
+{
+  "catalogID": "alertmanager",
+  "name": "Alertmanager",
+  "description": "Alert routing and notification — manages firing alerts, silences, and notification channels",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "provider": "alertmanager",
+  "defaultEndpoint": "http://alertmanager:9093",
+  "defaultPath": "/api/v2/alerts"
+}

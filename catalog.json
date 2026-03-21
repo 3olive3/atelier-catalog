@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
-  "version": "2.5.0",
-  "lastUpdated": "2026-03-21T18:00:00Z",
+  "version": "2.6.0",
+  "lastUpdated": "2026-03-21T20:00:00Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 140,
@@ -2288,24 +2288,64 @@
     ],
     "observability": [
       {
+        "catalogID": "prometheus-default",
+        "name": "Prometheus",
+        "description": "Metrics collection and querying — PromQL queries for system and application metrics",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "provider": "prometheus",
+        "defaultEndpoint": "http://prometheus:9090",
+        "defaultPath": "/api/v1/query"
+      },
+      {
+        "catalogID": "loki",
+        "name": "Loki",
+        "description": "Log aggregation system — query container and application logs via LogQL",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "provider": "loki",
+        "defaultEndpoint": "http://loki:3100",
+        "defaultPath": "/loki/api/v1/query"
+      },
+      {
+        "catalogID": "alertmanager",
+        "name": "Alertmanager",
+        "description": "Alert routing and notification — manages firing alerts, silences, and notification channels",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "provider": "alertmanager",
+        "defaultEndpoint": "http://alertmanager:9093",
+        "defaultPath": "/api/v2/alerts"
+      },
+      {
+        "catalogID": "uptime-kuma",
+        "name": "Uptime Kuma",
+        "description": "Uptime monitoring — service health checks, response times, and availability tracking",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "provider": "uptimeKuma",
+        "defaultEndpoint": "http://uptime-kuma:3001",
+        "defaultPath": "/api/status-page/heartbeat"
+      },
+      {
+        "catalogID": "dozzle",
+        "name": "Dozzle",
+        "description": "Real-time Docker container log viewer — live tail and search across all containers",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "provider": "dozzle",
+        "defaultEndpoint": "http://dozzle:8080",
+        "defaultPath": "/"
+      },
+      {
         "catalogID": "datadog-default",
         "name": "Datadog",
-        "description": "Datadog APM and logging configuration for full-stack observability",
+        "description": "Datadog APM and logging — full-stack observability with metrics, logs, and traces",
         "version": "1.0.0",
         "source": "builtIn",
         "provider": "datadog",
         "defaultEndpoint": "https://api.datadoghq.com",
         "defaultPath": "/api/v1/logs"
-      },
-      {
-        "catalogID": "prometheus-default",
-        "name": "Prometheus",
-        "description": "Default Prometheus configuration for metrics monitoring and alerting",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "provider": "prometheus",
-        "defaultEndpoint": "http://localhost:9090",
-        "defaultPath": "/api/v1/query"
       }
     ],
     "policy-templates": [

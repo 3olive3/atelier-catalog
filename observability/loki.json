@@ -1,0 +1,10 @@
+{
+  "catalogID": "loki",
+  "name": "Loki",
+  "description": "Log aggregation system — query container and application logs via LogQL",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "provider": "loki",
+  "defaultEndpoint": "http://loki:3100",
+  "defaultPath": "/loki/api/v1/query"
+}

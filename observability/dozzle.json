@@ -1,0 +1,10 @@
+{
+  "catalogID": "dozzle",
+  "name": "Dozzle",
+  "description": "Real-time Docker container log viewer — live tail and search across all containers",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "provider": "dozzle",
+  "defaultEndpoint": "http://dozzle:8080",
+  "defaultPath": "/"
+}
