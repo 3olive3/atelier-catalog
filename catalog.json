@@ -2304,7 +2304,7 @@
         "version": "1.0.0",
         "source": "builtIn",
         "provider": "loki",
-        "defaultEndpoint": "https://loki.3olive3.com",
+        "defaultEndpoint": "http://10.1.3.100:3101",
         "defaultPath": "/loki/api/v1/query"
       },
       {
