@@ -5,6 +5,6 @@
   "version": "1.0.0",
   "source": "builtIn",
   "provider": "dozzle",
-  "defaultEndpoint": "http://dozzle:8080",
+  "defaultEndpoint": "http://10.0.10.3:8080",
   "defaultPath": "/"
 }

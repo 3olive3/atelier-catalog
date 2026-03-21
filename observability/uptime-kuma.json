@@ -5,6 +5,6 @@
   "version": "1.0.0",
   "source": "builtIn",
   "provider": "uptimeKuma",
-  "defaultEndpoint": "http://uptime-kuma:3001",
+  "defaultEndpoint": "http://10.0.10.3:3001",
   "defaultPath": "/api/status-page/heartbeat"
 }
