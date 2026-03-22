@@ -1,0 +1,9 @@
+{
+  "catalogID": "require-jira-change",
+  "name": "Require Jira Change Request",
+  "description": "Requires a Jira change request to be created and linked before any deployment workflow can proceed",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "ticket",
+  "defaultValue": false
+}

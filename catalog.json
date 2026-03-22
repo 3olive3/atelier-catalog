@@ -96,6 +96,33 @@
         "source": "builtIn",
         "iconName": "key.slash",
         "defaultValue": true
+      },
+      {
+        "catalogID": "no-production-deploy",
+        "name": "No Production Deployment",
+        "description": "Prevents agents from deploying directly to production — requires workflow pipeline with approval gates",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "exclamationmark.octagon",
+        "defaultValue": true
+      },
+      {
+        "catalogID": "require-jira-change",
+        "name": "Require Jira Change Request",
+        "description": "Requires a Jira change request to be created and linked before any deployment workflow can proceed",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "ticket",
+        "defaultValue": false
+      },
+      {
+        "catalogID": "require-qa-approval",
+        "name": "Require QA Approval",
+        "description": "Requires QA review and approval gate before deployment steps can execute in a workflow pipeline",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "checkmark.shield",
+        "defaultValue": false
       }
     ],
     "permissions": [
@@ -1954,6 +1981,113 @@
           "Infrastructure",
           "Platform"
         ]
+      },
+      {
+        "catalogID": "qa-reviewer",
+        "name": "QA Reviewer",
+        "description": "Code review specialist — PR reviews, test coverage analysis, read-only code inspection with deployment workflow integration",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "qa",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "builder"
+        ],
+        "guardrailPresets": {
+          "readOnlyMode": true,
+          "allowShellExecution": false,
+          "allowFileCreation": false
+        },
+        "vaultFolders": [
+          "Agents"
+        ]
+      },
+      {
+        "catalogID": "e2e-tester",
+        "name": "E2E Tester",
+        "description": "End-to-end test engineer — test framework execution, observability source validation, regression testing for deployment workflows",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "qa",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "builder"
+        ],
+        "guardrailPresets": {
+          "allowShellExecution": true,
+          "allowNetworkAccess": true
+        },
+        "suggestedTechStacks": [
+          "swift-server",
+          "typescript-fullstack"
+        ],
+        "vaultFolders": [
+          "Agents"
+        ]
+      },
+      {
+        "catalogID": "release-manager",
+        "name": "Release Manager",
+        "description": "Deployment coordinator — CI/CD orchestration, traffic management, rollback decisions, observability-driven release governance",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "devops",
+        "defaultModel": "claude-opus-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "coordinator"
+        ],
+        "guardrailPresets": {
+          "allowShellExecution": true,
+          "allowNetworkAccess": true
+        },
+        "vaultFolders": [
+          "Agents",
+          "Infrastructure",
+          "Platform"
+        ]
+      },
+      {
+        "catalogID": "incident-responder",
+        "name": "Incident Responder",
+        "description": "Incident response specialist — observability triage, runbook execution, alert correlation, escalation management",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "sysadmin",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "builder"
+        ],
+        "guardrailPresets": {
+          "allowShellExecution": true,
+          "allowNetworkAccess": true
+        },
+        "vaultFolders": [
+          "Agents",
+          "Infrastructure"
+        ]
+      },
+      {
+        "catalogID": "documentation-writer",
+        "name": "Documentation Writer",
+        "description": "Technical writer — MkDocs page creation, API documentation, architecture diagrams, knowledge base maintenance",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "custom",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "autonomous",
+        "defaultReasoningMode": "default",
+        "allowedTiers": [
+          "operative"
+        ],
+        "vaultFolders": []
       }
     ],
     "git-repositories": [

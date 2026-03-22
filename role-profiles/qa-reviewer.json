@@ -1,0 +1,18 @@
+{
+  "catalogID": "qa-reviewer",
+  "name": "QA Reviewer",
+  "description": "Code review specialist — PR reviews, test coverage analysis, read-only code inspection with deployment workflow integration",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "baseRole": "qa",
+  "defaultModel": "claude-sonnet-4",
+  "defaultExecutionMode": "supervised",
+  "defaultReasoningMode": "extended",
+  "allowedTiers": ["builder"],
+  "guardrailPresets": {
+    "readOnlyMode": true,
+    "allowShellExecution": false,
+    "allowFileCreation": false
+  },
+  "vaultFolders": ["Agents"]
+}
