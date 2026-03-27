@@ -984,7 +984,7 @@
         "catalogID": "build-image",
         "name": "Build Image",
         "description": "Build Docker images on UNRAID with BuildKit, multi-core parallelism, registry push, tagging conventions, cache optimization, and manifest build: section as source of truth.",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "source": "builtIn",
         "category": "devops",
         "tags": [
@@ -993,6 +993,7 @@
           "registry",
           "unraid",
           "ci-cd",
+          "swift",
           "casa-lima"
         ],
         "author": "casa-lima",

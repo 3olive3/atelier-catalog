@@ -130,15 +130,13 @@ tail -20 /tmp/build-<image>.log
 
 ## BuildKit Cache Optimization
 
-```dockerfile
-# Cache mounts for package managers
-RUN --mount=type=cache,target=/root/.npm npm ci --production
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
+### Node.js
 
-# Multi-stage — keep final image small
+```dockerfile
 FROM node:22-bookworm-slim AS builder
+WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN --mount=type=cache,target=/root/.npm npm ci
 COPY . .
 RUN npm run build
 
@@ -147,6 +145,64 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 CMD ["node", "dist/index.js"]
 ```
+
+### Python
+
+```dockerfile
+FROM python:3-alpine AS builder
+COPY requirements.txt .
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
+COPY . .
+```
+
+### Swift SPM (mandatory for Swift builds)
+
+Swift Package Manager re-downloads and recompiles all dependencies on every build unless you use BuildKit cache mounts. This turns **20-minute builds into ~1-minute incremental builds**.
+
+**Three-step pattern:**
+
+1. **Manifest-first copy** — copy only `Package.swift` (or the Docker-specific variant) so SPM resolution is cached until dependencies change.
+2. **Stub source files** — create minimal `.swift` files per target so `swift package resolve` can build the package graph without full source.
+3. **Cache mount on `.build/`** — persist the resolved dependencies and compiled modules across builds.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM swift:6.0-jammy AS builder
+WORKDIR /app
+
+# 1) Copy ONLY the manifest — cached until Package.swift changes
+COPY Package.docker.swift Package.swift
+
+# 2) Create minimal stubs so SPM can resolve the package graph
+#    (adjust paths to match your target structure)
+RUN mkdir -p MyLib/Sources/MyLib MyApp/Sources/MyApp \
+    && echo 'import Foundation' > MyLib/Sources/MyLib/_Stub.swift \
+    && echo 'import Foundation' > MyApp/Sources/MyApp/_Stub.swift
+
+# 3) Resolve deps with cache mount — only re-runs when Package.swift changes
+RUN --mount=type=cache,target=/app/.build \
+    swift package resolve
+
+# 4) Copy full source — only this layer invalidates on code changes
+COPY MyLib/ MyLib/
+COPY MyApp/ MyApp/
+
+# 5) Build with cache mount — incremental compilation reuses .build/
+RUN --mount=type=cache,target=/app/.build \
+    swift build -c release --product MyApp -j 20 \
+    && cp .build/release/MyApp /usr/local/bin/MyApp
+
+FROM swift:6.0-jammy-slim
+COPY --from=builder /usr/local/bin/MyApp /usr/local/bin/MyApp
+```
+
+**Key details:**
+
+- `-j 20` — use half of UNRAID's 40 cores (leaves headroom for services)
+- `--mount=type=cache,target=/app/.build` — persists across builds within the BuildKit daemon
+- If the project uses a Docker-specific manifest (e.g., `Package.docker.swift`), copy it as `Package.swift`
+- System libraries (e.g., `CLinuxSQLite`) must be copied before the stub step
+- The `cp .build/release/...` inside the cache-mounted RUN is required because cache mount contents are not available to `COPY --from=builder`
 
 ## Image Lifecycle
 
