@@ -2,7 +2,7 @@
   "catalogID": "deploy-container",
   "name": "Deploy Container",
   "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID \u2014 manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "source": "builtIn",
   "category": "devops",
   "tags": [

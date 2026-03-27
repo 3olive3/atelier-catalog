@@ -25,6 +25,10 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 └── configs/                            # Service configs
 ```
 
+## Pre-requisite: Image Build
+
+If the manifest's `build:` field is not null, the image must be built before deploying. Load the **`build-image`** skill first — it covers BuildKit, multi-core parallelism, registry push, tagging, and cache optimization.
+
 ## 10-Step Pipeline
 
 | Step | Action | Tools |
@@ -195,7 +199,6 @@ Naming: `Service Name (Description)`. Interval: 60s HTTP/TCP, 120s Docker.
 
 - **`docker run` = unmanaged** — never use raw `docker run`/`docker create`. Always use `xmlToCommand` via the PHP script above. Unmanaged containers are invisible in UNRAID UI and lose edit/update/restart capability from the dashboard.
 - **`docker rename` = still unmanaged** — renaming doesn't update labels. Must stop, remove, and re-create from XML.
-- **BuildKit crashes on UNRAID** — always `DOCKER_BUILDKIT=0`
 - **No python3 on UNRAID** — use `jq`, `sed`, `awk`
 - **SSH MCP 30s timeout** — long ops: `setsid /tmp/script.sh &>/dev/null < /dev/null &`
 - **Icon caching** — change URL in XML to force re-download

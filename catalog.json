@@ -981,6 +981,26 @@
         "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/bash-pro/SKILL.md"
       },
       {
+        "catalogID": "build-image",
+        "name": "Build Image",
+        "description": "Build Docker images on UNRAID with BuildKit, multi-core parallelism, registry push, tagging conventions, cache optimization, and manifest build: section as source of truth.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "devops",
+        "tags": [
+          "docker",
+          "buildkit",
+          "registry",
+          "unraid",
+          "ci-cd",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-butler",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/build-image/SKILL.md"
+      },
+      {
         "catalogID": "content-pipeline",
         "name": "Content Pipeline",
         "description": "End-to-end Content Factory orchestration — 8-step pipeline, DAG structure, inter-step data flow, format selection, monitoring, and quality assurance.",
@@ -1022,7 +1042,7 @@
         "catalogID": "deploy-container",
         "name": "Deploy Container",
         "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "source": "builtIn",
         "category": "devops",
         "tags": [
@@ -2739,6 +2759,7 @@
       "name": "DevOps & Infrastructure",
       "description": "Container orchestration, IaC, monitoring, and automation for production systems.",
       "skillIds": [
+        "build-image",
         "docker-expert",
         "deploy-container",
         "distribute-skill-mcp",
@@ -2750,6 +2771,7 @@
       ],
       "tags": [
         "docker",
+        "buildkit",
         "kubernetes",
         "terraform",
         "monitoring"
