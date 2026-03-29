@@ -27,7 +27,7 @@ Services (/metrics)          Containers (stdout)
        │                            │
        ▼                            ▼
   Prometheus ◄───────────── Promtail (Docker SD)
-  (16 targets,                      │
+  (17 targets,                      │
    90-day retention)                ▼
        │                          Loki
        ├─► Alertmanager ──► email-critical (1h repeat)
@@ -36,7 +36,7 @@ Services (/metrics)          Containers (stdout)
        │        │
        │        └─► Karma (visual alert UI)
        │
-       └─► Grafana (21 dashboards, Casa Lima folder)
+       └─► Grafana (23 dashboards, Casa Lima folder)
                 ├─ Datasource: Prometheus (UID: prometheus)
                 └─ Datasource: Loki (UID: loki)
 ```
@@ -92,7 +92,7 @@ observability:
 2. The dashboard UID must match the manifest value
 
 **When `alerts` lists files:**
-1. Those rule files must exist in `configs/prometheus/rules/`
+1. Those rule files must exist in `infra/configs/prometheus/rules/`
 2. Rules for this service use labels matching the manifest's job name
 
 ---
@@ -101,7 +101,7 @@ observability:
 
 ### Adding a New Scrape Target
 
-Add to `configs/prometheus/prometheus.yml` under `scrape_configs`:
+Add to `infra/configs/prometheus/prometheus.yml` under `scrape_configs`:
 
 ```yaml
 - job_name: 'my-service'
@@ -117,7 +117,7 @@ Add to `configs/prometheus/prometheus.yml` under `scrape_configs`:
 - Default interval: 30s for apps, 60s for infrastructure, 5m for external APIs
 - After editing: sync file to UNRAID, then `docker kill --signal=SIGHUP prometheus`
 
-### Current Targets (16)
+### Current Targets (17)
 
 | Job | Target | Interval | Layer |
 |-----|--------|----------|-------|
@@ -133,17 +133,17 @@ Add to `configs/prometheus/prometheus.yml` under `scrape_configs`:
 | cloudflare | cloudflare-exporter:8080 | 5m | 3 |
 | ipmi | ipmi-exporter:9290 | 60s | 1 |
 | speedtest | speedtest-exporter:9469 | 5m | 3 |
-| fortigate-snmp | fortigate:161 | 60s | 3 |
-| fortiap-snmp | fortiap:161 | 60s | 3 |
+| snmp | snmp-exporter:9116 (Fortigate) | 60s | 3 |
+| snmp-wifi | snmp-exporter:9116 (FortiAP) | 60s | 3 |
+| snmp-ha | snmp-exporter:9116 (HA cluster) | 60s | 3 |
+| netbox-dhcp-sync | host:8090 | 60s | 1 |
 | uptime-kuma | uptime-kuma:3001 | 60s | 4 |
-| butler-gateway | atelier-butler:3100 | 30s | 4 |
-| atelier-backend | atelier-backend:8082 | 30s | 4 |
 
 ---
 
 ## Recording Rules
 
-Pre-computed metrics with `casa:` prefix. Used by Infrastructure Overview and Service Availability dashboards. Defined in `configs/prometheus/rules/recording.yml`.
+Pre-computed metrics with `casa:` prefix. Used by Infrastructure Overview and Service Availability dashboards. Defined in `infra/configs/prometheus/rules/recording.yml`.
 
 ### Naming Convention
 
@@ -181,17 +181,19 @@ Examples: `casa:node_cpu_usage_percent`, `casa:container_restarts_1h`, `casa:ser
 ### Rule File Organization
 
 ```
-configs/prometheus/rules/
+infra/configs/prometheus/rules/
 ├── recording.yml          # 16 casa:* recording rules
 ├── infrastructure.yml     # Host, SMART, hardware alerts
 ├── containers.yml         # Container resource alerts
 ├── cron.yml               # Cron job health (staleness, failures)
 ├── network.yml            # DNS, Cloudflare, WAN alerts
-├── network-security.yml   # Fortigate deny patterns (Loki Ruler)
 ├── applications.yml       # PostgreSQL, Plex, Vaultwarden, Butler, Atelier
 ├── storage.yml            # SMART disk health alerts
-└── smarthome.yml          # Homebridge alerts
+├── smarthome.yml          # Homebridge alerts
+└── hardware.yml           # IPMI power, temperature, fan alerts
 ```
+
+> **Note:** Fortigate deny-pattern alerts (Loki Ruler) are in `infra/configs/loki/rules/casa-lima/security.yml`, not in the Prometheus rules directory.
 
 ### Required Labels
 
@@ -268,7 +270,7 @@ docker kill --signal=SIGHUP prometheus
 ## Alertmanager Routing
 
 ```
-Prometheus (45 rules) + Loki Ruler (5 rules)
+Prometheus (65 rules) + Loki Ruler (5 rules)
     │
     ▼
 Alertmanager :9093
@@ -295,7 +297,7 @@ Receivers:
 
 Dashboards are file-provisioned (not API-created):
 - JSON files: `/mnt/user/appdata/grafana/data/dashboards/` on UNRAID
-- Source of truth: `dashboards/` directory in Butler repo (`infra/dashboards/`)
+- Source of truth: `infra/dashboards/` directory in Butler repo
 - Provider: `Casa Lima` folder, `disableDeletion: true`, `editable: false`
 
 ### Dashboard JSON Requirements
@@ -313,25 +315,34 @@ Dashboards are file-provisioned (not API-created):
 ### Directory Structure
 
 ```
-dashboards/
-├── infrastructure-overview.json
-├── service-availability.json
-├── pihole-dns.json
+infra/dashboards/
 ├── infrastructure/
+│   ├── infrastructure-overview.json
 │   ├── hardware-health.json
+│   ├── smart-disk-health.json
 │   ├── cron-job-health.json
 │   ├── cloud-costs.json
-│   ├── smart-disk-health.json
-│   └── ...
+│   ├── alert-history.json
+│   ├── service-catalog.json
+│   ├── node-exporter-full.json
+│   └── prometheus-stats.json
+├── containers/
+│   ├── cadvisor-docker.json
+│   └── loki-container-logs.json
 ├── network/
+│   ├── pihole-dns.json
 │   ├── cloudflare-analytics.json
 │   ├── fortigate-security.json
+│   ├── fortigate-snmp.json
 │   ├── network-lan-wifi.json
 │   └── network-wan.json
 ├── applications/
+│   ├── service-availability.json
 │   ├── butler-gateway.json
 │   ├── atelier-backend.json
-│   └── atelier-platform.json
+│   ├── atelier-platform.json
+│   └── postgresql-db.json
+├── media/           # (empty — future Plex/Tautulli dashboards)
 └── smarthome/
     └── smart-home.json
 ```
@@ -524,7 +535,7 @@ The Loki datasource has a derived field linking `container_name` labels to cAdvi
 
 ### Log-Based Alert Rules (Loki Ruler)
 
-Network security alerts use LogQL in `configs/prometheus/rules/network-security.yml`:
+Network security alerts use LogQL in `infra/configs/loki/rules/casa-lima/security.yml` (5 rules across 4 groups: WanDenySpikeDetected, WanDenyCritical, RogueAPDetected, VpnCertificateFailure, FortigateSyslogSilent):
 
 ```yaml
 # Example: Loki ruler alert
@@ -546,9 +557,9 @@ Network security alerts use LogQL in `configs/prometheus/rules/network-security.
 
 1. **Instrument**: Add `/metrics` endpoint (unauthenticated)
 2. **Manifest**: Add `observability:` block to container manifest
-3. **Scrape config**: Add target to `configs/prometheus/prometheus.yml`
-4. **Alert rules**: Add rules to appropriate `configs/prometheus/rules/<layer>.yml`
-5. **Dashboard**: Create JSON in `dashboards/<layer>/`
+3. **Scrape config**: Add target to `infra/configs/prometheus/prometheus.yml`
+4. **Alert rules**: Add rules to appropriate `infra/configs/prometheus/rules/<layer>.yml`
+5. **Dashboard**: Create JSON in `infra/dashboards/<layer>/`
 6. **Deploy to UNRAID**:
    - Sync prometheus.yml → `docker kill --signal=SIGHUP prometheus`
    - Sync rule files → `docker kill --signal=SIGHUP prometheus`
@@ -583,13 +594,13 @@ docker exec prometheus promtool check rules /etc/prometheus/rules/*.yml
 
 The Observability MCP (`observability` server) provides direct access to all four backends:
 
-**Prometheus**: `query_instant`, `query_range`, `list_metrics`, `list_targets`, `list_rules`, `list_alerts`, `find_series`, `get_metric_metadata`, `get_tsdb_stats`
+**Prometheus**: `query_instant`, `query_range`, `format_query`, `list_metrics`, `list_label_values`, `list_targets`, `list_rules`, `list_alerts`, `find_series`, `get_metric_metadata`, `get_tsdb_stats`, `get_prometheus_info`, `check_prometheus_health`
 
-**Loki**: `loki_query_logs`, `loki_query_metric`, `loki_list_labels`, `loki_list_label_values`, `loki_series`, `loki_stats`
+**Loki**: `loki_query_logs`, `loki_query_metric`, `loki_list_labels`, `loki_list_label_values`, `loki_series`, `loki_stats`, `check_loki_health`
 
-**Alertmanager**: `am_list_alerts`, `am_list_alert_groups`, `am_list_silences`, `am_create_silence`, `am_delete_silence`, `am_list_receivers`, `am_get_status`
+**Alertmanager**: `am_list_alerts`, `am_list_alert_groups`, `am_list_silences`, `am_create_silence`, `am_delete_silence`, `am_list_receivers`, `am_get_status`, `am_check_health`
 
-**Grafana**: `grafana_search_dashboards`, `grafana_get_dashboard`, `grafana_list_folders`, `grafana_list_annotations`, `grafana_create_annotation`
+**Grafana**: `grafana_search_dashboards`, `grafana_get_dashboard`, `grafana_list_folders`, `grafana_list_annotations`, `grafana_create_annotation`, `grafana_check_health`
 
 Use these tools to query live state, verify deployments, and investigate alerts.
 
