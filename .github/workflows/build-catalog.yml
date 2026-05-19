@@ -1,0 +1,41 @@
+name: Build Catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*/**.json'
+      - 'bundles.json'
+      - 'scripts/build-catalog.py'
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build catalog
+        run: python3 scripts/build-catalog.py
+
+      - name: Verify catalog.json is up to date
+        run: |
+          if git diff --quiet catalog.json compat/; then
+            echo "catalog.json and compat/ are up to date"
+          else
+            echo "::error::catalog.json or compat/ are out of date. Run 'python3 scripts/build-catalog.py' and commit."
+            git diff --stat catalog.json compat/
+            exit 1
+          fi
+
+      - name: Validate JSON syntax
+        run: |
+          for f in $(find . -name '*.json' -not -path './.git/*'); do
+            python3 -c "import json; json.load(open('$f'))" || exit 1
+          done
+          echo "All JSON files are valid"

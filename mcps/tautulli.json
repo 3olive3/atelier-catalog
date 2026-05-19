@@ -1,0 +1,28 @@
+{
+  "catalogID": "tautulli",
+  "name": "Tautulli",
+  "description": "Tautulli Plex monitoring — current activity, watch history, library stats, recently added, user analytics, and server health via REST API",
+  "version": "2.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": [
+    "dist/index.js"
+  ],
+  "env": {
+    "TAUTULLI_URL": "",
+    "TAUTULLI_API_KEY": ""
+  },
+  "category": "media",
+  "toolCount": 11,
+  "runtime": "node",
+  "tags": [
+    "media",
+    "monitoring",
+    "plex",
+    "analytics"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/tautulli-2.0.0.tar.gz",
+  "size": "25KB",
+  "checksum": "sha256:placeholder"
+}

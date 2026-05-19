@@ -1,0 +1,20 @@
+{
+  "catalogID": "excalidraw-diagram",
+  "name": "Excalidraw Diagram",
+  "description": "Generate beautiful Excalidraw architecture diagrams with Atelier brand colors. Renders to PNG via Playwright.",
+  "version": "1.0.0",
+  "source": "marketplace",
+  "category": "design",
+  "tags": [
+    "diagrams",
+    "excalidraw",
+    "architecture",
+    "visualization",
+    "design"
+  ],
+  "author": "coleam00 (customized for Atelier)",
+  "license": "MIT",
+  "sourceURL": "https://github.com/coleam00/excalidraw-diagram-skill",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/excalidraw-diagram/SKILL.md",
+  "dependencies": "Python 3.11+, Playwright 1.40+, Chromium (one-time install via: cd references && uv sync && uv run playwright install chromium)"
+}

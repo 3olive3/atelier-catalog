@@ -1,0 +1,9 @@
+{
+  "catalogID": "guardrail-no-destructive-ops",
+  "name": "No Destructive Operations",
+  "description": "Prevents the agent from deleting files, dropping database tables, or performing other irreversible destructive operations.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "exclamationmark.triangle",
+  "defaultValue": true
+}

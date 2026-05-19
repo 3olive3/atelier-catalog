@@ -1,0 +1,10 @@
+{
+  "catalogID": "grafana",
+  "name": "Grafana",
+  "description": "Dashboard and visualization platform — metrics, logs, and alerts in unified dashboards",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "provider": "grafana",
+  "defaultEndpoint": "https://grafana.3olive3.com",
+  "defaultPath": "/api/dashboards"
+}

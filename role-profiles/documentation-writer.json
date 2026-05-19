@@ -1,0 +1,13 @@
+{
+  "catalogID": "documentation-writer",
+  "name": "Documentation Writer",
+  "description": "Technical writer — MkDocs page creation, API documentation, architecture diagrams, knowledge base maintenance",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "baseRole": "custom",
+  "defaultModel": "claude-sonnet-4",
+  "defaultExecutionMode": "autonomous",
+  "defaultReasoningMode": "default",
+  "allowedTiers": ["operative"],
+  "vaultFolders": []
+}

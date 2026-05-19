@@ -1,0 +1,17 @@
+{
+  "catalogID": "incident-responder",
+  "name": "Incident Responder",
+  "description": "Incident response specialist — observability triage, runbook execution, alert correlation, escalation management",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "baseRole": "sysadmin",
+  "defaultModel": "claude-sonnet-4",
+  "defaultExecutionMode": "supervised",
+  "defaultReasoningMode": "extended",
+  "allowedTiers": ["builder"],
+  "guardrailPresets": {
+    "allowShellExecution": true,
+    "allowNetworkAccess": true
+  },
+  "vaultFolders": ["Agents", "Infrastructure"]
+}

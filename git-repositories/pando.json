@@ -1,0 +1,9 @@
+{
+  "catalogID": "pando",
+  "name": "Pando",
+  "description": "Homebridge plugin for Pando kitchen hood integration",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/Pando"
+}

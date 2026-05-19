@@ -1,0 +1,18 @@
+{
+  "catalogID": "n8n-workflows",
+  "name": "n8n Workflows",
+  "description": "Guide for triggering and monitoring n8n workflows — video assembly, publishing, and multi-step external service orchestration.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "ai-agent",
+  "tags": [
+    "content-factory",
+    "n8n",
+    "workflows",
+    "automation"
+  ],
+  "author": "Atelier",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/n8n-workflows/SKILL.md"
+}

@@ -1,0 +1,9 @@
+{
+  "catalogID": "require-qa-approval",
+  "name": "Require QA Approval",
+  "description": "Requires QA review and approval gate before deployment steps can execute in a workflow pipeline",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "checkmark.shield",
+  "defaultValue": false
+}

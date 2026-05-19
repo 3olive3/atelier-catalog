@@ -1,0 +1,9 @@
+{
+  "catalogID": "no-production-deploy",
+  "name": "No Production Deployment",
+  "description": "Prevents agents from deploying directly to production — requires workflow pipeline with approval gates",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "exclamationmark.octagon",
+  "defaultValue": true
+}

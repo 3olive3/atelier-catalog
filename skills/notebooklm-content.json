@@ -1,0 +1,18 @@
+{
+  "catalogID": "notebooklm-content",
+  "name": "NotebookLM Content",
+  "description": "Guide for using NotebookLM MCP to generate content — source ingestion, script generation, podcast audio, and content synthesis.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "ai-agent",
+  "tags": [
+    "content-factory",
+    "notebooklm",
+    "podcast",
+    "content-generation"
+  ],
+  "author": "Atelier",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/notebooklm-content/SKILL.md"
+}

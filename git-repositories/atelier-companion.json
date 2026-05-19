@@ -1,0 +1,9 @@
+{
+  "catalogID": "atelier-companion",
+  "name": "Atelier Companion",
+  "description": "iOS, iPad, and tvOS companion app for home control and agent runtime",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/atelier-companion"
+}

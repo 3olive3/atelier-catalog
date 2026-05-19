@@ -1,0 +1,17 @@
+{
+  "catalogID": "release-manager",
+  "name": "Release Manager",
+  "description": "Deployment coordinator — CI/CD orchestration, traffic management, rollback decisions, observability-driven release governance",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "baseRole": "devops",
+  "defaultModel": "claude-opus-4",
+  "defaultExecutionMode": "supervised",
+  "defaultReasoningMode": "extended",
+  "allowedTiers": ["coordinator"],
+  "guardrailPresets": {
+    "allowShellExecution": true,
+    "allowNetworkAccess": true
+  },
+  "vaultFolders": ["Agents", "Infrastructure", "Platform"]
+}

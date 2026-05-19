@@ -1,0 +1,9 @@
+{
+  "catalogID": "atelier-catalog",
+  "name": "Atelier Catalog",
+  "description": "Unified resource distribution catalog for 10 Atelier resource types",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/atelier-catalog"
+}

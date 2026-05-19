@@ -1,0 +1,9 @@
+{
+  "catalogID": "guardrail-no-git-push",
+  "name": "No Git Push",
+  "description": "Prevents the agent from pushing commits to remote git repositories.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "iconName": "arrow.up.circle",
+  "defaultValue": true
+}

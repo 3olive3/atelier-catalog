@@ -1,0 +1,9 @@
+{
+  "catalogID": "minecraft-server",
+  "name": "Minecraft Server",
+  "description": "Minecraft Paper game server configuration on UNRAID",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "defaultBranch": "main",
+  "remoteURL": "https://github.com/3olive3/minecraft-server"
+}

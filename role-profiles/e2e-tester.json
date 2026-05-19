@@ -1,0 +1,18 @@
+{
+  "catalogID": "e2e-tester",
+  "name": "E2E Tester",
+  "description": "End-to-end test engineer — test framework execution, observability source validation, regression testing for deployment workflows",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "baseRole": "qa",
+  "defaultModel": "claude-sonnet-4",
+  "defaultExecutionMode": "supervised",
+  "defaultReasoningMode": "default",
+  "allowedTiers": ["builder"],
+  "guardrailPresets": {
+    "allowShellExecution": true,
+    "allowNetworkAccess": true
+  },
+  "suggestedTechStacks": ["swift-server", "typescript-fullstack"],
+  "vaultFolders": ["Agents"]
+}

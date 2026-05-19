@@ -1,0 +1,33 @@
+{
+  "catalogID": "pihole",
+  "name": "Pi-hole",
+  "description": "Pi-hole DNS management — CNAME records, ad-blocking, domain blocking, client stats, and upstream health via SSH + docker exec",
+  "version": "2.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": [
+    "dist/index.js"
+  ],
+  "env": {
+    "UNRAID_HOST": "",
+    "UNRAID_PORT": "",
+    "UNRAID_USER": "",
+    "UNRAID_PASSWORD": "",
+    "PIHOLE_CONTAINER": "",
+    "PIHOLE_API_HOST": "",
+    "PIHOLE_API_PASSWORD": ""
+  },
+  "category": "core",
+  "toolCount": 10,
+  "runtime": "node",
+  "tags": [
+    "infrastructure",
+    "dns",
+    "ad-blocking",
+    "network"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/pihole-2.0.0.tar.gz",
+  "size": "25KB",
+  "checksum": "sha256:placeholder"
+}
