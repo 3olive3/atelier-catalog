@@ -54,11 +54,13 @@ python3 scripts/build-catalog.py
 - **MCPs**: developed in `atelier-butler/mcp/`, packaged in `atelier-mcps/`, *referenced* here.
 - **Consumers**: Atelier Designer (the `atelier` repo) fetches `https://raw.githubusercontent.com/3olive3/atelier-catalog/main/catalog.json`. Legacy consumers use `compat/mcps-catalog.json` and `compat/skills-catalog.json`.
 
-## Recommended skills
+## Skills installed
 
-From `~/Developer/atelier-catalog/skills/` (this is the catalog so loading from itself):
-- skill-creator, mcp-builder, distribute-skill-mcp
-- git-advanced-workflows, architecture-decision-records
+Available via the skill tool — symlinked into `.claude/skills/` from `skills/` (this repo IS the catalog source).
+
+**Casa Lima mandatory** (every repo): `vault-access`, `build-image`, `deploy-container`, `incidents-methodology`, `distribute-skill-mcp`, `home-network`, `bash-pro`, `git-advanced-workflows`, `systematic-debugging`, `security-review`.
+
+**This repo also has**: `skill-creator`, `mcp-builder`, `architecture-decision-records`.
 
 ## MCPs
 
