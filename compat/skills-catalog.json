@@ -1,6 +1,6 @@
 {
   "version": "1.3.0",
-  "lastUpdated": "2026-03-16T20:12:01Z",
+  "lastUpdated": "2026-05-22T23:33:40Z",
   "skills": [
     {
       "id": "api-design-principles",
@@ -91,6 +91,25 @@
       "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/bash-pro/SKILL.md"
     },
     {
+      "id": "build-image",
+      "name": "Build Image",
+      "version": "1.0.0",
+      "description": "Build Docker images on UNRAID — BuildKit, multi-core parallelism, local registry push/pull, tagging conventions, cache optimization, and long-build patterns. Chains with deploy-container.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-butler",
+      "tags": [
+        "docker",
+        "buildkit",
+        "registry",
+        "ci-cd",
+        "unraid",
+        "casa-lima"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/build-image/SKILL.md"
+    },
+    {
       "id": "content-pipeline",
       "name": "Content Pipeline",
       "version": "1.0.0",
@@ -129,7 +148,7 @@
     {
       "id": "deploy-container",
       "name": "Deploy Container",
-      "version": "1.0.0",
+      "version": "1.2.0",
       "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
       "author": "casa-lima",
       "license": "MIT",
@@ -775,6 +794,25 @@
       ],
       "category": "casa-lima-ops",
       "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/vault-access/SKILL.md"
+    },
+    {
+      "id": "visual-diagram",
+      "name": "visual-diagram",
+      "version": "1.0.0",
+      "description": "Generate beautiful, illustration-quality diagrams using SVG blueprints + Nano Banana 2. Hand-drawn + digital aesthetic for presentations, docs, and explainers.",
+      "author": "Unknown",
+      "license": "MIT",
+      "sourceURL": "",
+      "tags": [
+        "diagram",
+        "image-generation",
+        "nano-banana",
+        "gemini",
+        "svg",
+        "illustration"
+      ],
+      "category": "general",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-skills/main/skills/visual-diagram/SKILL.md"
     },
     {
       "id": "visual-generation",

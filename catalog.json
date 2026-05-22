@@ -1,12 +1,21 @@
 {
   "name": "Atelier Official Catalog",
-  "version": "2.6.0",
-  "lastUpdated": "2026-03-21T20:00:00Z",
+  "version": "2.0.0",
+  "lastUpdated": "2026-05-22T23:33:40Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 140,
+  "totalEntries": 117,
   "types": {
     "guardrails": [
+      {
+        "catalogID": "gdpr-compliance",
+        "name": "GDPR Compliance",
+        "description": "Ensure agents do not log, store, or transmit personally identifiable information (PII)",
+        "version": "1.0.0",
+        "source": "marketplace",
+        "iconName": "person.badge.shield.checkmark",
+        "defaultValue": false
+      },
       {
         "catalogID": "guardrail-no-destructive-ops",
         "name": "No Destructive Operations",
@@ -17,30 +26,12 @@
         "defaultValue": true
       },
       {
-        "catalogID": "guardrail-no-package-install",
-        "name": "No Package Installation",
-        "description": "Prevents the agent from installing new packages, dependencies, or modules (npm install, pip install, etc.).",
+        "catalogID": "guardrail-no-file-access-outside-repo",
+        "name": "No File Access Outside Repo",
+        "description": "Prevents the agent from creating or modifying files outside the project repository directory.",
         "version": "1.0.0",
         "source": "builtIn",
-        "iconName": "shippingbox",
-        "defaultValue": false
-      },
-      {
-        "catalogID": "guardrail-no-network-access",
-        "name": "No Network Access",
-        "description": "Prevents the agent from making outbound network requests (HTTP calls, API access, web fetches).",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "iconName": "network.slash",
-        "defaultValue": false
-      },
-      {
-        "catalogID": "guardrail-no-secret-access",
-        "name": "No Secret Access",
-        "description": "Prevents the agent from reading secrets, credentials, or vault entries.",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "iconName": "lock.shield",
+        "iconName": "folder.badge.minus",
         "defaultValue": true
       },
       {
@@ -53,30 +44,39 @@
         "defaultValue": true
       },
       {
+        "catalogID": "guardrail-no-network-access",
+        "name": "No Network Access",
+        "description": "Prevents the agent from making outbound network requests (HTTP calls, API access, web fetches).",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "network.slash",
+        "defaultValue": false
+      },
+      {
+        "catalogID": "guardrail-no-package-install",
+        "name": "No Package Installation",
+        "description": "Prevents the agent from installing new packages, dependencies, or modules (npm install, pip install, etc.).",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "shippingbox",
+        "defaultValue": false
+      },
+      {
+        "catalogID": "guardrail-no-secret-access",
+        "name": "No Secret Access",
+        "description": "Prevents the agent from reading secrets, credentials, or vault entries.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "lock.shield",
+        "defaultValue": true
+      },
+      {
         "catalogID": "guardrail-no-shell-execution",
         "name": "No Shell Execution",
         "description": "Prevents the agent from executing arbitrary shell commands and scripts.",
         "version": "1.0.0",
         "source": "builtIn",
         "iconName": "terminal",
-        "defaultValue": false
-      },
-      {
-        "catalogID": "guardrail-no-file-access-outside-repo",
-        "name": "No File Access Outside Repo",
-        "description": "Prevents the agent from creating or modifying files outside the project repository directory.",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "iconName": "folder.badge.minus",
-        "defaultValue": true
-      },
-      {
-        "catalogID": "gdpr-compliance",
-        "name": "GDPR Compliance",
-        "description": "Ensure agents do not log, store, or transmit personally identifiable information (PII)",
-        "version": "1.0.0",
-        "source": "marketplace",
-        "iconName": "person.badge.shield.checkmark",
         "defaultValue": false
       },
       {
@@ -89,21 +89,21 @@
         "defaultValue": true
       },
       {
-        "catalogID": "no-secrets-in-code",
-        "name": "No Secrets in Code",
-        "description": "Prevent agents from writing API keys, tokens, passwords, or credentials to source files",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "iconName": "key.slash",
-        "defaultValue": true
-      },
-      {
         "catalogID": "no-production-deploy",
         "name": "No Production Deployment",
         "description": "Prevents agents from deploying directly to production — requires workflow pipeline with approval gates",
         "version": "1.0.0",
         "source": "builtIn",
         "iconName": "exclamationmark.octagon",
+        "defaultValue": true
+      },
+      {
+        "catalogID": "no-secrets-in-code",
+        "name": "No Secrets in Code",
+        "description": "Prevent agents from writing API keys, tokens, passwords, or credentials to source files",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "iconName": "key.slash",
         "defaultValue": true
       },
       {
@@ -983,17 +983,16 @@
       {
         "catalogID": "build-image",
         "name": "Build Image",
-        "description": "Build Docker images on UNRAID with BuildKit, multi-core parallelism, registry push, tagging conventions, cache optimization, and manifest build: section as source of truth.",
-        "version": "1.1.0",
+        "description": "Build Docker images on UNRAID — BuildKit, multi-core parallelism, local registry push/pull, tagging conventions, cache optimization, and long-build patterns. Chains with deploy-container.",
+        "version": "1.0.0",
         "source": "builtIn",
         "category": "devops",
         "tags": [
           "docker",
           "buildkit",
           "registry",
-          "unraid",
           "ci-cd",
-          "swift",
+          "unraid",
           "casa-lima"
         ],
         "author": "casa-lima",
@@ -1043,7 +1042,7 @@
         "catalogID": "deploy-container",
         "name": "Deploy Container",
         "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "source": "builtIn",
         "category": "devops",
         "tags": [
@@ -1451,33 +1450,6 @@
         "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/notebooklm-content/SKILL.md"
       },
       {
-        "catalogID": "observability-skill",
-        "name": "Observability",
-        "description": "Casa Lima platform observability — Prometheus alerts, Grafana dashboards, Loki logs, metric instrumentation, manifest integration, five-layer architecture.",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "category": "devops",
-        "tags": [
-          "prometheus",
-          "grafana",
-          "loki",
-          "alertmanager",
-          "observability",
-          "monitoring",
-          "metrics",
-          "dashboards"
-        ],
-        "path": "skills/observability/SKILL.md",
-        "iconName": "waveform.path.ecg",
-        "isBuiltIn": true,
-        "isEnabled": true,
-        "defaultValue": true,
-        "author": "Atelier",
-        "license": "MIT",
-        "sourceURL": "https://github.com/3olive3/atelier-catalog",
-        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/observability/SKILL.md"
-      },
-      {
         "catalogID": "prometheus-configuration",
         "name": "Prometheus Config",
         "description": "Prometheus setup — metric collection, scrape configs, recording rules, alert rules, and monitoring best practices.",
@@ -1755,6 +1727,30 @@
         "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/vault-access/SKILL.md"
       },
       {
+        "catalogID": "visual-diagram",
+        "name": "visual-diagram",
+        "version": "1.0.0",
+        "description": "Generate beautiful, illustration-quality diagrams using SVG blueprints + Nano Banana 2. Hand-drawn + digital aesthetic for presentations, docs, and explainers.",
+        "type": "skill",
+        "source": "casa-lima",
+        "risk": "low",
+        "date_added": "2026-03-16",
+        "tags": [
+          "diagram",
+          "image-generation",
+          "nano-banana",
+          "gemini",
+          "svg",
+          "illustration"
+        ],
+        "dependencies": [
+          "gemini-api",
+          "tavily-api",
+          "python"
+        ],
+        "path": "skills/visual-diagram"
+      },
+      {
         "catalogID": "visual-generation",
         "name": "Visual Generation",
         "description": "Guide for using visual generation MCP — illustrations, thumbnails, scene images for videos, batch generation, and style selection.",
@@ -1776,254 +1772,19 @@
     ],
     "role-profiles": [
       {
-        "catalogID": "architect",
-        "name": "Architect",
-        "description": "Top-level system architect — designs architecture, reviews patterns, guides technical decisions",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "architect",
-        "defaultModel": "claude-opus-4",
-        "defaultExecutionMode": "plan",
-        "defaultReasoningMode": "extended",
-        "allowedTiers": [
-          "coordinator",
-          "builder"
-        ],
-        "vaultFolders": []
-      },
-      {
-        "catalogID": "backend",
-        "name": "Backend Engineer",
-        "description": "Server-side development — APIs, databases, business logic, backend services",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "backend",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "build",
-        "defaultReasoningMode": "default",
-        "allowedTiers": [
-          "coordinator",
-          "builder",
-          "operative"
-        ],
-        "vaultFolders": [
-          "Agents"
-        ]
-      },
-      {
-        "catalogID": "frontend",
-        "name": "Frontend Engineer",
-        "description": "Client-side development — UI components, styling, state management, accessibility",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "frontend",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "build",
-        "defaultReasoningMode": "default",
-        "allowedTiers": [
-          "coordinator",
-          "builder",
-          "operative"
-        ],
-        "vaultFolders": [
-          "Agents"
-        ]
-      },
-      {
-        "catalogID": "qa",
-        "name": "QA Engineer",
-        "description": "Quality assurance — test writing, bug reproduction, coverage analysis, test infrastructure",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "qa",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "build",
-        "defaultReasoningMode": "default",
-        "allowedTiers": [
-          "builder",
-          "operative"
-        ],
-        "vaultFolders": [
-          "Agents"
-        ]
-      },
-      {
-        "catalogID": "design",
-        "name": "Design Engineer",
-        "description": "UI/UX design — wireframes, design systems, component patterns, user flows",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "design",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "plan",
-        "defaultReasoningMode": "default",
-        "allowedTiers": [
-          "builder",
-          "operative"
-        ],
-        "vaultFolders": [
-          "Agents"
-        ]
-      },
-      {
-        "catalogID": "sysadmin",
-        "name": "SysAdmin",
-        "description": "System administration — server management, networking, monitoring, deployment",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "sysadmin",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "supervised",
-        "defaultReasoningMode": "default",
-        "allowedTiers": [
-          "builder",
-          "operative"
-        ],
-        "vaultFolders": [
-          "Agents",
-          "Infrastructure"
-        ]
-      },
-      {
-        "catalogID": "devops",
-        "name": "DevOps Engineer",
-        "description": "CI/CD pipelines, infrastructure as code, container orchestration, monitoring",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "devops",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "build",
-        "defaultReasoningMode": "default",
-        "allowedTiers": [
-          "builder",
-          "operative"
-        ],
-        "vaultFolders": [
-          "Agents",
-          "Infrastructure",
-          "Platform"
-        ]
-      },
-      {
-        "catalogID": "custom",
-        "name": "Custom Role",
-        "description": "Blank slate role — fully configurable model, mode, and guardrail defaults",
+        "catalogID": "documentation-writer",
+        "name": "Documentation Writer",
+        "description": "Technical writer — MkDocs page creation, API documentation, architecture diagrams, knowledge base maintenance",
         "version": "1.0.0",
         "source": "builtIn",
         "baseRole": "custom",
         "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "build",
+        "defaultExecutionMode": "autonomous",
         "defaultReasoningMode": "default",
         "allowedTiers": [
-          "coordinator",
-          "builder",
           "operative"
         ],
         "vaultFolders": []
-      },
-      {
-        "catalogID": "security-auditor",
-        "name": "Security Auditor",
-        "description": "Security-focused agent for code review, vulnerability scanning, and compliance checks",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "qa",
-        "defaultModel": "claude-opus-4",
-        "defaultExecutionMode": "supervised",
-        "defaultReasoningMode": "extended",
-        "allowedTiers": [
-          "builder"
-        ],
-        "guardrailPresets": {
-          "allowShellExecution": false,
-          "allowFileCreation": false,
-          "allowNetworkAccess": true,
-          "allowPackageInstall": false,
-          "requireHumanApproval": true,
-          "readOnlyMode": true,
-          "sandboxMode": true
-        },
-        "vaultFolders": [
-          "Agents"
-        ]
-      },
-      {
-        "catalogID": "senior-backend",
-        "name": "Senior Backend Engineer",
-        "description": "Experienced backend developer with API design, database, and system architecture focus",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "backend",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "autonomous",
-        "defaultReasoningMode": "extended",
-        "allowedTiers": [
-          "coordinator",
-          "builder"
-        ],
-        "suggestedTechStacks": [
-          "swift-server",
-          "typescript-fullstack",
-          "python-ml"
-        ],
-        "vaultFolders": [
-          "Agents",
-          "Platform"
-        ]
-      },
-      {
-        "catalogID": "sysadmin-infra",
-        "name": "Infrastructure SysAdmin",
-        "description": "Infrastructure management agent for servers, networking, monitoring, and deployment",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "sysadmin",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "supervised",
-        "defaultReasoningMode": "standard",
-        "allowedTiers": [
-          "builder",
-          "operative"
-        ],
-        "suggestedTechStacks": [
-          "devops-infra"
-        ],
-        "guardrailPresets": {
-          "allowShellExecution": true,
-          "allowFileCreation": true,
-          "allowNetworkAccess": true,
-          "allowPackageInstall": false,
-          "requireHumanApproval": true,
-          "readOnlyMode": false,
-          "sandboxMode": false
-        },
-        "vaultFolders": [
-          "Agents",
-          "Infrastructure",
-          "Platform"
-        ]
-      },
-      {
-        "catalogID": "qa-reviewer",
-        "name": "QA Reviewer",
-        "description": "Code review specialist — PR reviews, test coverage analysis, read-only code inspection with deployment workflow integration",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "baseRole": "qa",
-        "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "supervised",
-        "defaultReasoningMode": "extended",
-        "allowedTiers": [
-          "builder"
-        ],
-        "guardrailPresets": {
-          "readOnlyMode": true,
-          "allowShellExecution": false,
-          "allowFileCreation": false
-        },
-        "vaultFolders": [
-          "Agents"
-        ]
       },
       {
         "catalogID": "e2e-tester",
@@ -2046,6 +1807,50 @@
           "swift-server",
           "typescript-fullstack"
         ],
+        "vaultFolders": [
+          "Agents"
+        ]
+      },
+      {
+        "catalogID": "incident-responder",
+        "name": "Incident Responder",
+        "description": "Incident response specialist — observability triage, runbook execution, alert correlation, escalation management",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "sysadmin",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "builder"
+        ],
+        "guardrailPresets": {
+          "allowShellExecution": true,
+          "allowNetworkAccess": true
+        },
+        "vaultFolders": [
+          "Agents",
+          "Infrastructure"
+        ]
+      },
+      {
+        "catalogID": "qa-reviewer",
+        "name": "QA Reviewer",
+        "description": "Code review specialist — PR reviews, test coverage analysis, read-only code inspection with deployment workflow integration",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "qa",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "builder"
+        ],
+        "guardrailPresets": {
+          "readOnlyMode": true,
+          "allowShellExecution": false,
+          "allowFileCreation": false
+        },
         "vaultFolders": [
           "Agents"
         ]
@@ -2074,41 +1879,74 @@
         ]
       },
       {
-        "catalogID": "incident-responder",
-        "name": "Incident Responder",
-        "description": "Incident response specialist — observability triage, runbook execution, alert correlation, escalation management",
+        "catalogID": "security-auditor",
+        "name": "Security Auditor",
+        "description": "Security-focused agent for code review, vulnerability scanning, and compliance checks",
         "version": "1.0.0",
         "source": "builtIn",
-        "baseRole": "sysadmin",
-        "defaultModel": "claude-sonnet-4",
+        "baseRole": "qa",
+        "defaultModel": "claude-opus-4",
         "defaultExecutionMode": "supervised",
         "defaultReasoningMode": "extended",
         "allowedTiers": [
           "builder"
         ],
         "guardrailPresets": {
-          "allowShellExecution": true,
-          "allowNetworkAccess": true
-        },
-        "vaultFolders": [
-          "Agents",
-          "Infrastructure"
+          "allowShellExecution": false,
+          "allowFileCreation": false,
+          "allowNetworkAccess": true,
+          "allowPackageInstall": false,
+          "requireHumanApproval": true,
+          "readOnlyMode": true,
+          "sandboxMode": true
+        }
+      },
+      {
+        "catalogID": "senior-backend",
+        "name": "Senior Backend Engineer",
+        "description": "Experienced backend developer with API design, database, and system architecture focus",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "baseRole": "backend",
+        "defaultModel": "claude-sonnet-4",
+        "defaultExecutionMode": "autonomous",
+        "defaultReasoningMode": "extended",
+        "allowedTiers": [
+          "coordinator",
+          "builder"
+        ],
+        "suggestedTechStacks": [
+          "swift-server",
+          "typescript-fullstack",
+          "python-ml"
         ]
       },
       {
-        "catalogID": "documentation-writer",
-        "name": "Documentation Writer",
-        "description": "Technical writer — MkDocs page creation, API documentation, architecture diagrams, knowledge base maintenance",
+        "catalogID": "sysadmin-infra",
+        "name": "Infrastructure SysAdmin",
+        "description": "Infrastructure management agent for servers, networking, monitoring, and deployment",
         "version": "1.0.0",
         "source": "builtIn",
-        "baseRole": "custom",
+        "baseRole": "sysadmin",
         "defaultModel": "claude-sonnet-4",
-        "defaultExecutionMode": "autonomous",
-        "defaultReasoningMode": "default",
+        "defaultExecutionMode": "supervised",
+        "defaultReasoningMode": "standard",
         "allowedTiers": [
+          "builder",
           "operative"
         ],
-        "vaultFolders": []
+        "suggestedTechStacks": [
+          "devops-infra"
+        ],
+        "guardrailPresets": {
+          "allowShellExecution": true,
+          "allowFileCreation": true,
+          "allowNetworkAccess": true,
+          "allowPackageInstall": false,
+          "requireHumanApproval": true,
+          "readOnlyMode": false,
+          "sandboxMode": false
+        }
       }
     ],
     "git-repositories": [
@@ -2443,26 +2281,6 @@
     ],
     "observability": [
       {
-        "catalogID": "prometheus-default",
-        "name": "Prometheus",
-        "description": "Metrics collection and querying — PromQL queries for system and application metrics",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "provider": "prometheus",
-        "defaultEndpoint": "https://prometheus.3olive3.com",
-        "defaultPath": "/api/v1/query"
-      },
-      {
-        "catalogID": "loki",
-        "name": "Loki",
-        "description": "Log aggregation system — query container and application logs via LogQL",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "provider": "loki",
-        "defaultEndpoint": "https://loki.3olive3.com",
-        "defaultPath": "/loki/api/v1/query"
-      },
-      {
         "catalogID": "alertmanager",
         "name": "Alertmanager",
         "description": "Alert routing and notification — manages firing alerts, silences, and notification channels",
@@ -2471,16 +2289,6 @@
         "provider": "alertmanager",
         "defaultEndpoint": "https://alerts.3olive3.com",
         "defaultPath": "/api/v2/alerts"
-      },
-      {
-        "catalogID": "uptime-kuma",
-        "name": "Uptime Kuma",
-        "description": "Uptime monitoring — service health checks, response times, and availability tracking",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "provider": "uptimeKuma",
-        "defaultEndpoint": "https://uptime.3olive3.com",
-        "defaultPath": "/api/status-page/heartbeat"
       },
       {
         "catalogID": "dozzle",
@@ -2501,188 +2309,36 @@
         "provider": "grafana",
         "defaultEndpoint": "https://grafana.3olive3.com",
         "defaultPath": "/api/dashboards"
-      }
-    ],
-    "policy-templates": [
-      {
-        "catalogID": "budget-escalate-80",
-        "name": "Escalate on budget > 80%",
-        "description": "Escalates to coordinator when an agent budget usage exceeds 80%",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "category": "budget",
-        "trigger": "budgetThreshold",
-        "action": "escalate",
-        "priority": 90
       },
       {
-        "catalogID": "gate-destructive-ops",
-        "name": "Gate destructive operations",
-        "description": "Flags bash tool usage for human review before execution",
+        "catalogID": "loki",
+        "name": "Loki",
+        "description": "Log aggregation system — query container and application logs via LogQL",
         "version": "1.0.0",
         "source": "builtIn",
-        "category": "safety",
-        "trigger": "toolUsage",
-        "action": "flag",
-        "priority": 95
+        "provider": "loki",
+        "defaultEndpoint": "https://loki.3olive3.com",
+        "defaultPath": "/loki/api/v1/query"
       },
       {
-        "catalogID": "prod-deploy-approval",
-        "name": "Require production deploy approval",
-        "description": "Flags operations matching production deployment patterns for review",
+        "catalogID": "prometheus-default",
+        "name": "Prometheus",
+        "description": "Metrics collection and querying — PromQL queries for system and application metrics",
         "version": "1.0.0",
         "source": "builtIn",
-        "category": "approval",
-        "trigger": "contentPattern",
-        "action": "flag",
-        "priority": 100
+        "provider": "prometheus",
+        "defaultEndpoint": "https://prometheus.3olive3.com",
+        "defaultPath": "/api/v1/query"
       },
       {
-        "catalogID": "block-external-access",
-        "name": "Block unapproved external access",
-        "description": "Blocks web fetch and search tools to prevent unauthorized external access",
+        "catalogID": "uptime-kuma",
+        "name": "Uptime Kuma",
+        "description": "Uptime monitoring — service health checks, response times, and availability tracking",
         "version": "1.0.0",
         "source": "builtIn",
-        "category": "safety",
-        "trigger": "toolUsage",
-        "action": "block",
-        "priority": 80
-      },
-      {
-        "catalogID": "cost-cap-session",
-        "name": "Session cost cap",
-        "description": "Blocks agent execution when session cost exceeds the configured limit",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "category": "budget",
-        "trigger": "budgetThreshold",
-        "action": "block",
-        "priority": 99
-      },
-      {
-        "catalogID": "require-tests",
-        "name": "Require test coverage",
-        "description": "Flags code changes that do not include corresponding test updates",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "category": "compliance",
-        "trigger": "contentPattern",
-        "action": "flag",
-        "priority": 50
-      },
-      {
-        "catalogID": "no-main-push",
-        "name": "No direct push to main",
-        "description": "Blocks any git push targeting main or master branches",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "category": "safety",
-        "trigger": "contentPattern",
-        "action": "block",
-        "priority": 95
-      },
-      {
-        "catalogID": "rate-limit-tools",
-        "name": "Tool call rate limit",
-        "description": "Warns when an agent exceeds 100 tool calls per minute",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "category": "safety",
-        "trigger": "rateLimit",
-        "action": "warn",
-        "priority": 60
-      }
-    ],
-    "commands": [
-      {
-        "catalogID": "review-code",
-        "name": "Review Code",
-        "description": "Perform a thorough code review of the current changes — check for bugs, security issues, performance, and style",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Review the current code changes thoroughly. Check for:\n- Bugs and logic errors\n- Security vulnerabilities\n- Performance issues\n- Code style and conventions\n- Missing error handling\n- Test coverage gaps\n\nProvide specific, actionable feedback with file:line references."
-      },
-      {
-        "catalogID": "write-tests",
-        "name": "Write Tests",
-        "description": "Generate comprehensive tests for the current code — unit tests, edge cases, and integration tests",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Write comprehensive tests for the current code. Include:\n- Unit tests for all public functions\n- Edge case tests (null, empty, boundary values)\n- Error path tests\n- Integration tests where appropriate\n\nUse the projects existing test framework and conventions."
-      },
-      {
-        "catalogID": "fix-bug",
-        "name": "Fix Bug",
-        "description": "Analyze and fix the described bug — identify root cause, implement fix, verify with tests",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Analyze the described bug:\n1. Reproduce the issue\n2. Identify the root cause\n3. Implement the minimal fix\n4. Add a regression test\n5. Verify the fix doesnt break existing tests"
-      },
-      {
-        "catalogID": "refactor",
-        "name": "Refactor",
-        "description": "Refactor the specified code — improve structure, reduce duplication, enhance readability",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Refactor the specified code to improve:\n- Code structure and organization\n- Reduce duplication (DRY)\n- Enhance readability and naming\n- Simplify complex logic\n- Extract reusable components\n\nKeep the public API unchanged unless explicitly requested."
-      },
-      {
-        "catalogID": "document",
-        "name": "Document",
-        "description": "Add documentation to the current code — inline comments, docstrings, README updates",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Add comprehensive documentation:\n- Public API docstrings with parameter descriptions\n- Inline comments for complex logic\n- Update README if the public interface changed\n- Add usage examples where helpful\n\nFollow the projects existing documentation style."
-      },
-      {
-        "catalogID": "create-pr",
-        "name": "Create PR",
-        "description": "Create a pull request from the current branch with a summary of changes",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Create a pull request:\n1. Review all commits on this branch\n2. Write a concise PR title (under 70 chars)\n3. Write a description summarizing the changes\n4. Include a test plan\n5. Create the PR using gh cli"
-      },
-      {
-        "catalogID": "security-scan",
-        "name": "Security Scan",
-        "description": "Scan the codebase for security vulnerabilities — OWASP top 10, secrets, insecure patterns",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Perform a security scan of the codebase:\n- Check for OWASP top 10 vulnerabilities\n- Scan for hardcoded secrets, API keys, tokens\n- Identify insecure default configurations\n- Check dependency vulnerabilities\n- Review authentication and authorization logic\n- Flag SQL injection, XSS, command injection risks"
-      },
-      {
-        "catalogID": "explain",
-        "name": "Explain",
-        "description": "Explain the specified code or concept in detail — architecture, data flow, design decisions",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Explain the specified code or concept:\n- What it does and why\n- How the data flows through it\n- Key design decisions and trade-offs\n- Dependencies and interactions\n- Potential gotchas or edge cases"
-      },
-      {
-        "catalogID": "migrate",
-        "name": "Migrate",
-        "description": "Plan and execute a migration — database schema, API version, dependency upgrade",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Plan and execute the migration:\n1. Analyze what needs to change\n2. Create a migration plan with rollback steps\n3. Implement the migration incrementally\n4. Update affected tests\n5. Verify backward compatibility where required"
-      },
-      {
-        "catalogID": "deploy-check",
-        "name": "Deploy Check",
-        "description": "Pre-deployment verification — run tests, check build, verify configs, validate environment",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "cliTarget": "both",
-        "templateContent": "Pre-deployment verification checklist:\n1. Run full test suite\n2. Verify build succeeds\n3. Check for uncommitted changes\n4. Validate configuration files\n5. Review environment variables\n6. Check dependency versions\n7. Verify database migrations are up to date"
+        "provider": "uptimeKuma",
+        "defaultEndpoint": "https://uptime.3olive3.com",
+        "defaultPath": "/api/status-page/heartbeat"
       }
     ]
   },
@@ -2760,19 +2416,16 @@
       "name": "DevOps & Infrastructure",
       "description": "Container orchestration, IaC, monitoring, and automation for production systems.",
       "skillIds": [
-        "build-image",
         "docker-expert",
         "deploy-container",
         "distribute-skill-mcp",
         "terraform-skill",
         "kubernetes-architect",
         "bash-pro",
-        "prometheus-configuration",
-        "observability-skill"
+        "prometheus-configuration"
       ],
       "tags": [
         "docker",
-        "buildkit",
         "kubernetes",
         "terraform",
         "monitoring"
