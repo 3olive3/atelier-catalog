@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-05-22T23:33:40Z",
+  "lastUpdated": "2026-05-24T19:40:19Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 117,
@@ -1080,7 +1080,7 @@
       {
         "catalogID": "dns-sync",
         "name": "DNS Sync & IPAM",
-        "description": "FortiGate → NetBox → Pihole DHCP/DNS synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
+        "description": "FortiGate DHCP → NetBox IPAM → FortiGate DNS Database synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "casa-lima-ops",
@@ -1088,7 +1088,6 @@
           "dns",
           "ipam",
           "netbox",
-          "pihole",
           "dhcp",
           "sync",
           "casa-lima"
@@ -1249,7 +1248,7 @@
       {
         "catalogID": "home-network",
         "name": "Home Network",
-        "description": "Casa Lima network architecture — VLANs, Fortigate firewall, FortiSwitch, FortiAP, DNS (Pihole + Cloudflare), NGINX reverse proxy, and Cloudflare tunnels/Zero Trust.",
+        "description": "Casa Lima network architecture — VLANs, Fortigate firewall (DNS + DHCP authoritative), FortiSwitch, FortiAP, NGINX reverse proxy, and Cloudflare tunnels/Zero Trust.",
         "version": "1.0.0",
         "source": "builtIn",
         "category": "casa-lima-ops",

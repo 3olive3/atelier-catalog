@@ -58,7 +58,7 @@ All alerts and dashboards are organized into five layers. Every new alert or das
 |-------|------|----------|
 | 1 | Infrastructure | Host CPU/memory/disk, SMART, IPMI, Prometheus self-monitoring |
 | 2 | Containers | cAdvisor metrics, container logs, restart loops, OOM kills |
-| 3 | Network | DNS (Pihole), Cloudflare tunnels, WAN, LAN/WiFi, Fortigate security |
+| 3 | Network | DNS (FortiGate), Cloudflare tunnels, WAN, LAN/WiFi, Fortigate security |
 | 4 | Applications | PostgreSQL, Vaultwarden, Plex, Butler Gateway, Atelier Backend |
 | 5 | Smart Home | Homebridge status, response times, memory |
 
@@ -125,7 +125,6 @@ Add to `infra/configs/prometheus/prometheus.yml` under `scrape_configs`:
 | node | node-exporter:9100 | 30s | 1 |
 | cadvisor | cadvisor:8080 | 30s | 2 |
 | postgres | postgres-exporter:9187 | 30s | 4 |
-| pihole | pihole-exporter:9617 | 30s | 3 |
 | loki | tower:3101 | 30s | 1 |
 | promtail | tower:9080 | 30s | 1 |
 | grafana | grafana:3000 | 30s | 4 |
@@ -330,7 +329,7 @@ infra/dashboards/
 │   ├── cadvisor-docker.json
 │   └── loki-container-logs.json
 ├── network/
-│   ├── pihole-dns.json
+│   ├── fortigate-dns.json   # May need rebuilding for FortiGate DNS metrics
 │   ├── cloudflare-analytics.json
 │   ├── fortigate-security.json
 │   ├── fortigate-snmp.json

@@ -83,7 +83,7 @@ DOCKER_BUILDKIT=1 docker build \
 
 | Field | Value |
 |-------|-------|
-| Internal | `registry.3olive3.com` (Pihole CNAME → NGINX → port 5000) |
+| Internal | `registry.3olive3.com` (FortiGate DNS CNAME → NGINX → port 5000) |
 | Direct | `10.1.3.100:5000` |
 | Storage | `/mnt/user/registry/` (array disk, not cache SSD) |
 | Mode | Pull-through cache (Docker Hub) + hosted (local images) |

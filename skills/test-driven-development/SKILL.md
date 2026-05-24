@@ -382,7 +382,7 @@ Changes in shared components affect multiple repos:
 - **AtelierCore** (SPM package): changes affect both macOS app and Vapor backend
 - **BLOK-Shared** (SPM package): changes affect both iOS app and Vapor backend
 - **MCP servers** (atelier-butler): changes affect all repos using that MCP
-- **DNS sync** (IPAM AND DNS): changes affect NetBox, Pihole, FortiGate integration
+- **DNS sync** (IPAM AND DNS): changes affect NetBox and FortiGate DNS Database integration
 
 ### Pre-Merge Checklist
 

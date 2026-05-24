@@ -237,8 +237,11 @@ The script will:
 After deploy, complete the remaining pipeline steps using MCPs:
 
 ```bash
-# DNS: add CNAME in Pihole
-pihole_add_cname(source="my-service.3olive3.com", target="nginx.3olive3.com")
+# DNS: add CNAME in FortiGate DNS Database (zone 3olive3-com, domain 3olive3.com)
+# Dedicated MCP tools are pending — use curl from UNRAID (token in vault item "Fortigate 60F", butler-api user):
+curl -sk -X POST -H "Authorization: Bearer $FG_TOKEN" -H "Content-Type: application/json" \
+  -d '{"hostname":"my-service","type":"CNAME","canonical-name":"nginx.3olive3.com","status":"enable"}' \
+  "https://10.1.1.254/api/v2/cmdb/system/dns-database/3olive3-com/dns-entry"
 
 # Proxy: create NGINX proxy host
 nginx_create_proxy_host(domain="my-service.3olive3.com", upstream="10.1.3.100:8080", ssl=true)

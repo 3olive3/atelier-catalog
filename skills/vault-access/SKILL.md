@@ -81,7 +81,7 @@ docker run --rm -e BW_CLIENTID="<client-id>" \
 | Fortigate | `fortigate` or `firewall` | username + password |
 | iLO | `ilo` or `proliant` | username + password + URI |
 | NGINX Proxy Manager | `nginx` | username + password |
-| Pihole | `pihole` | password (API key in notes) |
+| ~~Pihole~~ (deprecated May 2026 — entry can be archived) | `pihole` | password (API key in notes) |
 | Plex | `plex` | token in notes |
 | UNRAID | `unraid` or `tower` | username + password |
 | Cloudflare | `cloudflare` | API token in password field |
