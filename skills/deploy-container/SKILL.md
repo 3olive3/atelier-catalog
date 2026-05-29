@@ -25,6 +25,38 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 └── configs/                            # Service configs
 ```
 
+## Bind Path Conventions (MANDATORY)
+
+Pick the host-path prefix that matches the share's `useCache` policy. **Wrong prefix triggers the shfs FUSE POSIX-lock bug** (RCA: Incident B 2026-05-26) which can cascade into a system-wide deadlock.
+
+| Share `useCache` | Examples | Required host prefix | Why |
+|---|---|---|---|
+| `only` | `appdata`, `system` | **`/mnt/cache/<share>/`** | Data is guaranteed on cache; using `/mnt/user/...` routes `flock()` through shfs FUSE which has an orphan-lock bug. Going direct to btrfs bypasses it. |
+| `no` | `Media`, `Downloads`, `registry`, `Backups` | **`/mnt/user/<share>/`** | Data lives on the array; `/mnt/cache/<share>` would miss everything. |
+| `prefer` / `yes` | `repos`, `domains` | `/mnt/user/<share>/` (default) | Could spill to array. Only migrate to `/mnt/cache/` if you also change share policy to `useCache=only` AND verify nothing is on `/mnt/disk*/<share>/`. |
+
+**Check a share's policy:** `cat /boot/config/shares/<name>.cfg | grep shareUseCache`
+
+**Common mistake (do NOT do this):**
+```yaml
+container:
+  volumes:
+    - host: /mnt/cache/appdata/my-service   # ❌ WRONG — uses shfs FUSE for flock
+      container: /config
+```
+
+**Correct:**
+```yaml
+container:
+  volumes:
+    - host: /mnt/cache/appdata/my-service  # ✓ direct btrfs, no FUSE
+      container: /config
+```
+
+The same rule applies to `backup.appdata` and to the `Default=` / value attributes in the XML template's `<Config Type="Path">` entries.
+
+**Validation:** `deploy-container.sh` lints the manifest before deploy and aborts with a clear error if it finds a bind to `/mnt/user/<cache-only-share>/`. Run `infra/scripts/audit-bind-paths.sh` periodically to detect drift across all templates + running containers.
+
 ## Primary Deploy Method: `deploy-container.sh`
 
 The script is at `infra/scripts/deploy-container.sh` and lives in the repo at:
@@ -74,7 +106,7 @@ container:
   port: 8080
   network: bridge
   volumes:
-    - host: /mnt/user/appdata/my-service
+    - host: /mnt/cache/appdata/my-service
       container: /config
       mode: rw
   template: templates/my-my-service.xml
@@ -116,7 +148,7 @@ network:
   firewall: []
 
 backup:
-  appdata: /mnt/user/appdata/my-service
+  appdata: /mnt/cache/appdata/my-service
   duplicacy: true
   critical: false
 
@@ -194,9 +226,9 @@ For every secret in `manifest.secrets[]`, the XML **must** have a `Config` entry
     Mode="tcp" Description="Web interface port"
     Type="Port" Display="always" Required="true" Mask="false">8080</Config>
 
-  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/my-service"
+  <Config Name="Config" Target="/config" Default="/mnt/cache/appdata/my-service"
     Mode="rw" Description="Config directory"
-    Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/my-service</Config>
+    Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/appdata/my-service</Config>
 
   <!-- Secrets: value must be __VAULTWARDEN__ — injected at deploy time -->
   <Config Name="API Key" Target="API_KEY" Default=""
@@ -335,3 +367,4 @@ php /tmp/recreate-container.php my-service my-service --dry-run
 - **SSH MCP 30s timeout** — long ops: `setsid /tmp/script.sh &>/dev/null < /dev/null &`
 - **Icon caching** — change URL in XML to force re-download
 - **`docker inspect` exposes secrets** — never output to users
+- **Bind paths matter** — `appdata`/`system` shares (cache-only) **must** use `/mnt/cache/<share>/` prefix. Using `/mnt/user/<share>/` routes through shfs FUSE which has a known POSIX-lock orphan bug that can wedge the entire system. See "Bind Path Conventions" section above.
