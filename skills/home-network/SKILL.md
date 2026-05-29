@@ -1,6 +1,6 @@
 ---
 name: home-network
-description: "Casa Lima network architecture — VLANs, Fortigate firewall, FortiSwitch, FortiAP, DNS (Pihole + Cloudflare), NGINX reverse proxy, and Cloudflare tunnels/Zero Trust."
+description: "Casa Lima network architecture — VLANs, Fortigate firewall (DNS + DHCP authoritative), FortiSwitch, FortiAP, NGINX reverse proxy, and Cloudflare tunnels/Zero Trust."
 ---
 
 # Home Network
@@ -10,11 +10,11 @@ Casa Lima network architecture reference and operational procedures. Covers VLAN
 ## Network Topology
 
 ```
-Internet → Fortigate 61F (HA) → FortiSwitch (x2) → FortiAP-231F (x3)
+Internet → Fortigate 61F (HA, DNS + DHCP authoritative) → FortiSwitch (x2) → FortiAP-231F (x3)
                                       ↓
                               UNRAID (HP DL380 Gen9)
-                              Pihole (DNS)
                               NGINX Proxy Manager
+                              Container fleet
 ```
 
 ## VLAN Architecture
@@ -31,9 +31,8 @@ Internet → Fortigate 61F (HA) → FortiSwitch (x2) → FortiAP-231F (x3)
 ### Key Addressing
 
 - **UNRAID/Tower**: 10.1.3.100 (VLAN 3 / MGT)
-- **Pihole**: 10.1.3.53 (container on UNRAID, VLAN 3)
 - **NGINX Proxy Manager**: 10.10.10.1 (macvlan `br0.10`, VLAN 10 / DMZ) — NOT on atelier-network
-- **Fortigate**: 10.1.1.1 (management)
+- **Fortigate**: 10.1.1.254 (mgmt) / 10.1.3.254 (VLAN 3 gateway + DNS) — authoritative DNS server for `3olive3.com`
 
 ---
 
@@ -91,16 +90,33 @@ Policies control inter-VLAN traffic. Key principle: **deny by default, allow by 
 
 ## DNS Architecture
 
-### Internal (Pihole)
+### Internal (FortiGate DNS Database)
 
-Pihole is the primary DNS for all VLANs. FortiGate DHCP pushes Pihole as DNS server.
+FortiGate is the primary DNS for all VLANs. DHCP scopes push FortiGate's per-interface IP as DNS (`dns-service: default`). The DNS Database zone `3olive3-com` (domain `3olive3.com`, view `shadow`, mode `recursive`) holds all local records.
 
-- **CNAME records**: `service.3olive3.com → nginx.3olive3.com` (most services)
-- **A records**: direct IP mappings for infrastructure
-- `pihole_list_cnames` — view all CNAME records
-- `pihole_add_cname` / `pihole_remove_cname` — manage CNAMEs
-- `pihole_get_dns_stats` — query statistics
-- `pihole_get_upstream_health` — upstream DNS health
+- **CNAME records**: `service.3olive3.com → nginx.3olive3.com` (most services behind NPM)
+- **A records**: direct IP mappings for infrastructure (nginx, tower, unraid, netbox, ilo, game servers)
+- **Upstream**: DoH to `3olive3.cloudflare-gateway.com` (Cloudflare Zero Trust — applies block policies for adult/security categories)
+- **Interfaces serving DNS** (in `system dns-server`): MGT-DEVICES, MGT_NET, Home1_W1, home1, DMZ_SERVERS, DMZ_PUBLIC, fortilink — all `mode: recursive`
+
+#### Managing records
+
+FortiGate REST API (`/api/v2/cmdb/system/dns-database/3olive3-com`) or web UI (Network → DNS Servers → DNS Database). Dedicated MCP tools pending — see task to add `fortigate_*` DNS Database tools.
+
+Until MCP tools land, use curl via UNRAID (token in vault item "Fortigate 60F" / butler-api):
+```bash
+# Add an A record
+curl -sk -X POST -H "Authorization: Bearer $FG_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"hostname":"newservice","type":"A","ip":"10.1.3.100","status":"enable"}' \
+  "https://10.1.1.254/api/v2/cmdb/system/dns-database/3olive3-com/dns-entry"
+
+# Add a CNAME
+curl -sk -X POST -H "Authorization: Bearer $FG_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"hostname":"newservice","type":"CNAME","canonical-name":"nginx.3olive3.com","status":"enable"}' \
+  "https://10.1.1.254/api/v2/cmdb/system/dns-database/3olive3-com/dns-entry"
+```
 
 ### External (Cloudflare)
 
@@ -108,7 +124,14 @@ Domain `3olive3.com` is on Cloudflare. External DNS records for public services.
 
 - `cloudflare_list_dns_records` — view records
 - `cloudflare_create_dns_record` / `cloudflare_update_dns_record` — manage records
-- Most internal services don't need external DNS (Pihole handles `*.3olive3.com` internally)
+- Most internal services don't need external DNS (FortiGate handles `*.3olive3.com` internally for LAN clients)
+
+### Zero Trust DNS Filtering
+
+FortiGate's upstream is the Cloudflare Zero Trust Gateway endpoint `3olive3.cloudflare-gateway.com` (DoH). All non-local queries are filtered by Gateway policies before resolving.
+
+- `cloudflare_list_gateway_rules` — view active DNS policies
+- Manage policies at <https://one.dash.cloudflare.com> → Gateway → Firewall Policies → DNS
 
 ---
 
@@ -116,7 +139,7 @@ Domain `3olive3.com` is on Cloudflare. External DNS records for public services.
 
 All HTTPS services go through NGINX Proxy Manager.
 
-**Traffic flow**: Client → Pihole (CNAME) → NGINX (10.10.10.1, DMZ) → Fortigate policy #50 → Container (10.1.3.100:PORT, MGT)
+**Traffic flow**: Client → FortiGate DNS (CNAME) → NGINX (10.10.10.1, DMZ) → Fortigate policy #50 → Container (10.1.3.100:PORT, MGT)
 
 **IMPORTANT**: NGINX is on macvlan (DMZ VLAN 10), containers are on VLAN 3 (MGT). Every container port must be added to the `3OLIVE3_NGINX_PROXY` Fortigate service group or NGINX gets 504. See `firewall-flows` skill for full details.
 
@@ -170,7 +193,8 @@ Cloudflare Tunnel (`cloudflared`) provides secure external access without exposi
 ## Gotchas
 
 - **Fortigate session table** — old sessions persist after policy changes; may need CLI clear
-- **Pihole CNAME target** — always `nginx.3olive3.com`, not the container IP directly
+- **CNAME target** — always `nginx.3olive3.com`, not the container IP directly (canonical name is on the A record list)
+- **DNS service per interface** — adding records to `dns-database` alone doesn't expose them; the interface must have an entry in `system dns-server` (mode `recursive`) too
 - **VLAN 11 (DMZ)** — macvlan networking, requires Fortigate VIP for port forwarding
 - **Cloudflare proxy (orange cloud)** — hides origin IP but adds latency; disable for internal-only records
 - **FortiAP firmware** — managed by FortiGate; don't update APs independently

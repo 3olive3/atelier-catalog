@@ -1,7 +1,7 @@
 {
   "catalogID": "dns-sync",
   "name": "DNS Sync & IPAM",
-  "description": "FortiGate \u2192 NetBox \u2192 Pihole DHCP/DNS synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
+  "description": "FortiGate DHCP \u2192 NetBox IPAM \u2192 FortiGate DNS Database synchronization pipeline, IP address management via NetBox, and DNS record lifecycle.",
   "version": "1.0.0",
   "source": "builtIn",
   "category": "casa-lima-ops",
@@ -9,7 +9,6 @@
     "dns",
     "ipam",
     "netbox",
-    "pihole",
     "dhcp",
     "sync",
     "casa-lima"

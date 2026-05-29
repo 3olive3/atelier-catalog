@@ -198,7 +198,6 @@ Monthly test restore validates the full backup chain:
 9. Verify key directories exist:
    → ls /mnt/user/appdata/vaultwarden/
    → ls /mnt/user/appdata/nginx-proxy-manager/
-   → ls /mnt/user/appdata/pihole/
    → ls /mnt/user/appdata/Grafana/
 ```
 
@@ -217,7 +216,7 @@ Monthly test restore validates the full backup chain:
 13. Start containers in order:
     - MariaDB/PostgreSQL (databases first)
     - Vaultwarden (secrets needed by others)
-    - Pihole (DNS)
+    - FortiGate is authoritative DNS (off-host, always-on)
     - NGINX Proxy Manager (reverse proxy)
     - Postfix-Relay (email)
     - All remaining containers (from XML templates in Docker tab)
@@ -235,7 +234,7 @@ Monthly test restore validates the full backup chain:
     → docker ps | wc -l (expect 50+)
 
 16. Check critical services:
-    → curl -s http://10.1.2.100/admin → Pihole
+    → dig +short nginx.3olive3.com @10.1.3.254 → FortiGate DNS resolution
     → curl -s http://localhost:81 → NGINX Proxy Manager
     → curl -s http://localhost:3100/api/v1/butler/health → Butler Gateway
     → curl -s https://vault.3olive3.com → Vaultwarden

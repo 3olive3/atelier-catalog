@@ -69,7 +69,7 @@ See `.mcp.json`. Default-enabled: `vaultwarden`. The catalog repo doesn't actual
 ## Gotchas
 
 - Skills and MCPs are **different types** in one manifest — skills are Markdown knowledge modules; MCPs are server configs. Don't conflate when adding entries.
-- 9 skills are tagged `casa-lima-ops` and are **not portable** — they assume a specific home network (VLANs, Fortigate, Pihole, UNRAID, Cloudflare). Treat as operational runbooks.
+- 9 skills are tagged `casa-lima-ops` and are **not portable** — they assume a specific home network (VLANs, Fortigate authoritative DNS for `3olive3.com` with upstream DoH to Cloudflare Zero Trust, UNRAID, Cloudflare). Treat as operational runbooks. (Pi-hole was decommissioned 2026-05; the `pihole` MCP source still exists but is no longer in the DNS path.)
 - `excalidraw-diagram` skill needs Python 3.11+, Playwright 1.40+, Chromium (`uv run playwright install chromium`). Unusual dep.
 - `.json` metadata is what the catalog references; `SKILL.md` is fetched separately by consumers. Updating `SKILL.md` without re-running `build-catalog.py` leaves the catalog version unchanged.
 - `bundles.json` is hand-maintained — no validation that bundle members exist. Renaming or removing a skill can rot a bundle silently.

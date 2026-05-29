@@ -1,5 +1,7 @@
 {
+  "catalogID": "visual-diagram",
   "name": "visual-diagram",
+  "version": "1.0.0",
   "description": "Generate beautiful, illustration-quality diagrams using SVG blueprints + Nano Banana 2. Hand-drawn + digital aesthetic for presentations, docs, and explainers.",
   "type": "skill",
   "source": "casa-lima",

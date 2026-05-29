@@ -25,148 +25,312 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 └── configs/                            # Service configs
 ```
 
-## Pre-requisite: Image Build
+## Bind Path Conventions (MANDATORY)
 
-If the manifest's `build:` field is not null, the image must be built before deploying. Load the **`build-image`** skill first — it covers BuildKit, multi-core parallelism, registry push, tagging, and cache optimization.
+Pick the host-path prefix that matches the share's `useCache` policy. **Wrong prefix triggers the shfs FUSE POSIX-lock bug** (RCA: Incident B 2026-05-26) which can cascade into a system-wide deadlock.
 
-## 10-Step Pipeline
+| Share `useCache` | Examples | Required host prefix | Why |
+|---|---|---|---|
+| `only` | `appdata`, `system` | **`/mnt/cache/<share>/`** | Data is guaranteed on cache; using `/mnt/user/...` routes `flock()` through shfs FUSE which has an orphan-lock bug. Going direct to btrfs bypasses it. |
+| `no` | `Media`, `Downloads`, `registry`, `Backups` | **`/mnt/user/<share>/`** | Data lives on the array; `/mnt/cache/<share>` would miss everything. |
+| `prefer` / `yes` | `repos`, `domains` | `/mnt/user/<share>/` (default) | Could spill to array. Only migrate to `/mnt/cache/` if you also change share policy to `useCache=only` AND verify nothing is on `/mnt/disk*/<share>/`. |
 
-| Step | Action | Tools |
-|------|--------|-------|
-| 1 | **Read manifest** — `atelier-butler/infra/manifests/<layer>/<container>.yml`. Missing = STOP. | Read |
-| 2 | **Drift check** — compare manifest vs running state. Present diff. | `unraid_inspect_container`, `pihole_list_cnames`, `nginx_list_proxy_hosts`, `uptime-kuma_list_monitors` |
-| 3 | **Fetch secrets** — for each `manifest.secrets[]`, get from Vaultwarden. For `shared:` refs, resolve via `stack.yml` `shared_secrets` → vault item + field. Memory only. | `vaultwarden_vault_get_password` |
-| 4 | **Apply container** — write XML template to UNRAID, create container via `xmlToCommand` (see "Creating Managed Containers" below). | `unraid_run_command` |
-| 5 | **Apply DNS + IPAM** — CNAME `service.3olive3.com → nginx.3olive3.com` in Pihole. Macvlan containers: A record instead + register IP in NetBox. | `pihole_add_cname`, `ipam_*` |
-| 6 | **Apply proxy** — create/update NGINX proxy host. SSL forced, block exploits, WebSocket if needed. | `nginx_*` |
-| 7 | **Validate firewall** — READ-ONLY check. Never create/modify — warn user instead. | `fortigate_get_policy` |
-| 8 | **Apply monitoring** — Uptime Kuma monitor (MANDATORY, every container). Prometheus scrape job if `/metrics` exposed. | `uptime-kuma_create_monitor` |
-| 9 | **Health check** — HTTP `curl -sf`, TCP `nc -z`, or skip for headless. | `unraid_run_command` |
-| 10 | **Commit** — export XML, sanitize secrets (`Mask="true"` → `__VAULTWARDEN__`), commit to `atelier-butler` (infra/). | git |
+**Check a share's policy:** `cat /boot/config/shares/<name>.cfg | grep shareUseCache`
 
-## XML Template
+**Common mistake (do NOT do this):**
+```yaml
+container:
+  volumes:
+    - host: /mnt/cache/appdata/my-service   # ❌ WRONG — uses shfs FUSE for flock
+      container: /config
+```
 
-Write to `/boot/config/plugins/dockerMan/templates-user/my-<Name>.xml`:
+**Correct:**
+```yaml
+container:
+  volumes:
+    - host: /mnt/cache/appdata/my-service  # ✓ direct btrfs, no FUSE
+      container: /config
+```
+
+The same rule applies to `backup.appdata` and to the `Default=` / value attributes in the XML template's `<Config Type="Path">` entries.
+
+**Validation:** `deploy-container.sh` lints the manifest before deploy and aborts with a clear error if it finds a bind to `/mnt/user/<cache-only-share>/`. Run `infra/scripts/audit-bind-paths.sh` periodically to detect drift across all templates + running containers.
+
+## Primary Deploy Method: `deploy-container.sh`
+
+The script is at `infra/scripts/deploy-container.sh` and lives in the repo at:
+```
+/mnt/user/repos/atelier-butler/infra/scripts/deploy-container.sh
+```
+
+```bash
+# Deploy (or redeploy) any container:
+bash /mnt/user/repos/atelier-butler/infra/scripts/deploy-container.sh <container-name>
+
+# Skip image pull (useful when image didn't change):
+bash .../deploy-container.sh <container-name> --skip-pull
+
+# Skip post-deploy prune:
+bash .../deploy-container.sh <container-name> --skip-prune
+```
+
+**What the script does (automated 10 steps):**
+1. Resolves container image, manifest, and XML template from the hard-coded table OR the manifest YAML (any container with a manifest works automatically)
+2. Pulls the Docker image (skip with `--skip-pull`)
+3. Reads `secrets:` block from the manifest YAML
+4. Resolves all `vault_item:` secrets from Vaultwarden in **one batch call** (one login, one sync)
+5. Creates a temp XML with secrets injected in place of `__VAULTWARDEN__` placeholders
+6. Recreates the container via UNRAID's `xmlToCommand` PHP pipeline (managed container, UNRAID UI labels)
+7. Applies `casalima.layer`, `casalima.manifest`, `casalima.deployed_at` Docker labels
+8. Health-checks the container (HTTP or Docker status)
+9. Prunes unused images
+
+**Supported containers:** Any container that has a manifest file under `infra/manifests/<layer>/`. The script derives image, template name, and health URL by parsing the manifest YAML. Hard-coded entries (atelier-*, github-runner-*) take precedence.
+
+## Creating a New Container — Full Workflow
+
+### 1. Create the manifest
+
+Create `atelier-butler/infra/manifests/<layer>/<container-name>.yml`:
+
+```yaml
+name: my-service
+stack: <stack-name>
+layer: <infrastructure|applications|media|network|containers|smarthome|gaming>
+ui_folder: <UNRAID UI folder name>
+description: "What this does"
+
+container:
+  image: author/image:tag
+  port: 8080
+  network: bridge
+  volumes:
+    - host: /mnt/cache/appdata/my-service
+      container: /config
+      mode: rw
+  template: templates/my-my-service.xml
+
+configs: []
+
+secrets:
+  - env: API_KEY
+    vault_item: "My Service API Key"   # Exact name of Vaultwarden item
+    field: password                    # password (default) or username
+  - env: ADMIN_PASSWORD
+    vault_item: "My Service Admin"
+
+observability:
+  scrape: none                # or: {job: ..., metrics_path: /metrics, port: 8080}
+  logs: true
+  dashboard: null
+  alerts: []
+  uptime_kuma:
+    monitor_id: null
+
+dns:
+  internal:
+    record: my-service.3olive3.com
+    type: CNAME
+    target: nginx.3olive3.com
+  external: []
+
+proxy:
+  enabled: true
+  domain: my-service.3olive3.com
+  upstream: "10.1.3.100:8080"
+  ssl: force
+  access_list: null
+
+network:
+  vlan: MGT
+  ip: null
+  firewall: []
+
+backup:
+  appdata: /mnt/cache/appdata/my-service
+  duplicacy: true
+  critical: false
+
+cost_center: default
+
+owner:
+  team: casa-lima
+  contact: administrator@3olive3.com
+
+lifecycle:
+  status: active
+  version_pinned: false
+
+tier: 3
+
+docs:
+  home_docs:
+    - server/containers/my-service.md
+  runbook: null
+
+external:
+  public: false
+  cloudflare_tunnel: false
+
+tags: []
+
+health_check:
+  type: http
+  endpoint: "http://localhost:8080/"
+  interval: 30s
+
+resources:
+  cpu_limit: null
+  memory_limit: null
+
+dependencies: []
+startup_order: 50
+```
+
+### 2. Create Vaultwarden items for each secret
+
+For each entry in `secrets:`, the vault item must exist **before** running the deploy script.
+
+```
+vault_item: "My Service API Key"  →  Vaultwarden login item named exactly "My Service API Key"
+                                      password field = the actual API key
+```
+
+Use the `vault-access` skill or the Vaultwarden MCP to create items.
+
+### 3. Write the XML template
+
+Create the XML at `/boot/config/plugins/dockerMan/templates-user/my-<name>.xml` on UNRAID.
+
+For every secret in `manifest.secrets[]`, the XML **must** have a `Config` entry with:
+- `Target="<env-name>"` matching the manifest `env:` key exactly
+- `Mask="true"` (hides value in UNRAID UI)
+- Value set to `__VAULTWARDEN__` (the placeholder the deploy script replaces)
 
 ```xml
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>ServiceName</Name>
-  <Repository>image:tag</Repository>
-  <Network>atelier-network</Network>
+  <Name>my-service</Name>
+  <Repository>author/image:tag</Repository>
+  <Network>bridge</Network>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Overview>Brief description.</Overview>
-  <WebUI>http://[IP]:[PORT:8080]</WebUI>
-  <Icon>https://raw.githubusercontent.com/.../icon.png</Icon>
+  <Overview>What this does</Overview>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <Icon>https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/service.png</Icon>
   <ExtraParams>--restart unless-stopped</ExtraParams>
   <PostArgs/><CPUset/><DateInstalled/>
 
-  <!-- Port: Type="Port" -->
   <Config Name="Web UI Port" Target="8080" Default="8080"
     Mode="tcp" Description="Web interface port"
     Type="Port" Display="always" Required="true" Mask="false">8080</Config>
 
-  <!-- Volume: Type="Path" -->
-  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/servicename"
+  <Config Name="Config" Target="/config" Default="/mnt/cache/appdata/my-service"
     Mode="rw" Description="Config directory"
-    Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/servicename</Config>
+    Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/appdata/my-service</Config>
 
-  <!-- Secret: Type="Variable", Mask="true" -->
+  <!-- Secrets: value must be __VAULTWARDEN__ — injected at deploy time -->
   <Config Name="API Key" Target="API_KEY" Default=""
-    Mode="" Description="API key"
-    Type="Variable" Display="always" Required="false" Mask="true"></Config>
+    Mode="" Description="API key (injected from Vaultwarden)"
+    Type="Variable" Display="always" Required="true" Mask="true">__VAULTWARDEN__</Config>
+
+  <Config Name="Admin Password" Target="ADMIN_PASSWORD" Default=""
+    Mode="" Description="Admin password (injected from Vaultwarden)"
+    Type="Variable" Display="always" Required="true" Mask="true">__VAULTWARDEN__</Config>
+
+  <Config Name="TZ" Target="TZ" Default="Europe/Lisbon"
+    Mode="" Description="Timezone"
+    Type="Variable" Display="always" Required="false" Mask="false">Europe/Lisbon</Config>
 </Container>
 ```
 
-UNRAID auto-injects labels (`net.unraid.docker.managed=dockerman`, icon, webui) and env vars (`TZ`, `HOST_OS`, `HOST_HOSTNAME`, `HOST_CONTAINERNAME`) — but **only** when the container is created through its Docker Manager (see below).
+**Critical:** XML `Target="API_KEY"` must match manifest `env: API_KEY` exactly.
 
-## Creating Managed Containers
+### 4. Add to `stack.yml`
 
-**CRITICAL:** Writing an XML template to disk is NOT enough. A raw `docker run` or `docker create` produces an **unmanaged** container — visible in `docker ps` but invisible/uneditable in the UNRAID web UI. The container MUST be created through UNRAID's Docker Manager so it injects the `net.unraid.docker.managed=dockerman` label and registers the container.
+Add the container to `atelier-butler/infra/stack.yml` under the appropriate stack.
 
-### Method: `xmlToCommand` via PHP script
-
-UNRAID's Docker Manager uses `xmlToCommand()` (in `/usr/local/emhttp/plugins/dynamix.docker.manager/include/Helpers.php`) to convert an XML template into a proper `docker create` command with all required labels and env vars.
-
-Use this helper script via `unraid_run_command`:
+### 5. Deploy
 
 ```bash
-# 1. Write the XML template to UNRAID first:
-#    /boot/config/plugins/dockerMan/templates-user/my-<Name>.xml
-
-# 2. Create and upload the recreate script to /tmp/recreate-container.php:
-cat > /tmp/recreate-container.php << 'PHPEOF'
-<?PHP
-$docroot = '/usr/local/emhttp';
-$_SERVER['DOCUMENT_ROOT'] = $docroot;
-$_SERVER['REQUEST_URI'] = '';
-require_once "$docroot/webGui/include/Wrappers.php";
-require_once "$docroot/plugins/dynamix.docker.manager/include/DockerClient.php";
-require_once "$docroot/webGui/include/publish.php";
-$var = parse_ini_file('/var/local/emhttp/var.ini');
-$DockerClient = new DockerClient();
-$custom = DockerUtil::custom();
-$subnet = DockerUtil::network($custom);
-$cpus = DockerUtil::cpus();
-$containerName = $argv[1] ?? '';
-$dryRun = ($argv[2] ?? '') === '--dry-run';
-if (!$containerName) { echo "Usage: php recreate-container.php <name> [--dry-run]\n"; exit(1); }
-$tmpl = "/boot/config/plugins/dockerMan/templates-user/my-{$containerName}.xml";
-if (!file_exists($tmpl)) { echo "ERROR: Template not found: $tmpl\n"; exit(1); }
-[$cmd, $Name, $Repository] = xmlToCommand($tmpl, !$dryRun);
-if ($dryRun) { echo "DRY RUN: $Name\nCMD: $cmd\n"; exit(0); }
-if ($DockerClient->doesContainerExist($Name)) {
-  $info = $DockerClient->getContainerDetails($Name);
-  if (!empty($info['State']['Running'])) { echo "Stopping $Name...\n"; $DockerClient->stopContainer($Name); }
-  echo "Removing $Name...\n"; $DockerClient->removeContainer($Name);
-}
-$cmd = str_replace('/docker create ', '/docker run -d ', $cmd);
-echo "Creating $Name...\n";
-exec($cmd . ' 2>&1', $output, $retval);
-echo implode("\n", $output) . "\n";
-echo $retval === 0 ? "SUCCESS: $Name recreated.\n" : "ERROR: exit code $retval\n";
-exit($retval);
-PHPEOF
-
-# 3. Dry-run first to verify the generated command:
-php /tmp/recreate-container.php <container-name> --dry-run
-
-# 4. Execute for real:
-php /tmp/recreate-container.php <container-name>
+bash /mnt/user/repos/atelier-butler/infra/scripts/deploy-container.sh my-service
 ```
 
-### What `xmlToCommand` generates
+The script will:
+- Auto-detect the manifest from `infra/manifests/<layer>/my-service.yml`
+- Resolve all secrets from Vaultwarden in one batch
+- Inject secrets into a temp XML
+- Recreate the container as managed (UNRAID UI visible + labeled)
+- Health-check and report
 
-From the XML template, it produces a `docker create` command that includes:
-- `--name`, `--net`, `--pids-limit 2048`
-- `-e TZ=... -e HOST_OS=Unraid -e HOST_HOSTNAME=... -e HOST_CONTAINERNAME=...`
-- `-l net.unraid.docker.managed=dockerman` (UNRAID UI management label)
-- `-l net.unraid.docker.webui=...` (WebUI link in UNRAID dashboard)
-- `-l net.unraid.docker.icon=...` (icon in UNRAID dashboard)
-- All ports (`-p`), volumes (`-v`), env vars (`-e`), and `ExtraParams`
+### 6. Apply DNS, proxy, monitoring (manual steps)
 
-### Renaming a container
-
-When renaming, you MUST re-create through the Docker Manager — `docker rename` does NOT update labels:
-1. Write the new XML template (with the new `<Name>`)
-2. Run the recreate script for the new name (it stops+removes the old, creates the new)
-3. Delete the old XML template: `rm /boot/config/plugins/dockerMan/templates-user/my-<OldName>.xml`
-
-### Verifying management status
+After deploy, complete the remaining pipeline steps using MCPs:
 
 ```bash
-# Check if a container is managed by UNRAID:
-docker inspect --format '{{index .Config.Labels "net.unraid.docker.managed"}}' <name>
-# Should return: dockerman
+# DNS: add CNAME in FortiGate DNS Database (zone 3olive3-com, domain 3olive3.com)
+# Dedicated MCP tools are pending — use curl from UNRAID (token in vault item "Fortigate 60F", butler-api user):
+curl -sk -X POST -H "Authorization: Bearer $FG_TOKEN" -H "Content-Type: application/json" \
+  -d '{"hostname":"my-service","type":"CNAME","canonical-name":"nginx.3olive3.com","status":"enable"}' \
+  "https://10.1.1.254/api/v2/cmdb/system/dns-database/3olive3-com/dns-entry"
+
+# Proxy: create NGINX proxy host
+nginx_create_proxy_host(domain="my-service.3olive3.com", upstream="10.1.3.100:8080", ssl=true)
+
+# Monitoring: create Uptime Kuma monitor
+uptime_kuma_create_monitor(name="My Service (description)", url="https://my-service.3olive3.com", interval=60)
 ```
+
+### 7. Commit sanitized XML to git
+
+```bash
+# On UNRAID: export + sanitize
+bash /mnt/user/repos/atelier-butler/infra/scripts/export-templates.sh
+bash /mnt/user/repos/atelier-butler/infra/scripts/sanitize-templates.sh
+
+# On dev machine: commit
+cd ~/Developer/atelier-butler
+git add infra/templates/my-my-service.xml infra/manifests/
+git commit -m "feat(infra): add my-service container"
+```
+
+### 8. Create docs page
+
+`home-docs/docs/server/containers/my-service.md` — update `mkdocs.yml` nav, trigger sync.
+
+## Secrets Reference
+
+| Manifest key | Deploy behavior |
+|---|---|
+| `vault_item: "Name"` + `field: password` | Fetches password field from Vaultwarden item "Name" |
+| `vault_item: "Name"` + `field: username` | Fetches username field from Vaultwarden item "Name" |
+| `value: "literal"` | Injects literal value (non-secret, convenience only) |
+| `shared: companion_jwt.secret` | ⚠️ Not yet implemented — skipped with WARN |
+
+All `vault_item:` entries are resolved in a **single Vaultwarden session** (one login, one sync), regardless of how many secrets the manifest declares. Item names must match exactly (case-insensitive search).
+
+The script fails if a `vault_item:` entry does not exist in Vaultwarden. Create the item first.
+
+## Shared Secrets (`stack.yml`)
+
+Some secrets are shared across containers (e.g., `BUTLER_JWT_SECRET`, `COMPANION_JWT_SECRET`). They are defined once in `infra/stack.yml` under `shared_secrets:`:
+
+```yaml
+shared_secrets:
+  companion_jwt:
+    vault_item: "Butler JWT Secret"
+    field: password
+```
+
+In manifests: `shared: companion_jwt.secret` (format: `<key>.<field>`). **Note:** `shared:` resolution is not yet implemented in `deploy-container.sh` — it logs a warning and skips. For now, reference vault directly with `vault_item:`.
 
 ## Monitoring Requirements
 
 Every container gets an Uptime Kuma monitor:
 
 | Container Type | Monitor Type | Target |
-|---------------|-------------|--------|
+|---|---|---|
 | Web UI / API | HTTP(s) | `https://service.3olive3.com` |
 | Database | TCP Port | `10.1.3.100:PORT` |
 | Headless / Cron | Docker Container | container name, docker host #1 |
@@ -174,33 +338,33 @@ Every container gets an Uptime Kuma monitor:
 
 Naming: `Service Name (Description)`. Interval: 60s HTTP/TCP, 120s Docker.
 
-**Logs (automatic):** Promtail collects all container logs via Docker service discovery — no per-container config needed.
-
-**Alerting:** Uptime Kuma notifications handle availability alerts (globally configured). For critical services that need custom alerts (error rate, resource exhaustion, SLO breaches), add Alertmanager rules in `atelier-butler/infra/configs/alertmanager/`.
-
-## New Container Checklist
-
-1. Create manifest in `atelier-butler/infra/manifests/<layer>/`
-2. Add to `stack.yml`
-3. Create Vaultwarden entries for secrets (or use `shared:` refs from `stack.yml` `shared_secrets`)
-4. Run pipeline (steps 1-10)
-5. Verify Uptime Kuma monitor exists
-6. Create docs page: `home-docs/docs/server/containers/<name>.md`
-7. Update `mkdocs.yml` nav
-8. Trigger MkDocs sync: `unraid_run_command` → `/mnt/user/appdata/mkdocs-sync.sh`
-
 ## Removing a Container
 
 1. Set `lifecycle.status: sunset` in manifest
-2. Run pipeline — stops container, removes DNS, disables proxy, pauses monitor
-3. Move manifest to `legacy/`
+2. Stop and remove container, remove DNS CNAME, disable proxy host, pause Uptime Kuma monitor
+3. Move manifest to `legacy/` directory
+
+## Low-Level: Manual `xmlToCommand` (fallback)
+
+Use this only when `deploy-container.sh` is unavailable or for troubleshooting. The script calls this internally.
+
+```bash
+# The script is auto-created at /tmp/recreate-container.php by deploy-container.sh
+# To invoke manually:
+php /tmp/recreate-container.php <TemplateName> <ManifestName> [--dry-run] [/path/to/xml-override]
+
+# Example dry-run to preview the docker command:
+php /tmp/recreate-container.php my-service my-service --dry-run
+```
 
 ## Gotchas
 
-- **`docker run` = unmanaged** — never use raw `docker run`/`docker create`. Always use `xmlToCommand` via the PHP script above. Unmanaged containers are invisible in UNRAID UI and lose edit/update/restart capability from the dashboard.
+- **`docker run` = unmanaged** — never use raw `docker run`/`docker create`. Always use `xmlToCommand` via the deploy script. Unmanaged containers are invisible in UNRAID UI and lose edit/update/restart capability.
+- **`__VAULTWARDEN__` must be in XML** — if you add a `secrets:` entry to the manifest but forget the `Target="ENV_NAME"` placeholder in the XML, the secret is resolved from Vaultwarden but silently not injected (no XML match = no replacement).
+- **Vault item name must be exact** — `vault_item: "My Service"` fails if the Vaultwarden item is named `"My service"` (case-insensitive match, but substring won't work).
 - **`docker rename` = still unmanaged** — renaming doesn't update labels. Must stop, remove, and re-create from XML.
 - **No python3 on UNRAID** — use `jq`, `sed`, `awk`
 - **SSH MCP 30s timeout** — long ops: `setsid /tmp/script.sh &>/dev/null < /dev/null &`
 - **Icon caching** — change URL in XML to force re-download
-- **Bind mount ownership** — check expected UID (e.g., `node` = 1000)
 - **`docker inspect` exposes secrets** — never output to users
+- **Bind paths matter** — `appdata`/`system` shares (cache-only) **must** use `/mnt/cache/<share>/` prefix. Using `/mnt/user/<share>/` routes through shfs FUSE which has a known POSIX-lock orphan bug that can wedge the entire system. See "Bind Path Conventions" section above.

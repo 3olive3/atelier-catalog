@@ -20,9 +20,10 @@ NGINX Proxy Manager runs on a **macvlan** network (`br0.10`) with its own IP on 
 ```
 Client (VLAN 6: 10.1.6.0/24)
   │
-  ├─ DNS query ──► Pihole (10.1.3.53)
+  ├─ DNS query ──► FortiGate (10.1.3.254)
   │                returns CNAME: service.3olive3.com → nginx.3olive3.com
   │                nginx.3olive3.com → 10.10.10.1
+  │                (served from FortiGate `system dns-database` zone `3olive3-com`)
   │
   ├─ HTTPS ──► NGINX Proxy Manager (10.10.10.1, VLAN 10 DMZ, macvlan br0.10)
   │             │
@@ -44,7 +45,7 @@ Client (VLAN 6: 10.1.6.0/24)
 |-----------|-----|------|-------------|
 | NGINX Proxy Manager | 10.10.10.1 | 10 (DMZ) | macvlan `br0.10` |
 | UNRAID / Tower | 10.1.3.100 | 3 (MGT/Servers) | host |
-| Pihole | 10.1.3.53 | 3 (MGT/Servers) | container |
+| FortiGate VLAN 3 gateway (authoritative DNS) | 10.1.3.254 | 3 (MGT/Servers) | firewall interface |
 | Containers (atelier-network) | 172.19.0.X | — | Docker bridge |
 
 **NGINX is NOT on `atelier-network`.** It cannot reach containers by Docker hostname or bridge IP. It must go through the host-mapped port on `10.1.3.100`, which means traffic crosses VLANs via the Fortigate.
@@ -145,4 +146,3 @@ When NGINX returns 504 Gateway Timeout for a new service:
 - **`fortigate_update_service_group` replaces members** — always fetch current list first, append your new service, then update. Missing this drops all other services.
 - **Policy changes are WRITE operations** — always present to the user and get explicit confirmation before executing.
 - **Port 80/443 (HTTP/HTTPS) are already allowed** — the base policy includes HTTP and HTTPS service objects. Only non-standard ports need a service object.
-- **Pihole MCP `pihole_add_cname` is unreliable for Pihole v6** — verify the record actually exists in `/etc/pihole/pihole.toml` after adding. If missing, edit the file directly inside the `Pihole-v6` container.
