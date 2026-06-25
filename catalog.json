@@ -1689,22 +1689,24 @@
         "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/test-driven-development/SKILL.md"
       },
       {
-        "catalogID": "ui-ux-designer",
-        "name": "UI/UX Designer",
-        "description": "Interface design, wireframes, design systems — user research, accessibility, and modern design tools.",
-        "version": "1.0.0",
-        "source": "builtIn",
+        "catalogID": "ui-ux-pro-max",
+        "name": "UI/UX Pro Max",
+        "description": "UI/UX design intelligence engine — 67 styles, 161 palettes, 57 font pairings, 161 product types, 99 UX guidelines, 25 chart types across 10 stacks. Searchable databases + design-system generator.",
+        "version": "2.8.1",
+        "source": "community",
         "category": "design",
         "tags": [
           "design",
           "ux",
           "ui",
-          "accessibility"
+          "accessibility",
+          "color-palette",
+          "typography"
         ],
-        "author": "Antigravity",
+        "author": "nextlevelbuilder",
         "license": "MIT",
-        "sourceURL": "https://github.com/sickn33/antigravity-awesome-skills",
-        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/ui-ux-designer/SKILL.md"
+        "sourceURL": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/ui-ux-pro-max/SKILL.md"
       },
       {
         "catalogID": "vault-access",
@@ -2435,7 +2437,7 @@
       "name": "Design & UX",
       "description": "UI/UX design, mobile design patterns, and frontend visual design.",
       "skillIds": [
-        "ui-ux-designer",
+        "ui-ux-pro-max",
         "frontend-design",
         "mobile-design"
       ],
