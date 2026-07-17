@@ -12,7 +12,7 @@ description: "Build Docker images on UNRAID — BuildKit, multi-core parallelism
 1. **BuildKit ON** — always `DOCKER_BUILDKIT=1`. The old "BuildKit crashes on UNRAID" issue is resolved.
 2. **Manifest is source of truth** — every locally-built image has a `build:` section in its manifest at `atelier-butler/infra/manifests/<layer>/<container>.yml`. Read it first.
 3. **Tag must match manifest** — `container.image` in the manifest = the tag you build. XML `<Repository>` must match exactly.
-4. **Push local images to registry** — any image built on UNRAID (not from Docker Hub/GHCR) must be pushed to `registry.3olive3.com` so it survives weekly cleanup.
+4. **Push local images to registry** — any image built on UNRAID (not from Docker Hub/GHCR) must be pushed to `localhost:5000` so it survives daily cleanup.
 5. **No secrets in build args** — use multi-stage builds or runtime env vars instead.
 6. **Present the plan** before executing.
 
@@ -35,13 +35,13 @@ build:
 
 | Container | Image | Context | Base |
 |-----------|-------|---------|------|
-| atelier-butler | `atelier-butler:latest` | `/mnt/user/repos/atelier-butler` | `node:22-bookworm-slim` |
-| atelier-butler-console | `atelier-butler-console:latest` | `/mnt/user/repos/atelier-butler` | `node:22-bookworm-slim` |
-| atelier-backend | `ghcr.io/3olive3/atelier-backend:latest` | `/mnt/user/repos/atelier` | `swift:6.0-jammy` |
-| atelier-sentinel | `atelier-sentinel:latest` | `/mnt/user/repos/atelier` | `swift:6.0-jammy` |
-| netbox-dhcp-sync | `netbox-dhcp-sync:latest` | `.../infra/services/netbox-dhcp-sync` | `python:3-alpine` |
+| atelier-butler | `localhost:5000/atelier-butler:latest` | `/mnt/user/repos/atelier-butler` | `node:22-bookworm-slim` |
+| atelier-butler-console | `localhost:5000/atelier-butler-console:latest` | `/mnt/user/repos/atelier-butler` | `node:22-bookworm-slim` |
+| atelier-backend | `localhost:5000/atelier-backend:latest` | `/mnt/user/repos/atelier` | `swift:6.0-jammy` |
+| atelier-sentinel | `localhost:5000/atelier-sentinel:latest` | `/mnt/user/repos/atelier` | `swift:6.0-jammy` |
+| netbox-dhcp-sync | `localhost:5000/netbox-dhcp-sync:dev` | `.../infra/services/netbox-dhcp-sync` | `python:3-alpine` |
 
-All other 57 containers use `build: null` — pulled from Docker Hub or GHCR.
+All other containers use `build: null` — pulled from Docker Hub or GHCR.
 
 ## Build Environments
 
@@ -63,7 +63,7 @@ DOCKER_BUILDKIT=1 docker build \
   --cpu-period=100000 --cpu-quota=2000000 \
   -f <dockerfile> \
   -t <container.image> \
-  -t registry.3olive3.com/<image>:latest \
+  -t localhost:5000/<image>:latest \
   <context>
 ```
 
@@ -73,11 +73,11 @@ DOCKER_BUILDKIT=1 docker build \
 
 | Scenario | Tag | Example |
 |----------|-----|---------|
-| Latest build | `latest` | `registry.3olive3.com/atelier-butler:latest` |
-| Git SHA | short SHA | `registry.3olive3.com/atelier-butler:ac41ef1` |
-| Semver release | `vX.Y.Z` | `registry.3olive3.com/atelier-butler:v1.2.0` |
+| Latest build | `latest` | `localhost:5000/atelier-butler:latest` |
+| Git SHA | short SHA | `localhost:5000/atelier-butler:ac41ef1` |
+| Semver release | `vX.Y.Z` | `localhost:5000/atelier-butler:v1.2.0` |
 
-**Always double-tag:** the manifest's `container.image` (for local `xmlToCommand`) + `registry.3olive3.com/<image>:latest` (for registry persistence).
+**Always double-tag:** the manifest's `container.image` (for local `xmlToCommand`) + `localhost:5000/<image>:latest` (for registry persistence).
 
 ## Local Registry
 
@@ -93,10 +93,10 @@ DOCKER_BUILDKIT=1 docker build \
 
 ```bash
 # Push after build:
-docker push registry.3olive3.com/<image>:<tag>
+docker push localhost:5000/<image>:<tag>
 
 # Pull (Docker Hub mirrors are automatic via daemon config):
-docker pull registry.3olive3.com/<image>:<tag>
+docker pull localhost:5000/<image>:<tag>
 ```
 
 ## Long Build Pattern (SSH Timeout)
@@ -114,9 +114,11 @@ DOCKER_BUILDKIT=1 docker build \
   --cpu-period=100000 --cpu-quota=2000000 \
   -f <dockerfile> \
   -t <container.image> \
-  -t registry.3olive3.com/<image>:latest \
+  -t localhost:5000/<image>:latest \
   <context> >> "$LOG" 2>&1
-docker push registry.3olive3.com/<image>:latest >> "$LOG" 2>&1
+docker push localhost:5000/<image>:latest >> "$LOG" 2>&1
+# Prune dangling images left by the build (old <none> layers)
+docker image prune -f >> "$LOG" 2>&1
 echo "Build finished: $(date)" >> "$LOG"
 BUILDEOF
 chmod +x /tmp/build-<image>.sh
@@ -208,11 +210,11 @@ COPY --from=builder /usr/local/bin/MyApp /usr/local/bin/MyApp
 
 | Event | What happens |
 |-------|-------------|
-| Build completes | Push to `registry.3olive3.com` + tag locally for `xmlToCommand` |
-| Weekly cleanup (Sun 2AM) | `docker image prune -a --filter until=168h` — removes unused >7d |
-| Registry GC (weekly) | Garbage collection reclaims blob storage |
+| Build completes | Push to `localhost:5000` + tag locally for `xmlToCommand` |
+| Post-build | `docker image prune -f` (dangling only, NOT `-a`) — removes orphan `<none>` images |
+| Daily cleanup (2AM) | `docker image prune -a --filter until=168h` — removes unused >7d |
+| Registry GC (weekly Sun) | Garbage collection reclaims blob storage |
 | Diun watch (6h) | Detects upstream updates for pulled images |
-| Post-build | `docker image prune -f` (dangling only, NOT `-a`) |
 
 ## Chaining with deploy-container
 
