@@ -1,0 +1,29 @@
+{
+  "catalogID": "homebridge",
+  "name": "Homebridge",
+  "description": "Homebridge smart home control — accessory listing, characteristic control, bridge management, plugin config, and system monitoring via REST API. Manages what Homebridge bridges into HomeKit; does not talk to Apple's HomeKit framework directly (renamed from 'homekit' 2026-08 for accuracy).",
+  "version": "2.0.0",
+  "source": "builtIn",
+  "transport": "stdio",
+  "command": "node",
+  "args": [
+    "dist/index.js"
+  ],
+  "env": {
+    "HOMEBRIDGE_URL": "",
+    "HOMEBRIDGE_USERNAME": "",
+    "HOMEBRIDGE_PASSWORD": ""
+  },
+  "category": "core",
+  "toolCount": 14,
+  "runtime": "node",
+  "tags": [
+    "smart-home",
+    "homebridge",
+    "iot",
+    "automation"
+  ],
+  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/homebridge-2.0.0.tar.gz",
+  "size": "30KB",
+  "checksum": "sha256:placeholder"
+}

@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-05-29T13:11:27Z",
+  "lastUpdated": "2026-08-11T21:52:12Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 117,
+  "totalEntries": 115,
   "types": {
     "guardrails": [
       {
@@ -373,9 +373,9 @@
         "checksum": "sha256:placeholder"
       },
       {
-        "catalogID": "homekit",
-        "name": "HomeKit",
-        "description": "Homebridge smart home control — accessory listing, characteristic control, bridge management, plugin config, and system monitoring via REST API",
+        "catalogID": "homebridge",
+        "name": "Homebridge",
+        "description": "Homebridge smart home control — accessory listing, characteristic control, bridge management, plugin config, and system monitoring via REST API. Manages what Homebridge bridges into HomeKit; does not talk to Apple's HomeKit framework directly (renamed from 'homekit' 2026-08 for accuracy).",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -389,7 +389,7 @@
           "HOMEBRIDGE_PASSWORD": ""
         },
         "category": "core",
-        "toolCount": 13,
+        "toolCount": 14,
         "runtime": "node",
         "tags": [
           "smart-home",
@@ -397,7 +397,7 @@
           "iot",
           "automation"
         ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/homekit-2.0.0.tar.gz",
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/homebridge-2.0.0.tar.gz",
         "size": "30KB",
         "checksum": "sha256:placeholder"
       },
@@ -492,9 +492,9 @@
         "checksum": "sha256:placeholder"
       },
       {
-        "catalogID": "media-stack",
-        "name": "Media Stack",
-        "description": "Unified media automation — Sonarr (TV series), Radarr (movies), and SABnzbd (downloads) management with queue monitoring and health checks via REST APIs",
+        "catalogID": "media",
+        "name": "Media",
+        "description": "Unified media platform — Sonarr (TV series), Radarr (movies), SABnzbd (downloads), Plex (library browsing, search, metadata, playback sessions, playlists), and Overseerr (requests, approvals, user quotas) via REST APIs. Merged 2026-08 from the separate media-stack, plex, and overseerr servers.",
         "version": "2.0.0",
         "source": "builtIn",
         "transport": "stdio",
@@ -508,20 +508,28 @@
           "RADARR_URL": "",
           "RADARR_API_KEY": "",
           "SABNZBD_URL": "",
-          "SABNZBD_API_KEY": ""
+          "SABNZBD_API_KEY": "",
+          "PLEX_URL": "",
+          "PLEX_TOKEN": "",
+          "OVERSEERR_URL": "",
+          "OVERSEERR_API_KEY": ""
         },
         "category": "media",
-        "toolCount": 27,
+        "toolCount": 53,
         "runtime": "node",
         "tags": [
           "media",
           "automation",
           "sonarr",
           "radarr",
-          "sabnzbd"
+          "sabnzbd",
+          "plex",
+          "streaming",
+          "overseerr",
+          "requests"
         ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-stack-2.0.0.tar.gz",
-        "size": "45KB",
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-2.0.0.tar.gz",
+        "size": "95KB",
         "checksum": "sha256:placeholder"
       },
       {
@@ -623,33 +631,6 @@
         "checksum": "sha256:placeholder"
       },
       {
-        "catalogID": "overseerr",
-        "name": "Overseerr",
-        "description": "Overseerr media requests — search, movie/TV details, request management, approval workflows, user quotas, and health monitoring via REST API",
-        "version": "2.0.0",
-        "source": "builtIn",
-        "transport": "stdio",
-        "command": "node",
-        "args": [
-          "dist/index.js"
-        ],
-        "env": {
-          "OVERSEERR_URL": "",
-          "OVERSEERR_API_KEY": ""
-        },
-        "category": "media",
-        "toolCount": 13,
-        "runtime": "node",
-        "tags": [
-          "media",
-          "requests",
-          "automation"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/overseerr-2.0.0.tar.gz",
-        "size": "28KB",
-        "checksum": "sha256:placeholder"
-      },
-      {
         "catalogID": "pihole",
         "name": "Pi-hole",
         "description": "Pi-hole DNS management — CNAME records, ad-blocking, domain blocking, client stats, and upstream health via SSH + docker exec",
@@ -680,33 +661,6 @@
         ],
         "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/pihole-2.0.0.tar.gz",
         "size": "25KB",
-        "checksum": "sha256:placeholder"
-      },
-      {
-        "catalogID": "plex",
-        "name": "Plex",
-        "description": "Plex Media Server — library browsing, search, metadata, on-deck, playlists, active sessions, and library scanning via REST API",
-        "version": "2.0.0",
-        "source": "builtIn",
-        "transport": "stdio",
-        "command": "node",
-        "args": [
-          "dist/index.js"
-        ],
-        "env": {
-          "PLEX_URL": "",
-          "PLEX_TOKEN": ""
-        },
-        "category": "media",
-        "toolCount": 13,
-        "runtime": "node",
-        "tags": [
-          "media",
-          "streaming",
-          "library"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/plex-2.0.0.tar.gz",
-        "size": "30KB",
         "checksum": "sha256:placeholder"
       },
       {
