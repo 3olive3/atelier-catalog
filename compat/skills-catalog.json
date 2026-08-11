@@ -1,6 +1,6 @@
 {
   "version": "1.3.0",
-  "lastUpdated": "2026-08-11T21:52:12Z",
+  "lastUpdated": "2026-08-11T23:48:12Z",
   "skills": [
     {
       "id": "api-design-principles",
@@ -497,23 +497,6 @@
       ],
       "category": "design",
       "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/mobile-design/SKILL.md"
-    },
-    {
-      "id": "n8n-workflows",
-      "name": "n8n Workflows",
-      "version": "1.0.0",
-      "description": "Guide for triggering and monitoring n8n workflows — video assembly, publishing, and multi-step external service orchestration.",
-      "author": "Atelier",
-      "license": "MIT",
-      "sourceURL": "https://github.com/3olive3/atelier-catalog",
-      "tags": [
-        "content-factory",
-        "n8n",
-        "workflows",
-        "automation"
-      ],
-      "category": "ai-agent",
-      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/n8n-workflows/SKILL.md"
     },
     {
       "id": "notebooklm-content",
