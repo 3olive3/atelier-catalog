@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-08-11T23:48:12Z",
+  "lastUpdated": "2026-08-14T11:56:42Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 114,
+  "totalEntries": 113,
   "types": {
     "guardrails": [
       {
@@ -628,39 +628,6 @@
         ],
         "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/prometheus-3.0.0.tar.gz",
         "size": "60KB",
-        "checksum": "sha256:placeholder"
-      },
-      {
-        "catalogID": "pihole",
-        "name": "Pi-hole",
-        "description": "Pi-hole DNS management — CNAME records, ad-blocking, domain blocking, client stats, and upstream health via SSH + docker exec",
-        "version": "2.0.0",
-        "source": "builtIn",
-        "transport": "stdio",
-        "command": "node",
-        "args": [
-          "dist/index.js"
-        ],
-        "env": {
-          "UNRAID_HOST": "",
-          "UNRAID_PORT": "",
-          "UNRAID_USER": "",
-          "UNRAID_PASSWORD": "",
-          "PIHOLE_CONTAINER": "",
-          "PIHOLE_API_HOST": "",
-          "PIHOLE_API_PASSWORD": ""
-        },
-        "category": "core",
-        "toolCount": 10,
-        "runtime": "node",
-        "tags": [
-          "infrastructure",
-          "dns",
-          "ad-blocking",
-          "network"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/pihole-2.0.0.tar.gz",
-        "size": "25KB",
         "checksum": "sha256:placeholder"
       },
       {

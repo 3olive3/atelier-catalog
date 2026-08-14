@@ -263,7 +263,7 @@ Monthly test restore validates the full backup chain:
     → Upload to Fortigate via System → Configuration → Restore
 
 21. If DNS records lost:
-    → Pihole config is in appdata backup (auto-restored)
+    → FortiGate DNS Database is authoritative — Unimus has the latest config backup (see step 20)
     → Cloudflare DNS managed via API (unchanged by server failure)
 ```
 
