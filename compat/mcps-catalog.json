@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-08-11T23:48:12Z",
+  "lastUpdated": "2026-08-14T11:56:42Z",
   "mcps": [
     {
       "id": "cloudflare",
@@ -221,24 +221,6 @@
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/prometheus-3.0.0.tar.gz",
       "size": "60KB",
-      "checksum": "sha256:placeholder"
-    },
-    {
-      "id": "pihole",
-      "name": "Pi-hole",
-      "version": "2.0.0",
-      "description": "Pi-hole DNS management — CNAME records, ad-blocking, domain blocking, client stats, and upstream health via SSH + docker exec",
-      "toolCount": 10,
-      "runtime": "node",
-      "transport": "stdio",
-      "tags": [
-        "infrastructure",
-        "dns",
-        "ad-blocking",
-        "network"
-      ],
-      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/pihole-2.0.0.tar.gz",
-      "size": "25KB",
       "checksum": "sha256:placeholder"
     },
     {
