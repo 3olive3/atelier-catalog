@@ -80,6 +80,14 @@ python3 scripts/build-catalog.py
 - Skills shape *behaviour*, never *access*. Giving an agent a `deploy-container` skill it has no tools for teaches conventions it cannot act on — capability is governed by the Gatekeeper.
 - Distribute changes with the `distribute-skill-mcp` skill so all consumers stay in sync.
 
+## Skills installed
+
+Available via the skill tool — this repo is the source of truth, so `.claude/skills/` here symlinks back to `skills/` in the same repo rather than to another one.
+
+**Casa Lima mandatory** (every repo): `vault-access`, `build-image`, `deploy-container`, `incidents-methodology`, `distribute-skill-mcp`, `home-network`, `bash-pro`, `git-advanced-workflows`, `systematic-debugging`, `security-review`.
+
+**This repo also has**: `architecture-decision-records`, `mcp-builder`, `skill-creator`.
+
 ## Gotchas
 
 - **Skills and MCPs are different types** in one manifest — don't conflate when adding entries.
