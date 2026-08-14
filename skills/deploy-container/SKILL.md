@@ -75,8 +75,20 @@ bash .../deploy-container.sh <container-name> --skip-pull
 bash .../deploy-container.sh <container-name> --skip-prune
 ```
 
+!!! danger "Editing an EXISTING container's XML in git does NOT reach the deploy — read this first"
+    `deploy-container.sh` reads the XML template **exclusively** from `/boot/config/plugins/dockerMan/templates-user/my-<name>.xml` — never from the git-tracked `infra/templates/*.xml` copy, regardless of what the manifest's `template:` field says. The git copy is a one-way **export mirror** (via `export-templates.sh` + `sanitize-templates.sh`, boot → git), not a source the deploy script reads from.
+
+    If you edit `infra/templates/*.xml` in a PR (adding a `Config` entry, changing a mount, etc.) and merge it, running `deploy-container.sh` **will silently deploy against the old, unedited boot XML** — no error, no warning, the new fields just never materialize as bind mounts/env vars. Confirmed live 2026-08-14: PR #185 added a `tokens.json` bind mount to the git template; the first deploy after merging silently omitted it because the boot XML was never updated to match.
+
+    **Before deploying a merged XML template change**, sync it to the boot path first:
+    ```bash
+    cp /mnt/user/repos/atelier-butler/infra/templates/my-<name>.xml \
+       /boot/config/plugins/dockerMan/templates-user/my-<name>.xml
+    ```
+    Then run `deploy-container.sh <name>` as normal. Verify the fix actually landed by checking the container's real bind mounts/env afterward (`docker inspect <name>`), not just that the script printed `SUCCESS`.
+
 **What the script does (automated 10 steps):**
-1. Resolves container image, manifest, and XML template from the hard-coded table OR the manifest YAML (any container with a manifest works automatically)
+1. Resolves container image, manifest, and XML **from the live boot-config path** (see warning above) OR the hard-coded table / manifest YAML for image+manifest lookup (any container with a manifest works automatically)
 2. Pulls the Docker image (skip with `--skip-pull`)
 3. Reads `secrets:` block from the manifest YAML
 4. Resolves all `vault_item:` secrets from Vaultwarden in **one batch call** (one login, one sync)
@@ -367,4 +379,5 @@ php /tmp/recreate-container.php my-service my-service --dry-run
 - **SSH MCP 30s timeout** — long ops: `setsid /tmp/script.sh &>/dev/null < /dev/null &`
 - **Icon caching** — change URL in XML to force re-download
 - **`docker inspect` exposes secrets** — never output to users
+- **Git template edits don't reach the deploy without a manual sync** — see the danger box under "Primary Deploy Method" above. `deploy-container.sh` always reads XML from `/boot/config/plugins/dockerMan/templates-user/`, never from `infra/templates/*.xml` directly. Editing-and-merging a template PR alone is not enough.
 - **Bind paths matter** — `appdata`/`system` shares (cache-only) **must** use `/mnt/cache/<share>/` prefix. Using `/mnt/user/<share>/` routes through shfs FUSE which has a known POSIX-lock orphan bug that can wedge the entire system. See "Bind Path Conventions" section above.

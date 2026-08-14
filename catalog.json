@@ -962,8 +962,8 @@
       {
         "catalogID": "deploy-container",
         "name": "Deploy Container",
-        "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
-        "version": "1.2.0",
+        "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets). Documents that XML template edits must be synced to the boot config path before deploying — the deploy script never reads infra/templates/*.xml directly.",
+        "version": "1.3.0",
         "source": "builtIn",
         "category": "devops",
         "tags": [
