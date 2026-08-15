@@ -311,6 +311,49 @@ git commit -m "feat(infra): add my-service container"
 
 `home-docs/docs/server/containers/my-service.md` — update `mkdocs.yml` nav, trigger sync.
 
+## Config files (`configs:` block)
+
+`deploy-container.sh` applies the manifest's `configs:` block, with two safety properties that matter:
+
+**Substitution is declared-keys-only.** Placeholders are resolved from a `config_substitutions:` block in the manifest — never a blanket `envsubst`. These files contain Go templates (`{{ $value | printf }}`) and relabel backreferences (`$1`) that a broad substitution would corrupt. A placeholder that survives rendering aborts the write, so a literal can never reach the host.
+
+**Applying is opt-in.** Without `--apply-configs` the script reports drift with a diff and writes nothing, because a routine deploy silently reverting a live hand-edit is worse than the drift itself.
+
+```yaml
+configs:
+  - src: configs/alertmanager/alertmanager.yml
+    dest: /mnt/cache/appdata/alertmanager/config/alertmanager.yml
+    reload: "curl -s -X POST http://localhost:9093/-/reload"
+
+config_substitutions:
+  - key: SMTP_TO
+    value: "administrator@3olive3.com"     # literal
+  - key: BUTLER_INGEST_TOKEN
+    vault_item: "Butler Ingest Token"      # from Vaultwarden
+  - key: IPMI_USERNAME
+    vault_item: "HPE Server iLO (DL380 Gen9)"
+    field: username                        # default is password
+```
+
+Placeholders in the config file may be written `__VAULTWARDEN__KEY`, `${KEY}` or `$KEY`.
+
+| Command | Effect |
+|---|---|
+| `deploy-container.sh <name>` | Normal deploy; reports config drift, writes nothing |
+| `deploy-container.sh <name> --apply-configs` | Deploy and write configs, then run `reload:` |
+| `deploy-container.sh <name> --configs-only` | Audit drift only — container untouched |
+| `deploy-container.sh <name> --configs-only --apply-configs` | Write configs + reload, no container bounce |
+| `deploy-container.sh <name> --skip-configs` | Ignore configs entirely |
+
+!!! warning "A declared key is substituted everywhere, comments included"
+    Writing `$BUTLER_INGEST_TOKEN` in a comment puts the real secret in that comment on the host. Name keys without the `$` in prose.
+
+!!! tip "Audit drift routinely"
+    `--configs-only` exists so drift can be checked without recreating a container. The first run of it found two live-only Prometheus settings that had never been committed — an entire alert group, and an `ipmi` module value that git would have reverted.
+
+!!! note "Vaultwarden rate-limits repeated runs"
+    Each run does a fresh vault login; several in quick succession return HTTP 429. The script fails closed (no file written) — wait a minute and retry.
+
 ## Secrets Reference
 
 | Manifest key | Deploy behavior |
@@ -380,4 +423,6 @@ php /tmp/recreate-container.php my-service my-service --dry-run
 - **Icon caching** — change URL in XML to force re-download
 - **`docker inspect` exposes secrets** — never output to users
 - **Git template edits don't reach the deploy without a manual sync** — see the danger box under "Primary Deploy Method" above. `deploy-container.sh` always reads XML from `/boot/config/plugins/dockerMan/templates-user/`, never from `infra/templates/*.xml` directly. Editing-and-merging a template PR alone is not enough.
+- **Config files are NOT auto-applied** — the `configs:` block only takes effect with `--apply-configs`. This is deliberate (see "Config files" above), but it means merging a config change to git does not deploy it. Different from the XML gotcha directly above: XML needs a manual *sync*, configs need an explicit *flag*.
+- **A declared substitution key is replaced everywhere in the file, comments included.** Writing `$SOME_SECRET` in a comment writes the real secret into that comment on the host. Refer to keys without the `$` in prose.
 - **Bind paths matter** — `appdata`/`system` shares (cache-only) **must** use `/mnt/cache/<share>/` prefix. Using `/mnt/user/<share>/` routes through shfs FUSE which has a known POSIX-lock orphan bug that can wedge the entire system. See "Bind Path Conventions" section above.
