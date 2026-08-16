@@ -10,7 +10,7 @@ Casa Lima network architecture reference and operational procedures. Covers VLAN
 ## Network Topology
 
 ```
-Internet → Fortigate 61F (HA, DNS + DHCP authoritative) → FortiSwitch (x2) → FortiAP-231F (x3)
+Internet → Fortigate 61F (HA, DNS + DHCP authoritative) → FortiSwitch (x2) → FortiAP (x4)
                                       ↓
                               UNRAID (HP DL380 Gen9)
                               NGINX Proxy Manager
@@ -19,14 +19,28 @@ Internet → Fortigate 61F (HA, DNS + DHCP authoritative) → FortiSwitch (x2) �
 
 ## VLAN Architecture
 
-| VLAN ID | Name | Subnet | Purpose |
-|---------|------|--------|---------|
-| 1 | Default/Management | 10.1.1.0/24 | Fortigate, switches, APs |
-| 3 | Servers | 10.1.3.0/24 | UNRAID, Docker containers |
-| 6 | Trusted | 10.1.6.0/24 | Family devices, workstations |
-| 7 | IoT | 10.1.7.0/24 | Smart home, Shelly, cameras |
-| 8 | Guest | 10.1.8.0/24 | Guest WiFi, isolated |
-| 11 | DMZ_PUBLIC | 10.10.11.0/24 | Public-facing services (Minecraft) |
+Verified against the device 2026-08-16. An earlier version of this table listed a
+VLAN 7 (IoT) and VLAN 8 (Guest) that **do not exist**, omitted VLAN 4 and 20, and
+called VLAN 6 "Trusted" when it is the wireless VLAN. Confirm with
+`fortigate_list_interfaces` rather than trusting any table, including this one.
+
+| VLAN ID | Interface | Subnet | Alias | Purpose |
+|---------|-----------|--------|-------|---------|
+| 3 | `MGT-DEVICES` | 10.1.3.0/24 | MGT-Devices | UNRAID, Docker containers |
+| 4 | `home1` | 10.1.4.0/24 | LAN_H1 | Wired home LAN. Intended as the future dedicated IoT VLAN |
+| 6 | `Home1_W1` | 10.1.6.0/24 | WIFI_H1 | **All wireless clients**, plus the PoE cameras. Every SSID lands here |
+| 10 | `DMZ_SERVERS` | 10.10.10.0/24 | Servers | NGINX Proxy Manager (10.10.10.1, macvlan) |
+| 11 | `DMZ_PUBLIC` | 10.10.11.0/24 | DMZ Public | Public-facing services (Minecraft) |
+| 15 | `WAN_LINK` | — | WAN_LINK | Uplink |
+| 20 | `MGT_NET` | 10.1.2.0/24 | MGM-NET | Out-of-band management (iLO 10.1.2.21) |
+
+FortiGate management is 10.1.1.254; the fortilink-internal VLANs (1, 4088–4093:
+`vsw`, `nac_segment`, `onboarding`, `cam`, `voi`, `snf`, `qtn`) are switch-controller
+plumbing, not user networks.
+
+**Note for smart-home work**: wired and wireless devices currently share VLAN 6,
+so HomeKit/Matter discovery between them is intra-VLAN. VLAN 4 is prepared for an
+IoT split (IPv6 + mDNS reflection both configured) but nothing has been moved.
 
 ### Key Addressing
 
@@ -79,12 +93,37 @@ Policies control inter-VLAN traffic. Key principle: **deny by default, allow by 
 - `fortigate_update_switch_port` — change VLAN, speed, PoE (requires approval)
 
 ### Wireless
-- 3x FortiAP-231F managed via FortiGate wireless-controller
+4 APs: 2x FortiAP-U231F (Office, Suite), 1x FortiAP-231F (Garagem), 1x FortiAP-231K (Office, replaced the U231F 2026-08-15 — the 231K has a real 6GHz radio-3, unlike the older units where radio-3 is monitor-only).
+
 - `fortigate_list_managed_aps` — AP inventory and status
 - `fortigate_list_wifi_clients` — connected clients
 - `fortigate_list_ssids` — SSID definitions
-- `fortigate_list_wtp_profiles` — radio configuration templates
-- `fortigate_update_ssid` — modify SSID settings (requires approval)
+- `fortigate_list_wtp_profiles` / `fortigate_get_wtp_profile` — radio templates
+- `fortigate_update_ssid` — modify an SSID (requires approval)
+- `fortigate_create_ssid` — new SSID (requires approval)
+- `fortigate_update_wtp_profile_radio` — channels, band, bonding, SSID assignment (requires approval)
+
+**Channel plan**: 2.4GHz restricted to 1/6/11 on every profile. 5GHz is DFS-inclusive (36–157) — that is the FortiOS default and correct here; going non-DFS-only leaves too few channels for 4 APs. Channel 140 is not a valid 40MHz primary in this region and the device rejects it.
+
+**6GHz**: mandates WPA3-SAE with PMF — it rejects WPA2 and transition mode outright. It therefore needs its own SSID, and FortiOS will not let two VAPs share one SSID string, so it cannot reuse the 2.4/5GHz name.
+
+**Assignment**: a new SSID does not broadcast until `update_wtp_profile_radio` puts it on a radio, and `vap-all` must be `manual` for an explicit list to apply.
+
+### Interfaces, IPv6 and multicast
+- `fortigate_list_interfaces` / `fortigate_get_interface` — VLAN tag, addressing, IPv6 block
+- `fortigate_set_interface_ipv6` — address, mode, router advertisements (requires approval)
+- `fortigate_set_interface_igmp_snooping` — per-interface (requires approval)
+- `fortigate_get_igmp_snooping` / `fortigate_set_igmp_snooping` — global switch settings
+- `fortigate_list_multicast_policies` / `fortigate_create_multicast_policy`
+
+**For HomeKit/Matter/AirPlay discovery**, the things that actually matter:
+- `flood-unknown-multicast` **enabled** globally, so the switch does not drop multicast for groups it has not learned
+- per-interface IGMP snooping **disabled** on home VLANs
+- `multicast-forward` enabled in `system settings` (global) — without it, multicast policies do nothing
+- a `firewall multicast-policy` per direction for UDP/5353 to 224.0.0.251
+- IPv6 with SLAAC (`ip6-send-adv`, managed/other flags off) — Matter requires IPv6; Thread border routers do not expect DHCPv6
+
+A multicast policy referencing a **deleted address object stops matching silently**. That had happened here: five deleted objects (`Bonjour`, `all_hosts`, `all_routers`, `EIGRP`, `OSPF`) had quietly broken the whole Bonjour setup with no error anywhere. Cross-check policy address names against `fortigate_list_address_objects`.
 
 ---
 
@@ -101,22 +140,25 @@ FortiGate is the primary DNS for all VLANs. DHCP scopes push FortiGate's per-int
 
 #### Managing records
 
-FortiGate REST API (`/api/v2/cmdb/system/dns-database/3olive3-com`) or web UI (Network → DNS Servers → DNS Database). Dedicated MCP tools pending — see task to add `fortigate_*` DNS Database tools.
+**Use the MCP tools** (added 2026-08-16 — this section previously told you to curl the REST API; that is no longer necessary):
 
-Until MCP tools land, use curl via UNRAID (token in vault item "Fortigate 60F" / butler-api):
-```bash
-# Add an A record
-curl -sk -X POST -H "Authorization: Bearer $FG_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"hostname":"newservice","type":"A","ip":"10.1.3.100","status":"enable"}' \
-  "https://10.1.1.254/api/v2/cmdb/system/dns-database/3olive3-com/dns-entry"
+| Task | Tool |
+|------|------|
+| List zones and record counts | `fortigate_list_dns_zones` |
+| Find a record | `fortigate_list_dns_records` (takes `hostFilter` — the main zone holds ~94) |
+| Add a record | `fortigate_create_dns_record` (requires approval) |
+| Remove a record | `fortigate_delete_dns_record` (requires approval) |
 
-# Add a CNAME
-curl -sk -X POST -H "Authorization: Bearer $FG_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"hostname":"newservice","type":"CNAME","canonical-name":"nginx.3olive3.com","status":"enable"}' \
-  "https://10.1.1.254/api/v2/cmdb/system/dns-database/3olive3-com/dns-entry"
 ```
+fortigate_create_dns_record(zone="3olive3-com", hostname="newservice",
+                            type="CNAME", canonicalName="nginx.3olive3.com")
+```
+
+Zone is `3olive3-com` (domain `3olive3.com`). **Prefer CNAME to `nginx.3olive3.com`** over an A record — an A record straight to a container IP bypasses NGINX Proxy Manager and therefore its TLS.
+
+`create_dns_record` refuses to add a duplicate hostname+type, and both write tools rewrite the zone's whole `dns-entry` array, so they abort rather than write if the read comes back in an unexpected shape. That guard exists because the equivalent DHCP tool would otherwise have deleted all 36 reservations on a bad read.
+
+The web UI (Network → DNS Servers → DNS Database) remains available for anything the tools do not cover.
 
 ### External (Cloudflare)
 
