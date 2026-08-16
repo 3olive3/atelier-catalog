@@ -97,7 +97,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 - Updating `SKILL.md` without re-running `build-catalog.py` leaves the catalog version unchanged.
 - `bundles.json` is hand-maintained with **no validation that members exist** — renaming or removing a skill can rot a bundle silently.
 - `compat/` shims have no deprecation timeline. With Designer archived, they are candidates for removal.
-- MCP counts here are reference metadata only. Authoritative: **17 servers / 397 tools** (media-stack+plex+overseerr merged into `media`, homekit renamed to homebridge, 2026-08-11), in `home-docs/docs/butler/mcp-servers.md`. Figures of 19/396, 404, 425 and 436 elsewhere are stale.
+- MCP counts here are reference metadata only. Authoritative: **17 servers / 415 tools** as of 2026-08-16 (fortigate 43 -> 58). Best read off the gateway's own startup log rather than any document — a hardcoded banner in the FortiGate server reported the wrong count for a day. Figures of 397, 400, 19/396, 404, 425 and 436 elsewhere are stale.
 
 ## More context
 

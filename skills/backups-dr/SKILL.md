@@ -1,3 +1,8 @@
+---
+name: backups-dr
+description: "Use when performing or verifying backups, running test restores, investigating a storage or disk-failure alert, or rebuilding a failed server. Covers the 7-layer backup architecture, Duplicacy (local + R2), USB boot backup, Unimus network configs, and the full rebuild runbook. Always confirm a recent backup exists before touching a failing disk."
+---
+
 # Backups & Disaster Recovery Skill
 
 > Full backup management and disaster recovery for Casa Lima infrastructure.
