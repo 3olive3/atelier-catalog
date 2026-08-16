@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-08-14T11:56:42Z",
+  "lastUpdated": "2026-08-16T11:40:32Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 113,
@@ -962,8 +962,8 @@
       {
         "catalogID": "deploy-container",
         "name": "Deploy Container",
-        "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets). Documents that XML template edits must be synced to the boot config path before deploying — the deploy script never reads infra/templates/*.xml directly.",
-        "version": "1.4.0",
+        "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
+        "version": "1.2.0",
         "source": "builtIn",
         "category": "devops",
         "tags": [
