@@ -1,6 +1,6 @@
 # Atelier Catalog
 
-Source of truth for the platform's **skills** — 47 skill modules, plus role profiles, guardrails, permissions, tech stacks and MCP reference metadata.
+Source of truth for the platform's **skills** — 48 skill modules, plus role profiles, guardrails, permissions, tech stacks and MCP reference metadata.
 
 > **Rearchitected 2026-08-11.** The primary consumer was Atelier Designer, which is archived. Skills are now consumed by **OpenClaw** and **Claude Code**, both of which read Markdown directly. Read <https://docs.3olive3.com/adr/> before architectural changes.
 
@@ -38,7 +38,7 @@ Both consumers read Markdown, so no transformation is needed. Per-repo `.claude/
 ## Layout
 
 ```
-skills/                   # 47 skill dirs — each: <name>.json metadata + SKILL.md content
+skills/                   # 48 skill dirs — each: <name>.json metadata + SKILL.md content
 mcps/                     # MCP reference metadata (servers live in atelier-butler/mcp/)
 role-profiles/            # 16 agent archetypes
 guardrails/               # 13 toggle rules
