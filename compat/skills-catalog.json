@@ -1,6 +1,6 @@
 {
   "version": "1.3.0",
-  "lastUpdated": "2026-08-16T11:40:32Z",
+  "lastUpdated": "2026-08-16T12:36:28Z",
   "skills": [
     {
       "id": "api-design-principles",
@@ -514,6 +514,27 @@
       ],
       "category": "ai-agent",
       "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/notebooklm-content/SKILL.md"
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "version": "1.1.0",
+      "description": "Casa Lima observability — incident triage order, the alert catalogue, the severity/system/layer/remediation_tier label contract, plus authoring Prometheus rules, Grafana dashboards, Alertmanager routing and /metrics instrumentation.",
+      "author": "Casa Lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-catalog",
+      "tags": [
+        "observability",
+        "incidents",
+        "alerting",
+        "prometheus",
+        "grafana",
+        "loki",
+        "alertmanager",
+        "casa-lima-ops"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/observability/SKILL.md"
     },
     {
       "id": "prometheus-configuration",
