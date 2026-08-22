@@ -72,6 +72,36 @@ def load_entries(type_dir: str) -> list[dict]:
     return entries
 
 
+def write_catalog_json(path, payload: dict) -> None:
+    """
+    Write a generated catalog, keeping `lastUpdated` stable when nothing else changed.
+
+    The build stamps `lastUpdated` with the current time, so a naive write makes
+    every run produce a different file. CI rebuilds and then diffs against the
+    committed copy to prove the catalog is current — with a moving timestamp that
+    check can never pass, and it failed on every run regardless of whether any
+    real content had changed. A check that always fails teaches people to ignore
+    it, which is worse than not having one.
+
+    So: compare everything except `lastUpdated`. If the content is identical,
+    carry the previous timestamp forward and the file on disk does not change.
+    The timestamp then means "when the catalog last actually changed", which is
+    what a reader assumes it means anyway.
+    """
+    if path.exists():
+        try:
+            previous = json.loads(path.read_text())
+        except (json.JSONDecodeError, OSError):
+            previous = None
+        if previous is not None:
+            a = {k: v for k, v in previous.items() if k != "lastUpdated"}
+            b = {k: v for k, v in payload.items() if k != "lastUpdated"}
+            if a == b:
+                payload = {**payload, "lastUpdated": previous.get("lastUpdated", payload.get("lastUpdated"))}
+
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
+
+
 def build_compat_mcps(mcp_entries: list[dict]) -> dict:
     """Generate backward-compatible MCP catalog (atelier-mcps format).
 
@@ -172,7 +202,7 @@ def main():
 
     # Write unified catalog
     catalog_path = REPO_ROOT / "catalog.json"
-    catalog_path.write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n")
+    write_catalog_json(catalog_path, catalog)
     print(f"\n  Wrote catalog.json ({total_entries} entries)")
 
     # Build backward-compatible shim catalogs
@@ -181,16 +211,12 @@ def main():
 
     mcps_compat = build_compat_mcps(all_types.get("mcps", []))
     mcps_compat_path = compat_dir / "mcps-catalog.json"
-    mcps_compat_path.write_text(
-        json.dumps(mcps_compat, indent=2, ensure_ascii=False) + "\n"
-    )
+    write_catalog_json(mcps_compat_path, mcps_compat)
     print(f"  Wrote compat/mcps-catalog.json ({len(mcps_compat['mcps'])} MCPs)")
 
     skills_compat = build_compat_skills(all_types.get("skills", []), bundles)
     skills_compat_path = compat_dir / "skills-catalog.json"
-    skills_compat_path.write_text(
-        json.dumps(skills_compat, indent=2, ensure_ascii=False) + "\n"
-    )
+    write_catalog_json(skills_compat_path, skills_compat)
     print(
         f"  Wrote compat/skills-catalog.json ({len(skills_compat['skills'])} skills, {len(bundles)} bundles)"
     )

@@ -1,6 +1,6 @@
 # Atelier Catalog
 
-Source of truth for the platform's **skills** — 47 skill modules, plus role profiles, guardrails, permissions, tech stacks and MCP reference metadata.
+Source of truth for the platform's **skills** — 48 skill modules, plus role profiles, guardrails, permissions, tech stacks and MCP reference metadata.
 
 > **Rearchitected 2026-08-11.** The primary consumer was Atelier Designer, which is archived. Skills are now consumed by **OpenClaw** and **Claude Code**, both of which read Markdown directly. Read <https://docs.3olive3.com/adr/> before architectural changes.
 
@@ -38,7 +38,7 @@ Both consumers read Markdown, so no transformation is needed. Per-repo `.claude/
 ## Layout
 
 ```
-skills/                   # 47 skill dirs — each: <name>.json metadata + SKILL.md content
+skills/                   # 48 skill dirs — each: <name>.json metadata + SKILL.md content
 mcps/                     # MCP reference metadata (servers live in atelier-butler/mcp/)
 role-profiles/            # 16 agent archetypes
 guardrails/               # 13 toggle rules
@@ -97,7 +97,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 - Updating `SKILL.md` without re-running `build-catalog.py` leaves the catalog version unchanged.
 - `bundles.json` is hand-maintained with **no validation that members exist** — renaming or removing a skill can rot a bundle silently.
 - `compat/` shims have no deprecation timeline. With Designer archived, they are candidates for removal.
-- MCP counts here are reference metadata only. Authoritative: **17 servers / 397 tools** (media-stack+plex+overseerr merged into `media`, homekit renamed to homebridge, 2026-08-11), in `home-docs/docs/butler/mcp-servers.md`. Figures of 19/396, 404, 425 and 436 elsewhere are stale.
+- MCP counts here are reference metadata only. Authoritative: **17 servers / 415 tools** as of 2026-08-16 (fortigate 43 -> 58). Best read off the gateway's own startup log rather than any document — a hardcoded banner in the FortiGate server reported the wrong count for a day. Figures of 397, 400, 19/396, 404, 425 and 436 elsewhere are stale.
 
 ## More context
 

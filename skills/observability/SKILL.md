@@ -1,6 +1,106 @@
+---
+name: observability
+description: "Use when investigating a firing alert or incident, when asked what an alert means or whether it can fire, and when authoring Prometheus rules, Grafana dashboards, Alertmanager routing or /metrics instrumentation for Casa Lima. Covers the alert catalogue, incident triage order, and the severity/system/layer/remediation_tier label contract. Not for generic Prometheus questions with no Casa Lima specifics — use prometheus-configuration for those."
+---
+
 # Observability Skill
 
 > Casa Lima platform observability — Prometheus, Grafana, Alertmanager, Loki. Butler is the source of truth for all observability configuration.
+
+---
+
+## Investigating an alert — start here
+
+If an alert is firing, work this order. Everything below this section is
+reference for *building* the stack; this section is for *using* it under
+pressure.
+
+### 0. Can this alert even fire?
+
+**Do this before believing anything else the alert implies.** A rule whose
+series does not exist never fires, and its silence is indistinguishable from
+good news — so the absence of a related alert proves nothing until checked.
+
+As of 2026-08-16, **11 of 78 rules cannot fire**. Three failure modes, and only
+the first is visible from the rule file:
+
+| Mode | Example | How to spot it |
+|---|---|---|
+| Metric never emitted | `ipmi_chassis_intrusion` | `count(<metric>)` returns empty |
+| Scrape job retired | `up{job="atelier-backend"}` — service decommissioned | metric exists, selector matches nothing |
+| Name/prefix mismatch | rule wants `nodejs_eventloop_lag_p99_seconds{job="butler-gateway"}`, Butler emits `butler_nodejs_…` | metric exists, selector matches nothing |
+
+The **[alert catalogue](https://docs.3olive3.com/observability/alert-catalogue/)**
+marks every rule 🟢 live / 🟠 suspect / 🔴 dead, re-checked against live
+Prometheus each time it is generated. Check the alert there first.
+
+### 1. What is actually lost?
+
+Severity tells you urgency, not consequence. `GrafanaDown` and `VaultwardenDown`
+are both `critical`, but one costs a dashboard and the other locks every
+credential in the house.
+
+`profiles/casa-lima/incident-routing.json` in `atelier-butler` maps the
+`system` label to impact, blast radius, first checks, and **which skills to
+load**. Read the entry for the firing alert's `system` before investigating —
+it is keyed on a label every rule already carries.
+
+**Tier-0 systems break your ability to diagnose the failure**: `butler`,
+`vaultwarden`, `fortigate`, `unraid`, `storage`, `monitoring`. If one of these
+is the subject, fall back to SSH + Grafana. You cannot use the butler to
+diagnose the butler.
+
+If the firing alert's `system` is `monitoring`, treat every other "all clear"
+as unverified until it is resolved.
+
+### 2. Confirm the condition independently
+
+Query the metric yourself rather than trusting the alert's rendered summary.
+Annotation text is templated at fire time and can be stale or misleading; the
+series is the fact.
+
+### 3. Check whether this has happened before
+
+Post-mortems live in `home-docs/docs/incidents/` as `YYYY-MM-*.md`. A matching
+past incident usually contains the fix and is faster than rediscovering it.
+
+### 4. Correlate with what changed
+
+Most incidents follow a change. Check recent deploys (`casalima.deployed_at`
+labels), config drift (`casa_config_drift`), and cron outcomes
+(`casa_cron_last_exit_code`) before theorising about spontaneous failure.
+
+### The label contract
+
+Every alert rule **must** carry these, and an investigator can rely on them:
+
+| Label | Purpose | Values |
+|---|---|---|
+| `severity` | urgency | `critical`, `warning`, `info` |
+| `system` | what broke — the routing key | 19 values; see `incident-routing.json` |
+| `layer` | where it sits | `infrastructure`, `containers`, `applications`, `network`, `smarthome` |
+| `remediation_tier` | what automation may do | `notify-only`, `investigate` |
+
+!!! warning "`remediation_tier` is declarative only today"
+    Workflows in `gateway/src/config/workflows.json` trigger on explicit
+    `alertname`, not on tier. The matching engine supports arbitrary label
+    matching (`gateway/src/workflows/matching.ts`), so the label *is* usable —
+    it simply is not used yet, and 72 of 78 rules do not set it. Do not assume
+    an untiered alert is being held back by anything.
+
+### Regenerating the catalogue
+
+After editing any rule, or the routing map:
+
+```bash
+cd ~/Developer/atelier-platform/atelier-butler
+python3 infra/scripts/generate-alert-catalogue.py
+```
+
+It joins the rules, the routing map and live Prometheus, then writes
+`home-docs/docs/observability/alert-catalogue.md`. **Never hand-edit that page**
+— a catalogue that disagrees with the rules is worse than none, because an
+agent will reason confidently from the wrong threshold.
 
 ---
 
@@ -616,10 +716,26 @@ Use these tools to query live state, verify deployments, and investigate alerts.
 
 ### Alert Not Firing
 
-1. Validate rule syntax: `promtool check rules`
-2. Check Prometheus `/alerts` page for rule state
-3. Verify labels match routing rules in Alertmanager
-4. Check Alertmanager `/api/v2/alerts` for suppressed alerts
+**Check step 1 before anything else.** A rule with perfect syntax, shown as
+healthy on the `/alerts` page, still never fires if nothing matches its
+selector — Prometheus reports a rule evaluating over zero series as `ok`, not
+as a problem. This is how 11 of 78 rules here sat permanently inactive.
+
+1. **Does the selector match anything?**
+   `query_instant` with the metric name alone, then with the full selector
+   including labels. A retired scrape job or a renamed/prefixed metric passes a
+   name-only check and still matches nothing:
+   ```promql
+   count(nodejs_eventloop_lag_p99_seconds)                        # exists
+   count(nodejs_eventloop_lag_p99_seconds{job="butler-gateway"})  # empty -> dead rule
+   ```
+2. Validate rule syntax: `promtool check rules`
+3. Check Prometheus `/alerts` page for rule state
+4. Verify labels match routing rules in Alertmanager
+5. Check Alertmanager `/api/v2/alerts` for suppressed alerts, and
+   `am_list_silences` for an active silence hiding it
+
+Run `generate-alert-catalogue.py` to check all rules at once instead of one.
 
 ### Dashboard Shows No Data
 

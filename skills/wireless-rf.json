@@ -1,0 +1,13 @@
+{
+  "catalogID": "wireless-rf",
+  "name": "Wireless RF",
+  "description": "FortiAP radio management for Casa Lima — DARRP scoring and tuning, the profile vs per-AP override trap, channel/power procedures, FortiOS write quirks, and the daily RF audit.",
+  "version": "1.0.0",
+  "source": "casaLima",
+  "category": "devops",
+  "tags": ["wireless", "wifi", "fortiap", "darrp", "rf", "networking", "casa-lima-ops"],
+  "author": "Casa Lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/wireless-rf/SKILL.md"
+}
