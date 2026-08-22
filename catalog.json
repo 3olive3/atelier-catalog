@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-08-16T16:04:25Z",
+  "lastUpdated": "2026-08-22T09:17:08Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 115,
+  "totalEntries": 116,
   "types": {
     "guardrails": [
       {
@@ -1186,6 +1186,26 @@
         "license": "MIT",
         "sourceURL": "https://github.com/3olive3/atelier-catalog",
         "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/home-network/SKILL.md"
+      },
+      {
+        "catalogID": "homebridge-personalization",
+        "name": "Homebridge Personalization",
+        "description": "Add devices to Homebridge, build/patch custom accessories for Casa Lima's specific hardware, and keep local plugin patches alive across updates — covers the Shelly Pro2 garage-door pattern as the reference example.",
+        "version": "1.0.0",
+        "source": "builtIn",
+        "category": "casa-lima-ops",
+        "tags": [
+          "homebridge",
+          "homekit",
+          "shelly",
+          "smarthome",
+          "iot",
+          "casa-lima"
+        ],
+        "author": "casa-lima",
+        "license": "MIT",
+        "sourceURL": "https://github.com/3olive3/atelier-butler",
+        "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/homebridge-personalization/SKILL.md"
       },
       {
         "catalogID": "incidents-methodology",
