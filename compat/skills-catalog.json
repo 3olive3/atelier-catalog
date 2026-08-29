@@ -1,6 +1,6 @@
 {
   "version": "1.3.0",
-  "lastUpdated": "2026-08-22T09:17:08Z",
+  "lastUpdated": "2026-08-29T15:56:50Z",
   "skills": [
     {
       "id": "api-design-principles",
@@ -144,6 +144,25 @@
       ],
       "category": "data-ai",
       "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/data-engineer/SKILL.md"
+    },
+    {
+      "id": "decommission",
+      "name": "Decommission",
+      "version": "1.0.0",
+      "description": "Removing something from Casa Lima infrastructure without leaving orphans behind — reference maps for containers, DNS names, FortiGate objects and credentials, plus orphan sweeps that find what earlier removals left rotting.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-catalog",
+      "tags": [
+        "cleanup",
+        "decommission",
+        "unraid",
+        "infrastructure",
+        "drift",
+        "casa-lima"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/decommission/SKILL.md"
     },
     {
       "id": "deploy-container",

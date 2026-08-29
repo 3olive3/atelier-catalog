@@ -1,13 +1,13 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-08-22T09:15:58Z",
+  "lastUpdated": "2026-08-29T15:56:50Z",
   "mcps": [
     {
       "id": "cloudflare",
       "name": "Cloudflare",
       "version": "3.0.0",
       "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
-      "toolCount": 63,
+      "toolCount": 68,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -40,15 +40,15 @@
         "infrastructure"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/duplicacy-2.0.0.tar.gz",
-      "size": "20KB",
-      "checksum": "sha256:placeholder"
+      "size": "2KB",
+      "checksum": "sha256:14e68dc364337ba45d2b5b6d41942f734582f15212fc623e9ce50aa7ab757f7e"
     },
     {
       "id": "fortigate",
       "name": "FortiGate",
-      "version": "2.2.0",
+      "version": "2.3.0",
       "description": "FortiGate 60F firewall — policies, address objects, service objects, DHCP, static routes, VPN, bandwidth stats, system health, FortiSwitch management, and FortiAP/WiFi management via REST API",
-      "toolCount": 43,
+      "toolCount": 71,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -62,7 +62,7 @@
         "fortiap",
         "wifi"
       ],
-      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/fortigate-2.2.0.tar.gz",
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.3.0/fortigate-2.3.0.tar.gz",
       "size": "60KB",
       "checksum": "sha256:placeholder"
     },
@@ -108,7 +108,7 @@
       "id": "ipam",
       "name": "NetBox",
       "version": "2.1.0",
-      "description": "NetBox IPAM — IP addresses, prefixes, VLANs, VRFs, IP ranges, services, devices, interfaces, sites, and infrastructure search via REST API. Supports NetBox 4.5+ v2 tokens (auto-detects nbt_ prefix, uses Bearer vs Token header).",
+      "description": "Atelier Butler MCP Server for NetBox — AI-native interface for IP address management, network prefixes, VLANs, devices, and infrastructure inventory",
       "toolCount": 23,
       "runtime": "node",
       "transport": "stdio",
@@ -118,8 +118,8 @@
         "infrastructure",
         "inventory"
       ],
-      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.1.0/netbox-2.1.0.tar.gz",
-      "size": "38KB",
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.1.0/ipam-2.1.0.tar.gz",
+      "size": "unknown",
       "checksum": "sha256:placeholder"
     },
     {
@@ -136,8 +136,8 @@
         "bandwidth"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/iperf3-2.0.0.tar.gz",
-      "size": "15KB",
-      "checksum": "sha256:placeholder"
+      "size": "2KB",
+      "checksum": "sha256:150276647ec49724f1dfea4ba7dd71cd6bf80049f0f387e2f11d13c85d23aacc"
     },
     {
       "id": "media",
@@ -166,8 +166,8 @@
       "id": "minecraft",
       "name": "Minecraft",
       "version": "1.0.0",
-      "description": "Minecraft Paper server management — player whitelist, bans, world management, weather, time, mob morphing, teleport, game modes, server status via RCON commands over SSH + docker exec",
-      "toolCount": 27,
+      "description": "Atelier Butler MCP Server for Minecraft Paper — AI-native interface for server management via RCON + SSH",
+      "toolCount": 26,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -179,7 +179,7 @@
         "entertainment"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/minecraft-1.0.0.tar.gz",
-      "size": "25KB",
+      "size": "unknown",
       "checksum": "sha256:placeholder"
     },
     {
@@ -197,14 +197,14 @@
         "networking"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/nginx-2.0.0.tar.gz",
-      "size": "30KB",
-      "checksum": "sha256:placeholder"
+      "size": "3KB",
+      "checksum": "sha256:3512e8606d0f6764f40dfadf99537434a0eebb5dcacb48e102f24f67cdf47cff"
     },
     {
       "id": "observability",
       "name": "Observability",
       "version": "3.0.0",
-      "description": "Full observability stack — Prometheus (PromQL queries, metric discovery, targets, alerts, rules, TSDB stats), Loki (log queries, label discovery, series, stats), Alertmanager (alerts, silences, receivers, status), and Grafana (dashboard search, annotations, folders) via HTTP APIs",
+      "description": "Atelier Butler MCP Server for Prometheus — AI-native interface for infrastructure metrics, alerting, and time-series observability via PromQL",
       "toolCount": 34,
       "runtime": "node",
       "transport": "stdio",
@@ -219,16 +219,16 @@
         "loki",
         "alertmanager"
       ],
-      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/prometheus-3.0.0.tar.gz",
-      "size": "60KB",
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/observability-3.0.0.tar.gz",
+      "size": "unknown",
       "checksum": "sha256:placeholder"
     },
     {
       "id": "shelly",
       "name": "Shelly",
       "version": "2.0.0",
-      "description": "Shelly device management — energy monitoring, power metrics, switch control, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
-      "toolCount": 12,
+      "description": "Shelly device management — energy monitoring, power metrics, switch control, remote reboot, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
+      "toolCount": 13,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -238,8 +238,8 @@
         "switches"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/shelly-2.0.0.tar.gz",
-      "size": "28KB",
-      "checksum": "sha256:placeholder"
+      "size": "2KB",
+      "checksum": "sha256:d0181e809539a1a95c531b14c9bc7cc768e6bce83e660615732ea0b0fd36d934"
     },
     {
       "id": "tautulli",
@@ -256,8 +256,8 @@
         "analytics"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/tautulli-2.0.0.tar.gz",
-      "size": "25KB",
-      "checksum": "sha256:placeholder"
+      "size": "2KB",
+      "checksum": "sha256:4706753024ed547f34fa2799d4669f58fbbcbf31050716c767c326446be94e99"
     },
     {
       "id": "unimus",
@@ -274,8 +274,8 @@
         "infrastructure"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unimus-2.0.0.tar.gz",
-      "size": "28KB",
-      "checksum": "sha256:placeholder"
+      "size": "3KB",
+      "checksum": "sha256:f1661bee0e6d66e2c52d5f8a49f4085fcb74f0cc41dd9781973d59a8d2a587e2"
     },
     {
       "id": "unraid",
@@ -293,8 +293,8 @@
         "storage"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unraid-2.0.0.tar.gz",
-      "size": "45KB",
-      "checksum": "sha256:placeholder"
+      "size": "3KB",
+      "checksum": "sha256:6eb2cf850845c1963c476c97a0ff91eb8d2a809bfffb2df56e30e5c48289bf42"
     },
     {
       "id": "uptime-kuma",
@@ -311,8 +311,8 @@
         "alerts"
       ],
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/uptime-kuma-2.0.0.tar.gz",
-      "size": "35KB",
-      "checksum": "sha256:placeholder"
+      "size": "12KB",
+      "checksum": "sha256:7f4a56b2785a0158cb30d6284900720a60ea8a8af0ff701fff342dc69bdd3876"
     },
     {
       "id": "vaultwarden",
