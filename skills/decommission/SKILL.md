@@ -81,6 +81,55 @@ docker exec UptimeKuma sqlite3 /app/data/kuma.db \
     | grep '^<ENV>=' | awk -F= '{print length($2) " chars"}'
   ```
 
+### Removing an MCP server
+
+The case that proves this section had to exist. Pi-hole's MCP was archived
+2026-08-13 and deleted from the repo 2026-08-14 — every source file gone, no
+`.mcp.json` anywhere defining it. It still appeared in `/mcp` on 2026-08-29,
+because the **name was left on an allow-list**. Deleting the code is the part
+everyone remembers; the tooling references are the part that rots quietly.
+
+| Also remove / check | Where |
+|---|---|
+| Server definition | **every** `.mcp.json` — repos duplicate server lists, so check all of them, not just the one you are standing in |
+| Allow/deny lists | `.claude/settings.local.json` → `enabledMcpjsonServers` **and** `disabledMcpjsonServers`, in every repo, plus `~/.claude.json` |
+| Per-tool permission grants | same file, `permissions.allow` — entries read `mcp__<name>__<tool>` |
+| Source | `atelier-butler/mcp/<name>/` |
+| Catalog + tool counts | **regenerate, never hand-edit**: `python3 atelier-mcps/scripts/sync-catalog.py --write` |
+| Distribution | `atelier-mcps/mcps/<name>/`, `atelier-mcps/releases/<name>-*.tar.gz`, `atelier-catalog/mcps/<name>.json` |
+| Gateway policy | `atelier-butler/profiles/casa-lima/` — token scopes in `tokens.json`, and `guardian-rules.json` rules naming those tools |
+| home-docs | MCP tables, tool counts, per-server pages |
+
+```bash
+# the sweep that would have caught the Pi-hole ghost
+for f in */.mcp.json .mcp.json; do
+  [ -f "$f" ] && jq -r '.mcpServers | keys[]' "$f"
+done | sort -u > /tmp/defined
+jq -r '(.enabledMcpjsonServers // [])[], (.disabledMcpjsonServers // [])[]' \
+  .claude/settings.local.json | sort -u > /tmp/named
+comm -13 /tmp/defined /tmp/named    # named but not defined = ghosts
+```
+
+**Reconnect before believing anything.** A running MCP process serves the code
+it loaded at spawn time, so a server you just deleted — or just fixed — keeps
+answering from memory until `/mcp` reconnects it.
+
+### Removing a skill
+
+| Also remove / check | Where |
+|---|---|
+| Skill directory | `atelier-catalog/skills/<name>/` |
+| Catalog entry | `atelier-catalog/skills/<name>.json` |
+| Symlinks | `.claude/skills/<name>` in **every** repo — these are symlinks into the catalog, and a dangling one stays invisible until the skill tool fails on it |
+| `CLAUDE.md` | the "Skills installed" list in each repo that had it |
+| home-docs | skills pages, and any runbook that says "use the `<name>` skill" |
+
+```bash
+# dangling skill symlinks across every repo
+find ~/Developer/atelier-platform/*/.claude/skills -maxdepth 1 -type l \
+  ! -exec test -e {} \; -print
+```
+
 ## Orphan sweeps
 
 Run these periodically, not only during a removal. Each one has found real rot.
@@ -111,14 +160,21 @@ grep -l '<Name>' /boot/config/plugins/dockerMan/templates-user/*.xml \
 
 **Unrotated logs** — `find /mnt/cache/appdata -name '*.log' -size +100M`.
 
+**Tooling references with nothing behind them** — MCP servers named on an
+allow-list but defined in no `.mcp.json`, and `.claude/skills/` symlinks
+pointing at deleted catalog entries. Both keep looking real right up until
+something tries to use them. Sweeps for each are in the two sections above.
+
 ## Verification
 
 Casa Lima rule, and it applies doubly here: **verify by effect, never by
 status.** Specific traps seen in this estate:
 
-- `delete_vip` returns an **error** on success — its post-delete re-read gets
-  HTTP 404, which *is* the confirmation, and it surfaces that as a failure.
-  Confirm with `list_vips`.
+- `delete_vip` **used to** return an error on success — its post-delete re-read
+  got HTTP 404, which *is* the confirmation, and reported it as a failure.
+  Fixed in fortigate MCP 2.4.0 (2026-08-29). You will still hit it on an older
+  build, or on a process not reconnected since. The general trap outlives the
+  fix: a tool that verifies by re-reading must treat "gone" as success.
 - The `uptime-kuma` MCP's **reads** are stale. `get_monitor` and
   `list_monitors` will show a deleted monitor as still present. Confirm against
   the sqlite DB, or you will delete it twice.
