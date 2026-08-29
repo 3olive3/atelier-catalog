@@ -92,7 +92,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 
 - **Skills and MCPs are different types** in one manifest — don't conflate when adding entries.
 - **9 skills tagged `casa-lima-ops` are not portable** — they assume this specific home (VLANs, FortiGate authoritative DNS for `3olive3.com` with upstream DoH to Cloudflare Zero Trust, UNRAID). Treat as operational runbooks.
-- **Stale skills to review**: `n8n-workflows` and `content-pipeline` assume n8n, which is **decommissioned**. Deterministic work now lives in `atelier-butler/infra/scripts/`.
+- **Stale skill to review**: `content-pipeline` still describes its later stages as n8n workflows, and n8n is **decommissioned**. Deterministic work now lives in `atelier-butler/infra/scripts/`. (`n8n-workflows` itself was removed; its last dangling symlink in `atelier-bridge` was cleaned up 2026-08-29.)
 - `excalidraw-diagram` needs Python 3.11+, Playwright 1.40+, Chromium (`uv run playwright install chromium`) — unusual dep.
 - Updating `SKILL.md` without re-running `build-catalog.py` leaves the catalog version unchanged.
 - `bundles.json` is hand-maintained with **no validation that members exist** — renaming or removing a skill can rot a bundle silently.
