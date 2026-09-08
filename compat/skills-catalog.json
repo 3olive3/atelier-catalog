@@ -1,6 +1,6 @@
 {
   "version": "1.3.0",
-  "lastUpdated": "2026-08-29T15:56:50Z",
+  "lastUpdated": "2026-09-08T11:14:31Z",
   "skills": [
     {
       "id": "api-design-principles",
@@ -660,6 +660,25 @@
       ],
       "category": "frontend",
       "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/react-pro/SKILL.md"
+    },
+    {
+      "id": "scheduled-jobs",
+      "name": "Scheduled Jobs",
+      "version": "1.0.0",
+      "description": "Writing a new cron job, collector or maintenance script for Casa Lima — where credentials come from, why it must be bash, how to emit metrics, where to document it, and the proof it has to pass before it counts as done.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/atelier-catalog",
+      "tags": [
+        "cron",
+        "scripts",
+        "automation",
+        "unraid",
+        "observability",
+        "casa-lima"
+      ],
+      "category": "devops",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/scheduled-jobs/SKILL.md"
     },
     {
       "id": "security-review",
