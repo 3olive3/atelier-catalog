@@ -88,12 +88,61 @@ Policies control inter-VLAN traffic. Key principle: **deny by default, allow by 
 ### Switches
 - Managed via FortiGate switch-controller
 - `fortigate_list_managed_switches` — inventory
-- `fortigate_get_managed_switch` — port configs, VLANs, PoE
+- `fortigate_get_managed_switch` — port configs, VLANs, PoE, **and descriptions**
 - `fortigate_get_switch_port_stats` — link status, TX/RX, errors
-- `fortigate_update_switch_port` — change VLAN, speed, PoE (requires approval)
+- `fortigate_update_switch_port` — change VLAN, speed, PoE, description (requires approval)
+
+!!! danger "MANDATORY — every port you connect or reconfigure gets a description"
+    **The switch port `description` is the source of truth for what is plugged
+    into that port.** Not the documentation, not NetBox — those are copies
+    generated from it. See home-docs `network/netbox-inventory-plan.md`.
+
+    So when you connect a device to a port, move a device between ports, or
+    change a port's VLAN, **writing the description is part of the change, not a
+    follow-up**:
+
+    ```
+    update_switch_port(switchId, portName, description="Philips Hue Bridge")
+    ```
+
+    Use a plain device name — `Vicente Gaming PC`, `AP SUITE`,
+    `LP1 Switch DinRail`. Do not encode state that the API already reports
+    (speed, PoE watts, up/down); it goes stale and the API is authoritative for
+    it anyway.
+
+    **Why this is mandatory and not a nicety.** The FortiGate exposes no
+    reliable per-port MAC table over REST, so an undescribed port is genuinely
+    unidentifiable — nothing can tell you what is on it. On 2026-09-08 that cost
+    an hour of deducing devices from traffic ratios, produced two wrong answers
+    and one false alarm, and all of it was avoidable because the ports that
+    *were* described had the answers.
+
+    **Especially for unmanaged gear.** A DIN-rail switch, injector or powerline
+    adapter has no IP and no CMDB entry — nothing in this estate can discover
+    it. Its uplink port's description is the *only* record that it exists.
+
+    After writing, run
+    `atelier-butler/infra/scripts/sync-netbox-interfaces.py --apply` so NetBox
+    picks it up.
 
 ### Wireless
-4 APs: 2x FortiAP-U231F (Office, Suite), 1x FortiAP-231F (Garagem), 1x FortiAP-231K (Office, replaced the U231F 2026-08-15 — the 231K has a real 6GHz radio-3, unlike the older units where radio-3 is monitor-only).
+4 APs, verified live 2026-09-08 — each is named on its own switch port:
+
+| AP | Model | SW1 port | IP |
+|---|---|---|---|
+| Suite | FortiAP-U231F | port9 `AP SUITE` | 10.1.6.77 |
+| Quartos | FortiAP-231K | port10 `AP QUARTOS` | 10.1.6.75 |
+| Office | FortiAP-231K | port11 `AP OFFICE` | 10.1.6.64 |
+| Garagem | FortiAP-231F | port12 `AP GARAGEM` | 10.1.6.63 |
+
+The **231K units have a real 6GHz radio-3**; on the older U231F and 231F,
+radio-3 is monitor-only. The Office U231F was replaced by a 231K on 2026-08-15
+and a second 231K was added for Quartos — this section said "2x U231F" until
+2026-09-08.
+
+**The APs have no DHCP reservations**, so they move address on lease renewal.
+That is how their addresses in the docs went stale, and how `.57`/`.58`/`.78`
+came to be documented as APs when those now belong to Aqara cameras and a Shelly.
 
 - `fortigate_list_managed_aps` — AP inventory and status
 - `fortigate_list_wifi_clients` — connected clients
