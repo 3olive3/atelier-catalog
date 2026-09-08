@@ -161,6 +161,17 @@ congestion or reliability makes it worth doing.
 - `fortigate_get_switch_port_stats` — link status, TX/RX, errors
 - `fortigate_update_switch_port` — change VLAN, speed, PoE, description (requires approval)
 
+!!! success "Two ways to know what is on a port"
+    **`/api/v2/monitor/user/device/query`** returns `fortiswitch_port_name` and
+    `fortiswitch_serial` per MAC — a real MAC-to-port table. An earlier version
+    of this skill said no such table existed over REST. That was wrong, and the
+    error cost an hour of inferring devices from traffic ratios and the deletion
+    of correct port assignments from documentation.
+
+    The port `description` and the MAC table answer different questions: the
+    description says what *should* be on a port, the table says what *is*.
+    Disagreement means something moved.
+
 !!! danger "MANDATORY — every port you connect or reconfigure gets a description"
     **The switch port `description` is the source of truth for what is plugged
     into that port.** Not the documentation, not NetBox — those are copies
@@ -179,12 +190,10 @@ congestion or reliability makes it worth doing.
     (speed, PoE watts, up/down); it goes stale and the API is authoritative for
     it anyway.
 
-    **Why this is mandatory and not a nicety.** The FortiGate exposes no
-    reliable per-port MAC table over REST, so an undescribed port is genuinely
-    unidentifiable — nothing can tell you what is on it. On 2026-09-08 that cost
-    an hour of deducing devices from traffic ratios, produced two wrong answers
-    and one false alarm, and all of it was avoidable because the ports that
-    *were* described had the answers.
+    **Why this is mandatory and not a nicety.** The MAC table tells you which
+    device is on a port; only the description tells you **what it is for** and
+    what *should* be there. A MAC is not an answer to "is this the right thing,
+    and is it still the thing we put here".
 
     **Especially for unmanaged gear.** A DIN-rail switch, injector or powerline
     adapter has no IP and no CMDB entry — nothing in this estate can discover
