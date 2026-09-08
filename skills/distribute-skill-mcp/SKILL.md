@@ -12,8 +12,19 @@ Every skill or MCP change MUST be reflected in 3 locations. This skill is the ch
 | # | Location | What goes here | Path |
 |---|----------|---------------|------|
 | 1 | **Canonical source** | The skill itself | `~/Developer/atelier-platform/atelier-catalog/skills/<id>/SKILL.md` + `<id>.json` |
-| 2 | **Every repo's `.claude/skills/`** | A **relative symlink** back to the catalog. This is how Claude Code actually loads skills | `<repo>/.claude/skills/<id>` |
-| 3 | **CLAUDE.md / memory** | Only for rules that must apply *without* the skill being loaded | `~/.claude/CLAUDE.md`, `<repo>/CLAUDE.md`, `~/.claude/projects/<project>/memory/` |
+| 2 | **Global Claude Code skills** | An **absolute** symlink. Makes the skill available in *every* session, with no repo prefix | `~/.claude/skills/<id>` |
+| 3 | **Every repo's `.claude/skills/`** | A **relative** symlink. Scopes the skill to work under that repo | `<repo>/.claude/skills/<id>` |
+| 4 | **CLAUDE.md / memory** | Only for rules that must apply *without* the skill being loaded | `~/.claude/CLAUDE.md`, `<repo>/CLAUDE.md`, `~/.claude/projects/<project>/memory/` |
+
+!!! tip "Global vs per-repo — they are not alternatives"
+    `~/.claude/skills/` is what makes a skill appear as plain `decommission`
+    rather than `atelier-catalog:decommission`. Broadly useful Casa Lima ops
+    skills belong there: `decommission`, `deploy-container`, `dns-sync`,
+    `home-docs`, `minecraft-ops`, `observability`, `scheduled-jobs`,
+    `vault-access`.
+
+    Note the link style differs — **absolute** globally, **relative** per repo.
+    Using the wrong one produces a link that dangles the moment anything moves.
 
 !!! warning "Corrections, 2026-09-08"
     Three things this page said were wrong and cost time:
@@ -21,8 +32,12 @@ Every skill or MCP change MUST be reflected in 3 locations. This skill is the ch
     - Paths said `~/Developer/atelier-catalog`. The five Atelier repos moved
       under **`~/Developer/atelier-platform/`** in August 2026.
     - It said *"Claude Code doesn't have a `skills/` directory like OpenCode"*.
-      It does — **ten repos** carry `.claude/skills/<id>` symlinks, and that is
-      the primary distribution mechanism, not CLAUDE.md.
+      It does, in **two** places — `~/.claude/skills/` globally, and
+      `.claude/skills/` in each of ten repos. That is the primary distribution
+      mechanism, not CLAUDE.md.
+
+      A first correction on the same day listed only the per-repo half and was
+      merged before the global one was noticed. Check both.
     - **OpenCode is retired** (2026-08-14). `~/.config/opencode/skills/` is not
       a live target. Do not copy there and do not fix its broken links.
 
@@ -46,7 +61,16 @@ If creating a new skill:
 3. Add entry to `catalog.json` (required fields: catalogID, name, version, description, source, category, tags, author)
 4. If it belongs to a bundle, add the skill ID to the bundle's `skillIds` array in `bundles.json`
 
-### Step 2: Symlink it into every repo
+### Step 2a: Symlink it globally, if it is broadly useful
+
+```bash
+ln -s ~/Developer/atelier-platform/atelier-catalog/skills/<id> ~/.claude/skills/<id>
+```
+
+**Absolute** path here. This is what makes the skill load in any session,
+including in repos that have no `.claude/skills` of their own.
+
+### Step 2b: Symlink it into every repo
 
 This is the step that actually makes the skill loadable. **The relative depth
 differs by location** — getting it wrong produces a dangling link that is
@@ -221,7 +245,8 @@ Use this checklist when distributing any change:
 ### Skill changes
 - [ ] `atelier-catalog/skills/<id>/SKILL.md` updated
 - [ ] `atelier-catalog/catalog.json` version + description updated
-- [ ] symlinked into **all ten** repos' `.claude/skills/`, and none dangle
+- [ ] symlinked into `~/.claude/skills/` (absolute) if broadly useful
+- [ ] symlinked into **all ten** repos' `.claude/skills/` (relative), and none dangle
 - [ ] Claude Code CLAUDE.md or memory updated (if applicable)
 - [ ] Committed to atelier-catalog repo
 
