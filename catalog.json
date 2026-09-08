@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-08-29T15:56:50Z",
+  "lastUpdated": "2026-09-08T10:11:50Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 117,
@@ -341,7 +341,7 @@
         "catalogID": "fortigate",
         "name": "FortiGate",
         "description": "FortiGate 60F firewall — policies, address objects, service objects, DHCP, static routes, VPN, bandwidth stats, system health, FortiSwitch management, and FortiAP/WiFi management via REST API",
-        "version": "2.3.0",
+        "version": "2.4.2",
         "source": "builtIn",
         "transport": "stdio",
         "command": "node",
@@ -355,7 +355,7 @@
           "FORTIGATE_INSECURE_TLS": ""
         },
         "category": "core",
-        "toolCount": 71,
+        "toolCount": 72,
         "runtime": "node",
         "tags": [
           "infrastructure",
@@ -368,7 +368,7 @@
           "fortiap",
           "wifi"
         ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.3.0/fortigate-2.3.0.tar.gz",
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.4.2/fortigate-2.4.2.tar.gz",
         "size": "60KB",
         "checksum": "sha256:placeholder"
       },
