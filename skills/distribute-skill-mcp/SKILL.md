@@ -11,9 +11,22 @@ Every skill or MCP change MUST be reflected in 3 locations. This skill is the ch
 
 | # | Location | What goes here | Path |
 |---|----------|---------------|------|
-| 1 | **Atelier repos** | Canonical source for distribution | `~/Developer/atelier-catalog/skills/` (skills) or `~/Developer/atelier-mcps/` (MCPs) |
-| 2 | **OpenCode** | Global/project skill files consumed by OpenCode sessions | `~/.config/opencode/skills/<id>/SKILL.md` |
-| 3 | **Claude Code** | Project CLAUDE.md or global instructions consumed by Claude Code | `~/.claude/CLAUDE.md` (global) or `<repo>/CLAUDE.md` (project) or `~/.claude/projects/<project>/memory/` (memory files) |
+| 1 | **Canonical source** | The skill itself | `~/Developer/atelier-platform/atelier-catalog/skills/<id>/SKILL.md` + `<id>.json` |
+| 2 | **Every repo's `.claude/skills/`** | A **relative symlink** back to the catalog. This is how Claude Code actually loads skills | `<repo>/.claude/skills/<id>` |
+| 3 | **CLAUDE.md / memory** | Only for rules that must apply *without* the skill being loaded | `~/.claude/CLAUDE.md`, `<repo>/CLAUDE.md`, `~/.claude/projects/<project>/memory/` |
+
+!!! warning "Corrections, 2026-09-08"
+    Three things this page said were wrong and cost time:
+
+    - Paths said `~/Developer/atelier-catalog`. The five Atelier repos moved
+      under **`~/Developer/atelier-platform/`** in August 2026.
+    - It said *"Claude Code doesn't have a `skills/` directory like OpenCode"*.
+      It does — **ten repos** carry `.claude/skills/<id>` symlinks, and that is
+      the primary distribution mechanism, not CLAUDE.md.
+    - **OpenCode is retired** (2026-08-14). `~/.config/opencode/skills/` is not
+      a live target. Do not copy there and do not fix its broken links.
+
+    MCP paths still say `blok-butler`; the repo is **`atelier-butler`**.
 
 **Violation of the 3-places rule = drift.** If one place is updated but the others aren't, agents in different environments get different instructions.
 
@@ -33,22 +46,44 @@ If creating a new skill:
 3. Add entry to `catalog.json` (required fields: catalogID, name, version, description, source, category, tags, author)
 4. If it belongs to a bundle, add the skill ID to the bundle's `skillIds` array in `bundles.json`
 
-### Step 2: Copy to OpenCode global skills
+### Step 2: Symlink it into every repo
+
+This is the step that actually makes the skill loadable. **The relative depth
+differs by location** — getting it wrong produces a dangling link that is
+invisible until the skill tool fails on it:
 
 ```bash
-# Create directory if new
-mkdir -p ~/.config/opencode/skills/<skill-id>/
+# The five repos under atelier-platform/ — three levels up lands in atelier-platform/
+for r in atelier-butler atelier-bridge atelier-companion atelier-mcps; do
+  ln -s ../../../atelier-catalog/skills/<id> \
+        ~/Developer/atelier-platform/$r/.claude/skills/<id>
+done
 
-# Copy the skill file
-cp ~/Developer/atelier-catalog/skills/<skill-id>/SKILL.md \
-   ~/.config/opencode/skills/<skill-id>/SKILL.md
+# atelier-catalog links to itself — only two levels
+ln -s ../../skills/<id> \
+      ~/Developer/atelier-platform/atelier-catalog/.claude/skills/<id>
+
+# Repos outside atelier-platform/ — three levels up lands in ~/Developer/
+for r in home-docs torneva HomeColor minecraft-server homebridge-pando-hood; do
+  ln -s ../../../atelier-platform/atelier-catalog/skills/<id> \
+        ~/Developer/$r/.claude/skills/<id>
+done
 ```
 
-OpenCode skills are only `SKILL.md` files — no catalog, no manifest.
+**Then prove none of them dangle** — this check has caught real ghosts twice:
 
-### Step 3: Update Claude Code references
+```bash
+find ~/Developer/*/.claude/skills \
+     ~/Developer/atelier-platform/*/.claude/skills \
+     -maxdepth 1 -type l ! -exec test -e {} \; -print
+```
 
-Claude Code doesn't have a `skills/` directory like OpenCode. Instead:
+`.claude/skills` is **version-controlled in all ten repos**, so the symlinks must
+be committed. A working copy that resolves while the committed path does not
+means a fresh clone gets broken links — which was true of three repos from
+August 2026 until 2026-09-08.
+
+### Step 3: CLAUDE.md and memory — only when the rule must apply unloaded
 
 - **Global rules**: `~/.claude/CLAUDE.md` — add references to new skills/MCPs if they affect all projects
 - **Project rules**: `<repo>/CLAUDE.md` — add skill-specific instructions if they affect a specific repo
@@ -186,7 +221,7 @@ Use this checklist when distributing any change:
 ### Skill changes
 - [ ] `atelier-catalog/skills/<id>/SKILL.md` updated
 - [ ] `atelier-catalog/catalog.json` version + description updated
-- [ ] `~/.config/opencode/skills/<id>/SKILL.md` copied
+- [ ] symlinked into **all ten** repos' `.claude/skills/`, and none dangle
 - [ ] Claude Code CLAUDE.md or memory updated (if applicable)
 - [ ] Committed to atelier-catalog repo
 
@@ -206,7 +241,7 @@ Use this checklist when distributing any change:
 
 | Change type | Places affected |
 |------------|----------------|
-| New skill | atelier-catalog (skills/<id>/SKILL.md + catalog.json) → OpenCode skill dir → Claude Code CLAUDE.md |
+| New skill | catalog (`skills/<id>/` + `<id>.json`, then `build-catalog.py`) → symlink into all ten repos → commit in each |
 | Skill update | Same 3 places, update content + version in catalog |
 | New MCP | blok-butler (source) → atelier-mcps (dist + manifest + catalog) → OpenCode/Claude MCP configs |
 | MCP bug fix | blok-butler (source + build) → atelier-mcps (dist + version bump) → restart sessions |
