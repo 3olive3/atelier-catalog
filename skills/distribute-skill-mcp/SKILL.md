@@ -29,7 +29,7 @@ Every skill or MCP change MUST be reflected in 3 locations. This skill is the ch
 !!! warning "Corrections, 2026-09-08"
     Three things this page said were wrong and cost time:
 
-    - Paths said `~/Developer/atelier-catalog`. The five Atelier repos moved
+    - Paths said `~/Developer/atelier-platform/atelier-catalog`. The five Atelier repos moved
       under **`~/Developer/atelier-platform/`** in August 2026.
     - It said *"Claude Code doesn't have a `skills/` directory like OpenCode"*.
       It does, in **two** places — `~/.claude/skills/` globally, and
@@ -52,11 +52,11 @@ Every skill or MCP change MUST be reflected in 3 locations. This skill is the ch
 Edit the SKILL.md in the atelier-catalog repo:
 
 ```
-~/Developer/atelier-catalog/skills/<skill-id>/SKILL.md
+~/Developer/atelier-platform/atelier-catalog/skills/<skill-id>/SKILL.md
 ```
 
 If creating a new skill:
-1. Create directory: `~/Developer/atelier-catalog/skills/<skill-id>/`
+1. Create directory: `~/Developer/atelier-platform/atelier-catalog/skills/<skill-id>/`
 2. Write `SKILL.md` with YAML frontmatter (`name`, `description`) + markdown body
 3. Add entry to `catalog.json` (required fields: catalogID, name, version, description, source, category, tags, author)
 4. If it belongs to a bundle, add the skill ID to the bundle's `skillIds` array in `bundles.json`
@@ -119,7 +119,7 @@ For skills that define **procedures** (like deploy-container, vault-access), ens
 
 ```bash
 # Atelier catalog repo
-cd ~/Developer/atelier-catalog
+cd ~/Developer/atelier-platform/atelier-catalog
 git add skills/<skill-id>/SKILL.md catalog.json
 git commit -m "feat: add <skill-id> skill to catalog"
 
@@ -142,7 +142,7 @@ npm run build
 ```bash
 # Copy built output
 cp ~/Developer/blok-butler/mcp/<mcp-name>/dist/index.js \
-   ~/Developer/atelier-mcps/mcps/<mcp-name>/dist/
+   ~/Developer/atelier-platform/atelier-mcps/mcps/<mcp-name>/dist/
 
 # Update manifest.json version + description if changed
 # Update catalog.json version + description if changed
@@ -150,7 +150,7 @@ cp ~/Developer/blok-butler/mcp/<mcp-name>/dist/index.js \
 
 Commit on develop branch:
 ```bash
-cd ~/Developer/atelier-mcps
+cd ~/Developer/atelier-platform/atelier-mcps
 git checkout develop
 git add mcps/<mcp-name>/ catalog.json
 git commit -m "fix: bump <mcp-name> MCP to vX.Y.Z"
