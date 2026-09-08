@@ -85,6 +85,11 @@ Policies control inter-VLAN traffic. Key principle: **deny by default, allow by 
 
 ## FortiSwitch & FortiAP
 
+!!! tip "For anything physical, use `home-electrical`"
+    Where a room is, which panel or breaker feeds it, which phase, the racks and
+    the 24 V layer — that is a sibling skill. The two meet at the DIN-rail panel
+    switches, the Shelly i4 controllers and PoE draw.
+
 ### Physical topology
 
 Two layers, and they are managed completely differently:
