@@ -98,9 +98,24 @@ FortiGate
   └─ SW2 (S424EPTF21001049)  ← standby: uplinks only, no access ports in use
 ```
 
-**SW1 carries everything.** SW2 has no device ports in use — every port from
-`port2` to `port22` is down and on `vsw.fortilink`. Treat it as spare capacity,
-not as half the estate.
+**SW1 carries every device today, but that is circumstance, not design.** SW2 is
+a **standby**: its access ports simply have not been needed yet. When they are,
+the load gets balanced across both rather than SW2 staying idle.
+
+!!! warning "Keep SW2 mirrored, or it is not a standby"
+    Until 2026-09-08 SW2's 15 access ports sat on `vsw.fortilink` with no VLAN
+    and no description, so a cable moved from SW1 would have landed on the
+    fabric VLAN with no connectivity. It read as protection and was not — the
+    same shape as a backup that has never been restored.
+
+    They are mirrored now. **Whenever you change an access port on SW1, re-run**
+    `atelier-butler/infra/scripts/mirror-switch-config.py` (dry run by default,
+    `--apply` to write) so SW2 follows.
+
+    SW2's descriptions are deliberately *not* copies. They read
+    `STANDBY - mirrors SW1 port9 (AP SUITE)` — true as written, since nothing is
+    plugged in. Overwrite one with the real device name the moment you connect
+    something there.
 
 #### The DIN-rail switches, one per electrical panel
 
