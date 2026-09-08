@@ -85,6 +85,55 @@ Policies control inter-VLAN traffic. Key principle: **deny by default, allow by 
 
 ## FortiSwitch & FortiAP
 
+### Physical topology
+
+Two layers, and they are managed completely differently:
+
+```
+FortiGate
+  └─ SW1 (S424EPTF21000991)  ← every access port in the house lands here
+       ├─ port9-12   the 4 FortiAPs (PoE)
+       ├─ port17-20  uplinks to the 4 DIN-rail switches, one per electrical panel
+       └─ port23/24  ISL to SW2 · FortiLink
+  └─ SW2 (S424EPTF21001049)  ← standby: uplinks only, no access ports in use
+```
+
+**SW1 carries everything.** SW2 has no device ports in use — every port from
+`port2` to `port22` is down and on `vsw.fortilink`. Treat it as spare capacity,
+not as half the estate.
+
+#### The DIN-rail switches, one per electrical panel
+
+Each electrical panel gets a small **unmanaged PoE switch on DIN rail**, serving
+anything in that panel that needs **wired ethernet or PoE** — cameras today,
+and panel-mounted IoT such as Shelly Pro relays, which are DIN-rail devices with
+an ethernet port.
+
+| Panel | SW1 uplink | Port description | State |
+|---|---|---|---|
+| LP1 | port17 | `LP1 Switch DinRail` | **live** — 5 wired Aqara cameras |
+| LP0 | port18 | `LP0 Switch DinRail` | wired, nothing connected |
+| RP0 | port19 | `RP0 Switch DinRail` | wired, nothing connected |
+| RP1 | port20 | `RP1 Switch DinRail` | wired, nothing connected |
+
+`LP`/`RP` are the house's own panel codes, used consistently in device names too
+(`i4-EscadasLP1-08`, `i4-ArrumosRP1-41`). **What the letters stand for has never
+been written down** — see the network roadmap's known unknowns.
+
+!!! warning "These switches are invisible to every API here"
+    No IP, no management interface, no CMDB entry of their own. Nothing can
+    discover them. They exist as a FortiSwitch port with several MAC addresses
+    behind it, plus the label that port carries — **the uplink description is
+    the entire record that the switch exists at all.**
+
+    So a device moving onto one of these does not just need its own note: the
+    uplink port description must stay accurate about what the panel now serves.
+
+**Currently on Wi-Fi but wired-capable**: all five Shelly Pro 2 relays
+(`10.1.6.59-62`, `.78`) sit on `homekit_*` SSIDs today. They are DIN-rail units
+in panels, so moving them onto the panel switch is available whenever radio
+congestion or reliability makes it worth doing.
+
 ### Switches
 - Managed via FortiGate switch-controller
 - `fortigate_list_managed_switches` — inventory
