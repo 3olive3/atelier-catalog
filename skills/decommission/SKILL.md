@@ -130,6 +130,59 @@ find ~/Developer/atelier-platform/*/.claude/skills -maxdepth 1 -type l \
   ! -exec test -e {} \; -print
 ```
 
+### Moving or renaming a repository or directory
+
+A move decommissions the **old path**, and every reference to it is now an
+orphan. The trap is specific and it caught this estate three times over:
+
+!!! danger "Repairing your working copy is not repairing the repo"
+    When a path changes, people fix the file in front of them so their machine
+    keeps working. The **committed** version stays wrong, nobody notices because
+    their own clone is fine, and anyone cloning fresh gets a broken config.
+
+    The Atelier repos moved under `atelier-platform/` in **August 2026**. On
+    **2026-09-08**, a month later:
+
+    - Three repos had `.claude/skills` symlinks that resolved locally while
+      their committed paths did not
+    - Three repos had `.mcp.json` files in the same state
+    - `torneva` was never corrected even locally — its `vaultwarden` MCP had
+      simply been unavailable since the move
+    - `homebridge-pando-hood` pointed at `mcp/homekit/`, which had *also* been
+      renamed to `mcp/homebridge/`. The earlier fix corrected the prefix and
+      not the name, so that MCP was dead for a month
+
+| Also check | Where |
+|---|---|
+| MCP server paths | `.mcp.json` in **every** repo — `args`, and any `env` carrying a path |
+| Skill symlinks | `.claude/skills/*` — relative depth changes with the move, so a mechanical prefix swap is not enough |
+| Scripts sourcing files by absolute path | `infra/scripts/` — `populate-netbox-interfaces.py` loaded its `.env` from the pre-move path and would have silently failed |
+| Docs and CLAUDE.md | every `~/Developer/<old>` reference |
+| Cron entries | `infra/configs/cron/casa-lima` |
+| A rename *inside* the move | the thing may have been renamed too. Fixing the prefix and keeping the old name leaves it just as broken |
+
+Prove it by resolving, not by reading the diff:
+
+```bash
+# every MCP path in every repo actually exists
+for d in ~/Developer/*/ ~/Developer/atelier-platform/*/; do
+  [ -f "$d/.mcp.json" ] || continue
+  python3 - "$d" <<'PY'
+import json, os, sys
+d = sys.argv[1]
+c = json.load(open(os.path.join(d, ".mcp.json")))
+for n, cfg in (c.get("mcpServers") or {}).items():
+    t = next((a for a in (cfg.get("args") or []) if a.endswith(".js")), None)
+    if t and not os.path.exists(t):
+        print(f"BROKEN {os.path.basename(d.rstrip('/'))}: {n} -> {t}")
+PY
+done
+```
+
+**Then confirm the fix is committed, not just present.** `git status` in each
+repo — a clean working tree with a wrong committed file looks identical to a
+correct one until someone clones.
+
 ## Orphan sweeps
 
 Run these periodically, not only during a removal. Each one has found real rot.
@@ -164,6 +217,11 @@ grep -l '<Name>' /boot/config/plugins/dockerMan/templates-user/*.xml \
 allow-list but defined in no `.mcp.json`, and `.claude/skills/` symlinks
 pointing at deleted catalog entries. Both keep looking real right up until
 something tries to use them. Sweeps for each are in the two sections above.
+
+**Paths that no longer resolve after a move** — MCP entrypoints and skill
+symlinks pointing at pre-move locations. Run the resolver above. On 2026-09-08
+it found seven broken references across four repos, a month after the move that
+caused them, and one of them had never worked since.
 
 ## Verification
 
