@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-09-29T21:40:02Z",
+  "lastUpdated": "2026-09-29T23:57:53Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 119,
@@ -718,7 +718,7 @@
         "catalogID": "unraid",
         "name": "UNRAID",
         "description": "UNRAID server management — containers, VMs, shares, disks, temperatures, and system commands via SSH",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "source": "builtIn",
         "transport": "stdio",
         "command": "node",
@@ -732,7 +732,7 @@
           "UNRAID_PASSWORD": ""
         },
         "category": "core",
-        "toolCount": 24,
+        "toolCount": 33,
         "runtime": "node",
         "tags": [
           "infrastructure",
@@ -741,9 +741,9 @@
           "virtualization",
           "storage"
         ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unraid-2.0.0.tar.gz",
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.1.0/unraid-2.1.0.tar.gz",
         "size": "3KB",
-        "checksum": "sha256:6eb2cf850845c1963c476c97a0ff91eb8d2a809bfffb2df56e30e5c48289bf42"
+        "checksum": "sha256:placeholder"
       },
       {
         "catalogID": "uptime-kuma",
