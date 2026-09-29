@@ -1,7 +1,7 @@
 {
   "catalogID": "shelly",
   "name": "Shelly",
-  "description": "Shelly device management — energy monitoring, power metrics, switch control, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
+  "description": "Shelly device management — energy monitoring, power metrics, switch control, remote reboot, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
   "version": "2.0.0",
   "source": "builtIn",
   "transport": "stdio",
@@ -14,7 +14,7 @@
     "SHELLY_TIMEOUT": ""
   },
   "category": "ops",
-  "toolCount": 12,
+  "toolCount": 13,
   "runtime": "node",
   "tags": [
     "smart-home",
@@ -23,6 +23,6 @@
     "switches"
   ],
   "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/shelly-2.0.0.tar.gz",
-  "size": "28KB",
-  "checksum": "sha256:placeholder"
+  "size": "2KB",
+  "checksum": "sha256:d0181e809539a1a95c531b14c9bc7cc768e6bce83e660615732ea0b0fd36d934"
 }

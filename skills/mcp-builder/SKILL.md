@@ -11,7 +11,7 @@ license: Complete terms in LICENSE.txt
 Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. The quality of an MCP server is measured by how well it enables LLMs to accomplish real-world tasks.
 
 **Distribution rule:** Every new MCP server must be registered in:
-1. `atelier-mcps` catalog (`~/Developer/atelier-mcps/`) — source of truth
+1. `atelier-mcps` catalog (`~/Developer/atelier-platform/atelier-mcps/`) — source of truth
 2. Global Claude Code config (`~/.claude/.mcp.json`) — available across all projects
 3. Global OpenCode config (`AGENTS.md`) — available in OpenCode sessions
 

@@ -25,6 +25,6 @@
     "alerts"
   ],
   "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/uptime-kuma-2.0.0.tar.gz",
-  "size": "35KB",
-  "checksum": "sha256:placeholder"
+  "size": "12KB",
+  "checksum": "sha256:7f4a56b2785a0158cb30d6284900720a60ea8a8af0ff701fff342dc69bdd3876"
 }

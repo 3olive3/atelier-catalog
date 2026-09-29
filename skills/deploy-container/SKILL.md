@@ -18,7 +18,7 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 ## Source of Truth
 
 ```
-~/Developer/atelier-butler/infra/
+~/Developer/atelier-platform/atelier-butler/infra/
 ├── manifests/<layer>/<container>.yml   # Container desired state
 ├── stack.yml                           # Master inventory
 ├── templates/my-*.xml                  # UNRAID XML templates (sanitized)
@@ -302,7 +302,7 @@ bash /mnt/user/repos/atelier-butler/infra/scripts/export-templates.sh
 bash /mnt/user/repos/atelier-butler/infra/scripts/sanitize-templates.sh
 
 # On dev machine: commit
-cd ~/Developer/atelier-butler
+cd ~/Developer/atelier-platform/atelier-butler
 git add infra/templates/my-my-service.xml infra/manifests/
 git commit -m "feat(infra): add my-service container"
 ```

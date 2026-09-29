@@ -1,0 +1,13 @@
+{
+  "catalogID": "home-electrical",
+  "name": "Home Electrical & Physical Layout",
+  "description": "Casa Lima's physical layer — the electrical panels, breakers, phases and 24 V supplies, the room-by-room location model, and the racks. Use for any question about what feeds what, which breaker or phase something is on, where a room is, or how power and network intersect.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": ["electrical", "power", "locations", "racks", "casa-lima-ops", "casa-lima"],
+  "author": "casa-lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/home-electrical/SKILL.md"
+}

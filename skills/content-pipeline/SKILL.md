@@ -158,7 +158,7 @@ Steps 3 and 4 run in parallel after Build completes. All other steps are sequent
 - Visual assets from Stage 6 (scene images, thumbnails)
 - Content format specifications
 
-**Tools:** n8n workflows (`n8n-workflows` skill)
+**Tools:** none currently — this stage was built on n8n, which is **decommissioned**, and the `n8n-workflows` skill it referenced no longer exists. Rebuild on `atelier-butler/infra/scripts/` before running this stage.
 
 **Output:**
 - Assembled video files (one per video format: explainer MP4, brief MP4)
@@ -185,7 +185,7 @@ Steps 3 and 4 run in parallel after Build completes. All other steps are sequent
 - Thumbnails from Stage 6
 - Feature metadata (name, description, tags)
 
-**Tools:** n8n workflows (`n8n-workflows` skill)
+**Tools:** none currently — this stage was built on n8n, which is **decommissioned**, and the `n8n-workflows` skill it referenced no longer exists. Rebuild on `atelier-butler/infra/scripts/` before running this stage.
 
 **Output:**
 - Published URLs for each platform

@@ -1,0 +1,20 @@
+{
+  "catalogID": "scheduled-jobs",
+  "name": "Scheduled Jobs",
+  "description": "Writing a new cron job, collector or maintenance script for Casa Lima — where credentials come from, why it must be bash, how to emit metrics, where to document it, and the proof it has to pass before it counts as done.",
+  "version": "1.0.0",
+  "source": "builtIn",
+  "category": "devops",
+  "tags": [
+    "cron",
+    "scripts",
+    "automation",
+    "unraid",
+    "observability",
+    "casa-lima"
+  ],
+  "author": "casa-lima",
+  "license": "MIT",
+  "sourceURL": "https://github.com/3olive3/atelier-catalog",
+  "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/scheduled-jobs/SKILL.md"
+}
