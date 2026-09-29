@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-09-08T10:11:50Z",
+  "lastUpdated": "2026-09-29T21:40:02Z",
   "mcps": [
     {
       "id": "cloudflare",
@@ -107,9 +107,9 @@
     {
       "id": "ipam",
       "name": "NetBox",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "description": "Atelier Butler MCP Server for NetBox — AI-native interface for IP address management, network prefixes, VLANs, devices, and infrastructure inventory",
-      "toolCount": 23,
+      "toolCount": 30,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -118,7 +118,7 @@
         "infrastructure",
         "inventory"
       ],
-      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.1.0/ipam-2.1.0.tar.gz",
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/ipam-2.2.0.tar.gz",
       "size": "unknown",
       "checksum": "sha256:placeholder"
     },
@@ -167,7 +167,7 @@
       "name": "Minecraft",
       "version": "1.0.0",
       "description": "Atelier Butler MCP Server for Minecraft Paper — AI-native interface for server management via RCON + SSH",
-      "toolCount": 26,
+      "toolCount": 29,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
