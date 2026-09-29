@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-09-08T12:39:39Z",
+  "lastUpdated": "2026-09-29T21:40:02Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 119,
@@ -437,7 +437,7 @@
         "catalogID": "ipam",
         "name": "NetBox",
         "description": "Atelier Butler MCP Server for NetBox — AI-native interface for IP address management, network prefixes, VLANs, devices, and infrastructure inventory",
-        "version": "2.1.0",
+        "version": "2.2.0",
         "source": "builtIn",
         "transport": "stdio",
         "command": "node",
@@ -449,7 +449,7 @@
           "NETBOX_TOKEN": ""
         },
         "category": "networking",
-        "toolCount": 23,
+        "toolCount": 30,
         "runtime": "node",
         "tags": [
           "networking",
@@ -457,7 +457,7 @@
           "infrastructure",
           "inventory"
         ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.1.0/ipam-2.1.0.tar.gz",
+        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/ipam-2.2.0.tar.gz",
         "size": "unknown",
         "checksum": "sha256:placeholder"
       },
@@ -551,7 +551,7 @@
           "MINECRAFT_CONTAINER": ""
         },
         "category": "gaming",
-        "toolCount": 26,
+        "toolCount": 29,
         "runtime": "node",
         "tags": [
           "gaming",
