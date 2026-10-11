@@ -14,6 +14,8 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 3. **No firewall changes** without explicit user approval.
 4. **No secrets** in git, logs, or chat. Fetch from Vaultwarden at deploy time.
 5. **Present the plan** before executing.
+6. **Never recreate a container from Unraid's UI** — not Update, Force update, or Edit → Apply. They rebuild it from the boot-config XML, where every vault-backed secret is the literal `__VAULTWARDEN__`; only `deploy-container.sh` fills the real values in. The container then usually keeps running on the placeholder and nothing notices (2026-10-11: four found, one of them Vaultwarden's own admin token). Updates and recreates go through Butler — Console → **Containers** (Update / Recreate, with approval) or `unraid.update_container` / `unraid.redeploy_container`. Start, Stop and Restart in Unraid are fine: they reuse the existing container.
+7. **Every `__VAULTWARDEN__` in the template must be declared** under `secrets:` in the manifest. Since 2026-10-11 `deploy-container.sh` refuses to deploy with any left over and names it; before that, an undeclared one (mariadb `MYSQL_PASSWORD`) was deployed as the literal placeholder without a word. `ContainerOnPlaceholderSecret` alerts on any running container that has one.
 
 ## Source of Truth
 
