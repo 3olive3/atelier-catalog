@@ -324,6 +324,9 @@ nginx_create_proxy_host(domain="my-service.3olive3.com", upstream="10.1.3.100:80
 uptime_kuma_create_monitor(name="My Service (description)", url="https://my-service.3olive3.com", interval=60)
 ```
 
+!!! warning "NPM cannot reach a new port until the FortiGate allows it"
+    NPM sits in the DMZ (10.10.10.1) and reaches TOWER through FortiGate policy #50, which allows only the ports in the service group `3OLIVE3_NGINX_PROXY`. A new published port needs a service object (`Name_PORT`) added to that group. Until then the proxy times out, even though the container answers locally. Authentik :9000 hit this on 2026-10-11, and `check-service-wiring.sh` reports it as `dead_proxy`. This is a firewall change: present it and get explicit approval first. `update_service_group` replaces the member list, so send the existing members plus the new one, then re-list the group.
+
 ### 7. Commit sanitized XML to git
 
 ```bash
