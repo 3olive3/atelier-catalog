@@ -14,6 +14,33 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 3. **No firewall changes** without explicit user approval.
 4. **No secrets** in git, logs, or chat. Fetch from Vaultwarden at deploy time.
 5. **Present the plan** before executing.
+6. **Never recreate a container from Unraid's UI** — not Update, Force update, or Edit → Apply. They rebuild it from the boot-config XML, where every vault-backed secret is the literal `__VAULTWARDEN__`; only `deploy-container.sh` fills the real values in. The container then usually keeps running on the placeholder and nothing notices (2026-10-11: four found, one of them Vaultwarden's own admin token). Updates and recreates go through Butler — Console → **Containers** (Update / Recreate, with approval) or `unraid.update_container` / `unraid.redeploy_container`. Start, Stop and Restart in Unraid are fine: they reuse the existing container.
+7. **Every `__VAULTWARDEN__` in the template must be declared** under `secrets:` in the manifest. Since 2026-10-11 `deploy-container.sh` refuses to deploy with any left over and names it; before that, an undeclared one (mariadb `MYSQL_PASSWORD`) was deployed as the literal placeholder without a word. `ContainerOnPlaceholderSecret` alerts on any running container that has one.
+
+## Container standards (enforced — 2026-10-11)
+
+Every container must meet all eight. They are checked in **three places**, with the same rules, so a new service cannot skip one:
+
+| Standard | What the manifest / box must have |
+|---|---|
+| **manifest** | A manifest whose `name:` equals its file name, with `layer`, `container.image`, `container.template` |
+| **deployed** | Created by `deploy-container.sh` (carries the `casalima.manifest` label) — never Unraid's UI (rule 6) |
+| **secrets** | Every `__VAULTWARDEN__` in the template declared under `secrets:` (`env:` + `vault_item:`/`value:`, or `env_prefix:` + `vault_prefix:`). An entry without `env:` is **silently skipped** by the deploy |
+| **storage** | No read-write bind through `/mnt/user/appdata` or `/mnt/user/system` — use `/mnt/cache/...` (Incident B) |
+| **monitored** | `observability.uptime_kuma.monitor_id: <n>` naming a monitor that exists — or `exempt_reason:` saying why not |
+| **updates** | `lifecycle.version_pinned: false` (Diun tracks it) or `true` with a comment saying why it is pinned |
+| **backup** | `backup.duplicacy: true` or `false` — an explicit decision (`false` + comment for stateless services) |
+| **git** | The sanitized template exported to `infra/templates/` (step 7 below) |
+
+| Where | What happens |
+|---|---|
+| **PR** — `Container standards` GitHub check | `infra/scripts/lint-manifests.sh` on the manifests the PR changes. Fails the PR |
+| **Deploy** — `deploy-container.sh` step 0 | Same lint before anything is pulled or recreated. **Refuses to deploy** and names each problem. `--allow-nonstandard` exists for emergencies and logs that it was used. After a deploy it prints the container's live scorecard ("standards still owed: monitored git") |
+| **Live** — `container-inventory.sh --prom`, every 15 min | `casa_container_standard{name,check}`; **`ContainerStandardViolation`** fires after 6 h. The Console **Containers** page shows a "Normas" column and filter |
+
+Run the lint yourself before opening a PR: `bash infra/scripts/lint-manifests.sh infra/manifests/<layer>/<name>.yml` (needs `yq` v4 — on UNRAID it is installed).
+
+**Order for a new service**, so nothing is ever owed: create the Uptime Kuma monitor **first** (a Docker Container monitor can exist before the container — it shows down for a minute), put its number in `monitor_id` → write the manifest and template → `lint-manifests.sh` → PR → deploy → export the template to git. The deploy's scorecard tells you if anything is still owed. `exempt_reason:` is for services that genuinely have nothing to monitor, not for "later".
 
 ## Source of Truth
 
@@ -138,7 +165,7 @@ observability:
   dashboard: null
   alerts: []
   uptime_kuma:
-    monitor_id: null
+    monitor_id: null           # REQUIRED: the Uptime Kuma monitor number — create the monitor first
 
 dns:
   internal:
@@ -161,6 +188,7 @@ network:
 
 backup:
   appdata: /mnt/cache/appdata/my-service
+  duplicacy: true                      # explicit decision; false + a comment for stateless services
   duplicacy: true
   critical: false
 
@@ -188,8 +216,10 @@ external:
 tags: []
 
 health_check:
-  type: http
-  endpoint: "http://localhost:8080/"
+  type: http                 # http | tcp | docker | none
+  endpoint: "http://localhost:8080/"   # HOST port: the check runs on UNRAID, not in the container
+  # host: my-service.3olive3.com       # if the app rejects Host: localhost (Django ALLOWED_HOSTS → 400)
+  # timeout: 180                       # seconds; default 30. Slow starters (DBs, Django) need more
   interval: 30s
 
 resources:
