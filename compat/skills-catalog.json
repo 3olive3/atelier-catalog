@@ -1,6 +1,6 @@
 {
   "version": "1.3.0",
-  "lastUpdated": "2026-09-08T12:39:39Z",
+  "lastUpdated": "2026-10-12T14:26:14Z",
   "skills": [
     {
       "id": "api-design-principles",
@@ -35,6 +35,24 @@
       ],
       "category": "foundations",
       "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/architecture-decision-records/SKILL.md"
+    },
+    {
+      "id": "atelier-design",
+      "name": "Atelier Design",
+      "version": "1.0.0",
+      "description": "The Atelier brand system and design-system rules: gold mark with a per-component glyph, 'Atelier' + coloured-name wordmark, brand-* tokens, the animated Platform loader and platform page — mandatory for any Atelier UI, icon or new component.",
+      "author": "casa-lima",
+      "license": "MIT",
+      "sourceURL": "https://github.com/3olive3/design-system",
+      "tags": [
+        "atelier",
+        "brand",
+        "design-system",
+        "ui",
+        "casa-lima"
+      ],
+      "category": "frontend",
+      "downloadURL": "https://raw.githubusercontent.com/3olive3/atelier-catalog/main/skills/atelier-design/SKILL.md"
     },
     {
       "id": "backend-architect",
