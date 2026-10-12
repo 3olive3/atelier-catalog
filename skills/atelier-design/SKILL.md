@@ -1,6 +1,6 @@
 ---
 name: atelier-design
-description: "MANDATORY before any UI, icon, logo, favicon, splash or naming work on the Atelier Platform (Console, SSO/Authentik, Guest portal, Bridge, Companion apps, Docs, Telegram bots, the platform page) and for any new Atelier component. The Atelier brand system — gold mark + per-component glyph, 'Atelier' + coloured name wordmark, brand-* tokens, the animated Platform loader — and how to use the shared design system so every Atelier surface looks like one family."
+description: "MANDATORY before any UI, icon, logo, favicon, splash or naming work on the Atelier Platform (Console, SSO/Authentik, Guest portal, Bridge, Models/LiteLLM, Companion apps, Docs, Telegram bots, the platform page) and for any new Atelier component. The Atelier brand system — gold mark + per-component glyph, 'Atelier' + coloured name wordmark, brand-* tokens, the animated Platform loader — and how to use the shared design system so every Atelier surface looks like one family."
 ---
 
 # Atelier design
@@ -45,6 +45,7 @@ import from the design-system repo at build time. The Console builds in Docker o
 | `sso` | SSO | Home Authentication | Impressão (fingerprint) | `auth.3olive3.com` (Authentik brand) |
 | `guest` | Guest | Welcome | Porta aberta (open door) | guest portal, guest Wi-Fi |
 | `bridge` | Bridge | Home Agents | Ponte (arch bridge) | the agents (OpenClaw) |
+| `models` | Models | Model Routing | Encaminhamento (one line in, three out) | LiteLLM: `models.3olive3.com` (its own UI) and the Console's Models section |
 | `companion` | Companion | iOS · iPadOS · tvOS | Telefone + tablet | app icons, launch screens |
 | `docs` | Docs | Home Knowledge | Livro aberto (open book) | `docs.3olive3.com`, and the Console's Docs menu (embedded) |
 | `catalog` | Catalog | Skills & Tools | Camadas (layers) | the Console's Catalog menu (MCP servers + skills) |
