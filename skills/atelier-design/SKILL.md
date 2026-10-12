@@ -46,8 +46,8 @@ import from the design-system repo at build time. The Console builds in Docker o
 | `guest` | Guest | Welcome | Porta aberta (open door) | guest portal, guest Wi-Fi |
 | `bridge` | Bridge | Home Agents | Ponte (arch bridge) | the agents (OpenClaw) |
 | `companion` | Companion | iOS · iPadOS · tvOS | Telefone + tablet | app icons, launch screens |
-| `docs` | Docs | Home Knowledge | Livro aberto (open book) | `docs.3olive3.com`, and the Console's Docs menu |
-| `catalog` | Catalog | Skills & Tools | Camadas (layers) | reserved: no surface until it has its own UI |
+| `docs` | Docs | Home Knowledge | Livro aberto (open book) | `docs.3olive3.com`, and the Console's Docs menu (embedded) |
+| `catalog` | Catalog | Skills & Tools | Camadas (layers) | the Console's Catalog menu (MCP servers + skills) |
 
 ## The Platform loader and the platform page
 
