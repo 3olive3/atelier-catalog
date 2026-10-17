@@ -98,6 +98,9 @@ bash /mnt/user/repos/atelier-butler/infra/scripts/deploy-container.sh <container
 # Skip image pull (useful when image didn't change):
 bash .../deploy-container.sh <container-name> --skip-pull
 
+# Only re-run the manifest's post-update check (after a manual fix):
+bash /mnt/user/repos/atelier-butler/infra/scripts/deploy-container.sh <name> --post-update-only
+
 # Skip post-deploy prune:
 bash .../deploy-container.sh <container-name> --skip-prune
 ```
@@ -201,6 +204,10 @@ owner:
 lifecycle:
   status: active
   version_pinned: false
+  # Optional hooks (cases in infra/scripts/update-hooks.sh, run from the repo root with CONTAINER set):
+  # update_guard: "bash infra/scripts/update-hooks.sh plex-idle"        # batch: not safe now → SKIPPED
+  # pre_update:   "bash infra/scripts/update-hooks.sh backup-sqlite DB"  # batch: backup fails → batch stops
+  # post_update:  "bash infra/scripts/update-hooks.sh homebridge-advertising"  # every deploy, see below
 
 tier: 3
 
@@ -343,6 +350,28 @@ git commit -m "feat(infra): add my-service container"
 ### 8. Create docs page
 
 `home-docs/docs/server/containers/my-service.md` — update `mkdocs.yml` nav, trigger sync.
+
+## Post-update check (`lifecycle.post_update`, 2026-10-17)
+
+The health check proves the container **answers**. It cannot prove it **does its
+job**: Homebridge 2.4 passed it on 2026-10-11 and published nothing over mDNS for
+~6 days. When the job can be checked, declare a `post_update` command:
+
+- `deploy-container.sh` runs it on **every** deploy (single, batch, Console, MCP)
+  **after the health check and before the prune**. It is retried for up to
+  `POST_UPDATE_TIMEOUT` (90 s).
+- Exit 0 means done. Non-zero means **DEPLOYMENT FAILED**. The command must print the reason
+  as its **last line**; that is what the Console job view and the batch summary
+  show.
+- Nothing is rolled back automatically: the new container stays and the old
+  image is kept. Deciding to go back is the human's call.
+- It writes `casa_post_update_check_ok{container}`. A `0` fires
+  `ContainerPostUpdateCheckFailed`, which opens a Butler incident (inbox and Telegram).
+- After a manual fix: `deploy-container.sh <name> --post-update-only` re-runs
+  just the check and clears the alert when it passes.
+
+Write new checks as cases in `infra/scripts/update-hooks.sh`, read-only and
+proven once against a deliberately wrong expectation.
 
 ## Config files (`configs:` block)
 
