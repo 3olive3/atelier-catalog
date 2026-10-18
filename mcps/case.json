@@ -1,0 +1,18 @@
+{
+  "catalogID": "case",
+  "kind": "native",
+  "name": "Cases",
+  "description": "Solved problems as cases (Atelier Memory phase C) — search and read past cases, file a new one after a conversation that solved something.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 3,
+  "runtime": "butler-gateway",
+  "tags": [
+    "memory",
+    "incidents",
+    "knowledge"
+  ],
+  "category": "core"
+}

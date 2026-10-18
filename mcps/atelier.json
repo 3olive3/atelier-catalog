@@ -1,0 +1,21 @@
+{
+  "catalogID": "atelier",
+  "kind": "native",
+  "name": "Atelier",
+  "description": "The Atelier platform's configuration by conversation — Guardian rules, people & levels, initiative and daily brief, model tiers, workflows, platform status. Every write waits for the admin's Aprovar (Ask rule); every other role is blocked.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 16,
+  "runtime": "butler-gateway",
+  "tags": [
+    "platform",
+    "configuration",
+    "guardian",
+    "people",
+    "workflows",
+    "models"
+  ],
+  "category": "core"
+}
