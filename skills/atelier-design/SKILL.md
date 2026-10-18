@@ -40,7 +40,7 @@ import from the design-system repo at build time. The Console builds in Docker o
 | Key | Name | Subtitle | Glyph | Used on |
 |---|---|---|---|---|
 | `platform` | Platform | Home Platform | Oficina (wire diamond, dot) | the loader of every service, `atelier.3olive3.com`, shared docs |
-| `butler` | Butler | Home Intelligence | Laço (bow tie) | Telegram bots and approvals, and the Console's chat with Butler |
+| `butler` | Butler | Home Intelligence | Laço (bow tie) | the control plane, the inbox and notifications, and the house's memory (ADR-0028); Telegram bots and approvals, and the Console's chat with Butler. Memory and notifications use the Butler mark plus a Lucide icon, never a mark of their own |
 | `console` | Console | Control Centre | Mosaico (2×2 tiles) | `console.3olive3.com` |
 | `sso` | SSO | Home Authentication | Impressão (fingerprint) | `auth.3olive3.com` (Authentik brand) |
 | `guest` | Guest | Welcome | Porta aberta (open door) | guest portal, guest Wi-Fi |
@@ -50,7 +50,7 @@ import from the design-system repo at build time. The Console builds in Docker o
 | `docs` | Docs | Home Knowledge | Livro aberto (open book) | `docs.3olive3.com`, and the Console's Docs menu (embedded) |
 | `catalog` | Catalog | Skills & Tools | Camadas (layers) | the Console's Catalog menu (MCP servers + skills) |
 | `guardian` | Guardian | Policy & Access | Escudo e fechadura (shield + keyhole), orchid | the Console's Guardian group (people, guests, service access, permissions, advanced rules) — no own UI, opens its Console section |
-| `harness` | Harness | Home Agents | Prompt vivo (terminal: prompt and steps), jade | where every agent runs (ADR-0029, Claude Agent SDK). No UI yet, so it is not on the platform page or in the switcher |
+| `harness` | Harness | Home Agents | Prompt vivo (terminal: prompt and steps), jade | where every agent runs (ADR-0029, Claude Agent SDK). No UI yet: an "em breve" card on the platform page, left out of the switcher |
 
 ## The Platform loader and the platform page
 
