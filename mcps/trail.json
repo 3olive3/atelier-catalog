@@ -1,0 +1,18 @@
+{
+  "catalogID": "trail",
+  "kind": "native",
+  "name": "Trail",
+  "description": "Search the audit Trail — who called what, with which verdict and result.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 1,
+  "runtime": "butler-gateway",
+  "tags": [
+    "audit",
+    "awareness",
+    "read-only"
+  ],
+  "category": "core"
+}

@@ -1,0 +1,18 @@
+{
+  "catalogID": "wifi",
+  "kind": "native",
+  "name": "Guest WiFi",
+  "description": "Guest WiFi admission — status, the arrivals switch, and admitting a guest with a temporary FortiGate user (after the host approves).",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 4,
+  "runtime": "butler-gateway",
+  "tags": [
+    "network",
+    "guests",
+    "wifi"
+  ],
+  "category": "core"
+}

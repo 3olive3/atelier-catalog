@@ -39,7 +39,7 @@ Both consumers read Markdown, so no transformation is needed. Per-repo `.claude/
 
 ```
 skills/                   # 48 skill dirs — each: <name>.json metadata + SKILL.md content
-mcps/                     # MCP reference metadata (servers live in atelier-butler/mcp/)
+mcps/                     # MCP reference metadata (servers live in atelier-butler/mcp/; kind "native" = served by the Butler gateway itself)
 role-profiles/            # 16 agent archetypes
 guardrails/               # 13 toggle rules
 permissions/              # 3 pre-configured rule sets
@@ -97,7 +97,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 - Updating `SKILL.md` without re-running `build-catalog.py` leaves the catalog version unchanged.
 - `bundles.json` is hand-maintained with **no validation that members exist** — renaming or removing a skill can rot a bundle silently.
 - `compat/` shims have no deprecation timeline. With Designer archived, they are candidates for removal.
-- MCP counts here are reference metadata only. Authoritative: **17 servers / 415 tools** as of 2026-08-16 (fortigate 43 -> 58). Best read off the gateway's own startup log rather than any document — a hardcoded banner in the FortiGate server reported the wrong count for a day. Figures of 397, 400, 19/396, 404, 425 and 436 elsewhere are stale.
+- MCP counts here are reference metadata only, **generated** by `atelier-mcps/scripts/sync-catalog.py` (never hand-edit `mcps/*.json`; then run `scripts/build-catalog.py`). As of 2026-10-18: **29 servers / 506 tools** = 17 package servers / 453 tools (`atelier-butler/mcp/`) + 12 Butler-native servers / 53 tools (`kind: "native"`, `source: "butlerNative"`: `atelier`, `people`, `memory`, `case`, `knowledge`, `inbox`, `incidents`, `trail`, `approvals`, `history`, `workflows`, `wifi` — served by the gateway, no package, no downloadURL). Best read off the gateway's own startup log rather than any document — a hardcoded banner in the FortiGate server reported the wrong count for a day. Figures of 397, 400, 19/396, 404, 425 and 436 elsewhere are stale.
 
 ## More context
 

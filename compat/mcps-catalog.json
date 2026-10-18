@@ -1,7 +1,58 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-09-30T09:09:53Z",
+  "lastUpdated": "2026-10-18T19:14:48Z",
   "mcps": [
+    {
+      "id": "approvals",
+      "kind": "native",
+      "name": "Approvals",
+      "version": "1.0.0",
+      "description": "How the approvals a person asked for ended (an admin sees everyone's).",
+      "toolCount": 1,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "approvals",
+        "awareness",
+        "read-only"
+      ]
+    },
+    {
+      "id": "atelier",
+      "kind": "native",
+      "name": "Atelier",
+      "version": "1.0.0",
+      "description": "The Atelier platform's configuration by conversation — Guardian rules, people & levels, initiative and daily brief, model tiers, workflows, platform status. Every write waits for the admin's Aprovar (Ask rule); every other role is blocked.",
+      "toolCount": 16,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "platform",
+        "configuration",
+        "guardian",
+        "people",
+        "workflows",
+        "models"
+      ]
+    },
+    {
+      "id": "case",
+      "kind": "native",
+      "name": "Cases",
+      "version": "1.0.0",
+      "description": "Solved problems as cases (Atelier Memory phase C) — search and read past cases, file a new one after a conversation that solved something.",
+      "toolCount": 3,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "memory",
+        "incidents",
+        "knowledge"
+      ]
+    },
     {
       "id": "cloudflare",
       "name": "Cloudflare",
@@ -67,6 +118,22 @@
       "checksum": "sha256:placeholder"
     },
     {
+      "id": "history",
+      "kind": "native",
+      "name": "History",
+      "version": "1.0.0",
+      "description": "Questions over the home's events (90 days) — what happened in a window, and the last time something happened.",
+      "toolCount": 2,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "events",
+        "history",
+        "read-only"
+      ]
+    },
+    {
       "id": "homebridge",
       "name": "Homebridge",
       "version": "2.0.0",
@@ -105,6 +172,36 @@
       "checksum": "sha256:placeholder"
     },
     {
+      "id": "inbox",
+      "kind": "native",
+      "name": "Inbox",
+      "version": "1.0.0",
+      "description": "What happened, for the agents — recent notifications, incidents, approvals and jobs, one item in detail, mark read or acknowledged.",
+      "toolCount": 5,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "notifications",
+        "awareness"
+      ]
+    },
+    {
+      "id": "incidents",
+      "kind": "native",
+      "name": "Incidents",
+      "version": "1.0.0",
+      "description": "Incidents with their alert, timeline and investigation finding.",
+      "toolCount": 2,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "incidents",
+        "awareness"
+      ]
+    },
+    {
       "id": "ipam",
       "name": "NetBox",
       "version": "2.2.0",
@@ -140,6 +237,22 @@
       "checksum": "sha256:150276647ec49724f1dfea4ba7dd71cd6bf80049f0f387e2f11d13c85d23aacc"
     },
     {
+      "id": "knowledge",
+      "kind": "native",
+      "name": "Knowledge graph",
+      "version": "1.0.0",
+      "description": "The platform graph (containers, routes, agents, MCP servers, devices, jobs) — search, one entity, and what depends on what. Read-only.",
+      "toolCount": 3,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "knowledge",
+        "platform",
+        "read-only"
+      ]
+    },
+    {
       "id": "media",
       "name": "Media",
       "version": "2.0.0",
@@ -161,6 +274,21 @@
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-2.0.0.tar.gz",
       "size": "95KB",
       "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "memory",
+      "kind": "native",
+      "name": "Atelier Memory",
+      "version": "1.0.0",
+      "description": "The household's memory (ADR-0028) — search, read, remember, forget and export what Butler knows about a person.",
+      "toolCount": 7,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "memory",
+        "personal"
+      ]
     },
     {
       "id": "minecraft",
@@ -224,6 +352,22 @@
       "checksum": "sha256:placeholder"
     },
     {
+      "id": "people",
+      "kind": "native",
+      "name": "People",
+      "version": "1.0.0",
+      "description": "The People page as tools — list and explain people and their access; adding, removing and changing levels always waits for an approval.",
+      "toolCount": 8,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "people",
+        "permissions",
+        "guardian"
+      ]
+    },
+    {
       "id": "shelly",
       "name": "Shelly",
       "version": "2.0.0",
@@ -260,6 +404,22 @@
       "checksum": "sha256:4706753024ed547f34fa2799d4669f58fbbcbf31050716c767c326446be94e99"
     },
     {
+      "id": "trail",
+      "kind": "native",
+      "name": "Trail",
+      "version": "1.0.0",
+      "description": "Search the audit Trail — who called what, with which verdict and result.",
+      "toolCount": 1,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "audit",
+        "awareness",
+        "read-only"
+      ]
+    },
+    {
       "id": "unimus",
       "name": "Unimus",
       "version": "2.0.0",
@@ -280,9 +440,9 @@
     {
       "id": "unraid",
       "name": "UNRAID",
-      "version": "2.2.0",
+      "version": "2.4.0",
       "description": "UNRAID server management — containers, VMs, shares, disks, temperatures, and system commands via SSH",
-      "toolCount": 34,
+      "toolCount": 38,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -292,7 +452,7 @@
         "virtualization",
         "storage"
       ],
-      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/unraid-2.2.0.tar.gz",
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.4.0/unraid-2.4.0.tar.gz",
       "size": "3KB",
       "checksum": "sha256:placeholder"
     },
@@ -333,6 +493,37 @@
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.1.0/vaultwarden-1.1.0.tar.gz",
       "size": "256KB",
       "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "wifi",
+      "kind": "native",
+      "name": "Guest WiFi",
+      "version": "1.0.0",
+      "description": "Guest WiFi admission — status, the arrivals switch, and admitting a guest with a temporary FortiGate user (after the host approves).",
+      "toolCount": 4,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "network",
+        "guests",
+        "wifi"
+      ]
+    },
+    {
+      "id": "workflows",
+      "kind": "native",
+      "name": "Workflows",
+      "version": "1.0.0",
+      "description": "Routines by conversation — a person's agent proposes a workflow, created disabled; it runs only after the admin approves it.",
+      "toolCount": 1,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "workflows",
+        "automation"
+      ]
     }
   ]
 }
