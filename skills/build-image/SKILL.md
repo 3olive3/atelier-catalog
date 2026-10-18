@@ -11,7 +11,7 @@ description: "Build Docker images on UNRAID — BuildKit, multi-core parallelism
 
 1. **BuildKit ON** — always `DOCKER_BUILDKIT=1`. The old "BuildKit crashes on UNRAID" issue is resolved.
 2. **Manifest is source of truth** — every locally-built image has a `build:` section in its manifest at `atelier-butler/infra/manifests/<layer>/<container>.yml`. Read it first.
-3. **Tag must match manifest** — `container.image` in the manifest = the tag you build. XML `<Repository>` must match exactly.
+3. **Tag must match manifest** — `container.image` in the manifest = the tag you build. `deploy-container.sh` syncs the boot XML's `<Repository>` to the manifest image itself (since 2026-10-18) and fails with exit 3 if the recreated container is not on it — check `docker inspect`, not the log.
 4. **Push local images to registry** — any image built on UNRAID (not from Docker Hub/GHCR) must be pushed to `localhost:5000` so it survives daily cleanup.
 5. **No secrets in build args** — use multi-stage builds or runtime env vars instead.
 6. **Present the plan** before executing.
@@ -226,7 +226,7 @@ This skill produces images. The `deploy-container` skill deploys them:
 
 ## Gotchas
 
-- **Tag mismatch** — `container.image` in manifest must match what you build AND the XML `<Repository>`. Mismatches = container won't start.
+- **Tag mismatch** — `container.image` in the manifest must be the tag you build. The deploy syncs the boot XML `<Repository>` to the manifest, so a build pushed under another tag either fails to start or is caught by the post-recreate image check (exit 3). Before 2026-10-18 a stale boot XML silently redeployed the OLD image while the log named the new one.
 - **No python3 on UNRAID** — build scripts must use bash/jq/sed.
 - **Socket mount** — GitHub runner uses `/var/run/docker.sock`. Builds share the host daemon. No Docker-in-Docker.
 - **Cache invalidation** — `COPY . .` busts all subsequent layers. Copy dependency files first.
