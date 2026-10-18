@@ -2,7 +2,7 @@
   "catalogID": "build-image",
   "name": "Build Image",
   "description": "Build Docker images on UNRAID — BuildKit, multi-core parallelism, local registry push/pull, tagging conventions, cache optimization, and long-build patterns. Chains with deploy-container.",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "source": "builtIn",
   "category": "devops",
   "tags": [

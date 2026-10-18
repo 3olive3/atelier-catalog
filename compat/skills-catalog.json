@@ -1,6 +1,6 @@
 {
   "version": "1.3.0",
-  "lastUpdated": "2026-10-12T14:26:14Z",
+  "lastUpdated": "2026-10-18T09:04:17Z",
   "skills": [
     {
       "id": "api-design-principles",
@@ -111,7 +111,7 @@
     {
       "id": "build-image",
       "name": "Build Image",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "description": "Build Docker images on UNRAID — BuildKit, multi-core parallelism, local registry push/pull, tagging conventions, cache optimization, and long-build patterns. Chains with deploy-container.",
       "author": "casa-lima",
       "license": "MIT",
@@ -185,7 +185,7 @@
     {
       "id": "deploy-container",
       "name": "Deploy Container",
-      "version": "1.2.0",
+      "version": "2.0.0",
       "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
       "author": "casa-lima",
       "license": "MIT",

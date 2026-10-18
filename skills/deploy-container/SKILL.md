@@ -14,7 +14,7 @@ description: "The ONLY official way to deploy, update, or redeploy containers on
 3. **No firewall changes** without explicit user approval.
 4. **No secrets** in git, logs, or chat. Fetch from Vaultwarden at deploy time.
 5. **Present the plan** before executing.
-6. **Never recreate a container from Unraid's UI** — not Update, Force update, or Edit → Apply. They rebuild it from the boot-config XML, where every vault-backed secret is the literal `__VAULTWARDEN__`; only `deploy-container.sh` fills the real values in. The container then usually keeps running on the placeholder and nothing notices (2026-10-11: four found, one of them Vaultwarden's own admin token). Updates and recreates go through Butler — Console → **Containers** (Update / Recreate, with approval) or `unraid.update_container` / `unraid.redeploy_container`. Start, Stop and Restart in Unraid are fine: they reuse the existing container.
+6. **Never recreate a container from Unraid's UI** — not Update, Force update, or Edit → Apply. They rebuild it from the boot-config XML, where every vault-backed secret is the literal `__VAULTWARDEN__`; only `deploy-container.sh` fills the real values in. The container then usually keeps running on the placeholder and nothing notices (2026-10-11: four found, one of them Vaultwarden's own admin token). Updates and recreates go through Butler — Console → **Containers** (Update / Recreate, with approval) or `unraid.update_container` / `unraid.redeploy_container`. Start, Stop and Restart in Unraid are fine: they reuse the existing container. **Never edit a container in Unraid's Edit screen either:** since 2026-10-18 every deploy overwrites the boot XML with the git template, so a UI edit is lost on the next deploy.
 7. **Every `__VAULTWARDEN__` in the template must be declared** under `secrets:` in the manifest. Since 2026-10-11 `deploy-container.sh` refuses to deploy with any left over and names it; before that, an undeclared one (mariadb `MYSQL_PASSWORD`) was deployed as the literal placeholder without a word. `ContainerOnPlaceholderSecret` alerts on any running container that has one.
 
 ## Container standards (enforced — 2026-10-11)
@@ -30,7 +30,7 @@ Every container must meet all eight. They are checked in **three places**, with 
 | **monitored** | `observability.uptime_kuma.monitor_id: <n>` naming a monitor that exists — or `exempt_reason:` saying why not |
 | **updates** | `lifecycle.version_pinned: false` (Diun tracks it) or `true` with a comment saying why it is pinned |
 | **backup** | `backup.duplicacy: true` or `false` — an explicit decision (`false` + comment for stateless services) |
-| **git** | The sanitized template exported to `infra/templates/` (step 7 below) |
+| **git** | The template in `infra/templates/my-<name>.xml` — it is the source of the boot XML (step 3 below) |
 
 | Where | What happens |
 |---|---|
@@ -40,7 +40,7 @@ Every container must meet all eight. They are checked in **three places**, with 
 
 Run the lint yourself before opening a PR: `bash infra/scripts/lint-manifests.sh infra/manifests/<layer>/<name>.yml` (needs `yq` v4 — on UNRAID it is installed).
 
-**Order for a new service**, so nothing is ever owed: create the Uptime Kuma monitor **first** (a Docker Container monitor can exist before the container — it shows down for a minute), put its number in `monitor_id` → write the manifest and template → `lint-manifests.sh` → PR → deploy → export the template to git. The deploy's scorecard tells you if anything is still owed. `exempt_reason:` is for services that genuinely have nothing to monitor, not for "later".
+**Order for a new service**, so nothing is ever owed: create the Uptime Kuma monitor **first** (a Docker Container monitor can exist before the container — it shows down for a minute), put its number in `monitor_id` → write the manifest and the git template → `lint-manifests.sh` → PR → deploy (it creates the boot XML from git). The deploy's scorecard tells you if anything is still owed. `exempt_reason:` is for services that genuinely have nothing to monitor, not for "later".
 
 ## Source of Truth
 
@@ -98,34 +98,45 @@ bash /mnt/user/repos/atelier-butler/infra/scripts/deploy-container.sh <container
 # Skip image pull (useful when image didn't change):
 bash .../deploy-container.sh <container-name> --skip-pull
 
+# Only re-run the manifest's post-update check (after a manual fix):
+bash /mnt/user/repos/atelier-butler/infra/scripts/deploy-container.sh <name> --post-update-only
+
 # Skip post-deploy prune:
 bash .../deploy-container.sh <container-name> --skip-prune
 ```
 
-!!! danger "Editing an EXISTING container's XML in git does NOT reach the deploy — read this first"
-    `deploy-container.sh` reads the XML template **exclusively** from `/boot/config/plugins/dockerMan/templates-user/my-<name>.xml` — never from the git-tracked `infra/templates/*.xml` copy, regardless of what the manifest's `template:` field says. The git copy is a one-way **export mirror** (via `export-templates.sh` + `sanitize-templates.sh`, boot → git), not a source the deploy script reads from.
+!!! danger "The git template is the source — every deploy writes it over the boot XML (since 2026-10-18)"
+    **Source of truth:** `infra/templates/my-<name>.xml` in the **local checkout** `/mnt/user/repos/atelier-butler` on UNRAID (kept on `develop` by `sync-repos.sh`), with the manifest's `container.image` as its `<Repository>`. **A deploy needs no GitHub access** — GitHub is only where changes are reviewed and merged.
 
-    If you edit `infra/templates/*.xml` in a PR (adding a `Config` entry, changing a mount, etc.) and merge it, running `deploy-container.sh` **will silently deploy against the old, unedited boot XML** — no error, no warning, the new fields just never materialize as bind mounts/env vars. Confirmed live 2026-08-14: PR #185 added a `tokens.json` bind mount to the git template; the first deploy after merging silently omitted it because the boot XML was never updated to match.
+    **What every deploy does by itself:**
 
-    **Before deploying a merged XML template change**, sync it to the boot path first:
-    ```bash
-    cp /mnt/user/repos/atelier-butler/infra/templates/my-<name>.xml \
-       /boot/config/plugins/dockerMan/templates-user/my-<name>.xml
-    ```
-    Then run `deploy-container.sh <name>` as normal. Verify the fix actually landed by checking the container's real bind mounts/env afterward (`docker inspect <name>`), not just that the script printed `SUCCESS`.
+    1. **Lints the git template.** A template that is unsafe is **not copied** — the deploy warns (`template: …` lines, `Corrected: NOT synced from git…`) and goes on from the boot XML as it is, image still synced. Unsafe means: a masked value or a masked `Default=` holding a literal, a `__VAULTWARDEN__` the manifest does not declare, or a declared secret without its placeholder. A declared secret with no Config at all is only a warning.
+    2. **Copies git (+ manifest image) over the boot XML** `/boot/config/plugins/dockerMan/templates-user/my-<name>.xml` when they differ: timestamped backup (`.bak-<ts>-git-sync`, root-only `/boot`), a sanitized diff in the log (`boot→git: …` lines, masked and declared values never shown), the copy read back, and one line `boot XML synced from git: …`. Mounts, env, ports, network, everything. Secrets stay placeholders on disk and are injected into a temp copy only.
+    3. **Recreates, then checks with `docker inspect`:** new Id, `StartedAt` after the deploy began, `Config.Image` = manifest image with the same image ID that tag has locally, and every mount, env name and the network of the boot XML.
+    4. **Self-heals once:** on a miss it logs `Not converged: <why>`, re-syncs from git, re-injects, recreates a second time and checks again. Only a second miss is `=== DEPLOYMENT FAILED ===`, last line `Deploy check failed: <why>`, **exit 3** — for what a re-sync cannot fix (an image that does not exist, a tag that keeps resolving elsewhere). The batch updater, Console/MCP jobs and `ci-deploy.sh` (which never excuses exit 3) report it.
+    5. **Says what it corrected:** the summary has `Image:` from docker inspect and one `Corrected: …` line per fix.
 
-**What the script does (automated 10 steps):**
-1. Resolves container image, manifest, and XML **from the live boot-config path** (see warning above) OR the hard-coded table / manifest YAML for image+manifest lookup (any container with a manifest works automatically)
-2. Pulls the Docker image (skip with `--skip-pull`)
-3. Reads `secrets:` block from the manifest YAML
-4. Resolves all `vault_item:` secrets from Vaultwarden in **one batch call** (one login, one sync)
-5. Creates a temp XML with secrets injected in place of `__VAULTWARDEN__` placeholders
-6. Recreates the container via UNRAID's `xmlToCommand` PHP pipeline (managed container, UNRAID UI labels)
-7. Applies `casalima.layer`, `casalima.manifest`, `casalima.deployed_at` Docker labels
-8. Health-checks the container (HTTP or Docker status)
-9. Prunes unused images
+    **Consequences:**
 
-**Supported containers:** Any container that has a manifest file under `infra/manifests/<layer>/`. The script derives image, template name, and health URL by parsing the manifest YAML. Hard-coded entries (atelier-*, github-runner-*) take precedence.
+    - **Any change goes into git.** A hand edit of the boot XML, or in Unraid's **Edit** screen, is overwritten by the next deploy.
+    - **Emergency without GitHub:** edit the local checkout on UNRAID (`/mnt/user/repos/atelier-butler/infra/templates/…`), deploy, then upstream the same change by PR, before `sync-repos.sh` needs a fast-forward over it.
+    - **To bring a boot-only change into git** (e.g. something set in the UI before this): `infra/scripts/template-drift.sh --adopt <name>` prints the boot XML sanitized; commit it by PR.
+    - **Drift check:** `infra/scripts/template-drift.sh` (table: SAME / DIFF / LINT / NO_GIT / NO_BOOT), `--diff <name>` for one. It replaces `export-templates.sh` + `sanitize-templates.sh` (boot → git), retired 2026-10-18. Their regex never touched multi-line Configs or the `Default=` attribute, which is how mariadb's live `MYSQL_PASSWORD` ended up in git.
+
+    Why: on 2026-10-18 an atelier-bridge PR bumped the image in the manifest and the git XML; the deploy logged "Image: …2.1.302", passed its health check, and recreated the container on **2.1.292** from the stale boot XML. In 2026-08 a `tokens.json` mount and the MCP catalog mount were added in git and never reached the box. Proof: `infra/scripts/tests/deploy-container-image-truth.sh` (iperf3: one deploy corrects image + env + mount drift; a forced first miss self-heals; a permanent miss is exit 3).
+
+**What the script does:**
+1. Resolves image, manifest and template. **The manifest's `container.image` wins**: the hard-coded table (atelier-*, github-runner-*) only supplies the template, manifest and health URL names
+2. Checks the container standards (`lint-manifests.sh`), then pulls the image (skip with `--skip-pull`; `localhost:5000/…` is never pulled)
+3. **Lints the git template and writes it (+ manifest image) over the boot XML** when they differ — backup, sanitized diff in the log
+4. Reads the `secrets:` block and resolves all `vault_item:` secrets in **one batch call** (one login, one sync)
+5. Creates a temp XML with secrets injected in place of `__VAULTWARDEN__` placeholders (refuses if any is left)
+6. Recreates the container via UNRAID's `xmlToCommand` PHP pipeline, with the `casalima.layer`, `casalima.manifest` and `casalima.deployed_at` labels
+7. **Checks the result with `docker inspect`** (image reference + ID, new Id, fresh start, mounts, env names, network). A miss → re-sync + second recreate; a second miss → DEPLOYMENT FAILED, exit 3
+8. Health-checks the container (HTTP, TCP or running state), then runs `lifecycle.post_update` if the manifest declares one
+9. Prunes unused images, and prints the summary: the **actual running image** and every `Corrected:` line
+
+**Supported containers:** Any container that has a manifest file under `infra/manifests/<layer>/`. The script derives image, template name, and health URL by parsing the manifest YAML. Hard-coded entries (atelier-*, github-runner-*) take precedence for the template name and health URL, never for the image.
 
 ## Creating a New Container — Full Workflow
 
@@ -201,6 +212,10 @@ owner:
 lifecycle:
   status: active
   version_pinned: false
+  # Optional hooks (cases in infra/scripts/update-hooks.sh, run from the repo root with CONTAINER set):
+  # update_guard: "bash infra/scripts/update-hooks.sh plex-idle"        # batch: not safe now → SKIPPED
+  # pre_update:   "bash infra/scripts/update-hooks.sh backup-sqlite DB"  # batch: backup fails → batch stops
+  # post_update:  "bash infra/scripts/update-hooks.sh homebridge-advertising"  # every deploy, see below
 
 tier: 3
 
@@ -243,7 +258,7 @@ Use the `vault-access` skill or the Vaultwarden MCP to create items.
 
 ### 3. Write the XML template
 
-Create the XML at `/boot/config/plugins/dockerMan/templates-user/my-<name>.xml` on UNRAID.
+Create it **in git**: `atelier-butler/infra/templates/my-<name>.xml`. The first deploy writes it to `/boot/config/plugins/dockerMan/templates-user/my-<name>.xml` on UNRAID; you never edit that file.
 
 For every secret in `manifest.secrets[]`, the XML **must** have a `Config` entry with:
 - `Target="<env-name>"` matching the manifest `env:` key exactly
@@ -327,22 +342,35 @@ uptime_kuma_create_monitor(name="My Service (description)", url="https://my-serv
 !!! warning "NPM cannot reach a new port until the FortiGate allows it"
     NPM sits in the DMZ (10.10.10.1) and reaches TOWER through FortiGate policy #50, which allows only the ports in the service group `3OLIVE3_NGINX_PROXY`. A new published port needs a service object (`Name_PORT`) added to that group. Until then the proxy times out, even though the container answers locally. Authentik :9000 hit this on 2026-10-11, and `check-service-wiring.sh` reports it as `dead_proxy`. This is a firewall change: present it and get explicit approval first. `update_service_group` replaces the member list, so send the existing members plus the new one, then re-list the group.
 
-### 7. Commit sanitized XML to git
+### 7. Nothing to export
 
-```bash
-# On UNRAID: export + sanitize
-bash /mnt/user/repos/atelier-butler/infra/scripts/export-templates.sh
-bash /mnt/user/repos/atelier-butler/infra/scripts/sanitize-templates.sh
-
-# On dev machine: commit
-cd ~/Developer/atelier-platform/atelier-butler
-git add infra/templates/my-my-service.xml infra/manifests/
-git commit -m "feat(infra): add my-service container"
-```
+The template was written in git (step 3) and the deploy copied it to the box. `bash /mnt/user/repos/atelier-butler/infra/scripts/template-drift.sh --diff my-service` on UNRAID should say `SAME`.
 
 ### 8. Create docs page
 
 `home-docs/docs/server/containers/my-service.md` — update `mkdocs.yml` nav, trigger sync.
+
+## Post-update check (`lifecycle.post_update`, 2026-10-17)
+
+The health check proves the container **answers**. It cannot prove it **does its
+job**: Homebridge 2.4 passed it on 2026-10-11 and published nothing over mDNS for
+~6 days. When the job can be checked, declare a `post_update` command:
+
+- `deploy-container.sh` runs it on **every** deploy (single, batch, Console, MCP)
+  **after the health check and before the prune**. It is retried for up to
+  `POST_UPDATE_TIMEOUT` (90 s).
+- Exit 0 means done. Non-zero means **DEPLOYMENT FAILED**. The command must print the reason
+  as its **last line**; that is what the Console job view and the batch summary
+  show.
+- Nothing is rolled back automatically: the new container stays and the old
+  image is kept. Deciding to go back is the human's call.
+- It writes `casa_post_update_check_ok{container}`. A `0` fires
+  `ContainerPostUpdateCheckFailed`, which opens a Butler incident (inbox and Telegram).
+- After a manual fix: `deploy-container.sh <name> --post-update-only` re-runs
+  just the check and clears the alert when it passes.
+
+Write new checks as cases in `infra/scripts/update-hooks.sh`, read-only and
+proven once against a deliberately wrong expectation.
 
 ## Config files (`configs:` block)
 
@@ -455,7 +483,9 @@ php /tmp/recreate-container.php my-service my-service --dry-run
 - **SSH MCP 30s timeout** — long ops: `setsid /tmp/script.sh &>/dev/null < /dev/null &`
 - **Icon caching** — change URL in XML to force re-download
 - **`docker inspect` exposes secrets** — never output to users
-- **Git template edits don't reach the deploy without a manual sync** — see the danger box under "Primary Deploy Method" above. `deploy-container.sh` always reads XML from `/boot/config/plugins/dockerMan/templates-user/`, never from `infra/templates/*.xml` directly. Editing-and-merging a template PR alone is not enough.
-- **Config files are NOT auto-applied** — the `configs:` block only takes effect with `--apply-configs`. This is deliberate (see "Config files" above), but it means merging a config change to git does not deploy it. Different from the XML gotcha directly above: XML needs a manual *sync*, configs need an explicit *flag*.
+- **The git template is the source; the boot XML is a copy.** Every deploy overwrites the boot XML from `infra/templates/` in the local checkout. Edits on the box (by hand or in Unraid's Edit screen) are lost on the next deploy — put them in git. A deploy counts as done when `docker inspect` shows the change, which the script itself checks.
+- **`fails its lint — NOT synced` = the git template is unsafe** (literal secret, undeclared placeholder, declared secret without one). The deploy still ran, from the boot XML as it was. Fix the template in git; never put a real secret in it.
+- **Exit 3 = it did not converge even after a re-sync and a second recreate.** The last log line says why (`Deploy check failed: …`). A single miss is corrected automatically and shows up as `Corrected:` in the summary. `DEPLOY_SIMULATE_STALE_BOOT_XML=1|always` exists only for `infra/scripts/tests/deploy-container-image-truth.sh`.
+- **Config files are NOT auto-applied** — the `configs:` block only takes effect with `--apply-configs`. This is deliberate (see "Config files" above), but it means merging a config change to git does not deploy it. Different from the XML, which every deploy syncs from git by itself: configs need an explicit *flag*.
 - **A declared substitution key is replaced everywhere in the file, comments included.** Writing `$SOME_SECRET` in a comment writes the real secret into that comment on the host. Refer to keys without the `$` in prose.
 - **Bind paths matter** — `appdata`/`system` shares (cache-only) **must** use `/mnt/cache/<share>/` prefix. Using `/mnt/user/<share>/` routes through shfs FUSE which has a known POSIX-lock orphan bug that can wedge the entire system. See "Bind Path Conventions" section above.
