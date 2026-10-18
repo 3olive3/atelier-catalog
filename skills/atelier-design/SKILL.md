@@ -1,6 +1,6 @@
 ---
 name: atelier-design
-description: "MANDATORY before any UI, icon, logo, favicon, splash or naming work on the Atelier Platform (Console, SSO/Authentik, Guest portal, Bridge, Models/LiteLLM, Guardian, Companion apps, Docs, Telegram bots, the platform page) and for any new Atelier component. The Atelier brand system — gold mark + per-component glyph, 'Atelier' + coloured name wordmark, brand-* tokens, the animated Platform loader — and how to use the shared design system so every Atelier surface looks like one family."
+description: "MANDATORY before any UI, icon, logo, favicon, splash or naming work on the Atelier Platform (Console, SSO/Authentik, Guest portal, Bridge, Models/LiteLLM, Guardian, Atelier Home apps, Docs, Telegram bots, the platform page) and for any new Atelier component. The Atelier brand system — gold mark + per-component glyph, 'Atelier' + coloured name wordmark, brand-* tokens, the animated Platform loader — and how to use the shared design system so every Atelier surface looks like one family."
 ---
 
 # Atelier design
@@ -46,7 +46,7 @@ import from the design-system repo at build time. The Console builds in Docker o
 | `guest` | Guest | Welcome | Porta aberta (open door) | guest portal, guest Wi-Fi |
 | `bridge` | Bridge | Home Channels | Ponte (arch bridge) | the channels the family talks through (OpenClaw): Telegram DMs, the Butler group, pairing, sessions |
 | `models` | Models | Model Routing | Encaminhamento (one line in, three out) | LiteLLM: `models.3olive3.com` (its own UI) and the Console's Models section |
-| `companion` | Companion | iOS · iPadOS · tvOS | Telefone + tablet | app icons, launch screens |
+| `home` | Home | iOS · iPadOS · tvOS | Telefone + tablet | Atelier Home (ADR-0027, was Companion): the family's Apple app and the HomeKit gateway; app icons, launch screens. The repo stays `atelier-companion` |
 | `docs` | Docs | Home Knowledge | Livro aberto (open book) | `docs.3olive3.com`, and the Console's Docs menu (embedded) |
 | `catalog` | Catalog | Skills & Tools | Camadas (layers) | the Console's Catalog menu (MCP servers + skills) |
 | `guardian` | Guardian | Policy & Access | Escudo e fechadura (shield + keyhole), orchid | the Console's Guardian group (people, guests, service access, permissions, advanced rules) — no own UI, opens its Console section |
