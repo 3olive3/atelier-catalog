@@ -105,30 +105,33 @@ bash /mnt/user/repos/atelier-butler/infra/scripts/deploy-container.sh <name> --p
 bash .../deploy-container.sh <container-name> --skip-prune
 ```
 
-!!! danger "Editing an EXISTING container's XML in git does NOT reach the deploy — read this first"
-    `deploy-container.sh` reads the XML template **exclusively** from `/boot/config/plugins/dockerMan/templates-user/my-<name>.xml` — never from the git-tracked `infra/templates/*.xml` copy, regardless of what the manifest's `template:` field says. The git copy is a one-way **export mirror** (via `export-templates.sh` + `sanitize-templates.sh`, boot → git), not a source the deploy script reads from.
+!!! danger "The container is recreated from the BOOT XML — what is synced for you and what is not"
+    `deploy-container.sh` recreates the container from `/boot/config/plugins/dockerMan/templates-user/my-<name>.xml`, **every field of it**. It never reads the git copy `infra/templates/*.xml` (a one-way export mirror, boot → git, via `export-templates.sh` + `sanitize-templates.sh`).
 
-    If you edit `infra/templates/*.xml` in a PR (adding a `Config` entry, changing a mount, etc.) and merge it, running `deploy-container.sh` **will silently deploy against the old, unedited boot XML** — no error, no warning, the new fields just never materialize as bind mounts/env vars. Confirmed live 2026-08-14: PR #185 added a `tokens.json` bind mount to the git template; the first deploy after merging silently omitted it because the boot XML was never updated to match.
+    **The image is synced automatically (since 2026-10-18).** The manifest's `container.image` is the source of truth. Before the recreate, if the boot XML's `<Repository>` differs from it (`x` and `x:latest` count as the same), the script backs the boot XML up (`my-<name>.xml.bak-<timestamp>-image-sync`, root-only on `/boot`), rewrites `<Repository>`, reads it back, and logs one line: `boot XML image synced: <old> → <new> (manifest is the source; backup …)`. Why: on 2026-10-18 an atelier-bridge PR bumped the image in the manifest and the git XML; the deploy pulled 2.1.302, logged "Image: …2.1.302", passed its health check — and recreated the container on **2.1.292**, because the boot XML still said so. Only `docker inspect` showed it.
 
-    **Before deploying a merged XML template change**, sync it to the boot path first:
+    **Mounts, env, ports, network and every other field are NOT synced.** They carry `__VAULTWARDEN__` placeholders and live values git never sees, so the script only **reports** drift: a `WARNING` listing each difference between the git template and the boot XML (`Config Path:/x: in git, missing on the box`, `Network: git=… boot=…`; masked and `__VAULTWARDEN__` values are ignored, Variable values are named but never printed). Nothing is applied. 2026-08-14: PR #185 added a `tokens.json` mount to the git template; the deploy silently omitted it because the boot XML was never updated. To apply such a change, edit the boot XML by hand after backing it up:
     ```bash
-    cp /mnt/user/repos/atelier-butler/infra/templates/my-<name>.xml \
-       /boot/config/plugins/dockerMan/templates-user/my-<name>.xml
+    X=/boot/config/plugins/dockerMan/templates-user/my-<name>.xml
+    cp -p "$X" "$X.bak-$(date +%Y%m%d-%H%M%S)"
+    # add/change the Config entries in $X — never paste real secret values; keep __VAULTWARDEN__
     ```
-    Then run `deploy-container.sh <name>` as normal. Verify the fix actually landed by checking the container's real bind mounts/env afterward (`docker inspect <name>`), not just that the script printed `SUCCESS`.
+    Then deploy, and check that the drift WARNING is gone.
 
-**What the script does (automated 10 steps):**
-1. Resolves container image, manifest, and XML **from the live boot-config path** (see warning above) OR the hard-coded table / manifest YAML for image+manifest lookup (any container with a manifest works automatically)
-2. Pulls the Docker image (skip with `--skip-pull`)
-3. Reads `secrets:` block from the manifest YAML
-4. Resolves all `vault_item:` secrets from Vaultwarden in **one batch call** (one login, one sync)
-5. Creates a temp XML with secrets injected in place of `__VAULTWARDEN__` placeholders
-6. Recreates the container via UNRAID's `xmlToCommand` PHP pipeline (managed container, UNRAID UI labels)
-7. Applies `casalima.layer`, `casalima.manifest`, `casalima.deployed_at` Docker labels
-8. Health-checks the container (HTTP or Docker status)
-9. Prunes unused images
+    **A deploy is verified by `docker inspect`, not by the log.** After the recreate the script checks the new container: its ID changed, it started after the deploy began, `.Config.Image` is the manifest image, and its image ID is the one that tag points to locally. If any of these fails, it prints `=== DEPLOYMENT FAILED ===` and, as the last line, `Image check failed: <reason>`, then exits **3**. The old image is not pruned. The batch updater, the Console/MCP jobs and `ci-deploy.sh` all treat that as a failure. `ci-deploy.sh` excuses other non-zero exits when the ID changed, but never exit 3. The final summary's `Image:` line is what `docker inspect` reports, not the manifest value. For mounts and env, which nothing checks automatically, verify them yourself with `docker inspect <name>` (never paste its output anywhere: it holds the secrets).
 
-**Supported containers:** Any container that has a manifest file under `infra/manifests/<layer>/`. The script derives image, template name, and health URL by parsing the manifest YAML. Hard-coded entries (atelier-*, github-runner-*) take precedence.
+**What the script does:**
+1. Resolves image, manifest and template. **The manifest's `container.image` wins**: the hard-coded table (atelier-*, github-runner-*) only supplies the template, manifest and health URL names
+2. Checks the container standards (`lint-manifests.sh`), then pulls the image (skip with `--skip-pull`; `localhost:5000/…` is never pulled)
+3. **Syncs the boot XML's `<Repository>` to the manifest image** (backup first), and **reports** any other drift between the git template and the boot XML (never applied)
+4. Reads the `secrets:` block and resolves all `vault_item:` secrets in **one batch call** (one login, one sync)
+5. Creates a temp XML with secrets injected in place of `__VAULTWARDEN__` placeholders (refuses if any is left)
+6. Recreates the container via UNRAID's `xmlToCommand` PHP pipeline, with the `casalima.layer`, `casalima.manifest` and `casalima.deployed_at` labels
+7. **Verifies the running image with `docker inspect`**: new ID, fresh start, manifest image reference and image ID. Otherwise DEPLOYMENT FAILED, exit 3
+8. Health-checks the container (HTTP, TCP or running state), then runs `lifecycle.post_update` if the manifest declares one
+9. Prunes unused images, and prints the summary with the **actual running image**
+
+**Supported containers:** Any container that has a manifest file under `infra/manifests/<layer>/`. The script derives image, template name, and health URL by parsing the manifest YAML. Hard-coded entries (atelier-*, github-runner-*) take precedence for the template name and health URL, never for the image.
 
 ## Creating a New Container — Full Workflow
 
@@ -484,7 +487,8 @@ php /tmp/recreate-container.php my-service my-service --dry-run
 - **SSH MCP 30s timeout** — long ops: `setsid /tmp/script.sh &>/dev/null < /dev/null &`
 - **Icon caching** — change URL in XML to force re-download
 - **`docker inspect` exposes secrets** — never output to users
-- **Git template edits don't reach the deploy without a manual sync** — see the danger box under "Primary Deploy Method" above. `deploy-container.sh` always reads XML from `/boot/config/plugins/dockerMan/templates-user/`, never from `infra/templates/*.xml` directly. Editing-and-merging a template PR alone is not enough.
+- **Git template edits reach the deploy only for the image** — see the danger box under "Primary Deploy Method". The script syncs the boot XML's `<Repository>` to the manifest image by itself; mounts, env and other fields changed in `infra/templates/*.xml` are only **reported** as drift and must be put into the boot XML by hand (back it up first). A deploy counts as done when `docker inspect` shows the change, not when the log says SUCCESS.
+- **Exit 3 = the container is not on the manifest image.** It was recreated, but `docker inspect` disagrees with the manifest (the last log line says why). Do not retry blindly; read the reason. `DEPLOY_SIMULATE_STALE_BOOT_XML=1` exists only for `infra/scripts/tests/deploy-container-image-truth.sh`.
 - **Config files are NOT auto-applied** — the `configs:` block only takes effect with `--apply-configs`. This is deliberate (see "Config files" above), but it means merging a config change to git does not deploy it. Different from the XML gotcha directly above: XML needs a manual *sync*, configs need an explicit *flag*.
 - **A declared substitution key is replaced everywhere in the file, comments included.** Writing `$SOME_SECRET` in a comment writes the real secret into that comment on the host. Refer to keys without the `$` in prose.
 - **Bind paths matter** — `appdata`/`system` shares (cache-only) **must** use `/mnt/cache/<share>/` prefix. Using `/mnt/user/<share>/` routes through shfs FUSE which has a known POSIX-lock orphan bug that can wedge the entire system. See "Bind Path Conventions" section above.
