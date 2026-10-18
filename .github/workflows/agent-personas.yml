@@ -1,0 +1,24 @@
+name: Agent personas
+
+# Reviewed persona files for the Bridge workspaces and their installer. The test
+# proves: dry run writes nothing, --apply backs up and writes, a second --apply
+# changes nothing, Butler-generated blocks survive, TOOLS/AGENTS/MEMORY untouched.
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'agent-personas/**'
+      - 'scripts/install-agent-personas.sh'
+      - 'scripts/test-install-agent-personas.sh'
+      - '.github/workflows/agent-personas.yml'
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer proof
+        run: bash scripts/test-install-agent-personas.sh

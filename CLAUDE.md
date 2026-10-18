@@ -39,6 +39,7 @@ Both consumers read Markdown, so no transformation is needed. Per-repo `.claude/
 
 ```
 skills/                   # 48 skill dirs — each: <name>.json metadata + SKILL.md content
+agent-personas/           # reviewed IDENTITY/SOUL/USER for the Atelier agents (Bridge workspaces are not in git) + scripts/install-agent-personas.sh
 mcps/                     # MCP reference metadata (servers live in atelier-butler/mcp/)
 role-profiles/            # 16 agent archetypes
 guardrails/               # 13 toggle rules
