@@ -39,6 +39,7 @@ Both consumers read Markdown, so no transformation is needed. Per-repo `.claude/
 
 ```
 skills/                   # 48 skill dirs — each: <name>.json metadata + SKILL.md content
+agent-skills/             # the `casa` plugin for household agents on the Atelier Harness (text only, linted, pinned by digest) — see its README
 mcps/                     # MCP reference metadata (servers live in atelier-butler/mcp/)
 role-profiles/            # 16 agent archetypes
 guardrails/               # 13 toggle rules
@@ -71,6 +72,10 @@ python3 scripts/build-catalog.py
 - Skills were merged in from the archived `atelier-skills` repo (2026-03-16); this is the live one.
 
 > `atelier` (Designer) is **archived** and no longer fetches `catalog.json`.
+
+## Agent skills (`agent-skills/`)
+
+Skills for the **household agents** (not operator skills): one `SKILL.md` per skill, pt-PT, loaded by the Atelier Harness as the local plugin `casa`. Text only — `node scripts/lint-agent-skills.mjs` refuses hooks, `.mcp.json`, agents, commands, scripts, links and secrets (CI: `.github/workflows/agent-skills.yml`, negative test `scripts/test-lint-agent-skills.sh`). The Harness loads it only when `node scripts/agent-skills-digest.mjs` equals its pin `HARNESS_AGENT_SKILLS_DIGEST` (atelier-butler manifest), so a change here needs a pin bump + Harness redeploy.
 
 ## Authoring conventions
 
