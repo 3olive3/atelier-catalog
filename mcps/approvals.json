@@ -1,0 +1,18 @@
+{
+  "catalogID": "approvals",
+  "kind": "native",
+  "name": "Approvals",
+  "description": "How the approvals a person asked for ended (an admin sees everyone's).",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 1,
+  "runtime": "butler-gateway",
+  "tags": [
+    "approvals",
+    "awareness",
+    "read-only"
+  ],
+  "category": "core"
+}

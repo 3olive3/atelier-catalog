@@ -1,0 +1,18 @@
+{
+  "catalogID": "knowledge",
+  "kind": "native",
+  "name": "Knowledge graph",
+  "description": "The platform graph (containers, routes, agents, MCP servers, devices, jobs) — search, one entity, and what depends on what. Read-only.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 3,
+  "runtime": "butler-gateway",
+  "tags": [
+    "knowledge",
+    "platform",
+    "read-only"
+  ],
+  "category": "core"
+}

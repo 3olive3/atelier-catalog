@@ -1,0 +1,18 @@
+{
+  "catalogID": "people",
+  "kind": "native",
+  "name": "People",
+  "description": "The People page as tools — list and explain people and their access; adding, removing and changing levels always waits for an approval.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 8,
+  "runtime": "butler-gateway",
+  "tags": [
+    "people",
+    "permissions",
+    "guardian"
+  ],
+  "category": "core"
+}

@@ -110,6 +110,22 @@ def build_compat_mcps(mcp_entries: list[dict]) -> dict:
     """
     compat_entries = []
     for entry in mcp_entries:
+        if entry.get("kind") == "native":
+            # Butler-native server (atelier, people, memory, …): reached through
+            # Butler's one MCP endpoint, never downloaded — no downloadURL.
+            compat_entries.append({
+                "id": entry["catalogID"],
+                "kind": "native",
+                "name": entry["name"],
+                "version": entry.get("version", "1.0.0"),
+                "description": entry["description"],
+                "toolCount": entry.get("toolCount", 0),
+                "runtime": entry.get("runtime", "butler-gateway"),
+                "transport": entry.get("transport", "butler"),
+                "endpoint": entry.get("endpoint", "/api/v1/butler/mcp"),
+                "tags": entry.get("tags", []),
+            })
+            continue
         compat = {
             "id": entry["catalogID"],
             "name": entry["name"],

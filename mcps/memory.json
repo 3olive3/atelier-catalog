@@ -1,0 +1,17 @@
+{
+  "catalogID": "memory",
+  "kind": "native",
+  "name": "Atelier Memory",
+  "description": "The household's memory (ADR-0028) — search, read, remember, forget and export what Butler knows about a person.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 7,
+  "runtime": "butler-gateway",
+  "tags": [
+    "memory",
+    "personal"
+  ],
+  "category": "core"
+}
