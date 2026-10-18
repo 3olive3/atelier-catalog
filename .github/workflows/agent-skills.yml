@@ -1,0 +1,39 @@
+name: Agent skills
+
+# The `casa` plugin the Atelier Harness loads into household agents. Text only:
+# the lint refuses hooks, MCP servers, agents, commands, scripts, links and
+# anything secret-shaped; the negative test proves the lint still refuses them.
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'agent-skills/**'
+      - 'scripts/lint-agent-skills.mjs'
+      - 'scripts/agent-skills-digest.mjs'
+      - 'scripts/test-lint-agent-skills.sh'
+      - '.github/workflows/agent-skills.yml'
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Lint the agent-skills plugin
+        run: node scripts/lint-agent-skills.mjs agent-skills
+
+      - name: Prove the lint refuses what it must
+        run: bash scripts/test-lint-agent-skills.sh
+
+      - name: Digest (the Harness pin)
+        run: |
+          d=$(node scripts/agent-skills-digest.mjs agent-skills)
+          echo "HARNESS_AGENT_SKILLS_DIGEST=$d"
+          echo "### agent-skills digest: \`$d\`" >> "$GITHUB_STEP_SUMMARY"
