@@ -39,6 +39,7 @@ Both consumers read Markdown, so no transformation is needed. Per-repo `.claude/
 
 ```
 skills/                   # 48 skill dirs — each: <name>.json metadata + SKILL.md content
+agent-personas/           # reviewed IDENTITY/SOUL/USER for the Atelier agents (Bridge workspaces are not in git) + scripts/install-agent-personas.sh
 agent-skills/             # the `casa` plugin for household agents on the Atelier Harness (text only, linted, pinned by digest) — see its README
 mcps/                     # MCP reference metadata (servers live in atelier-butler/mcp/; kind "native" = served by the Butler gateway itself)
 role-profiles/            # 16 agent archetypes
