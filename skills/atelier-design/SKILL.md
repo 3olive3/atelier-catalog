@@ -44,12 +44,13 @@ import from the design-system repo at build time. The Console builds in Docker o
 | `console` | Console | Control Centre | Mosaico (2×2 tiles) | `console.3olive3.com` |
 | `sso` | SSO | Home Authentication | Impressão (fingerprint) | `auth.3olive3.com` (Authentik brand) |
 | `guest` | Guest | Welcome | Porta aberta (open door) | guest portal, guest Wi-Fi |
-| `bridge` | Bridge | Home Agents | Ponte (arch bridge) | the agents (OpenClaw) |
+| `bridge` | Bridge | Home Channels | Ponte (arch bridge) | the channels the family talks through (OpenClaw): Telegram DMs, the Butler group, pairing, sessions |
 | `models` | Models | Model Routing | Encaminhamento (one line in, three out) | LiteLLM: `models.3olive3.com` (its own UI) and the Console's Models section |
 | `companion` | Companion | iOS · iPadOS · tvOS | Telefone + tablet | app icons, launch screens |
 | `docs` | Docs | Home Knowledge | Livro aberto (open book) | `docs.3olive3.com`, and the Console's Docs menu (embedded) |
 | `catalog` | Catalog | Skills & Tools | Camadas (layers) | the Console's Catalog menu (MCP servers + skills) |
 | `guardian` | Guardian | Policy & Access | Escudo e fechadura (shield + keyhole), orchid | the Console's Guardian group (people, guests, service access, permissions, advanced rules) — no own UI, opens its Console section |
+| `harness` | Harness | Home Agents | Prompt vivo (terminal: prompt and steps), jade | where every agent runs (ADR-0029, Claude Agent SDK). No UI yet, so it is not on the platform page or in the switcher |
 
 ## The Platform loader and the platform page
 
