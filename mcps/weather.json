@@ -1,0 +1,17 @@
+{
+  "catalogID": "weather",
+  "kind": "native",
+  "name": "Weather",
+  "description": "Weather from IPMA open data — daily forecast for a city (default Viana do Castelo) and active warnings for a district. Read-only, no key.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 2,
+  "runtime": "butler-gateway",
+  "tags": [
+    "weather",
+    "read-only"
+  ],
+  "category": "core"
+}

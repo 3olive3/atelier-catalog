@@ -1,0 +1,17 @@
+{
+  "catalogID": "incidents",
+  "kind": "native",
+  "name": "Incidents",
+  "description": "Incidents with their alert, timeline and investigation finding.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 2,
+  "runtime": "butler-gateway",
+  "tags": [
+    "incidents",
+    "awareness"
+  ],
+  "category": "core"
+}

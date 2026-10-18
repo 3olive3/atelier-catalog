@@ -1,0 +1,17 @@
+{
+  "catalogID": "inbox",
+  "kind": "native",
+  "name": "Inbox",
+  "description": "What happened, for the agents — recent notifications, incidents, approvals and jobs, one item in detail, mark read or acknowledged.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 5,
+  "runtime": "butler-gateway",
+  "tags": [
+    "notifications",
+    "awareness"
+  ],
+  "category": "core"
+}

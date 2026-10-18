@@ -1,0 +1,17 @@
+{
+  "catalogID": "workflows",
+  "kind": "native",
+  "name": "Workflows",
+  "description": "Routines by conversation — a person's agent proposes a workflow, created disabled; it runs only after the admin approves it.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 1,
+  "runtime": "butler-gateway",
+  "tags": [
+    "workflows",
+    "automation"
+  ],
+  "category": "core"
+}

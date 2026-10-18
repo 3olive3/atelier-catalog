@@ -1,0 +1,18 @@
+{
+  "catalogID": "history",
+  "kind": "native",
+  "name": "History",
+  "description": "Questions over the home's events (90 days) — what happened in a window, and the last time something happened.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 2,
+  "runtime": "butler-gateway",
+  "tags": [
+    "events",
+    "history",
+    "read-only"
+  ],
+  "category": "core"
+}

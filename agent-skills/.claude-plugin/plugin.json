@@ -1,0 +1,5 @@
+{
+  "name": "casa",
+  "version": "1.0.0",
+  "description": "Casa Lima agent skills for the Atelier Harness: how each agent works in this house (pt-PT). Text only: no hooks, no MCP servers, no commands, no agents."
+}
