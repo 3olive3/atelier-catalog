@@ -39,6 +39,7 @@ Both consumers read Markdown, so no transformation is needed. Per-repo `.claude/
 
 ```
 skills/                   # 48 skill dirs — each: <name>.json metadata + SKILL.md content
+agent-skills/             # the `casa` plugin for household agents on the Atelier Harness (text only, linted, pinned by digest) — see its README
 mcps/                     # MCP reference metadata (servers live in atelier-butler/mcp/; kind "native" = served by the Butler gateway itself)
 role-profiles/            # 16 agent archetypes
 guardrails/               # 13 toggle rules
@@ -72,6 +73,10 @@ python3 scripts/build-catalog.py
 
 > `atelier` (Designer) is **archived** and no longer fetches `catalog.json`.
 
+## Agent skills (`agent-skills/`)
+
+Skills for the **household agents** (not operator skills): one `SKILL.md` per skill, pt-PT, loaded by the Atelier Harness as the local plugin `casa`. Text only — `node scripts/lint-agent-skills.mjs` refuses hooks, `.mcp.json`, agents, commands, scripts, links and secrets (CI: `.github/workflows/agent-skills.yml`, negative test `scripts/test-lint-agent-skills.sh`). The Harness loads it only when `node scripts/agent-skills-digest.mjs` equals its pin `HARNESS_AGENT_SKILLS_DIGEST` (atelier-butler manifest), so a change here needs a pin bump + Harness redeploy.
+
 ## Authoring conventions
 
 - One skill, one domain. If the description needs "and", it is probably two skills.
@@ -97,7 +102,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 - Updating `SKILL.md` without re-running `build-catalog.py` leaves the catalog version unchanged.
 - `bundles.json` is hand-maintained with **no validation that members exist** — renaming or removing a skill can rot a bundle silently.
 - `compat/` shims have no deprecation timeline. With Designer archived, they are candidates for removal.
-- MCP counts here are reference metadata only, **generated** by `atelier-mcps/scripts/sync-catalog.py` (never hand-edit `mcps/*.json`; then run `scripts/build-catalog.py`). As of 2026-10-18: **29 servers / 506 tools** = 17 package servers / 453 tools (`atelier-butler/mcp/`) + 12 Butler-native servers / 53 tools (`kind: "native"`, `source: "butlerNative"`: `atelier`, `people`, `memory`, `case`, `knowledge`, `inbox`, `incidents`, `trail`, `approvals`, `history`, `workflows`, `wifi` — served by the gateway, no package, no downloadURL). Best read off the gateway's own startup log rather than any document — a hardcoded banner in the FortiGate server reported the wrong count for a day. Figures of 397, 400, 19/396, 404, 425 and 436 elsewhere are stale.
+- MCP counts here are reference metadata only, **generated** by `atelier-mcps/scripts/sync-catalog.py` (never hand-edit `mcps/*.json`; then run `scripts/build-catalog.py`). As of 2026-10-18: **30 servers / 517 tools** = 17 package servers / 462 tools (`atelier-butler/mcp/`) + 13 Butler-native servers / 55 tools (`kind: "native"`, `source: "butlerNative"`: `atelier`, `people`, `memory`, `case`, `knowledge`, `inbox`, `incidents`, `trail`, `approvals`, `history`, `workflows`, `wifi`, `weather` — served by the gateway, no package, no downloadURL). Best read off the gateway's own startup log rather than any document — a hardcoded banner in the FortiGate server reported the wrong count for a day. Figures of 397, 400, 19/396, 404, 425 and 436 elsewhere are stale.
 
 ## More context
 

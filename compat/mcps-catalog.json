@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-18T19:14:48Z",
+  "lastUpdated": "2026-10-18T19:20:03Z",
   "mcps": [
     {
       "id": "approvals",
@@ -257,7 +257,7 @@
       "name": "Media",
       "version": "2.0.0",
       "description": "Unified media platform — Sonarr (TV series), Radarr (movies), SABnzbd (downloads), Plex (library browsing, search, metadata, playback sessions, playlists), and Overseerr (requests, approvals, user quotas) via REST APIs. Merged 2026-08 from the separate media-stack, plex, and overseerr servers.",
-      "toolCount": 53,
+      "toolCount": 60,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -295,7 +295,7 @@
       "name": "Minecraft",
       "version": "1.0.0",
       "description": "Atelier Butler MCP Server for Minecraft Paper — AI-native interface for server management via RCON + SSH",
-      "toolCount": 29,
+      "toolCount": 31,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -493,6 +493,21 @@
       "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.1.0/vaultwarden-1.1.0.tar.gz",
       "size": "256KB",
       "checksum": "sha256:placeholder"
+    },
+    {
+      "id": "weather",
+      "kind": "native",
+      "name": "Weather",
+      "version": "1.0.0",
+      "description": "Weather from IPMA open data — daily forecast for a city (default Viana do Castelo) and active warnings for a district. Read-only, no key.",
+      "toolCount": 2,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "weather",
+        "read-only"
+      ]
     },
     {
       "id": "wifi",
