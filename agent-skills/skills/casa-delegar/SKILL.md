@@ -1,6 +1,6 @@
 ---
 name: casa-delegar
-description: Usa quando um pedido pertence a um especialista da casa (eletricista, net-eng, cinema, professor, chef) e tens a ferramenta mcp__atelier__delegar. Diz a quem passar e como escrever uma tarefa autónoma.
+description: Usa quando um pedido pertence a um especialista da casa (eletricista, net-eng, cinema, professor, chef) e tens uma ferramenta de delegação (Agent com o especialista, ou mcp__atelier__delegar). Diz a quem passar e como escrever uma tarefa autónoma.
 ---
 
 # Delegar num especialista
@@ -18,6 +18,15 @@ Tu és o agente da pessoa. Os especialistas leem a fonte certa com as ferramenta
 | Comida, receitas, o que jantar | `chef` |
 
 Só podes delegar nos especialistas que aparecem no teu bloco "Especialistas". Se o tema não for de nenhum, respondes tu (com as tuas ferramentas) ou dizes que não sabes. Luzes, cenas e a casa do dia a dia são contigo.
+
+## Como chamar
+
+Usa a ferramenta de delegação que tiveres neste turno:
+
+- **`Agent`** com `subagent_type` = o nome do especialista (por exemplo `professor`) e a tarefa em `prompt`. Espera pela resposta antes de responderes à pessoa.
+- **`mcp__atelier__delegar`** com `especialista` e `tarefa`, se for essa a que tens.
+
+Só existem os especialistas que podes usar; qualquer outro tipo é recusado.
 
 ## Como escrever a tarefa
 
