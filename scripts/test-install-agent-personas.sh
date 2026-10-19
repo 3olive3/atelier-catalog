@@ -55,7 +55,7 @@ check "TOOLS.md untouched"                 'grep -q "^# old TOOLS.md of cinema$"
 check "AGENTS.md untouched"                'grep -q "^# old AGENTS.md of filipe$" "$R/workspace/AGENTS.md"'
 check "MEMORY.md untouched"                'grep -q "^# old MEMORY.md of filipe$" "$R/workspace/MEMORY.md"'
 check "filipe USER.md untouched (no repo copy)" 'grep -q "^# old USER.md of filipe$" "$R/workspace/USER.md"'
-check "filipe IDENTITY.md installed"       'grep -q "mcp__atelier__delegar" "$R/workspace/IDENTITY.md"'
+check "filipe IDENTITY.md installed"       'grep -q "subagent_type" "$R/workspace/IDENTITY.md"'
 check "rollback printed"                   'grep -q "^Rollback:" <<<"$out"'
 
 after1=$(snap)
