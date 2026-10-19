@@ -374,7 +374,7 @@ When adding mocks or test utilities, read @testing-anti-patterns.md to avoid com
 | BLOK (iOS + Vapor) | Unit + UI | XCTest | Active |
 | atelier-butler | Manual | — | MCP tools tested via OpenCode |
 | home-docs | Build validation | MkDocs build | Minimal |
-| atelier-mcps | Schema validation | Manual | Minimal |
+| atelier-catalog | Catalog drift (`sync-catalog.py --check`) + build | CI | Minimal |
 
 ### Cross-Repo Impact
 

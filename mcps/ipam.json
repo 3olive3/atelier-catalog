@@ -2,7 +2,7 @@
   "catalogID": "ipam",
   "name": "NetBox",
   "description": "Atelier Butler MCP Server for NetBox — AI-native interface for IP address management, network prefixes, VLANs, devices, and infrastructure inventory",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
@@ -21,8 +21,5 @@
     "ipam",
     "infrastructure",
     "inventory"
-  ],
-  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/ipam-2.2.0.tar.gz",
-  "size": "unknown",
-  "checksum": "sha256:placeholder"
+  ]
 }

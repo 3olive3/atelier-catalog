@@ -11,9 +11,9 @@ license: Complete terms in LICENSE.txt
 Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. The quality of an MCP server is measured by how well it enables LLMs to accomplish real-world tasks.
 
 **Distribution rule:** Every new MCP server must be registered in:
-1. `atelier-mcps` catalog (`~/Developer/atelier-platform/atelier-mcps/`) — source of truth
-2. Global Claude Code config (`~/.claude/.mcp.json`) — available across all projects
-3. Global OpenCode config (`AGENTS.md`) — available in OpenCode sessions
+1. Source in `atelier-butler/mcp/<name>/` (`~/Developer/atelier-platform/atelier-butler/`) — source of truth, served by the Butler gateway
+2. `atelier-catalog` index — run `python3 scripts/sync-catalog.py --write` there (generated `mcps/<name>.json`; never hand-edit counts)
+3. Claude Code config (`.mcp.json` in the repos that use it, pointing at `atelier-butler/mcp/<name>/dist/index.js`)
 
 ---
 
