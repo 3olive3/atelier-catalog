@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-18T19:20:03Z",
+  "lastUpdated": "2026-10-19T11:57:21Z",
   "mcps": [
     {
       "id": "approvals",
@@ -97,7 +97,7 @@
     {
       "id": "fortigate",
       "name": "FortiGate",
-      "version": "2.4.2",
+      "version": "2.5.0",
       "description": "FortiGate 60F firewall — policies, address objects, service objects, DHCP, static routes, VPN, bandwidth stats, system health, FortiSwitch management, and FortiAP/WiFi management via REST API",
       "toolCount": 72,
       "runtime": "node",
@@ -113,7 +113,7 @@
         "fortiap",
         "wifi"
       ],
-      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.4.2/fortigate-2.4.2.tar.gz",
+      "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.5.0/fortigate-2.5.0.tar.gz",
       "size": "60KB",
       "checksum": "sha256:placeholder"
     },
