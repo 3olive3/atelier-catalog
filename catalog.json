@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-19T12:26:11Z",
+  "lastUpdated": "2026-10-19T12:36:52Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 132,
@@ -531,7 +531,7 @@
         "catalogID": "ipam",
         "name": "NetBox",
         "description": "Atelier Butler MCP Server for NetBox — AI-native interface for IP address management, network prefixes, VLANs, devices, and infrastructure inventory",
-        "version": "2.2.0",
+        "version": "2.3.0",
         "source": "builtIn",
         "transport": "stdio",
         "command": "node",
