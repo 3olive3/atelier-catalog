@@ -17,17 +17,17 @@ atelier-catalog/
 ├── catalog.json              # Unified manifest (auto-generated)
 ├── bundles.json              # Skill bundles
 ├── compat/                   # Backward-compatible shim catalogs
-│   ├── mcps-catalog.json     #   atelier-mcps format
+│   ├── mcps-catalog.json     #   legacy Designer MCP format (no download fields)
 │   └── skills-catalog.json   #   atelier-skills format
 ├── scripts/
 │   ├── build-catalog.py      # Assembles catalog.json from entries
-│   └── enrich-entries.py     # One-time enrichment from legacy repos
+│   └── sync-catalog.py       # Generates mcps/*.json from atelier-butler/mcp (tool counts, versions)
 ├── guardrails/               # 3 entries
 ├── permissions/              # 3 entries
 ├── mcps/                     # 20 entries
 ├── skills/                   # 45 entries (metadata + SKILL.md content)
 ├── role-profiles/            # 3 entries
-├── git-repositories/         # 11 entries
+├── git-repositories/         # 10 entries
 ├── tech-stacks/              # 5 entries
 ├── knowledge-bases/          # 2 entries
 ├── context-files/            # 2 entries
@@ -103,7 +103,7 @@ The `compat/` directory contains shim catalogs that match the legacy formats:
 
 | File | Matches | Used by |
 |------|---------|---------|
-| `compat/mcps-catalog.json` | `atelier-mcps/catalog.json` | `DefaultMCPManager` |
+| `compat/mcps-catalog.json` | Legacy Designer MCP catalog format (retired `atelier-mcps`, 2026-10-19) | `DefaultMCPManager` (archived) |
 | `compat/skills-catalog.json` | Legacy `atelier-skills/catalog.json` format | `DefaultSkillManager` |
 
 These allow gradual migration — existing app versions can point to the compat URLs while new versions use the unified `catalog.json`.

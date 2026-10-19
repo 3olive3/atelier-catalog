@@ -21,8 +21,5 @@
     "monitoring",
     "plex",
     "analytics"
-  ],
-  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/tautulli-2.0.0.tar.gz",
-  "size": "2KB",
-  "checksum": "sha256:4706753024ed547f34fa2799d4669f58fbbcbf31050716c767c326446be94e99"
+  ]
 }

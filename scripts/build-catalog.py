@@ -6,8 +6,10 @@ Reads all JSON entries from the 10 type directories, validates them,
 and assembles a single catalog.json that the Atelier app can fetch
 in one HTTP request.
 
-Also generates backward-compatible shim catalogs for the legacy
-atelier-mcps and atelier-skills fetch URLs.
+Also generates backward-compatible shim catalogs in the legacy Designer
+MCP and skills formats (compat/). The MCP shim carries no download fields:
+the atelier-mcps release repo they pointed at was retired 2026-10-19 without
+ever cutting a release.
 
 Usage:
     python3 scripts/build-catalog.py
@@ -103,7 +105,7 @@ def write_catalog_json(path, payload: dict) -> None:
 
 
 def build_compat_mcps(mcp_entries: list[dict]) -> dict:
-    """Generate backward-compatible MCP catalog (atelier-mcps format).
+    """Generate backward-compatible MCP catalog (legacy Designer format).
 
     Maps catalogID -> id and ensures all fields expected by
     MCPCatalogEntry.init(from:) are present.
@@ -135,12 +137,6 @@ def build_compat_mcps(mcp_entries: list[dict]) -> dict:
             "runtime": entry.get("runtime", "node"),
             "transport": entry.get("transport", "stdio"),
             "tags": entry.get("tags", []),
-            "downloadURL": entry.get(
-                "downloadURL",
-                f"https://github.com/3olive3/atelier-mcps/releases/download/v{entry.get('version', '1.0.0')}/{entry['catalogID']}-{entry.get('version', '1.0.0')}.tar.gz",
-            ),
-            "size": entry.get("size", "unknown"),
-            "checksum": entry.get("checksum", ""),
         }
         compat_entries.append(compat)
 

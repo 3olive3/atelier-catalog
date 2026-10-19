@@ -69,7 +69,7 @@ python3 scripts/build-catalog.py
 ## Cross-repo dependencies
 
 - **Consumed by**: `atelier-bridge` (OpenClaw agent workspaces), and every repo's `.claude/skills/` symlinks for Claude Code.
-- **MCPs**: developed in `atelier-butler/mcp/`, packaged in `atelier-mcps/`, only *referenced* here.
+- **MCPs**: developed in `atelier-butler/mcp/`, built into the Butler image (and run locally from `atelier-butler/mcp/<id>/dist`), only *indexed* here. This catalog is the single MCP index since `atelier-mcps` was retired (2026-10-19; it never cut a release).
 - Skills were merged in from the archived `atelier-skills` repo (2026-03-16); this is the live one.
 
 > `atelier` (Designer) is **archived** and no longer fetches `catalog.json`.
@@ -103,7 +103,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 - Updating `SKILL.md` without re-running `build-catalog.py` leaves the catalog version unchanged.
 - `bundles.json` is hand-maintained with **no validation that members exist** — renaming or removing a skill can rot a bundle silently.
 - `compat/` shims have no deprecation timeline. With Designer archived, they are candidates for removal.
-- MCP counts here are reference metadata only, **generated** by `atelier-mcps/scripts/sync-catalog.py` (never hand-edit `mcps/*.json`; then run `scripts/build-catalog.py`). As of 2026-10-18: **30 servers / 517 tools** = 17 package servers / 462 tools (`atelier-butler/mcp/`) + 13 Butler-native servers / 55 tools (`kind: "native"`, `source: "butlerNative"`: `atelier`, `people`, `memory`, `case`, `knowledge`, `inbox`, `incidents`, `trail`, `approvals`, `history`, `workflows`, `wifi`, `weather` — served by the gateway, no package, no downloadURL). Best read off the gateway's own startup log rather than any document — a hardcoded banner in the FortiGate server reported the wrong count for a day. Figures of 397, 400, 19/396, 404, 425 and 436 elsewhere are stale.
+- MCP counts here are reference metadata only, **generated** by `scripts/sync-catalog.py` in this repo (reads `../atelier-butler/mcp/*` + `gateway/native-servers.json`; `--write` also runs `scripts/build-catalog.py`; CI gate: `Catalog Drift` workflow, NOT VERIFIED until the `CASALIMA_REPO_TOKEN` secret exists). Never hand-edit `mcps/*.json`. As of 2026-10-18: **30 servers / 517 tools** = 17 package servers / 462 tools (`atelier-butler/mcp/`) + 13 Butler-native servers / 55 tools (`kind: "native"`, `source: "butlerNative"`: `atelier`, `people`, `memory`, `case`, `knowledge`, `inbox`, `incidents`, `trail`, `approvals`, `history`, `workflows`, `wifi`, `weather` — served by the gateway, no package). No entry has `downloadURL`/`checksum`/`size` any more — they pointed at atelier-mcps releases that never existed. Best read off the gateway's own startup log rather than any document — a hardcoded banner in the FortiGate server reported the wrong count for a day. Figures of 397, 400, 19/396, 404, 425 and 436 elsewhere are stale.
 
 ## More context
 

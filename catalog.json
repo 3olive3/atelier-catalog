@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-19T11:57:21Z",
+  "lastUpdated": "2026-10-19T12:36:52Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 133,
+  "totalEntries": 132,
   "types": {
     "guardrails": [
       {
@@ -356,10 +356,7 @@
           "gateway",
           "device-profiles",
           "access-groups"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/cloudflare-3.0.0.tar.gz",
-        "size": "75KB",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "duplicacy",
@@ -389,10 +386,7 @@
           "backup",
           "storage",
           "infrastructure"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/duplicacy-2.0.0.tar.gz",
-        "size": "2KB",
-        "checksum": "sha256:14e68dc364337ba45d2b5b6d41942f734582f15212fc623e9ce50aa7ab757f7e"
+        ]
       },
       {
         "catalogID": "fortigate",
@@ -424,10 +418,7 @@
           "fortiswitch",
           "fortiap",
           "wifi"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.5.0/fortigate-2.5.0.tar.gz",
-        "size": "60KB",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "history",
@@ -471,10 +462,7 @@
           "homebridge",
           "iot",
           "automation"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/homebridge-2.0.0.tar.gz",
-        "size": "30KB",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "ilo",
@@ -503,10 +491,7 @@
           "monitoring",
           "redfish",
           "ilo"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/ilo-1.0.0.tar.gz",
-        "size": "35KB",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "inbox",
@@ -546,7 +531,7 @@
         "catalogID": "ipam",
         "name": "NetBox",
         "description": "Atelier Butler MCP Server for NetBox — AI-native interface for IP address management, network prefixes, VLANs, devices, and infrastructure inventory",
-        "version": "2.2.0",
+        "version": "2.3.0",
         "source": "builtIn",
         "transport": "stdio",
         "command": "node",
@@ -565,10 +550,7 @@
           "ipam",
           "infrastructure",
           "inventory"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.2.0/ipam-2.2.0.tar.gz",
-        "size": "unknown",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "iperf3",
@@ -595,10 +577,7 @@
           "networking",
           "diagnostics",
           "bandwidth"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/iperf3-2.0.0.tar.gz",
-        "size": "2KB",
-        "checksum": "sha256:150276647ec49724f1dfea4ba7dd71cd6bf80049f0f387e2f11d13c85d23aacc"
+        ]
       },
       {
         "catalogID": "knowledge",
@@ -654,10 +633,7 @@
           "streaming",
           "overseerr",
           "requests"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/media-2.0.0.tar.gz",
-        "size": "95KB",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "memory",
@@ -704,10 +680,7 @@
           "rcon",
           "kids",
           "entertainment"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/minecraft-1.0.0.tar.gz",
-        "size": "unknown",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "nginx",
@@ -733,10 +706,7 @@
           "reverse-proxy",
           "ssl",
           "networking"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/nginx-2.0.0.tar.gz",
-        "size": "3KB",
-        "checksum": "sha256:3512e8606d0f6764f40dfadf99537434a0eebb5dcacb48e102f24f67cdf47cff"
+        ]
       },
       {
         "catalogID": "observability",
@@ -769,10 +739,7 @@
           "grafana",
           "loki",
           "alertmanager"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/observability-3.0.0.tar.gz",
-        "size": "unknown",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "people",
@@ -815,10 +782,7 @@
           "energy",
           "iot",
           "switches"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/shelly-2.0.0.tar.gz",
-        "size": "2KB",
-        "checksum": "sha256:d0181e809539a1a95c531b14c9bc7cc768e6bce83e660615732ea0b0fd36d934"
+        ]
       },
       {
         "catalogID": "tautulli",
@@ -843,10 +807,7 @@
           "monitoring",
           "plex",
           "analytics"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/tautulli-2.0.0.tar.gz",
-        "size": "2KB",
-        "checksum": "sha256:4706753024ed547f34fa2799d4669f58fbbcbf31050716c767c326446be94e99"
+        ]
       },
       {
         "catalogID": "trail",
@@ -889,10 +850,7 @@
           "config-management",
           "backup",
           "infrastructure"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/unimus-2.0.0.tar.gz",
-        "size": "3KB",
-        "checksum": "sha256:f1661bee0e6d66e2c52d5f8a49f4085fcb74f0cc41dd9781973d59a8d2a587e2"
+        ]
       },
       {
         "catalogID": "unraid",
@@ -920,10 +878,7 @@
           "containers",
           "virtualization",
           "storage"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.4.0/unraid-2.4.0.tar.gz",
-        "size": "3KB",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "uptime-kuma",
@@ -950,10 +905,7 @@
           "uptime",
           "infrastructure",
           "alerts"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v2.0.0/uptime-kuma-2.0.0.tar.gz",
-        "size": "12KB",
-        "checksum": "sha256:7f4a56b2785a0158cb30d6284900720a60ea8a8af0ff701fff342dc69bdd3876"
+        ]
       },
       {
         "catalogID": "vaultwarden",
@@ -981,10 +933,7 @@
           "encryption",
           "bitwarden",
           "totp"
-        ],
-        "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.1.0/vaultwarden-1.1.0.tar.gz",
-        "size": "256KB",
-        "checksum": "sha256:placeholder"
+        ]
       },
       {
         "catalogID": "weather",
@@ -2272,15 +2221,6 @@
         "source": "builtIn",
         "defaultBranch": "main",
         "remoteURL": "https://github.com/3olive3/atelier-companion"
-      },
-      {
-        "catalogID": "atelier-mcps",
-        "name": "Atelier MCPs",
-        "description": "MCP server distribution catalog with installable packages",
-        "version": "1.0.0",
-        "source": "builtIn",
-        "defaultBranch": "main",
-        "remoteURL": "https://github.com/3olive3/atelier-mcps"
       },
       {
         "catalogID": "atelier-skills",
