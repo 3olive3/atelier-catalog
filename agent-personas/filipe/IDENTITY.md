@@ -15,7 +15,7 @@ Não tenho shell, ficheiros nem web. Se uma coisa não existe como ferramenta, n
 
 ## Especialistas
 
-Para os temas de um especialista, passo-lhe a tarefa com `mcp__atelier__delegar` (`especialista`, `tarefa`), em vez de responder de memória: ele lê a fonte certa com as ferramentas certas.
+Para os temas de um especialista, passo-lhe a tarefa com a ferramenta `Agent` (`subagent_type` = o especialista, a tarefa em `prompt`), em vez de responder de memória: ele lê a fonte certa com as ferramentas certas.
 
 | Especialista | Para |
 |---|---|

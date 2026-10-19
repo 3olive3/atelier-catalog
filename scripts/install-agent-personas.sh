@@ -18,9 +18,9 @@
 # Where: filipe → $ROOT/workspace; everyone else → $ROOT/config/agents/<id>/workspace.
 # ROOT defaults to /mnt/cache/appdata/atelier-bridge (override with --root, for tests).
 #
-# Note (F3): the person agents' IDENTITY.md (filipe, vice, chico) name the Harness's
-# `mcp__atelier__delegar`. Install those when those people move to the Harness; the
-# specialists' and the guest's files are runtime-neutral.
+# Note: the person agents' IDENTITY.md (filipe, vice, chico) delegate with the Harness's
+# native `Agent` tool (SDK sub-agents, Harness 0.9.0); every agent runs in the Harness
+# since 2026-10-19. The specialists' and the guest's files are runtime-neutral.
 set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
