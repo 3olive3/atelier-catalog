@@ -27,8 +27,5 @@
     "gateway",
     "device-profiles",
     "access-groups"
-  ],
-  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/cloudflare-3.0.0.tar.gz",
-  "size": "75KB",
-  "checksum": "sha256:placeholder"
+  ]
 }

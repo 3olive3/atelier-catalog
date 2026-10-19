@@ -29,8 +29,5 @@
     "grafana",
     "loki",
     "alertmanager"
-  ],
-  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v3.0.0/observability-3.0.0.tar.gz",
-  "size": "unknown",
-  "checksum": "sha256:placeholder"
+  ]
 }

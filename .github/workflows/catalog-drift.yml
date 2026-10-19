@@ -1,0 +1,96 @@
+name: Catalog Drift
+
+# Catches the class of problem found on 2026-08-29: fortigate published as 43
+# tools while source had 71, shelly listed as 12 in one catalog and 13 in the
+# other, and three renames that never reached the index. All of it was
+# hand-maintained metadata rotting quietly for months.
+#
+# Moved here from atelier-mcps when that repo was retired (2026-10-19): this
+# catalog is now the single index, and scripts/sync-catalog.py generates
+# mcps/*.json from atelier-butler/mcp/* and gateway/native-servers.json.
+#
+# Only BLOCKING drift fails the job — fields sync-catalog.py can regenerate.
+# Advisory items (a version not yet bumped) are printed but never red, so the
+# gate stays meaningful instead of permanently broken.
+
+on:
+  pull_request:
+  push:
+    branches: [develop, main]
+  workflow_dispatch:
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    # Hoisted to job level on purpose: the `secrets` context is NOT available
+    # in a step-level `if:`, so testing it there silently misbehaves. `env` is.
+    env:
+      HAVE_TOKEN: ${{ secrets.CASALIMA_REPO_TOKEN != '' }}
+    steps:
+      - name: Checkout atelier-catalog
+        uses: actions/checkout@v4
+        with:
+          path: atelier-catalog
+
+      # The source of truth lives in another repo.
+      - name: Checkout source (atelier-butler)
+        id: source
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: 3olive3/atelier-butler
+          token: ${{ secrets.CASALIMA_REPO_TOKEN }}
+          path: atelier-butler
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Two situations, deliberately handled differently:
+      #
+      #   - No token configured. That is a setup gap, not drift. Going red on
+      #     every PR for it would train everyone to ignore this check, which is
+      #     the failure it exists to prevent. The job passes, but the summary
+      #     says NOT VERIFIED in as many words.
+      #   - Token present and checkout still failed. Something is actually
+      #     wrong — fail.
+      #
+      # Neither path ever reports an unmade comparison as a verified pass.
+      - name: Skip — source repo not reachable
+        if: steps.source.outcome != 'success' && env.HAVE_TOKEN != 'true'
+        run: |
+          echo "::warning::Catalog drift NOT VERIFIED — CASALIMA_REPO_TOKEN is not set."
+          {
+            echo "### Catalog drift: NOT VERIFIED"
+            echo ""
+            echo "\`CASALIMA_REPO_TOKEN\` is not configured, so \`3olive3/atelier-butler\`"
+            echo "could not be checked out and the catalogs were **not** compared against"
+            echo "source. This check is green only because there was nothing to compare —"
+            echo "it is not evidence the catalogs are correct."
+            echo ""
+            echo "Set the secret to a PAT with read access to enable it."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail — source checkout broken despite a token
+        if: steps.source.outcome != 'success' && env.HAVE_TOKEN == 'true'
+        run: |
+          echo "::error::CASALIMA_REPO_TOKEN is set but checking out 3olive3/atelier-butler failed."
+          echo "Check the token's scope and expiry."
+          exit 1
+
+      - name: Check catalogs against source
+        if: steps.source.outcome == 'success'
+        working-directory: atelier-catalog
+        env:
+          MCP_SOURCE_DIR: ${{ github.workspace }}/atelier-butler/mcp
+          # Butler-native servers (atelier, people, memory, …): generated in atelier-butler
+          # by gateway/scripts/native-servers.mjs. Missing = NOT VERIFIED (advisory), never dropped.
+          MCP_NATIVE_MANIFEST: ${{ github.workspace }}/atelier-butler/gateway/native-servers.json
+        run: |
+          echo '### Catalog drift' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/sync-catalog.py --check | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"

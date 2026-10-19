@@ -26,8 +26,5 @@
     "rcon",
     "kids",
     "entertainment"
-  ],
-  "downloadURL": "https://github.com/3olive3/atelier-mcps/releases/download/v1.0.0/minecraft-1.0.0.tar.gz",
-  "size": "unknown",
-  "checksum": "sha256:placeholder"
+  ]
 }

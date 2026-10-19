@@ -37,9 +37,10 @@ Layer 3: Container Appdata (Cloud — Offsite)
 
 Layer 4: Code & Configuration (Git)
 ├── What: All repo source code, IaC configs, Docker templates, deploy scripts
-├── Backup: Git → GitHub (9 repos, auto-synced to UNRAID every 10 min)
-├── Repos: atelier, atelier-bridge, atelier-butler, atelier-catalog,
-│          atelier-companion, atelier-mcps, home-docs, homebridge-pando-hood, minecraft-server
+├── Backup: Git → GitHub (repos auto-synced to UNRAID every 10 min)
+├── Repos: atelier-bridge, atelier-butler, atelier-catalog, atelier-companion,
+│          home-docs, homebridge-pando-hood, minecraft-server
+│          (archived on GitHub: atelier, atelier-mcps)
 └── Status: Continuous (on every commit)
 
 Layer 5: Secrets

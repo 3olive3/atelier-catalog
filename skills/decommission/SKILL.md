@@ -95,8 +95,7 @@ everyone remembers; the tooling references are the part that rots quietly.
 | Allow/deny lists | `.claude/settings.local.json` → `enabledMcpjsonServers` **and** `disabledMcpjsonServers`, in every repo, plus `~/.claude.json` |
 | Per-tool permission grants | same file, `permissions.allow` — entries read `mcp__<name>__<tool>` |
 | Source | `atelier-butler/mcp/<name>/` |
-| Catalog + tool counts | **regenerate, never hand-edit**: `python3 atelier-mcps/scripts/sync-catalog.py --write` |
-| Distribution | `atelier-mcps/mcps/<name>/`, `atelier-mcps/releases/<name>-*.tar.gz`, `atelier-catalog/mcps/<name>.json` |
+| Catalog + tool counts | **regenerate, never hand-edit**: `python3 atelier-catalog/scripts/sync-catalog.py --write` — drops `atelier-catalog/mcps/<name>.json` once the source dir is gone, and rebuilds `catalog.json` |
 | Gateway policy | `atelier-butler/profiles/casa-lima/` — token scopes in `tokens.json`, and `guardian-rules.json` rules naming those tools |
 | home-docs | MCP tables, tool counts, per-server pages |
 
