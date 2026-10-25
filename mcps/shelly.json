@@ -2,7 +2,7 @@
   "catalogID": "shelly",
   "name": "Shelly",
   "description": "Shelly device management — energy monitoring, power metrics, switch control, remote reboot, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
@@ -14,7 +14,7 @@
     "SHELLY_TIMEOUT": ""
   },
   "category": "ops",
-  "toolCount": 13,
+  "toolCount": 18,
   "runtime": "node",
   "tags": [
     "smart-home",

@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-25T20:12:20Z",
+  "lastUpdated": "2026-10-25T22:52:13Z",
   "mcps": [
     {
       "id": "approvals",
@@ -337,9 +337,9 @@
     {
       "id": "shelly",
       "name": "Shelly",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "description": "Shelly device management — energy monitoring, power metrics, switch control, remote reboot, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
-      "toolCount": 13,
+      "toolCount": 18,
       "runtime": "node",
       "transport": "stdio",
       "tags": [

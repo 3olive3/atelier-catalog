@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-25T20:12:20Z",
+  "lastUpdated": "2026-10-25T22:52:13Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 132,
@@ -763,7 +763,7 @@
         "catalogID": "shelly",
         "name": "Shelly",
         "description": "Shelly device management — energy monitoring, power metrics, switch control, remote reboot, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "source": "builtIn",
         "transport": "stdio",
         "command": "node",
@@ -775,7 +775,7 @@
           "SHELLY_TIMEOUT": ""
         },
         "category": "ops",
-        "toolCount": 13,
+        "toolCount": 18,
         "runtime": "node",
         "tags": [
           "smart-home",
