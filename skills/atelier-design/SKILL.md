@@ -28,7 +28,7 @@ import from the design-system repo at build time. The Console builds in Docker o
 ## The brand rule
 
 1. **The mark.**
-   - A gold square: `#c9a227`, 72-unit grid, radius 16. It is the same everywhere, and it means *Atelier*.
+   - A gold square: `#f2bf16` ("ouro sol", since 2026-10-25; was `#c9a227`), 72-unit grid, radius 16. It is the same everywhere, and it means *Atelier*.
    - Inside it, the component's **glyph**, in dark ink `rgba(0,0,0,0.85)`, stroke 2.5 (2 for detail).
    - The square never changes colour per component or per theme. Only the glyph changes.
 2. **The wordmark.**
@@ -46,7 +46,7 @@ import from the design-system repo at build time. The Console builds in Docker o
 | `guest` | Guest | Welcome | Porta aberta (open door) | guest portal, guest Wi-Fi |
 | `bridge` | Bridge | Home Channels | Ponte (arch bridge) | the channels the family talks through (OpenClaw): Telegram DMs, the Butler group, pairing, sessions |
 | `models` | Models | Model Routing | Encaminhamento (one line in, three out) | LiteLLM: `models.3olive3.com` (its own UI) and the Console's Models section |
-| `home` | Home | iOS · iPadOS · tvOS | Telefone + tablet | Atelier Home (ADR-0027, was Companion): the family's Apple app and the HomeKit gateway; app icons, launch screens. The repo stays `atelier-companion` |
+| `home` | Home | iOS · iPadOS · tvOS | Casa com laço (house + bow tie) | Atelier Home (ADR-0027, was Companion): the family's Apple app and the HomeKit gateway; app icons, launch screens. The repo stays `atelier-companion` |
 | `docs` | Docs | Home Knowledge | Livro aberto (open book) | `docs.3olive3.com`, and the Console's Docs menu (embedded) |
 | `catalog` | Catalog | Skills & Tools | Camadas (layers) | the Console's Catalog menu (MCP servers + skills) |
 | `guardian` | Guardian | Policy & Access | Escudo e fechadura (shield + keyhole), orchid | the Console's Guardian group (people, guests, service access, permissions, advanced rules) — no own UI, opens its Console section |
