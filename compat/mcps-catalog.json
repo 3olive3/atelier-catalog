@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-25T11:18:56Z",
+  "lastUpdated": "2026-10-25T20:12:20Z",
   "mcps": [
     {
       "id": "approvals",
@@ -56,9 +56,9 @@
     {
       "id": "cloudflare",
       "name": "Cloudflare",
-      "version": "3.0.0",
+      "version": "3.1.0",
       "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
-      "toolCount": 68,
+      "toolCount": 86,
       "runtime": "node",
       "transport": "stdio",
       "tags": [

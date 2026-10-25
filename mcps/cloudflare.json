@@ -2,7 +2,7 @@
   "catalogID": "cloudflare",
   "name": "Cloudflare",
   "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "source": "builtIn",
   "transport": "stdio",
   "command": "node",
@@ -14,7 +14,7 @@
     "CLOUDFLARE_ZONE_NAME": ""
   },
   "category": "networking",
-  "toolCount": 68,
+  "toolCount": 86,
   "runtime": "node",
   "tags": [
     "dns",
