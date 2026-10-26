@@ -1,0 +1,20 @@
+{
+  "catalogID": "elevenlabs",
+  "name": "ElevenLabs",
+  "description": "ElevenLabs Agents for Butler voice mode — voices and Voice Library, agents (authentication always required, overrides only for prompt/first message/language), client tools, conversations, usage; outbound calls only to an allowlist, admin-confirmed",
+  "version": "1.0.0",
+  "transport": "stdio",
+  "toolCount": 16,
+  "runtime": "node",
+  "tags": [
+    "voice",
+    "agents",
+    "telephony"
+  ],
+  "source": "builtIn",
+  "command": "node",
+  "args": [
+    "dist/index.js"
+  ],
+  "category": "core"
+}

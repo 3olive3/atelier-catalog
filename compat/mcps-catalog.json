@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-26T18:33:36Z",
+  "lastUpdated": "2026-10-26T18:37:52Z",
   "mcps": [
     {
       "id": "approvals",
@@ -86,6 +86,20 @@
         "backup",
         "storage",
         "infrastructure"
+      ]
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "version": "1.0.0",
+      "description": "ElevenLabs Agents for Butler voice mode — voices and Voice Library, agents (authentication always required, overrides only for prompt/first message/language), client tools, conversations, usage; outbound calls only to an allowlist, admin-confirmed",
+      "toolCount": 16,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "voice",
+        "agents",
+        "telephony"
       ]
     },
     {
