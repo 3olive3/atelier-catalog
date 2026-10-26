@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-25T22:52:13Z",
+  "lastUpdated": "2026-10-26T18:33:36Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 132,
+  "totalEntries": 133,
   "types": {
     "guardrails": [
       {
@@ -465,6 +465,25 @@
         ]
       },
       {
+        "catalogID": "household",
+        "kind": "native",
+        "name": "Household",
+        "description": "Household settings, the same for the whole family — the streaming services the house subscribes to and the Siri alias. Read-only; the admin edits them in the Console (Pessoas → Família).",
+        "version": "1.0.0",
+        "source": "butlerNative",
+        "transport": "butler",
+        "endpoint": "/api/v1/butler/mcp",
+        "toolCount": 1,
+        "runtime": "butler-gateway",
+        "tags": [
+          "household",
+          "settings",
+          "entertainment",
+          "read-only"
+        ],
+        "category": "core"
+      },
+      {
         "catalogID": "ilo",
         "name": "HPE iLO",
         "description": "HPE iLO 4 server management — system info, processors, memory, storage, network adapters, temperatures, fans, power supplies, power control, indicator LED, iLO management, event logs, firmware inventory, virtual media, and license info via Redfish REST API",
@@ -621,7 +640,7 @@
           "OVERSEERR_API_KEY": ""
         },
         "category": "media",
-        "toolCount": 60,
+        "toolCount": 68,
         "runtime": "node",
         "tags": [
           "media",
