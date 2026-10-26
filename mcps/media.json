@@ -22,7 +22,7 @@
     "OVERSEERR_API_KEY": ""
   },
   "category": "media",
-  "toolCount": 60,
+  "toolCount": 68,
   "runtime": "node",
   "tags": [
     "media",
