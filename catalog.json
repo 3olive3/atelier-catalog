@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-25T22:52:13Z",
+  "lastUpdated": "2026-10-26T00:11:48Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 132,
+  "totalEntries": 133,
   "types": {
     "guardrails": [
       {
@@ -387,6 +387,26 @@
           "storage",
           "infrastructure"
         ]
+      },
+      {
+        "catalogID": "elevenlabs",
+        "name": "ElevenLabs",
+        "description": "ElevenLabs Agents for Butler voice mode — voices and Voice Library, agents (authentication always required, overrides only for prompt/first message/language), client tools, conversations, usage; outbound calls only to an allowlist, admin-confirmed",
+        "version": "1.0.0",
+        "transport": "stdio",
+        "toolCount": 16,
+        "runtime": "node",
+        "tags": [
+          "voice",
+          "agents",
+          "telephony"
+        ],
+        "source": "builtIn",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "category": "core"
       },
       {
         "catalogID": "fortigate",
