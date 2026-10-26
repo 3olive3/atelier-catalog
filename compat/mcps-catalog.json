@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-25T22:52:13Z",
+  "lastUpdated": "2026-10-26T18:33:36Z",
   "mcps": [
     {
       "id": "approvals",
@@ -140,6 +140,23 @@
       ]
     },
     {
+      "id": "household",
+      "kind": "native",
+      "name": "Household",
+      "version": "1.0.0",
+      "description": "Household settings, the same for the whole family — the streaming services the house subscribes to and the Siri alias. Read-only; the admin edits them in the Console (Pessoas → Família).",
+      "toolCount": 1,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "household",
+        "settings",
+        "entertainment",
+        "read-only"
+      ]
+    },
+    {
       "id": "ilo",
       "name": "HPE iLO",
       "version": "1.0.0",
@@ -236,7 +253,7 @@
       "name": "Media",
       "version": "2.0.0",
       "description": "Unified media platform — Sonarr (TV series), Radarr (movies), SABnzbd (downloads), Plex (library browsing, search, metadata, playback sessions, playlists), and Overseerr (requests, approvals, user quotas) via REST APIs. Merged 2026-08 from the separate media-stack, plex, and overseerr servers.",
-      "toolCount": 60,
+      "toolCount": 68,
       "runtime": "node",
       "transport": "stdio",
       "tags": [

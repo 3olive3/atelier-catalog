@@ -1,0 +1,19 @@
+{
+  "catalogID": "household",
+  "kind": "native",
+  "name": "Household",
+  "description": "Household settings, the same for the whole family — the streaming services the house subscribes to and the Siri alias. Read-only; the admin edits them in the Console (Pessoas → Família).",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 1,
+  "runtime": "butler-gateway",
+  "tags": [
+    "household",
+    "settings",
+    "entertainment",
+    "read-only"
+  ],
+  "category": "core"
+}
