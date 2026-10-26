@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-19T12:36:52Z",
+  "lastUpdated": "2026-10-26T18:37:52Z",
   "mcps": [
     {
       "id": "approvals",
@@ -56,9 +56,9 @@
     {
       "id": "cloudflare",
       "name": "Cloudflare",
-      "version": "3.0.0",
+      "version": "3.1.0",
       "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
-      "toolCount": 68,
+      "toolCount": 86,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -86,6 +86,20 @@
         "backup",
         "storage",
         "infrastructure"
+      ]
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "version": "1.0.0",
+      "description": "ElevenLabs Agents for Butler voice mode — voices and Voice Library, agents (authentication always required, overrides only for prompt/first message/language), client tools, conversations, usage; outbound calls only to an allowlist, admin-confirmed",
+      "toolCount": 16,
+      "runtime": "node",
+      "transport": "stdio",
+      "tags": [
+        "voice",
+        "agents",
+        "telephony"
       ]
     },
     {
@@ -140,11 +154,28 @@
       ]
     },
     {
+      "id": "household",
+      "kind": "native",
+      "name": "Household",
+      "version": "1.0.0",
+      "description": "Household settings, the same for the whole family — the streaming services the house subscribes to and the Siri alias. Read-only; the admin edits them in the Console (Pessoas → Família).",
+      "toolCount": 1,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "household",
+        "settings",
+        "entertainment",
+        "read-only"
+      ]
+    },
+    {
       "id": "ilo",
       "name": "HPE iLO",
       "version": "1.0.0",
       "description": "HPE iLO 4 server management — system info, processors, memory, storage, network adapters, temperatures, fans, power supplies, power control, indicator LED, iLO management, event logs, firmware inventory, virtual media, and license info via Redfish REST API",
-      "toolCount": 21,
+      "toolCount": 23,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -236,7 +267,7 @@
       "name": "Media",
       "version": "2.0.0",
       "description": "Unified media platform — Sonarr (TV series), Radarr (movies), SABnzbd (downloads), Plex (library browsing, search, metadata, playback sessions, playlists), and Overseerr (requests, approvals, user quotas) via REST APIs. Merged 2026-08 from the separate media-stack, plex, and overseerr servers.",
-      "toolCount": 60,
+      "toolCount": 68,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
@@ -337,9 +368,9 @@
     {
       "id": "shelly",
       "name": "Shelly",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "description": "Shelly device management — energy monitoring, power metrics, switch control, remote reboot, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
-      "toolCount": 13,
+      "toolCount": 18,
       "runtime": "node",
       "transport": "stdio",
       "tags": [

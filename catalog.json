@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-19T12:36:52Z",
+  "lastUpdated": "2026-10-26T18:37:52Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 132,
+  "totalEntries": 134,
   "types": {
     "guardrails": [
       {
@@ -331,7 +331,7 @@
         "catalogID": "cloudflare",
         "name": "Cloudflare",
         "description": "Cloudflare management — DNS records, tunnels, Zero Trust (users, devices, access groups, device profiles, WARP split tunnels, tunnel routes, local domain fallback, device settings), Gateway DNS/HTTP/network policies and lists, SSL/TLS, firewall rules, IP access rules, cache, and zone analytics via REST API",
-        "version": "3.0.0",
+        "version": "3.1.0",
         "source": "builtIn",
         "transport": "stdio",
         "command": "node",
@@ -343,7 +343,7 @@
           "CLOUDFLARE_ZONE_NAME": ""
         },
         "category": "networking",
-        "toolCount": 68,
+        "toolCount": 86,
         "runtime": "node",
         "tags": [
           "dns",
@@ -387,6 +387,26 @@
           "storage",
           "infrastructure"
         ]
+      },
+      {
+        "catalogID": "elevenlabs",
+        "name": "ElevenLabs",
+        "description": "ElevenLabs Agents for Butler voice mode — voices and Voice Library, agents (authentication always required, overrides only for prompt/first message/language), client tools, conversations, usage; outbound calls only to an allowlist, admin-confirmed",
+        "version": "1.0.0",
+        "transport": "stdio",
+        "toolCount": 16,
+        "runtime": "node",
+        "tags": [
+          "voice",
+          "agents",
+          "telephony"
+        ],
+        "source": "builtIn",
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "category": "core"
       },
       {
         "catalogID": "fortigate",
@@ -465,6 +485,25 @@
         ]
       },
       {
+        "catalogID": "household",
+        "kind": "native",
+        "name": "Household",
+        "description": "Household settings, the same for the whole family — the streaming services the house subscribes to and the Siri alias. Read-only; the admin edits them in the Console (Pessoas → Família).",
+        "version": "1.0.0",
+        "source": "butlerNative",
+        "transport": "butler",
+        "endpoint": "/api/v1/butler/mcp",
+        "toolCount": 1,
+        "runtime": "butler-gateway",
+        "tags": [
+          "household",
+          "settings",
+          "entertainment",
+          "read-only"
+        ],
+        "category": "core"
+      },
+      {
         "catalogID": "ilo",
         "name": "HPE iLO",
         "description": "HPE iLO 4 server management — system info, processors, memory, storage, network adapters, temperatures, fans, power supplies, power control, indicator LED, iLO management, event logs, firmware inventory, virtual media, and license info via Redfish REST API",
@@ -482,7 +521,7 @@
           "ILO_INSECURE_TLS": ""
         },
         "category": "hardware",
-        "toolCount": 21,
+        "toolCount": 23,
         "runtime": "node",
         "tags": [
           "infrastructure",
@@ -621,7 +660,7 @@
           "OVERSEERR_API_KEY": ""
         },
         "category": "media",
-        "toolCount": 60,
+        "toolCount": 68,
         "runtime": "node",
         "tags": [
           "media",
@@ -763,7 +802,7 @@
         "catalogID": "shelly",
         "name": "Shelly",
         "description": "Shelly device management — energy monitoring, power metrics, switch control, remote reboot, temperature, WiFi status, and firmware updates via Gen2/Gen3 RPC API",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "source": "builtIn",
         "transport": "stdio",
         "command": "node",
@@ -775,7 +814,7 @@
           "SHELLY_TIMEOUT": ""
         },
         "category": "ops",
-        "toolCount": 13,
+        "toolCount": 18,
         "runtime": "node",
         "tags": [
           "smart-home",
