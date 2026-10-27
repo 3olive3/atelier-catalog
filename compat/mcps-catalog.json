@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-27T11:29:48Z",
+  "lastUpdated": "2026-10-27T15:22:36Z",
   "mcps": [
     {
       "id": "approvals",
@@ -51,6 +51,23 @@
         "memory",
         "incidents",
         "knowledge"
+      ]
+    },
+    {
+      "id": "cinema",
+      "kind": "native",
+      "name": "Cinema",
+      "version": "1.0.0",
+      "description": "Modo Cinema and Cinema Party — per room, the lights (and blinds, other screens) follow the film on Plex: dim on play, 30 % on pause, back to before at the end; party follows the film's colours across one or several rooms. Status, mode, start and end a session.",
+      "toolCount": 5,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "entertainment",
+        "media",
+        "lights",
+        "home"
       ]
     },
     {
@@ -312,6 +329,24 @@
         "rcon",
         "kids",
         "entertainment"
+      ]
+    },
+    {
+      "id": "music",
+      "kind": "native",
+      "name": "Música local",
+      "version": "1.0.0",
+      "description": "A person's Apple Music playlists kept as Plex playlists Butler owns (audio + \"(vídeo)\"): list, mark, sync now, status with what is missing and why, official-video candidates and download, and asking Lidarr for a missing song. The same deterministic service as the app and the daily job.",
+      "toolCount": 8,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "music",
+        "plex",
+        "apple-music",
+        "lidarr",
+        "media"
       ]
     },
     {
