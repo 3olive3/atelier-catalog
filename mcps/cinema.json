@@ -1,0 +1,19 @@
+{
+  "catalogID": "cinema",
+  "kind": "native",
+  "name": "Cinema",
+  "description": "Modo Cinema and Cinema Party — per room, the lights (and blinds, other screens) follow the film on Plex: dim on play, 30 % on pause, back to before at the end; party follows the film's colours across one or several rooms. Status, mode, start and end a session.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 5,
+  "runtime": "butler-gateway",
+  "tags": [
+    "entertainment",
+    "media",
+    "lights",
+    "home"
+  ],
+  "category": "core"
+}
