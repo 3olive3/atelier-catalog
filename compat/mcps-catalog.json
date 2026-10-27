@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-26T18:37:52Z",
+  "lastUpdated": "2026-10-27T11:29:48Z",
   "mcps": [
     {
       "id": "approvals",
@@ -267,7 +267,7 @@
       "name": "Media",
       "version": "2.0.0",
       "description": "Unified media platform — Sonarr (TV series), Radarr (movies), SABnzbd (downloads), Plex (library browsing, search, metadata, playback sessions, playlists), and Overseerr (requests, approvals, user quotas) via REST APIs. Merged 2026-08 from the separate media-stack, plex, and overseerr servers.",
-      "toolCount": 68,
+      "toolCount": 71,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
