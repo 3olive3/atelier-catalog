@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-27T15:00:01Z",
+  "lastUpdated": "2026-10-28T21:57:16Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 135,
+  "totalEntries": 136,
   "types": {
     "guardrails": [
       {
@@ -739,6 +739,26 @@
           "kids",
           "entertainment"
         ]
+      },
+      {
+        "catalogID": "music",
+        "kind": "native",
+        "name": "Música local",
+        "description": "A person's Apple Music playlists kept as Plex playlists Butler owns (audio + \"(vídeo)\"): list, mark, sync now, status with what is missing and why, official-video candidates and download, and asking Lidarr for a missing song. The same deterministic service as the app and the daily job.",
+        "version": "1.0.0",
+        "source": "butlerNative",
+        "transport": "butler",
+        "endpoint": "/api/v1/butler/mcp",
+        "toolCount": 8,
+        "runtime": "butler-gateway",
+        "tags": [
+          "music",
+          "plex",
+          "apple-music",
+          "lidarr",
+          "media"
+        ],
+        "category": "core"
       },
       {
         "catalogID": "nginx",
