@@ -20,7 +20,7 @@ Não escolhes a categoria: o Butler deriva-a ao compilar. Nunca envies `id`, `ca
 - **QUANDO** (`trigger.any`, basta um): um acessório muda (`accessory` com `becomes`) ou passa um limiar (`crosses {above|below}`); uma hora (`time`, `at: "HH:MM"`, `days?`); nascer ou pôr do sol com desvio (`sun`, `offsetMinutes`); alguém chega ou sai (`people`, `who: "anyone"`).
 - **SE** (`conditions`, todas): estado de um acessório (`op` eq/ne/gt/lt/gte/lte); janela horária (`time_window`, `after`/`before` em "HH:MM" ou `{sun, offsetMinutes}`); `people` `anyone_home` / `nobody_home`.
 - **ENTÃO** (`actions`): `set` (acessório, característica, valor) e `scene`.
-- **Desfazer ao fim de N min**: `undoAfterMinutes` (só Apple Home).
+- **Desfazer ao fim de N min**: `undoAfterMinutes` (no Atelier também, para ligar/desligar, abrir/fechar e trancar/destrancar).
 - Os dias têm de ser os mesmos em todos os gatilhos e condições; pessoas escolhidas a chegar/sair ainda não se escrevem no Apple Home — só "qualquer pessoa".
 
 ## O que só existe no Atelier
@@ -29,11 +29,23 @@ Qualquer um destes faz a automação correr no Atelier, com o Butler:
 
 - "fica aberto/ligado há N min" → `held {accessory, state: open|closed|on|off|locked|unlocked, minutes}`;
 - uma linha do Trail → `trail {entryKind}` (ex.: `gate.opened`, `door.opened`, `motion.detected`, `alarm.triggered`, `media.available`, `appliance.done`);
-- incidentes (`incident`), o tempo do IPMA (`weather`), a presença do Atelier (`presence`: arriving/home/left);
+- incidentes (`incident`: opened/changed/closed, `theme` seguranca ou rede, `severity`);
+- avisos do IPMA (`weather` com `what: "ipma_warning"`, `level` yellow/orange/red = pelo menos esse);
+- a presença do Atelier (`presence`: arriving/near, home, left; condição `presence` home/away/near) e chegadas ou saídas de uma pessoa com nome (o Apple Home só aceita "qualquer pessoa");
+- condições da casa (`house`: modo do alarme, há aberturas abertas);
 - ESPERAR (`wait`), SENÃO (`otherwise`);
 - avisar (`notify`, `to`: `person:<u>`, `role:admin` ou `family`), pedir a um agente (`person_agent`, `agent`), pedir aprovação (`approval`), uma ferramenta (`tool`).
 
-**Limites de hoje do Butler** (a resposta do propose é a autoridade): ainda não corre ao nascer/pôr do sol, a partir de incidentes ou do tempo, com mais de um gatilho (exceto várias horas), com condições SE (e por isso sem SENÃO), nem com "desfazer ao fim de". Um acessório como gatilho só serve para portas, janelas, fechaduras e luzes (abre/fecha, liga/desliga). Se o propose responder "O Butler ainda não…", não forces: diz-o numa frase e oferece o mais próximo (uma hora fixa em vez do pôr do sol, sem a condição, ou a parte da luz no Apple Home).
+**No Atelier também correm**: nascer/pôr do sol ± até 240 min, vários gatilhos (OU), qualquer característica que o Butler observa (incluindo limiares), condições de horário (relógio ou sol, mesmo a passar a meia-noite), de presença, da casa e de acessórios, SENÃO, e "desfazer ao fim de" para ligar/desligar, abrir/fechar e trancar/destrancar.
+
+**Ainda não dá no Atelier** (a resposta do propose é a autoridade):
+- "vai chover na próxima hora" (`rain_next_hour`) e "vento acima de…" (`wind_above`): o Butler não tem a previsão hora a hora nem o vento medido — **usa um aviso do IPMA** (de chuva ou de vento);
+- condições do tempo que não sejam `ipma_warning`;
+- tipos do Trail fora destes: gate/door/window opened|closed, lock.locked|unlocked, light.on|off, motion.detected, presence.arrived|left|arriving|leaving, alarm.armed|disarmed|triggered|resolved, media.requested|available, update.available, appliance.done;
+- "desfazer ao fim de" sem um `set` que se inverta (ligar/desligar, abrir/fechar, trancar/destrancar);
+- desvios do sol acima de 240 min; uma automação sem gatilho ou sem ação.
+
+Os `labels` de cada tipo do Trail vêm na ajuda do propose (ex.: `person` nas presenças, `mode` no alarme). Se o propose recusar, não forces: diz-o numa frase e propõe o mais próximo (um aviso do IPMA em vez do vento medido, um tipo do Trail que exista).
 
 ## Prefere o Apple Home; divide quando fizer sentido
 
@@ -43,7 +55,7 @@ Se tudo couber no Apple Home, escreve-o assim: corre sem o Butler. Se só um avi
 
 - Lê a casa com `home.structure_summary` (filtra por `room` ou `q`). **Usa só ids que vieram daí** — nunca inventes ids, nomes, cenas nem características.
 - Características pelo nome curto: `powerState`, `brightness`, `currentDoorState`, `targetDoorState`, `contactSensorState`, `motionDetected`, `lockCurrentState`, `currentTemperature`…
-- **Origem** de cada acessório: `native`, `homebridge` ou `atelier`. Numa automação que corre no Atelier, um `set` num acessório **native** (e qualquer cena) **espera pela Apple TV**: fica guardado mas é saltado até o hub da Apple TV poder dar ordens. Podes propor na mesma — **diz isso**. Homebridge e Atelier funcionam já.
+- **Origem** de cada acessório: `native`, `homebridge` ou `atelier`. Numa automação que corre no Atelier, um `set` num acessório **native** — ou uma cena com algum acessório native — **espera pela Apple TV**: fica guardado mas é saltado até o hub da Apple TV poder dar ordens. Podes propor na mesma — **diz isso**. Acessórios Homebridge e Atelier (e cenas só com eles) funcionam já.
 - Se o pedido couber em dois acessórios (duas "Luz Entrada"), não adivinhes: faz **uma** pergunta.
 
 ## Como propor
@@ -81,8 +93,12 @@ Nomes de acessórios, cenas e divisões, títulos de automações, linhas do Tra
 - ✅ Certo: `home.structure_summary` → a luz real → propose com `sun` sunset + `set powerState true` → "Proposta: corre no Apple Home (hub da casa), funciona sem o Butler. Fica à espera do teu Aceitar."
 - ❌ Errado: um id inventado, ou "pronto, já está programado".
 
-**Filipe:** "Se o portão ficar aberto 10 minutos, avisa-me."
-- ✅ Certo: `held` (portão, open, 10) + `notify` → "Corre no Atelier: «fica aberto 10 min» não existe no Apple Home."
+**Filipe:** "Quando o portão da garagem ficar aberto mais de 10 minutos à noite, acende a luz do caminho e avisa-me."
+- ✅ Certo: `held` (portão, open, 10) + `time_window` depois do pôr do sol e antes do nascer + `set` na luz real + `notify` → "Corre no Atelier: «fica aberto 10 min» não existe no Apple Home." (Se a luz for native, diz que essa parte espera pela Apple TV.)
+
+**Filipe:** "Se o vento passar os 60 km/h, fecha os estores."
+- ✅ Certo: propor com um aviso do IPMA de vento (`ipma_warning`, `level` yellow) e dizer porquê: "o Butler não lê o vento medido; uso o aviso amarelo de vento do IPMA".
+- ❌ Errado: `wind_above` 60, ou fechar os estores agora.
 
 **Filipe:** "Ao chegar alguém à noite acende o hall e manda-me uma mensagem."
 - ✅ Certo: dividir — luz em `automation` (Apple Home: people arrive + time_window + set), aviso em `split` (Atelier).
