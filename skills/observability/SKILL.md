@@ -130,9 +130,9 @@ Services (/metrics)          Containers (stdout)
   (17 targets,                      │
    90-day retention)                ▼
        │                          Loki
-       ├─► Alertmanager ──► email-critical (1h repeat)
-       │        │          ──► email-default (4h repeat)
-       │        │          ──► companion-push (APNs)
+       ├─► Alertmanager ──► butler-events (every alert: incidents, Telegram, inbox, app push)
+       │        │          ──► email-critical (1h repeat)
+       │        │          ──► no-email (warning, info)
        │        │
        │        └─► Karma (visual alert UI)
        │
@@ -343,9 +343,9 @@ The `dashboard_url` and `logs_url` create a three-way correlation: **alert email
 
 | Severity | Criteria | Alertmanager Routing |
 |----------|----------|---------------------|
-| critical | Service down, data loss risk, security breach | email-critical (1h repeat) + companion-push |
-| warning | Degraded performance, approaching limits | email-default (4h repeat) + companion-push |
-| info | Informational, no action needed | email-default (relaxed timing) |
+| critical | Service down, data loss risk, security breach | butler-events + email-critical (1h repeat) |
+| warning | Degraded performance, approaching limits | butler-events (no email) |
+| info | Informational, no action needed | butler-events (no email) |
 
 ### Validation
 
@@ -373,19 +373,21 @@ Prometheus (65 rules) + Loki Ruler (5 rules)
     │
     ▼
 Alertmanager :9093
-    ├── route: severity=critical
-    │   ├── email-critical (group_wait 10s, repeat 1h)
-    │   └── continue → companion-push
-    ├── route: severity=warning
-    │   ├── email-default (group_wait 30s, repeat 4h)
-    │   └── continue → companion-push
-    └── route: severity=info
-        └── email-default (relaxed timing)
+    ├── route: butler_origin=inbox → email-butler-inbox (continue: false — never back into Butler)
+    ├── route: (every alert) → butler-events (continue: true)
+    ├── route: severity=critical → email-critical (group_wait 10s, repeat 1h)
+    ├── route: severity=warning  → no-email
+    └── route: severity=info     → no-email (relaxed timing)
 
 Receivers:
+  butler-events  → Butler: incident, Telegram topics, inbox, and the Butler app push
+                   (each person's notification preferences decide what reaches a phone)
   email-critical → postfix relay → Cloudflare Email → administrator@3olive3.com
-  email-default  → same path, relaxed timing
-  companion-push → POST http://10.1.3.100:8081/api/v1/webhooks/generic → APNs
+  email-default  → same path (only alerts without a known severity)
+
+Phones get alerts ONLY through Butler's inbox push. The old `companion-push`
+webhook (Companion-Backend, HTTP 500 for months) was retired on 2026-10-27.
+Source of truth: atelier-butler/infra/configs/alertmanager/alertmanager.yml.
 ```
 
 ---
