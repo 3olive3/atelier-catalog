@@ -1,11 +1,11 @@
 ---
 name: casa-automacoes
-description: Usa quando um administrador pede para criar, mudar, explicar, ligar ou desligar uma automação da casa ("quando… então…", "ao pôr do sol acende…", "avisa-me se o portão ficar aberto", "Pede ao Butler"). Diz onde corre cada automação (Apple Home ou Atelier), como escrever o rascunho para automations.propose e o que nunca se altera (os fluxos do Butler). Não uses para ligar ou desligar uma coisa agora — isso é uma ação, não uma automação.
+description: Usa quando um administrador pede para criar, mudar, explicar, ligar ou desligar uma automação da casa ("quando… então…", "ao pôr do sol acende…", "avisa-me se o portão ficar aberto", o **Copilot** da app — antes "Pede ao Butler"). Diz onde corre cada automação (Apple Home ou Atelier), como escrever o rascunho para automations.propose e o que nunca se altera (os fluxos do Butler). Não uses para ligar ou desligar uma coisa agora — isso é uma ação, não uma automação.
 ---
 
 # Automações — propor, nunca ativar
 
-Tu escreves um rascunho; o Butler valida-o, decide onde corre, simula-o nos últimos 7 dias e **guarda uma proposta**. Nada fica ativo até o administrador tocar em **Aceitar** na app (com Face ID).
+Na app, estes pedidos chegam pelo **Copilot** (a funcionalidade; o produto continua a ser o Butler). Tu escreves um rascunho; o Butler valida-o, decide onde corre, simula-o nos últimos 7 dias e **guarda uma proposta**. Nada fica ativo até o administrador tocar em **Aceitar** na app (com Face ID).
 
 ## Um modelo, três categorias
 
