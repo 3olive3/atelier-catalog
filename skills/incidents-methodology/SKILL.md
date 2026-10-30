@@ -120,6 +120,15 @@ If the incident revealed issues that affect other areas, update relevant documen
 - Networking issues — update network docs
 - Security issues — update security procedures
 
+### Step 5: File the Follow-Up Actions in Butler
+
+Every "Prevention" item that is not done in the same session becomes a **post-mortem action** in Butler (ADR-0035) — the deterministic list of what is left to do, not the post-mortem page and not memory. One action per change, linked to the incident id when there is one, with an owner and (if agreed) a due date:
+
+- Through Butler's MCP: `actions.create` / `actions.update` / `actions.close` / `actions.list` (native server `actions`, served at `/api/v1/butler/mcp`).
+- Through the app: Incidentes → the incident → Ações, or Incidentes → Ações pós-incidente.
+- When the fix lands, close it as `feita` with the PR link and the proof; a dropped one as `descartada` with the reason.
+- Promoting an action to Filipe's master roadmap (home-docs) is allowed: add the roadmap entry, then `actions.update` with `roadmap_ref` — Butler stays the source of truth for its status.
+
 ---
 
 ## Troubleshooting Workflow — Mandatory Agent Behavior

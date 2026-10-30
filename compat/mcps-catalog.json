@@ -1,7 +1,23 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-28T21:57:16Z",
+  "lastUpdated": "2026-10-30T10:19:35Z",
   "mcps": [
+    {
+      "id": "actions",
+      "kind": "native",
+      "name": "Ações pós-incidente",
+      "version": "1.0.0",
+      "description": "Post-mortem and follow-up actions (ADR-0035): file what must be done after an incident or a conversation, linked to the incident, with owner, priority, due date and status (aberta, em curso, feita, descartada); update, close and list them. Butler's source of truth for follow-ups — written by tools, never only in a model's memory.",
+      "toolCount": 5,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "incidents",
+        "follow-up",
+        "awareness"
+      ]
+    },
     {
       "id": "approvals",
       "kind": "native",
@@ -35,6 +51,23 @@
         "people",
         "workflows",
         "models"
+      ]
+    },
+    {
+      "id": "automations",
+      "kind": "native",
+      "name": "Automações",
+      "version": "1.0.0",
+      "description": "One automation model (ADR-0031): Apple Home, Atelier and Butler automations — list, explain any of them in plain Portuguese, their health (what is broken and why, from the Apple Home structure history: removed accessories, likely replacements, lost actions, duplicates, conflicts — admins), switch one on/off (admin's confirmation), and propose a new one or a change from what an admin asked (stored as a proposal; only the admin's Aceitar in the app makes it live).",
+      "toolCount": 8,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "automation",
+        "home",
+        "workflows",
+        "homekit"
       ]
     },
     {
@@ -152,6 +185,22 @@
       "tags": [
         "events",
         "history",
+        "read-only"
+      ]
+    },
+    {
+      "id": "home",
+      "kind": "native",
+      "name": "Casa (estrutura)",
+      "version": "1.0.0",
+      "description": "The Apple Home structure in short, for writing automations: rooms, accessories with their origin (native, Homebridge or Atelier) and characteristics, and scenes. Read-only.",
+      "toolCount": 1,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "home",
+        "homekit",
         "read-only"
       ]
     },

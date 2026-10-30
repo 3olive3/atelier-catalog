@@ -18,7 +18,12 @@ Full container facts: [Homebridge](../../../../home-docs/docs/server/containers/
 | Config file | `config.json` at the appdata root |
 | Plugin code | `node_modules/<plugin>/` under appdata — persists across container restarts, **not** across a plugin reinstall/update |
 | Admin UI | config-ui-x, port 8581/8124, Vaultwarden `Homebridge UI — Butler MCP` |
-| Deploy method | UNRAID Docker template — **not** manifest/CI-managed like the rest of atelier-butler |
+| Deploy method | UNRAID Docker template; **plugins, patches and config.json from git** since 2026-10-30 ("Homebridge as code") |
+| Our plugins + third-party patches | `atelier-homebridge` monorepo: `packages/<plugin>/`, `patches/<plugin>/<version>/` + `patches/apply.sh` |
+| What production runs | atelier-butler `infra/homebridge/`: `plugins.json` (exact versions), `package-lock.json`, `config.template.json` (secrets as vault placeholders), `npmrc` |
+| Rebuild / drift | `infra/scripts/homebridge-reinstall.sh` (runbook: home-docs `runbooks/reinstall-homebridge.md`); `check-homebridge-drift.sh` hourly → `HomebridgeDriftFromGit` |
+
+**Any device/config change now ends in git**: edit `config.template.json` (or adopt a UI edit into it) and bump `plugins.json` for versions — never update a plugin from the Homebridge UI (it wipes patches and fires the drift alert).
 
 Several plugins run as independent **child bridges**, each its own HAP pairing. `docker restart homebridge` restarts all of them together — there's no per-plugin restart.
 
@@ -43,8 +48,8 @@ These aren't Homebridge defaults — they're choices made explicitly during the 
 When a plugin's upstream doesn't support a specific device variant or accessory shape (confirmed both packages are already at their latest published npm versions before treating this as a gap, not staleness), the pattern used for the Shelly Pro2 UL-model + Garage Door Opener work is the template:
 
 1. **Read the plugin's actual source** before assuming behavior — abilities/device-delegates architecture varies by plugin. Understand the existing "Switch"-style ability as a template for the read/write/event pattern before writing a new one.
-2. **Patch `node_modules` directly**, never the git-tracked plugin repo (there isn't one locally) — back up every file before editing (`.bak` alongside), and `node --check <file>` after every edit before restarting the container.
-3. **Write the new/patched files as real, git-tracked source** in `atelier-butler/infra/homebridge-patches/`, not just deployed artifacts — this is what makes the pattern below possible, and what a future session reads instead of re-reverse-engineering the plugin.
+2. **Develop against the pristine tarball** (`npm pack <plugin>@<installed version>`), on a test instance — never by editing production's `node_modules`. `node --check <file>` after every edit.
+3. **Commit the change as unified diffs** in `atelier-homebridge/patches/<plugin>/<version>/` (+ the `series` line: patch, target package, target version) and run `npm run test:patches` there — it proves apply, idempotence, upstream-change and conflict detection against the real tarball. Then bump `atelier_homebridge.ref` in atelier-butler `infra/homebridge/plugins.json`. (The 2026-08-22 patches were converted this way on 2026-10-30; `infra/homebridge-patches/` holds the original JS patcher, still used by the 15-min self-heal.)
 4. **Build a self-healing check, don't just patch once.** A plugin reinstall/update via the Homebridge UI silently wipes local `node_modules` edits — freezing all updates to prevent this blocks legitimate fixes to every *other* plugin too. Instead, write an idempotent script (checks-before-writes, one line of output per check) and wire it into `infra/configs/cron/casa-lima` on a schedule (every 15 min matches the existing pattern), restarting Homebridge only when it actually had something to reapply. `infra/scripts/ensure-homebridge-shelly-patches.sh` is the reference implementation — copy its shape for the next plugin patch rather than designing fresh.
 5. **Test the self-heal script against a real simulated wipe** before considering it done — restore every `.bak` file and delete every new file, run the script, confirm it detects all of them, reapplies, and the container comes back clean. A script that's only ever been run against the already-patched state hasn't proven anything about the failure mode it exists for.
 6. **Document in home-docs, not just in the patch files' comments** — the per-container page (what/why/detection command) and the plugin-inventory page (full file-by-file rationale) are what a future session actually reads first. A comment banner in the patched file is a second layer, not a substitute.

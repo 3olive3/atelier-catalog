@@ -16,6 +16,11 @@ import { digest, walk } from "./agent-skills-digest.mjs";
 const root = process.argv[2] ?? "agent-skills";
 const PLUGIN_NAME = "casa";
 const MAX_SKILL_CHARS = 12_000;
+// casa-automacoes teaches the METHOD only: the vocabulary (trigger/condition/action kinds)
+// comes from automations.capabilities at run time, so naming it here makes the skill stale.
+const AUTOMATIONS_SKILL = "casa-automacoes";
+const AUTOMATIONS_MAX_CHARS = 8_000;
+const AUTOMATIONS_CODE_ALLOW = /^automations\.[a-z_]+$|^home\.structure_summary$|^(time|sun|notify)$/;
 const ID = /^[a-z][a-z0-9-]{1,40}$/;
 const PLUGIN_KEYS = new Set(["name", "version", "description", "author", "license", "keywords"]);
 const FORBIDDEN_DIRS = ["hooks", "agents", "commands", "output-styles", "scripts", "bin", "mcp"];
@@ -75,6 +80,15 @@ for (const { full, rel, st } of entries) {
     seenSkills.push(id);
     if (!ID.test(id)) bad(rel, `skill id "${id}" must match ${ID}`);
     if (text.length > MAX_SKILL_CHARS) bad(rel, `${text.length} chars > ${MAX_SKILL_CHARS}`);
+    if (id === AUTOMATIONS_SKILL) {
+      if (text.length > AUTOMATIONS_MAX_CHARS) bad(rel, `${text.length} chars > ${AUTOMATIONS_MAX_CHARS} (method only; vocabulary comes from automations.capabilities)`);
+      for (const [, span] of text.matchAll(/`([^`\n]+)`/g)) {
+        if (!AUTOMATIONS_CODE_ALLOW.test(span)) bad(rel, `names a capability or syntax in code span \`${span}\` (only automations.*, home.structure_summary, time, sun, notify allowed)`);
+      }
+      if (/\bkind:|"kind"/.test(text)) bad(rel, 'contains a "kind" snippet (the vocabulary comes from the tool)');
+      const ref = /\b(trigger|condition|action)\.[a-z_]+/.exec(text);
+      if (ref) bad(rel, `names capability id "${ref[0]}" (the vocabulary comes from the tool)`);
+    }
     const fm = /^---\n([\s\S]*?)\n---\n/.exec(text);
     if (!fm) { bad(rel, "missing YAML frontmatter (---)"); continue; }
     const field = (k) => (new RegExp(`^${k}:\\s*(.+)$`, "m").exec(fm[1])?.[1] ?? "").trim();
