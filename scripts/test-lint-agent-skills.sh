@@ -46,6 +46,15 @@ d=$(v pluginkey);  printf '{"name":"casa","hooks":"./h.json"}\n' > "$d/.claude-p
 d=$(v pluginname); printf '{"name":"outro"}\n' > "$d/.claude-plugin/plugin.json";  expect fail plugin-name "$d" "plugin name must be"
 d=$(v tools);      printf -- '---\nname: exemplo\nallowed-tools: Bash\ndescription: Usa num teste.\n---\n\nTexto.\n' > "$d/skills/exemplo/SKILL.md"; expect fail allowed-tools "$d" 'frontmatter "allowed-tools" not allowed'
 
+# casa-automacoes: method-only rules (size > 8000, no capability names).
+auto() { local n="$1"; good "$T/$n"; mkdir -p "$T/$n/skills/casa-automacoes"; rm -r "$T/$n/skills/exemplo"
+  printf -- '---\nname: casa-automacoes\ndescription: Usa num teste.\n---\n\nUsa `automations.propose`, `home.structure_summary` e `notify`.\n' > "$T/$n/skills/casa-automacoes/SKILL.md"; echo "$T/$n"; }
+d=$(auto autook);  expect pass automacoes-ok "$d"
+d=$(auto autobig); head -c 9000 /dev/zero | tr '\0' 'a' | fold -w 80 >> "$d/skills/casa-automacoes/SKILL.md"; expect fail automacoes-too-big "$d" "> 8000"
+d=$(auto autoheld); echo 'Usa `held` para "aberto há N min".' >> "$d/skills/casa-automacoes/SKILL.md"; expect fail automacoes-names-held "$d" 'code span `held`'
+d=$(auto autokind); echo 'Escreve kind: gate.opened.' >> "$d/skills/casa-automacoes/SKILL.md"; expect fail automacoes-kind "$d" '"kind" snippet'
+d=$(auto autoid);   echo 'Gatilho trigger.sun serve.' >> "$d/skills/casa-automacoes/SKILL.md"; expect fail automacoes-capability-id "$d" 'names capability id'
+
 # Digest: same tree → same digest; one byte changed → different digest.
 a=$($DIGEST "$T/good"); b=$($DIGEST "$T/good")
 # Known vector: the Harness's TS implementation must produce the same hex for this tree.
