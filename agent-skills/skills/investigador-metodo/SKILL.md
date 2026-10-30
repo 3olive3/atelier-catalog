@@ -31,7 +31,7 @@ Quando te pedem o formato `findings`, preenche:
 | `likely_cause` | a causa mais provável, ou "desconhecida" |
 | `confidence` | `alta` · `média` · `baixa` |
 | `evidence[]` | `{source: "servidor.ferramenta", observation}` — só o que viste |
-| `next_steps[]` | passos propostos, concretos, para uma pessoa fazer |
+| `next_steps[]` | passos propostos, concretos, para uma pessoa fazer — cada um escrito como o título de uma ação pós-incidente ("Subir o limite de memória do X no manifest"), para o Butler da pessoa o poder registar tal como está |
 | `needs_human` | `true` quando é preciso alguém decidir ou agir |
 
 ## Certo / Errado

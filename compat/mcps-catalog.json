@@ -1,7 +1,23 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-30T10:08:12Z",
+  "lastUpdated": "2026-10-30T10:19:35Z",
   "mcps": [
+    {
+      "id": "actions",
+      "kind": "native",
+      "name": "Ações pós-incidente",
+      "version": "1.0.0",
+      "description": "Post-mortem and follow-up actions (ADR-0035): file what must be done after an incident or a conversation, linked to the incident, with owner, priority, due date and status (aberta, em curso, feita, descartada); update, close and list them. Butler's source of truth for follow-ups — written by tools, never only in a model's memory.",
+      "toolCount": 5,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "incidents",
+        "follow-up",
+        "awareness"
+      ]
+    },
     {
       "id": "approvals",
       "kind": "native",

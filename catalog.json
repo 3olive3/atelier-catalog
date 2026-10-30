@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-30T10:08:12Z",
+  "lastUpdated": "2026-10-30T10:19:35Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 138,
+  "totalEntries": 139,
   "types": {
     "guardrails": [
       {
@@ -270,6 +270,24 @@
       }
     ],
     "mcps": [
+      {
+        "catalogID": "actions",
+        "kind": "native",
+        "name": "Ações pós-incidente",
+        "description": "Post-mortem and follow-up actions (ADR-0035): file what must be done after an incident or a conversation, linked to the incident, with owner, priority, due date and status (aberta, em curso, feita, descartada); update, close and list them. Butler's source of truth for follow-ups — written by tools, never only in a model's memory.",
+        "version": "1.0.0",
+        "source": "butlerNative",
+        "transport": "butler",
+        "endpoint": "/api/v1/butler/mcp",
+        "toolCount": 5,
+        "runtime": "butler-gateway",
+        "tags": [
+          "incidents",
+          "follow-up",
+          "awareness"
+        ],
+        "category": "core"
+      },
       {
         "catalogID": "approvals",
         "kind": "native",
