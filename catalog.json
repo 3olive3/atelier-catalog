@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-30T10:11:12Z",
+  "lastUpdated": "2026-10-30T10:19:35Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 139,
@@ -331,12 +331,12 @@
         "catalogID": "automations",
         "kind": "native",
         "name": "Automações",
-        "description": "One automation model (ADR-0031): Apple Home, Atelier and Butler automations — list, explain any of them in plain Portuguese, switch one on/off (admin's confirmation), and propose a new one or a change from what an admin asked (stored as a proposal; only the admin's Aceitar in the app makes it live).",
+        "description": "One automation model (ADR-0031): Apple Home, Atelier and Butler automations — list, explain any of them in plain Portuguese, their health (what is broken and why, from the Apple Home structure history: removed accessories, likely replacements, lost actions, duplicates, conflicts — admins), switch one on/off (admin's confirmation), and propose a new one or a change from what an admin asked (stored as a proposal; only the admin's Aceitar in the app makes it live).",
         "version": "1.0.0",
         "source": "butlerNative",
         "transport": "butler",
         "endpoint": "/api/v1/butler/mcp",
-        "toolCount": 7,
+        "toolCount": 8,
         "runtime": "butler-gateway",
         "tags": [
           "automation",
