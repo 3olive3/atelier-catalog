@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-30T10:19:35Z",
+  "lastUpdated": "2026-10-30T22:19:15Z",
   "mcps": [
     {
       "id": "actions",
@@ -193,15 +193,16 @@
       "kind": "native",
       "name": "Casa (estrutura)",
       "version": "1.0.0",
-      "description": "The Apple Home structure in short, for writing automations: rooms, accessories with their origin (native, Homebridge or Atelier) and characteristics, and scenes. Read-only.",
-      "toolCount": 1,
+      "description": "The Apple Home structure in short, for writing automations: rooms, accessories with their origin (native, Homebridge or Atelier) and characteristics, and scenes; and the HP printer's status (ink per colour, state, problems, pages and jams). Read-only.",
+      "toolCount": 2,
       "runtime": "butler-gateway",
       "transport": "butler",
       "endpoint": "/api/v1/butler/mcp",
       "tags": [
         "home",
         "homekit",
-        "read-only"
+        "read-only",
+        "printer"
       ]
     },
     {
