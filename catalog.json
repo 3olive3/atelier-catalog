@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-30T10:19:35Z",
+  "lastUpdated": "2026-10-30T22:19:15Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 139,
@@ -518,17 +518,18 @@
         "catalogID": "home",
         "kind": "native",
         "name": "Casa (estrutura)",
-        "description": "The Apple Home structure in short, for writing automations: rooms, accessories with their origin (native, Homebridge or Atelier) and characteristics, and scenes. Read-only.",
+        "description": "The Apple Home structure in short, for writing automations: rooms, accessories with their origin (native, Homebridge or Atelier) and characteristics, and scenes; and the HP printer's status (ink per colour, state, problems, pages and jams). Read-only.",
         "version": "1.0.0",
         "source": "butlerNative",
         "transport": "butler",
         "endpoint": "/api/v1/butler/mcp",
-        "toolCount": 1,
+        "toolCount": 2,
         "runtime": "butler-gateway",
         "tags": [
           "home",
           "homekit",
-          "read-only"
+          "read-only",
+          "printer"
         ],
         "category": "core"
       },

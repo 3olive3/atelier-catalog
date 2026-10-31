@@ -15,7 +15,7 @@ Não escolhes a categoria nem envias id, category, runsOn ou version: o Butler d
 
 ## O método
 
-1. `automations.capabilities` sem ids: o índice do que esta casa sabe fazer. O vocabulário vem daqui, não da tua memória.
+1. `automations.capabilities` sem argumentos: o índice (a gramática base e uma linha por domínio). Depois, chama de novo com o domínio do pedido (parâmetro domain, p. ex. security, kitchen, lighting; vários separados por vírgula) ou com as palavras da pessoa (parâmetro q). Por fim, chama com ids para o detalhe das peças que escolheste. O vocabulário vem daqui, não da tua memória.
 2. `home.structure_summary` para os ids reais de acessórios, cenas e divisões (filtra por divisão ou texto; se duas pesquisas não chegarem, lê uma vez sem filtro). Usa só ids que vieram daí.
 3. `automations.capabilities` com ids para as 2 a 5 peças que escolheste: traz o formato, um exemplo e as armadilhas.
 4. Escreve o rascunho a partir dos exemplos.
