@@ -110,3 +110,17 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 - **ADRs**: <https://docs.3olive3.com/adr/>
 - **Skills architecture**: <https://docs.3olive3.com/butler/skills/>
 - **Agent roster** (which agent gets which skills): <https://docs.3olive3.com/butler/agent-roster/>
+
+<!-- factory:begin -->
+## Atelier Factory (generated — edit atelier-factory/kit, then reinstall)
+
+This repo runs the Atelier Factory kit (version 0.1.0). Its rules are enforced by hooks, not by memory:
+
+- **Model tiering.** Every Agent call needs a model, or a factory agent that pins one. Use `mechanic` (Haiku) for work with one right answer, `worker` / `verifier` / `learner` (Sonnet) by default, `planner` / `security-reviewer` (Opus) only for planning, architecture and high-risk changes. A plain `opus` call needs an `Opus-reason:` line in its prompt.
+- **Git flow.** Pushing to `main` or `develop` is blocked. Push a `feature/*` or `bugfix/*` branch and open a PR.
+- **Secrets.** Writing `.env` files is blocked. Secrets live only in Vaultwarden.
+- **Lanes.** `factory.json` maps paths to lanes by blast radius: open, wide, closed. Closed-lane changes always need Filipe's approval.
+- **Evidence.** Nothing is done until a check that could fail has passed: deterministic result > trace > independent `verifier` > self-report.
+
+The enforcement registry and audit live in `atelier-factory` (`bin/factory-audit.mjs`).
+<!-- factory:end -->
