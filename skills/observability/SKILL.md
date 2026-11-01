@@ -130,9 +130,10 @@ Services (/metrics)          Containers (stdout)
   (17 targets,                      │
    90-day retention)                ▼
        │                          Loki
-       ├─► Alertmanager ──► butler-events (every alert: incidents, inbox, app push — no Telegram since 2026-11-01, ADR-0037)
-       │        │          ──► email-critical (1h repeat)
-       │        │          ──► no-email (warning, info)
+       ├─► Alertmanager ──► butler-events (every alert → Butler inbox; pushes decided by Butler's notification definitions)
+       │        │          ──► email-butler-inbox (butler_origin=inbox only)
+       │        │          ──► email-page (`page: email` label, grouped by system)
+       │        │          ──► no-email (everything else)
        │        │
        │        └─► Karma (visual alert UI)
        │
@@ -343,7 +344,7 @@ The `dashboard_url` and `logs_url` create a three-way correlation: **alert email
 
 | Severity | Criteria | Alertmanager Routing |
 |----------|----------|---------------------|
-| critical | Service down, data loss risk, security breach | butler-events + email-critical (1h repeat) |
+| critical | Service down, data loss risk, security breach | butler-events; add `page: email` to the rule for an email |
 | warning | Degraded performance, approaching limits | butler-events (no email) |
 | info | Informational, no action needed | butler-events (no email) |
 
@@ -374,19 +375,21 @@ Prometheus (65 rules) + Loki Ruler (5 rules)
     ▼
 Alertmanager :9093
     ├── route: butler_origin=inbox → email-butler-inbox (continue: false — never back into Butler)
+    ├── route: alertname=MaintenanceWindow → no-email (inhibit source only)
     ├── route: (every alert) → butler-events (continue: true)
-    ├── route: severity=critical → email-critical (group_wait 10s, repeat 1h)
-    ├── route: severity=warning  → no-email
-    └── route: severity=info     → no-email (relaxed timing)
+    ├── route: page=email → email-page (group_by system, group_wait 2m, group_interval 10m, repeat 4h, send_resolved false)
+    └── default → no-email
+
+Inhibit: an active MaintenanceWindow (raised by infra/scripts/maintenance-window.sh,
+written by deploy-container.sh) mutes container/app warnings, UptimeKumaServiceDown
+and TargetDown. Critical infrastructure/house alerts are never inhibited.
 
 Receivers:
-  butler-events  → Butler: incident, inbox, and the Butler app push (Telegram carries only the Butler chat, ADR-0037)
-                   (each person's notification preferences decide what reaches a phone)
-  email-critical → postfix relay → Cloudflare Email → administrator@3olive3.com
-  email-default  → same path (only alerts without a known severity)
+  butler-events  → Butler webhook: inbox and incidents; pushes decided by Butler's notification definitions (butler #963)
+  email-butler-inbox → Butler inbox emails (one item, one email)
+  email-page     → email to $SMTP_TO, one per system group
 
-Phones get alerts ONLY through Butler's inbox push. The old `companion-push`
-webhook (Companion-Backend, HTTP 500 for months) was retired on 2026-10-27.
+companion-push is retired (2026-10-27); phones get alerts only via Butler.
 Source of truth: atelier-butler/infra/configs/alertmanager/alertmanager.yml.
 ```
 
@@ -632,7 +635,7 @@ All services should emit JSON to stdout:
 
 ### Loki Derived Fields
 
-The Loki datasource has a derived field linking `container_name` labels to cAdvisor dashboard panels — one-click from log line to container metrics.
+The Loki datasource has a derived field linking `container` labels to cAdvisor dashboard panels — one-click from log line to container metrics.
 
 ### Log-Based Alert Rules (Loki Ruler)
 
