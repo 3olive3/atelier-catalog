@@ -114,13 +114,23 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 <!-- factory:begin -->
 ## Atelier Factory (generated — edit atelier-factory/kit, then reinstall)
 
-This repo runs the Atelier Factory kit (version 0.2.0). Its rules are enforced by hooks, not by memory:
+This repo runs the Atelier Factory kit (version 0.3.0). Its rules are enforced by hooks, not by memory:
 
 - **Model tiering.** Every Agent call needs a model, or a factory agent that pins one. Use `mechanic` (Haiku) for work with one right answer, `worker` / `verifier` / `learner` (Sonnet) by default, `planner` / `security-reviewer` (Opus) only for planning, architecture and high-risk changes. A plain `opus` call needs an `Opus-reason:` line in its prompt.
 - **Git flow.** Pushing to `main` or `develop` is blocked. Push a `feature/*` or `bugfix/*` branch and open a PR.
 - **Secrets.** Writing `.env` files is blocked. Secrets live only in Vaultwarden.
 - **Lanes.** `factory.json` maps paths to lanes by blast radius: open, wide, closed. Closed-lane changes always need Filipe's approval.
 - **Evidence.** Nothing is done until a check that could fail has passed: deterministic result > trace > independent `verifier` > self-report.
+
+### Learned constraints (never-list)
+
+- **Never** let a code node read another repo's working tree; read a clean export of the base ref with `git archive origin/develop`.
+- **Never** treat "no checks reported" as green before checks register (wait at least two minutes, then merge only on green).
+- **Never** trust a grep check to prove a claim about code is true; require the verifier for doc changes that make claims about code.
+- **Never** parse git porcelain output after trimming it; the leading space is significant, and parsing gets a test with that case.
+- **Never** read "passed on attempt 1" in a run report as "no earlier failures"; the report counts only the final execution, so check the ledger for failed attempts in earlier executions before drawing a conclusion about a model tier.
+- **Never** record a failed attempt without its reason; a failure with no recorded cause cannot be assigned to a layer, so it teaches nothing.
+- **Never** assume a code node's tools exist on the host; declare them and run Python through `uv run --with <deps>`.
 
 The enforcement registry and audit live in `atelier-factory` (`bin/factory-audit.mjs`).
 <!-- factory:end -->
