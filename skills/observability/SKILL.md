@@ -130,7 +130,7 @@ Services (/metrics)          Containers (stdout)
   (17 targets,                      │
    90-day retention)                ▼
        │                          Loki
-       ├─► Alertmanager ──► butler-events (every alert: incidents, Telegram, inbox, app push)
+       ├─► Alertmanager ──► butler-events (every alert: incidents, inbox, app push — no Telegram since 2026-11-01, ADR-0037)
        │        │          ──► email-critical (1h repeat)
        │        │          ──► no-email (warning, info)
        │        │
@@ -380,7 +380,7 @@ Alertmanager :9093
     └── route: severity=info     → no-email (relaxed timing)
 
 Receivers:
-  butler-events  → Butler: incident, Telegram topics, inbox, and the Butler app push
+  butler-events  → Butler: incident, inbox, and the Butler app push (Telegram carries only the Butler chat, ADR-0037)
                    (each person's notification preferences decide what reaches a phone)
   email-critical → postfix relay → Cloudflare Email → administrator@3olive3.com
   email-default  → same path (only alerts without a known severity)
