@@ -44,7 +44,7 @@ import from the design-system repo at build time. The Console builds in Docker o
 | `console` | Console | Control Centre | Mosaico (2×2 tiles) | `console.3olive3.com` |
 | `sso` | SSO | Home Authentication | Impressão (fingerprint) | `auth.3olive3.com` (Authentik brand) |
 | `guest` | Guest | Welcome | Porta aberta (open door) | guest portal, guest Wi-Fi |
-| `bridge` | Bridge | Home Channels | Ponte (arch bridge) | the channels the family talks through (OpenClaw): Telegram DMs, the Butler group, pairing, sessions |
+| `bridge` | Bridge | Home Channels | Ponte (arch bridge) | the channels the family talks through (OpenClaw): Telegram private chats with the Butler bot (no groups since 2026-11-01, ADR-0037), pairing, sessions |
 | `models` | Models | Model Routing | Encaminhamento (one line in, three out) | LiteLLM: `models.3olive3.com` (its own UI) and the Console's Models section |
 | `home` | Home | iOS · iPadOS · tvOS | Casa com laço (house + bow tie) | Atelier Home (ADR-0027, was Companion): the family's Apple app and the HomeKit gateway; app icons, launch screens. The repo stays `atelier-companion` |
 | `docs` | Docs | Home Knowledge | Livro aberto (open book) | `docs.3olive3.com`, and the Console's Docs menu (embedded) |
