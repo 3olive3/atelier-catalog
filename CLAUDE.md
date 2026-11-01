@@ -114,7 +114,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 <!-- factory:begin -->
 ## Atelier Factory (generated — edit atelier-factory/kit, then reinstall)
 
-This repo runs the Atelier Factory kit (version 0.4.0). Its rules are enforced by hooks, not by memory:
+This repo runs the Atelier Factory kit (version 0.5.0). Its rules are enforced by hooks, not by memory:
 
 - **Model tiering.** Every Agent call needs a model, or a factory agent that pins one. Use `mechanic` (Haiku) for work with one right answer, `worker` / `verifier` / `learner` (Sonnet) by default, `planner` / `security-reviewer` (Opus) only for planning, architecture and high-risk changes. A plain `opus` call needs an `Opus-reason:` line in its prompt.
 - **Git flow.** Pushing to `main` or `develop` is blocked. Push a `feature/*` or `bugfix/*` branch and open a PR.
@@ -138,6 +138,8 @@ This repo runs the Atelier Factory kit (version 0.4.0). Its rules are enforced b
 - **Never** stop an MCP tool change at the source merge; the catalog, Butler image, credentials, local `.mcp.json` and docs go in the same piece of work.
 
 ### Working through the factory
+
+The one-page manual for people is `FACTORY.md` at this repo's root.
 
 When asked to "run this through the factory" (or to resume the roadmap through it), every item goes through harness, loop and graph:
 
