@@ -114,7 +114,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 <!-- factory:begin -->
 ## Atelier Factory (generated — edit atelier-factory/kit, then reinstall)
 
-This repo runs the Atelier Factory kit (version 0.3.0). Its rules are enforced by hooks, not by memory:
+This repo runs the Atelier Factory kit (version 0.4.0). Its rules are enforced by hooks, not by memory:
 
 - **Model tiering.** Every Agent call needs a model, or a factory agent that pins one. Use `mechanic` (Haiku) for work with one right answer, `worker` / `verifier` / `learner` (Sonnet) by default, `planner` / `security-reviewer` (Opus) only for planning, architecture and high-risk changes. A plain `opus` call needs an `Opus-reason:` line in its prompt.
 - **Git flow.** Pushing to `main` or `develop` is blocked. Push a `feature/*` or `bugfix/*` branch and open a PR.
@@ -131,6 +131,21 @@ This repo runs the Atelier Factory kit (version 0.3.0). Its rules are enforced b
 - **Never** read "passed on attempt 1" in a run report as "no earlier failures"; the report counts only the final execution, so check the ledger for failed attempts in earlier executions before drawing a conclusion about a model tier.
 - **Never** record a failed attempt without its reason; a failure with no recorded cause cannot be assigned to a layer, so it teaches nothing.
 - **Never** assume a code node's tools exist on the host; declare them and run Python through `uv run --with <deps>`.
+- **Never** start a manual image build while CI is building the same tag; check `gh run list --workflow=<name> --limit 1` first and re-trigger with `gh workflow run`.
+- **Never** branch off `develop` without checking `git log develop..main`; if main is ahead, develop is not a safe base.
+- **Never** edit a repo that other agents may be using from its shared clone; use a worktree off `origin/develop` and check `git branch --show-current` before commit.
+- **Never** hand-edit catalog MCP counts or versions; run `scripts/sync-catalog.py --write`.
+- **Never** stop an MCP tool change at the source merge; the catalog, Butler image, credentials, local `.mcp.json` and docs go in the same piece of work.
+
+### Working through the factory
+
+When asked to "run this through the factory" (or to resume the roadmap through it), every item goes through harness, loop and graph:
+
+1. **Spec** (features): `/speckit-specify` then `/speckit-clarify` (ask Filipe the open questions), `/speckit-plan`, `/speckit-tasks`. Small one-file fixes may skip the spec.
+2. **Graph and loop:** `/speckit-implement` compiles `tasks.md` into `GRAPH.json` and runs `node ~/Developer/atelier-platform/atelier-factory/bin/factory-run.mjs <GRAPH.json>`. Every node needs a check that fails now and passes when done; `mechanic` (Haiku) for one-right-answer tasks, `worker` (Sonnet) otherwise.
+3. **Evidence:** the gate decides by lane; then the `verifier` reviews the PR against the spec before merge.
+4. **Ship:** PR to `develop`. A release to `main` (production, ADR-0038) only when Filipe asks: a `develop` → `main` PR merged with a merge commit and tagged.
+5. **Learn:** failures and surprises go into the run's LESSONS.md; `factory-learn` turns them into rules.
 
 The enforcement registry and audit live in `atelier-factory` (`bin/factory-audit.mjs`).
 <!-- factory:end -->
