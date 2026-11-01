@@ -365,7 +365,7 @@ job**: Homebridge 2.4 passed it on 2026-10-11 and published nothing over mDNS fo
 - Nothing is rolled back automatically: the new container stays and the old
   image is kept. Deciding to go back is the human's call.
 - It writes `casa_post_update_check_ok{container}`. A `0` fires
-  `ContainerPostUpdateCheckFailed`, which opens a Butler incident (inbox and Telegram).
+  `ContainerPostUpdateCheckFailed`, which opens a Butler incident (inbox and the Atelier app's push).
 - After a manual fix: `deploy-container.sh <name> --post-update-only` re-runs
   just the check and clears the alert when it passes.
 
