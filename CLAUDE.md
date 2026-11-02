@@ -114,12 +114,14 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 <!-- factory:begin -->
 ## Atelier Factory (generated — edit atelier-factory/kit, then reinstall)
 
-This repo runs the Atelier Factory kit (version 0.5.0). Its rules are enforced by hooks, not by memory:
+This repo runs the Atelier Factory kit (version 0.6.5). Its rules are enforced by hooks, not by memory:
 
 - **Model tiering.** Every Agent call needs a model, or a factory agent that pins one. Use `mechanic` (Haiku) for work with one right answer, `worker` / `verifier` / `learner` (Sonnet) by default, `planner` / `security-reviewer` (Opus) only for planning, architecture and high-risk changes. A plain `opus` call needs an `Opus-reason:` line in its prompt.
 - **Git flow.** Pushing to `main` or `develop` is blocked. Push a `feature/*` or `bugfix/*` branch and open a PR.
 - **Secrets.** Writing `.env` files is blocked. Secrets live only in Vaultwarden.
 - **Lanes.** `factory.json` maps paths to lanes by blast radius: open, wide, closed. Closed-lane changes always need Filipe's approval.
+- **Design system.** Every PR runs the design-system check: no new colour literals, copies match their pin.
+- **Skills.** Mandatory in every repo: `atelier-design`, `deploy-container`, `build-image`, `scheduled-jobs`, `decommission` (linked in `.claude/skills/`; load before any UI, icon or naming work).
 - **Evidence.** Nothing is done until a check that could fail has passed: deterministic result > trace > independent `verifier` > self-report.
 
 ### Learned constraints (never-list)
@@ -136,6 +138,10 @@ This repo runs the Atelier Factory kit (version 0.5.0). Its rules are enforced b
 - **Never** edit a repo that other agents may be using from its shared clone; use a worktree off `origin/develop` and check `git branch --show-current` before commit.
 - **Never** hand-edit catalog MCP counts or versions; run `scripts/sync-catalog.py --write`.
 - **Never** stop an MCP tool change at the source merge; the catalog, Butler image, credentials, local `.mcp.json` and docs go in the same piece of work.
+- **Never** accept a knowledge migration on a "source listed on the page" check; it proves files are covered, not facts. Migrations of knowledge need a fact-level verifier node before merge.
+- **Never** let a test or check touch the real `~/.atelier-factory` (or any home-directory state); point it at a throwaway folder through `FACTORY_STATE_DIR` or `$TMPDIR`. A worker's sandbox denies that path, so the check fails the same way on every attempt.
+- **Never** read a "failed 3 attempts" escalation as three different failures; the repeat detector compares raw output, so a pid, a timing or a temp-dir name hides a repeat. Compare the failing lines yourself before blaming the attempt or the tier.
+- **Never** let a worker fill a field the source does not give; write "not recorded", do not infer it.
 
 ### Working through the factory
 

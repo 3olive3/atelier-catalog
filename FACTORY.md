@@ -1,6 +1,6 @@
 # Atelier Factory — one-page manual
 
-<!-- Installed by atelier-factory (kit 0.5.0). Do not edit here: edit
+<!-- Installed by atelier-factory (kit 0.6.5). Do not edit here: edit
      atelier-factory/kit/MANUAL.md and reinstall. -->
 
 The factory is how work gets built in this repo: rules enforced by code (**harness**),
@@ -14,6 +14,7 @@ every unit checked until it passes (**loop**), work split into real steps with g
 - **Learned rules.** The never-list in this repo's CLAUDE.md is loaded in every session.
 - **Telemetry.** Every subagent call and every block goes to the ledger (`~/.atelier-factory/ledger/`), which feeds the scorecard.
 - **CI.** PRs run the repo's tests and gates.
+- **Design system.** Every PR runs the design-system check: no new colour literals, copies match their pin.
 
 ## What to say
 
@@ -72,7 +73,7 @@ node ~/Developer/atelier-platform/atelier-factory/bin/factory-install.mjs <repo>
 
 ## Not built yet
 
-- **Nightly audit and learner**: run `bash ~/Developer/atelier-platform/atelier-factory/bin/factory-schedule.sh` once on the Mac.
+- **Nightly audit, learner and scorecard**: Claude Code may not install a background job on your Mac, so run `bash ~/Developer/atelier-platform/atelier-factory/bin/factory-schedule.sh` once yourself. After that it runs every night at 05:15, and the learner's wiki changes arrive as a PR.
 - **Health check and automatic rollback after a release**: until then, a rollback is a manual redeploy of the previous tag.
 - **Per-person feature switches**: new features visible only to you first.
 - **Factory in all products** (global baseline, `factory-new` for new repos).
