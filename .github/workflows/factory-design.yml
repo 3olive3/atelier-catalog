@@ -1,0 +1,52 @@
+# Installed by atelier-factory (factory-install). Do not edit here: edit
+# atelier-factory/kit/ci/factory-design.yml and reinstall.
+#
+# The scanner and the baseline are read from the PR's BASE branch, so a PR cannot
+# weaken its own check. Only the first install PR (base has no copy yet) uses its own.
+name: factory-design
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  design-system:
+    name: design-system
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Scan for colour literals and pin drift
+        env:
+          BASE: ${{ github.base_ref }}
+        run: |
+          set -eu
+          git fetch --no-tags origin "$BASE"
+          # The scanner and the baseline come from the BASE branch, so a PR cannot weaken
+          # its own check. The PR's own copy is used only when the base does not have the
+          # file at all (the first install PR); any other read error fails the job (exit 2).
+          from_base() {
+            # $1 = path in the repo, $2 = destination
+            if ! git cat-file -e "origin/$BASE:$1" 2>/dev/null; then
+              echo "base has no $1 yet: using this PR's copy (first install)"
+              cp "$1" "$2"
+              return
+            fi
+            git show "origin/$BASE:$1" > "$2" || { echo "could not read $1 from origin/$BASE"; exit 2; }
+          }
+          from_base .claude/factory/design-scan.mjs "$RUNNER_TEMP/scan.mjs"
+          from_base .claude/factory/design-baseline.json "$RUNNER_TEMP/baseline.json"
+          # Pins come from the PR itself: each copied file must match the sha256 its own
+          # design-system.json records (a re-copy updates both together). Whether a pin is
+          # the real design-system file is checked nightly, where the design system is readable.
+          if [ -f design-system.json ]; then
+            node "$RUNNER_TEMP/scan.mjs" --dir . --baseline "$RUNNER_TEMP/baseline.json" --pins design-system.json
+          else
+            node "$RUNNER_TEMP/scan.mjs" --dir . --baseline "$RUNNER_TEMP/baseline.json"
+          fi
