@@ -43,6 +43,9 @@ On versions: package.json is canonical, but catalog versions were once ahead of
 source. So a *lower* source version is reported and NOT written unless
 --adopt-source-versions is passed. Regenerating must never silently downgrade.
 
+Without --write, catalog.json and compat/mcps-catalog.json are also compared with
+mcps/*.json (a wrong count there is BLOCKING); --write skips that, it rebuilds them.
+
 Paths (override with env): MCP_SOURCE_DIR (default ../atelier-butler/mcp),
 MCP_NATIVE_MANIFEST (default ../atelier-butler/gateway/native-servers.json),
 MCP_CONSUMER_CATALOG (default ./mcps).
@@ -52,6 +55,7 @@ from __future__ import annotations
 
 import argparse
 import glob
+import importlib.util
 import json
 import os
 import re
@@ -306,6 +310,68 @@ def write(entries, native_verified=True):
         os.remove(f)
 
 
+def check_built():
+    """BLOCKING notes for catalog.json and compat/mcps-catalog.json vs mcps/*.json.
+
+    plan() only compares mcps/*.json with source; this holds the built output to
+    mcps/*.json too. The compat fields come from build_compat_mcps itself.
+    """
+    notes = []
+    wanted = {}
+    for f in sorted(glob.glob(os.path.join(CONSUMER_CATALOG, "*.json"))):
+        d = load_json(f)
+        if isinstance(d, dict):
+            wanted[os.path.basename(f)[:-5]] = d
+
+    spec = importlib.util.spec_from_file_location("build_catalog", BUILD_CATALOG)
+    build = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(build)
+
+    def shown(field, old, new):
+        return f"{field} {old} -> {new}" if field == "toolCount" else field
+
+    # catalog.json
+    path = os.path.join(REPO_ROOT, "catalog.json")
+    built = load_json(path)
+    rows = None
+    if isinstance(built, dict) and isinstance(built.get("types"), dict):
+        rows = built["types"].get("mcps")
+    if not isinstance(rows, list):
+        notes.append("catalog.json: missing, unreadable or without types.mcps")
+    else:
+        by_id = {r.get("catalogID"): r for r in rows if isinstance(r, dict)}
+        for mcp_id in sorted(set(wanted) - set(by_id)):
+            notes.append(f"catalog.json: {mcp_id} is in mcps/ but has no row in types.mcps")
+        for mcp_id in sorted(set(by_id) - set(wanted), key=str):
+            notes.append(f"catalog.json: types.mcps row {mcp_id} has no file in mcps/")
+        for mcp_id in sorted(set(by_id) & set(wanted)):
+            row, want = by_id[mcp_id], wanted[mcp_id]
+            diff = [shown(k, row.get(k), want.get(k)) for k in sorted(set(row) | set(want))
+                    if row.get(k) != want.get(k)]
+            if diff:
+                notes.append(f"catalog.json: {mcp_id} differs from mcps/{mcp_id}.json: {', '.join(diff)}")
+
+    # compat/mcps-catalog.json
+    path = os.path.join(REPO_ROOT, "compat", "mcps-catalog.json")
+    compat = load_json(path)
+    rows = compat.get("mcps") if isinstance(compat, dict) else None
+    if not isinstance(rows, list):
+        notes.append("compat/mcps-catalog.json: missing, unreadable or without mcps")
+    else:
+        expected = {r["id"]: r for r in build.build_compat_mcps(list(wanted.values()))["mcps"]}
+        by_id = {r.get("id"): r for r in rows if isinstance(r, dict)}
+        for mcp_id in sorted(set(expected) - set(by_id)):
+            notes.append(f"compat/mcps-catalog.json: {mcp_id} is in mcps/ but has no row")
+        for mcp_id in sorted(set(by_id) - set(expected), key=str):
+            notes.append(f"compat/mcps-catalog.json: row {mcp_id} has no file in mcps/")
+        for mcp_id in sorted(set(by_id) & set(expected)):
+            diff = [shown(k, by_id[mcp_id].get(k), expected[mcp_id].get(k)) for k in ("toolCount", "version")
+                    if by_id[mcp_id].get(k) != expected[mcp_id].get(k)]
+            if diff:
+                notes.append(f"compat/mcps-catalog.json: {mcp_id} differs from mcps/{mcp_id}.json: {', '.join(diff)}")
+    return notes
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--write", action="store_true", help="apply changes, then run build-catalog.py")
@@ -320,6 +386,8 @@ def main():
     source = read_source()
     native = read_native()
     entries, notes = plan(source, args.adopt_source_versions, native)
+    if not args.write:  # --write rebuilds the built files anyway
+        notes += [("blocking", m) for m in check_built()]
 
     pkgs = [e for e in entries.values() if e.get("kind") != "native"]
     nats = [e for e in entries.values() if e.get("kind") == "native"]
