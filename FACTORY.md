@@ -1,6 +1,6 @@
 # Atelier Factory — one-page manual
 
-<!-- Installed by atelier-factory (kit 0.6.5). Do not edit here: edit
+<!-- Installed by atelier-factory (kit 0.6.6). Do not edit here: edit
      atelier-factory/kit/MANUAL.md and reinstall. -->
 
 The factory is how work gets built in this repo: rules enforced by code (**harness**),
