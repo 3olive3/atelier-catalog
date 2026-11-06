@@ -7,7 +7,7 @@
     "wide": ["skills/**", "mcps/**", "agent-skills/**", "agent-personas/**", "role-profiles/**", "scripts/**", "catalog.json", "bundles.json"],
     "closed": ["permissions/**", "guardrails/**"]
   },
-  "checks": ["python3 scripts/sync-catalog.py --check"],
+  "checks": ["python3 scripts/sync-catalog.py --check", "bash scripts/test-sync-catalog.sh"],
   "skills": [
     "architecture-decision-records", "bash-pro", "build-image", "deploy-container", "distribute-skill-mcp",
     "git-advanced-workflows", "home-electrical", "home-network", "incidents-methodology", "mcp-builder",
