@@ -15,6 +15,17 @@ If an alert is firing, work this order. Everything below this section is
 reference for *building* the stack; this section is for *using* it under
 pressure.
 
+### Before you say «there is no metric» or «no alert»
+
+Applies to any question about hardware or infrastructure state. In this order:
+
+1. **Firing alerts for the component:** `am_list_alerts` (include silenced and inhibited), and `ALERTS{}` in Prometheus.
+2. **Rules:** `list_rules`, filtered by the component's name.
+3. **Series by job:** list the targets, then `find_series` or a query by job. Never guess a metric name.
+4. **Only then** may you say there is none, and name the three you checked.
+
+Why: on 2026-11-03 an agent said PSU 2 had no metric and no alert, but `PowerSupplyFailed` had been firing since 2026-10-05.
+
 ### 0. Can this alert even fire?
 
 **Do this before believing anything else the alert implies.** A rule whose
