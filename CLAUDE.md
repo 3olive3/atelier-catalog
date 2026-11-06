@@ -114,7 +114,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 <!-- factory:begin -->
 ## Atelier Factory (generated — edit atelier-factory/kit, then reinstall)
 
-This repo runs the Atelier Factory kit (version 0.6.5). Its rules are enforced by hooks, not by memory:
+This repo runs the Atelier Factory kit (version 0.6.6). Its rules are enforced by hooks, not by memory:
 
 - **Model tiering.** Every Agent call needs a model, or a factory agent that pins one. Use `mechanic` (Haiku) for work with one right answer, `worker` / `verifier` / `learner` (Sonnet) by default, `planner` / `security-reviewer` (Opus) only for planning, architecture and high-risk changes. A plain `opus` call needs an `Opus-reason:` line in its prompt.
 - **Git flow.** Pushing to `main` or `develop` is blocked. Push a `feature/*` or `bugfix/*` branch and open a PR.

@@ -35,8 +35,9 @@ export function pinnedModel(agentType, projectDir) {
   const dirs = [projectDir && join(projectDir, ".claude", "agents"), join(homedir(), ".claude", "agents")];
   for (const dir of dirs.filter(Boolean)) {
     const file = join(dir, `${agentType}.md`);
-    if (!existsSync(file)) continue;
-    const fm = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---/);
+    let text;
+    try { text = readFileSync(file, "utf8"); } catch { continue; } // absent or unreadable: no pin from here
+    const fm = text.match(/^---\n([\s\S]*?)\n---/);
     const m = fm && fm[1].match(/^model:\s*(\S+)/m);
     if (m) return m[1];
   }
