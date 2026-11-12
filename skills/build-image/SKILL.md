@@ -56,9 +56,9 @@ A merge to `main` runs **Build & Deploy Butler Gateway** on the `[self-hosted, u
 - **A dirty local checkout fails the release before anything is built** (`Your local changes … would be overwritten by checkout`). If you edited the checkout in an emergency, run `git checkout -- <those files>` **before** merging the release PR, not after (2026-11-12: the release ran first, failed in 4 s, and had to be re-run).
 - **`deploy-container.sh` alone never builds.** It recreates the container from the image the tag already names. Running it after a merge redeploys the old image, healthy and EXIT 0 (2026-11-12). The proof a release is live is the revision label: `docker inspect <c> --format '{{index .Config.Labels "org.opencontainers.image.revision"}}'` must equal the merge commit.
 
-### Pull-request CI: the `butler-ci` runner
+### Pull-request CI: GitHub-hosted now, `butler-ci` after the UNRAID upgrade
 
-Since 2026-11-11 (GitHub-hosted minutes ran out) pull-request checks run on `github-runner-ci-butler` (`runs-on: [self-hosted, butler-ci]`): ephemeral, unprivileged, no Docker socket, no mounts, `--cpus=12`, and **all of `/tmp` a tmpfs** (8g). Never give it the socket: a pull request runs code nobody has merged. Its speed rules are in "Speed" below.
+**Today pull-request checks run on GitHub-hosted runners** (`ubuntu-latest`; Filipe 2026-11-12: GitHub Pro plus an Actions budget **until UNRAID is upgraded**). On 2026-11-11..12 they ran on `github-runner-ci-butler` (`runs-on: [self-hosted, butler-ci]`): ephemeral, unprivileged, no Docker socket, no mounts, `--cpus=12`, and **all of `/tmp` a tmpfs** (8g). It stays deployed and idle. Never give it the socket: a pull request runs code nobody has merged. Move checks back to it (`runs-on: [self-hosted, butler-ci]`) only after the upgrade, and only when a gateway run there is close to the GitHub time (~4 min); its speed rules are in "Speed" below.
 
 ## Build Command
 
