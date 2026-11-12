@@ -1,6 +1,6 @@
 ---
 name: build-image
-description: "Build Docker images on UNRAID — BuildKit, multi-core parallelism, local registry push/pull, tagging conventions, cache optimization, and long-build patterns. Chains with deploy-container."
+description: "Build Docker images on UNRAID — BuildKit, build speed (fsync on docker.img, apt/npm/pip cache mounts, tmpfs for CI), local registry push/pull, tagging conventions, cache optimization, and long-build patterns. Chains with deploy-container."
 ---
 
 # Build Image
@@ -49,25 +49,74 @@ All other containers use `build: null` — pulled from Docker Hub or GHCR.
 
 For ad-hoc or agent-triggered builds. Subject to MCP SSH 30s timeout — use the setsid pattern for anything over ~20s.
 
-### GitHub Actions Runner (`github-runner`)
+### Releases: `ci-deploy.sh` (how production images are built)
 
-Self-hosted runner on UNRAID (`myoung34/github-runner:latest`), bridge network, Docker socket mounted. Builds triggered by GitHub Actions workflows. Has read-only access to `/mnt/user/repos`.
+A merge to `main` runs **Build & Deploy Butler Gateway** on the `[self-hosted, unraid]` runner, which SSHes to UNRAID with a forced command: `infra/scripts/ci-deploy.sh <container> <branch>`. That script fast-forwards the **local checkout** `/mnt/user/repos/atelier-butler` to `origin/<branch>`, runs `docker build` there (label `org.opencontainers.image.revision=<sha>`), pushes `:latest` and `:<short sha>`, then `deploy-container.sh` and `release-health.sh` (which watches ~10 min and rolls back on a regression).
 
-Manifest: `infra/manifests/containers/github-runner.yml`. Runner shares the host Docker daemon via socket — registry mirror config in `/boot/config/docker.cfg` applies automatically.
+- **A dirty local checkout fails the release before anything is built** (`Your local changes … would be overwritten by checkout`). If you edited the checkout in an emergency, run `git checkout -- <those files>` **before** merging the release PR, not after (2026-11-12: the release ran first, failed in 4 s, and had to be re-run).
+- **`deploy-container.sh` alone never builds.** It recreates the container from the image the tag already names. Running it after a merge redeploys the old image, healthy and EXIT 0 (2026-11-12). The proof a release is live is the revision label: `docker inspect <c> --format '{{index .Config.Labels "org.opencontainers.image.revision"}}'` must equal the merge commit.
+
+### Pull-request CI: GitHub-hosted now, `butler-ci` after the UNRAID upgrade
+
+**Today pull-request checks run on GitHub-hosted runners** (`ubuntu-latest`; Filipe 2026-11-12: GitHub Pro plus an Actions budget **until UNRAID is upgraded**). On 2026-11-11..12 they ran on `github-runner-ci-butler` (`runs-on: [self-hosted, butler-ci]`): ephemeral, unprivileged, no Docker socket, no mounts, `--cpus=12`, and **all of `/tmp` a tmpfs** (8g). It stays deployed and idle. Never give it the socket: a pull request runs code nobody has merged. Move checks back to it (`runs-on: [self-hosted, butler-ci]`) only after the upgrade, and only when a gateway run there is close to the GitHub time (~4 min); its speed rules are in "Speed" below.
 
 ## Build Command
 
 ```bash
 # Read build: section from manifest first, then:
 DOCKER_BUILDKIT=1 docker build \
-  --cpu-period=100000 --cpu-quota=2000000 \
+  --cpu-period=100000 --cpu-quota=800000 \
   -f <dockerfile> \
   -t <container.image> \
   -t localhost:5000/<image>:latest \
   <context>
 ```
 
-**CPU quota:** `--cpu-quota=2000000` / `--cpu-period=100000` = 20 cores. UNRAID has 40 threads — 20 leaves headroom for running services.
+**CPU quota:** `--cpu-quota=800000` / `--cpu-period=100000` = 8 cores, the value `ci-deploy.sh` uses (Filipe, 2026-09-27). More cores barely help: a cold build is bound by disk fsyncs and downloads, not CPU (see "Speed").
+
+## Speed (MANDATORY for every Dockerfile built on UNRAID — 2026-11-12)
+
+**Why builds and tests are slow here: fsync.** Docker's storage on UNRAID is `docker.img`, a loop file on btrfs. One `fsync` there takes **~46 ms**; in a tmpfs it takes 0.01 ms (measured 2026-11-12, 200 fsyncs: 9260 ms vs 2 ms). Anything that fsyncs per file crawls: dpkg (every unpacked file), SQLite (every commit), npm's cache writes. CPU is rarely the limit.
+
+What it cost before the fixes:
+
+| Where | Before | Cause |
+|---|---|---|
+| Butler image, cold cache (new `node:22-slim` upstream) | 35m52s (warm: 6–9 min) | builder apt 513 s, ffmpeg+pyatv 1520 s (dpkg fsyncs), 18 × `npm ci` in series 597 s |
+| Gateway PR tests on `butler-ci` | 14–17 min (GitHub: ~4 min) | SQLite test files in `os.tmpdir()` = `/tmp` on docker.img; single tests 0.0 s → 60–137 s |
+
+**Rules for every Dockerfile:**
+
+1. **apt with cache mounts and `force-unsafe-io`.** The `.deb`s survive a cold cache; dpkg skips its fsyncs (a failed layer is discarded anyway). Remove the dpkg setting at the end of the runtime stage.
+   ```dockerfile
+   RUN --mount=type=cache,id=apt-cache-<stage>,target=/var/cache/apt,sharing=locked \
+       --mount=type=cache,id=apt-lists-<stage>,target=/var/lib/apt/lists,sharing=locked \
+       rm -f /etc/apt/apt.conf.d/docker-clean \
+       && echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/02-unsafe-io \
+       && apt-get update && apt-get install -y --no-install-recommends <pkgs> \
+       && rm -f /etc/dpkg/dpkg.cfg.d/02-unsafe-io
+   ```
+   No `rm -rf /var/lib/apt/lists/*`: the lists are a cache mount, not in the layer. **One `id=` per stage**: with one shared locked cache the runtime stage's apt waited for the builder's, though BuildKit runs the stages in parallel.
+   **No `# syntax=docker/dockerfile:1` line**: the built-in frontend already has cache mounts, and resolving that image from Docker Hub cost 45.7 s per build.
+2. **npm: `--mount=type=cache,target=/root/.npm`** on every `npm ci`, with `--prefer-offline --no-audit --no-fund`.
+3. **pip: `--mount=type=cache,target=/root/.cache/pip`**, and drop `--no-cache-dir` (the cache lives in the mount, not the image).
+4. **Independent installs in parallel**, with a failure still fatal: `... | xargs -P 6 -I{} sh -c 'cd /app/{} && npm ci ...'` (xargs exits non-zero when any one fails).
+5. **Dependency manifests before source** (`COPY package*.json` → install → `COPY src`), so a code change reuses the install layers.
+6. **Expect a cold cache whenever the base tag moves upstream.** `FROM node:22-slim` is not pinned on purpose (security updates arrive without a PR); rules 1–4 are what make that cold build cheap.
+
+**Rules for CI on the home runners:**
+
+- **Every temp file in tmpfs.** The runner's whole `/tmp` is a tmpfs (`--tmpfs /tmp:exec,size=8g`), so `os.tmpdir()`, `mkdtemp`, SQLite test DBs and `RUNNER_WORKDIR=/tmp/runner` never touch docker.img. `exec` is required: npm runs esbuild's binary from there. The tmpfs counts against `--memory`.
+- **A new runner gets the same template**, or its tests are 4–5× slower than on GitHub with no error anywhere.
+- **ExtraParams only from the door rule's allow list** (`EXTRA_PARAMS_ALLOW` in `infra/scripts/lint-door-all.sh`): any other flag (`--cpu-shares` included) marks the template a host-root holder and fails the `lint` check.
+
+**Find where the time went, before guessing:**
+
+```bash
+docker buildx history ls                      # every build with its duration
+docker buildx history logs <build-id> | grep -E '^#[0-9]+ (DONE|\[)'   # per-step times
+```
+For tests, compare per-test `duration_ms` in a home run's log with a GitHub-hosted run of the same suite: a test that is 0.0 s there and seconds here is waiting on disk or network, not CPU. To check a filesystem from inside a container, time 200 `fsyncSync` calls with `node -e` (the UNRAID MCP blocks `dd`).
 
 ## Tagging Conventions
 
@@ -111,7 +160,7 @@ set -euo pipefail
 LOG="/tmp/build-<image>.log"
 echo "Build started: $(date)" > "$LOG"
 DOCKER_BUILDKIT=1 docker build \
-  --cpu-period=100000 --cpu-quota=2000000 \
+  --cpu-period=100000 --cpu-quota=800000 \
   -f <dockerfile> \
   -t <container.image> \
   -t localhost:5000/<image>:latest \
@@ -228,7 +277,8 @@ This skill produces images. The `deploy-container` skill deploys them:
 
 - **Tag mismatch** — `container.image` in the manifest must be the tag you build. The deploy writes the manifest image into the boot XML itself, so a build pushed under another tag either fails to start or, after one automatic retry, ends in DEPLOYMENT FAILED (exit 3). Before 2026-10-18 a stale boot XML silently redeployed the OLD image while the log named the new one.
 - **No python3 on UNRAID** — build scripts must use bash/jq/sed.
-- **Socket mount** — GitHub runner uses `/var/run/docker.sock`. Builds share the host daemon. No Docker-in-Docker.
+- **Socket mount** — only the deploy runner (`[self-hosted, unraid]`) has `/var/run/docker.sock`; builds share the host daemon, no Docker-in-Docker. The pull-request runner (`butler-ci`) never gets it.
+- **Slow build or slow tests = check fsync first** — see "Speed". A build over ~10 min or a home CI job far slower than its GitHub-hosted history is a disk problem until the step times say otherwise.
 - **Cache invalidation** — `COPY . .` busts all subsequent layers. Copy dependency files first.
 - **Multi-platform** — UNRAID is x86_64 only. No `--platform` needed.
 - **Disk space** — monitor `/mnt/user/registry/` growth. Registry GC needs a cron job.
