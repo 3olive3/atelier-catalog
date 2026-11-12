@@ -1,7 +1,7 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-10-30T22:19:15Z",
+  "lastUpdated": "2026-11-12T10:25:34Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
   "totalEntries": 139,
@@ -1238,8 +1238,8 @@
       {
         "catalogID": "build-image",
         "name": "Build Image",
-        "description": "Build Docker images on UNRAID — BuildKit, multi-core parallelism, local registry push/pull, tagging conventions, cache optimization, and long-build patterns. Chains with deploy-container.",
-        "version": "1.0.2",
+        "description": "Build Docker images on UNRAID — BuildKit, build speed (fsync on docker.img, apt/npm/pip cache mounts, tmpfs for CI), local registry push/pull, tagging conventions, releases via ci-deploy.sh, and long-build patterns. Chains with deploy-container.",
+        "version": "1.1.0",
         "source": "builtIn",
         "category": "devops",
         "tags": [
@@ -1317,7 +1317,7 @@
         "catalogID": "deploy-container",
         "name": "Deploy Container",
         "description": "The ONLY official way to deploy, update, or redeploy containers on UNRAID — manifest-driven pipeline with full UNRAID XML template knowledge, managed labels, drift detection, and 10-step deployment (container, DNS, proxy, firewall, monitoring, secrets).",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "source": "builtIn",
         "category": "devops",
         "tags": [
