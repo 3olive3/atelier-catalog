@@ -58,7 +58,7 @@ A merge to `main` runs **Build & Deploy Butler Gateway** on the `[self-hosted, u
 
 ### Pull-request CI: the `butler-ci` runner
 
-Since 2026-11-11 (GitHub-hosted minutes ran out) pull-request checks run on `github-runner-ci-butler` (`runs-on: [self-hosted, butler-ci]`): ephemeral, unprivileged, no Docker socket, no mounts, `--cpus=12 --cpu-shares=512`, and **all of `/tmp` a tmpfs** (8g). Never give it the socket: a pull request runs code nobody has merged. Its speed rules are in "Speed" below.
+Since 2026-11-11 (GitHub-hosted minutes ran out) pull-request checks run on `github-runner-ci-butler` (`runs-on: [self-hosted, butler-ci]`): ephemeral, unprivileged, no Docker socket, no mounts, `--cpus=12`, and **all of `/tmp` a tmpfs** (8g). Never give it the socket: a pull request runs code nobody has merged. Its speed rules are in "Speed" below.
 
 ## Build Command
 
@@ -108,7 +108,7 @@ What it cost before the fixes:
 
 - **Every temp file in tmpfs.** The runner's whole `/tmp` is a tmpfs (`--tmpfs /tmp:exec,size=8g`), so `os.tmpdir()`, `mkdtemp`, SQLite test DBs and `RUNNER_WORKDIR=/tmp/runner` never touch docker.img. `exec` is required: npm runs esbuild's binary from there. The tmpfs counts against `--memory`.
 - **A new runner gets the same template**, or its tests are 4–5× slower than on GitHub with no error anywhere.
-- **Production first:** CI runners run with `--cpu-shares=512`, so a release build wins the CPU when both run.
+- **ExtraParams only from the door rule's allow list** (`EXTRA_PARAMS_ALLOW` in `infra/scripts/lint-door-all.sh`): any other flag (`--cpu-shares` included) marks the template a host-root holder and fails the `lint` check.
 
 **Find where the time went, before guessing:**
 
