@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-10-30T22:19:15Z",
+  "lastUpdated": "2026-11-15T20:31:08Z",
   "mcps": [
     {
       "id": "actions",
@@ -32,6 +32,23 @@
         "approvals",
         "awareness",
         "read-only"
+      ]
+    },
+    {
+      "id": "artlist",
+      "kind": "native",
+      "name": "Artlist",
+      "version": "1.0.0",
+      "description": "Pictures with Artlist (phase 1) — credits left, the image models, what a job would cost, and making 1 to 4 pictures. Making pictures spends credits and runs only after the person who asked confirms it with Face ID («confirmado por quem pediu, com Face ID»); no files, links or uploads.",
+      "toolCount": 4,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "creative",
+        "images",
+        "artlist",
+        "spend"
       ]
     },
     {
@@ -92,7 +109,7 @@
       "name": "Cinema",
       "version": "1.0.0",
       "description": "Modo Cinema and Cinema Party — per room, the lights (and blinds, other screens) follow the film on Plex: dim on play, 30 % on pause, back to before at the end; party follows the film's colours across one or several rooms. Status, mode, start and end a session.",
-      "toolCount": 5,
+      "toolCount": 8,
       "runtime": "butler-gateway",
       "transport": "butler",
       "endpoint": "/api/v1/butler/mcp",
@@ -150,6 +167,23 @@
         "voice",
         "agents",
         "telephony"
+      ]
+    },
+    {
+      "id": "factory",
+      "kind": "native",
+      "name": "Factory",
+      "version": "1.0.0",
+      "description": "The remote factory's door, read-only for admins — status of the run in progress, recent runs with their failed step, and the scorecard. Reads a snapshot and says could not check when it is stale. A gate is decided only on the Atelier app's Face ID card, bound to one commit; the tool never approves.",
+      "toolCount": 7,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "factory",
+        "delivery",
+        "read-only",
+        "admin"
       ]
     },
     {
@@ -334,7 +368,7 @@
       "name": "Media",
       "version": "2.0.0",
       "description": "Unified media platform — Sonarr (TV series), Radarr (movies), SABnzbd (downloads), Plex (library browsing, search, metadata, playback sessions, playlists), and Overseerr (requests, approvals, user quotas) via REST APIs. Merged 2026-08 from the separate media-stack, plex, and overseerr servers.",
-      "toolCount": 71,
+      "toolCount": 74,
       "runtime": "node",
       "transport": "stdio",
       "tags": [

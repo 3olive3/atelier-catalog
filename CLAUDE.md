@@ -114,7 +114,7 @@ Available via the skill tool — this repo is the source of truth, so `.claude/s
 <!-- factory:begin -->
 ## Atelier Factory (generated — edit atelier-factory/kit, then reinstall)
 
-This repo runs the Atelier Factory kit (version 0.6.6). Its rules are enforced by hooks, not by memory:
+This repo runs the Atelier Factory kit (version 0.6.7). Its rules are enforced by hooks, not by memory:
 
 - **Model tiering.** Every Agent call needs a model, or a factory agent that pins one. Use `mechanic` (Haiku) for work with one right answer, `worker` / `verifier` / `learner` (Sonnet) by default, `planner` / `security-reviewer` (Opus) only for planning, architecture and high-risk changes. A plain `opus` call needs an `Opus-reason:` line in its prompt.
 - **Git flow.** Pushing to `main` or `develop` is blocked. Push a `feature/*` or `bugfix/*` branch and open a PR.
@@ -142,6 +142,15 @@ This repo runs the Atelier Factory kit (version 0.6.6). Its rules are enforced b
 - **Never** let a test or check touch the real `~/.atelier-factory` (or any home-directory state); point it at a throwaway folder through `FACTORY_STATE_DIR` or `$TMPDIR`. A worker's sandbox denies that path, so the check fails the same way on every attempt.
 - **Never** read a "failed 3 attempts" escalation as three different failures; the repeat detector compares raw output, so a pid, a timing or a temp-dir name hides a repeat. Compare the failing lines yourself before blaming the attempt or the tier.
 - **Never** let a worker fill a field the source does not give; write "not recorded", do not infer it.
+- **Never** give a node a check that needs installed dependencies unless an earlier step installs them; a fresh worktree has no `node_modules`, and the runner does not run `npm ci` for node checks (only the gate does). The check then fails the same way on Haiku and Sonnet.
+- **Never** write a check whose failure leaves only a constant message (`gateway build or tests fail`, `review-sirens review did not pass`); put the command's own failing output before the message, so the worker has something to fix and the repeat detector compares causes, not labels. Whether these checks silenced their output is not visible in the brief; what is visible is that the recorded failure is one constant line.
+- **Never** read a scorecard "highest in the window" or "lowest in the window" value as a current event; it is the worst value anywhere in the window and carries no date, so the same old event is flagged until it ages out. Check the "now" value and the ledger before calling it new.
+- **Never** read "gate verdict fail" as a cause; the gate fails by check name only, so open the check's own output before blaming the change.
+- **Never** add a flag to the Harness scorecard that gives a count without the series behind it; a safety-failure or regression count with no suite or agent name supports no rule.
+- **Never** put a repo-wide lint in a node's check unless the node's deps cover every file the lint scans; the worker cannot fix a file outside its scope (the runner reverts it), so the node fails on another node's literals.
+- **Never** judge whether a fix works from evidence that predates it: compare each row's time with the fix's merge time (`git log --format='%h %ad'`) before saying a fix failed or a gap remains.
+- **Never** read a failed attempt whose recorded output shows only passing lines as "no cause"; the runner also fails an attempt whose check passed when files outside its scope were reverted (`bin/factory-run.mjs:552`), and it keeps only the last 60 lines of output. Say which of the three the evidence supports, or say it cannot tell.
+- **Never** read "recovered in a later execution" as "the plan was fixed": the ledger does not record whether the node's definition changed between executions, so a recovery can be a changed plan (the rule was right) or a transient or environmental failure (the rule fired for nothing). Say which one the evidence supports, or say it cannot tell.
 
 ### Working through the factory
 

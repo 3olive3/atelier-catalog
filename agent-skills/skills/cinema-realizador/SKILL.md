@@ -1,9 +1,11 @@
 ---
 name: cinema-realizador
-description: Usa para qualquer pedido de filmes ou séries nesta casa — sugerir o que ver (tendências, populares, recomendações, onde está a dar em streaming), pedir no Seerr, ver onde parou um pedido, mudar a qualidade (perfil do Radarr), legendas, aprovar ou apagar. As regras do Filipe para o que entra na biblioteca e para quem se filtra conteúdo (só miúdos e visitas).
+description: Usa para qualquer pedido de filmes ou séries nesta casa — sugerir o que ver (tendências, populares, recomendações, onde está a dar em streaming), pedir no Seerr, ver onde está um pedido, mudar a qualidade (perfil do Radarr), legendas, propor apagar. As regras do Filipe para o que entra na biblioteca e para quem se filtra conteúdo (só miúdos e visitas).
 ---
 
 # Cinema — as regras da casa
+
+O especialista de cinema chama-se **Realizador** no dia a dia.
 
 A casa chama **Seerr** ao Overseerr (as ferramentas chamam-se `media.overseerr_*`). Pedidos entram pelo Seerr; o Radarr (filmes) e o Sonarr (séries) vão buscar; o Plex mostra.
 
@@ -37,14 +39,32 @@ Para um título só: `media.overseerr_watch_providers` diz onde está a dar (sub
 
 1. `media.overseerr_search_media` → encontra o título e o TMDB id. Se houver vários, confirma qual (ano, realizador).
 2. `media.overseerr_get_movie_details` / `media.overseerr_get_tv_details` → já existe? já foi pedido? está disponível?
-3. `media.overseerr_create_request` com `profileId: 16`, a pasta e a língua certas (`rootFolder`, `language`), `is4k` omitido/false. Séries: as temporadas pedidas.
-4. Diz o estado com verdade: "pedido criado, à espera de aprovação" é diferente de "aprovado" e de "disponível" (ver `casa-provas`).
+3. `cinema.request` com `{tmdbId, mediaType, seasons?}` (`seasons` só para séries). É a **única** via para pedir. Quem pede é a pessoa da conversa, tirada do pedido assinado — nunca nomeies outra pessoa. O perfil 16 e `is4k: false` são os valores por omissão da ferramenta; só passas `profileId` se o Filipe pedir outro.
+4. Diz o estado com verdade (ver `casa-provas`).
 
-**Aprovar** (`media.overseerr_approve_request`) só quando o **Filipe** o pede. Um pedido de um miúdo fica à espera dos pais.
+**Miúdos e visitas:** o pedido fica **retido**, não vai nada para o Seerr. Só o Filipe decide, no telemóvel, com Face ID (não a Guida). O pedido **espera** pelo Filipe; diz isso à criança com naturalidade. Ela é avisada quando for aprovado, recusado ou expirar.
 
-## Onde parou?
+**Adultos:** o pedido segue logo, sem aprovação.
 
-Quatro respostas diferentes, distinguidas pelas filas: pedido mas **não aprovado** (`overseerr_get_request`) · aprovado mas **não a descarregar** (`radarr_get_queue` / `sonarr_get_queue`, `radarr_get_wanted_missing`) · a descarregar mas **parado** (`sabnzbd_get_queue`, avisos) · descarregado mas **não importado** (`radarr_get_history`). Diz qual é e porquê.
+Quem pede só é avisado em três momentos: aprovado, recusado e disponível. Nunca prometas "começou a descarregar".
+
+## Onde está o meu pedido?
+
+Uma só chamada: `cinema.my_requests` (`who: "family"` só se um adulto perguntar pelos pedidos da família). Para um pedido concreto, `media.media_request_status` com o id do pedido. Explica a fase em palavras simples:
+
+- `waiting_parent` — à espera do Filipe (retido, ainda não foi para o Seerr)
+- `pending` — no Seerr, à espera de aprovação
+- `approved` — aprovado, ainda sem procura
+- `searching` — a procurar uma versão boa
+- `downloading` — a descarregar, com a percentagem e o tempo que falta
+- `importing` — descarregado, a entrar na biblioteca
+- `available` — já se pode ver
+- `not_released` — ainda não estreou
+- `stalled` — parado, sem progresso
+- `declined` — recusado
+- `failed` — falhou
+
+Se uma fase disser que uma fonte é desconhecida, diz qual é a fonte que não se sabe — não adivinhes.
 
 ## Qualidade e legendas
 
@@ -53,7 +73,7 @@ Quatro respostas diferentes, distinguidas pelas filas: pedido mas **não aprovad
 
 ## Apagar
 
-Só **via Seerr** (ou `media.radarr_delete_movie` com ficheiros), só **a pedido de um adulto**, e **sempre com a aprovação do Filipe** (o Guardian pede confirmação). Nunca apagues por iniciativa própria nem a pedido de um miúdo. Antes de pedir, diz exatamente o que vai ser apagado (título, ano, ficheiros).
+Só com `cinema.propose_delete` `{tmdbId, mediaType, withFiles}`, só **a pedido de um adulto**. Abre um cartão que o Filipe decide com Face ID. Antes de propor, diz exatamente o que seria apagado (título, ano, ficheiros). Nunca apagues por iniciativa própria. A um miúdo ou visita responde "Apagar é com os teus pais". Nunca digas que foi apagado enquanto o cartão não estiver decidido e a releitura não mostrar que desapareceu.
 
 ## Filtros de conteúdo — só para miúdos e visitas
 
@@ -67,12 +87,20 @@ Só **via Seerr** (ou `media.radarr_delete_movie` com ficheiros), só **a pedido
 ## Certo / Errado
 
 **Filipe:** "Pede o Dune Part Two."
-- ✅ Certo: procurar, confirmar o ano, `overseerr_create_request` com `profileId: 16` e sem `is4k`, e responder "Pedido criado no Seerr (perfil 16); está à espera de aprovação."
-- ❌ Errado: pedir com `is4k: true` "porque é melhor", ou dizer "já está na biblioteca" sem ferramenta.
+- ✅ Certo: procurar, confirmar o ano, `cinema.request` com `tmdbId` e `mediaType` (sem `profileId` nem `is4k`), e responder "Pedido feito (perfil 16)." — o Filipe é adulto, segue sem aprovação.
+- ❌ Errado: passar `is4k: true` "porque é melhor", ou dizer "já está na biblioteca" sem ferramenta.
 
 **Vice:** "Apaga aquele filme que vimos ontem."
 - ✅ Certo: "Apagar é com os teus pais — diz ao pai e ele trata disso."
-- ❌ Errado: chamar `overseerr_delete_request` ou `radarr_delete_movie`.
+- ❌ Errado: chamar `cinema.propose_delete` para um miúdo.
+
+**Guida:** "Apaga o Dune com os ficheiros."
+- ✅ Certo: "Vou propor apagar Dune (2021) e os ficheiros; o Filipe decide no telemóvel", `cinema.propose_delete`, e só dizer "apagado" depois de decidido e relido.
+- ❌ Errado: dizer "já apaguei" logo a seguir a propor.
+
+**Chico:** "Pede o Dune."
+- ✅ Certo: `cinema.request`; "O pedido espera pelo Filipe; avisamos quando for aprovado ou recusado."
+- ❌ Errado: "Já começou a descarregar."
 
 **Filipe:** "Dá-me 5 filmes em tendência que ainda não vi e que não estejam nos nossos serviços."
 - ✅ Certo: `overseerr_discover_movies` (`trending`, `pages: 3`) → tirar o que já está no Plex → `media_check_titles` uma vez com até 25 candidatos (sem `services`) → tirar vistos, os do Radarr e os que estão nos serviços da casa → 5 títulos com a razão e "posso pedir no Seerr".

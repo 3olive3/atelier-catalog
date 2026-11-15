@@ -1,6 +1,6 @@
 # Atelier Factory — one-page manual
 
-<!-- Installed by atelier-factory (kit 0.6.6). Do not edit here: edit
+<!-- Installed by atelier-factory (kit 0.6.7). Do not edit here: edit
      atelier-factory/kit/MANUAL.md and reinstall. -->
 
 The factory is how work gets built in this repo: rules enforced by code (**harness**),
@@ -11,6 +11,7 @@ every unit checked until it passes (**loop**), work split into real steps with g
 
 - **Right model for the job.** An agent call without a model is blocked. `mechanic` runs on Haiku, `worker`, `verifier` and `learner` on Sonnet, `planner` and `security-reviewer` on Opus. Opus anywhere else needs a written reason.
 - **Safety.** Pushing to `main` or `develop` and writing `.env` files are blocked. Secrets live only in Vaultwarden.
+- **One release at a time.** A release action (merge or PR into `main`, a tag push, `gh release create`, `harness-release.sh`, a TestFlight archive or upload) takes that repo's release lock for 3 hours. A second session's release is refused and told who holds it. Hand the release to the holder, or, if it has finished and you agree, `node bin/factory-release-lock.mjs release <key>`; `status` lists the locks.
 - **Learned rules.** The never-list in this repo's CLAUDE.md is loaded in every session.
 - **Telemetry.** Every subagent call and every block goes to the ledger (`~/.atelier-factory/ledger/`), which feeds the scorecard.
 - **CI.** PRs run the repo's tests and gates.

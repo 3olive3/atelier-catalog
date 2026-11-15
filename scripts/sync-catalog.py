@@ -177,6 +177,12 @@ def plan(source, adopt_source_versions, native=None):
 
     entries, notes = {}, []
 
+    # A directory under mcp/ that registers no tools is not an MCP server (the Artlist runner,
+    # spec 007, is a socket server that shares its name with the native `artlist` tools): the
+    # native entry owns the id.
+    for rid in sorted(set(source) & set(native or {})):
+        if not source[rid]["tools"]:
+            del source[rid]
     collisions = sorted(set(source) & set(native or {}))
     if collisions:
         sys.exit(f"ids both under mcp/ and native in the gateway: {', '.join(collisions)} — rename one")
