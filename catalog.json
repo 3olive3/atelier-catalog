@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-11-12T10:25:34Z",
+  "lastUpdated": "2026-11-15T20:18:08Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 139,
+  "totalEntries": 141,
   "types": {
     "guardrails": [
       {
@@ -307,6 +307,25 @@
         "category": "core"
       },
       {
+        "catalogID": "artlist",
+        "kind": "native",
+        "name": "Artlist",
+        "description": "Pictures with Artlist (phase 1) — credits left, the image models, what a job would cost, and making 1 to 4 pictures. Making pictures spends credits and runs only after the person who asked confirms it with Face ID («confirmado por quem pediu, com Face ID»); no files, links or uploads.",
+        "version": "1.0.0",
+        "source": "butlerNative",
+        "transport": "butler",
+        "endpoint": "/api/v1/butler/mcp",
+        "toolCount": 4,
+        "runtime": "butler-gateway",
+        "tags": [
+          "creative",
+          "images",
+          "artlist",
+          "spend"
+        ],
+        "category": "core"
+      },
+      {
         "catalogID": "atelier",
         "kind": "native",
         "name": "Atelier",
@@ -461,6 +480,25 @@
         "command": "node",
         "args": [
           "dist/index.js"
+        ],
+        "category": "core"
+      },
+      {
+        "catalogID": "factory",
+        "kind": "native",
+        "name": "Factory",
+        "description": "The remote factory's door, read-only for admins — status of the run in progress, recent runs with their failed step, and the scorecard. Reads a snapshot and says could not check when it is stale. A gate is decided only on the Atelier app's Face ID card, bound to one commit; the tool never approves.",
+        "version": "1.0.0",
+        "source": "butlerNative",
+        "transport": "butler",
+        "endpoint": "/api/v1/butler/mcp",
+        "toolCount": 7,
+        "runtime": "butler-gateway",
+        "tags": [
+          "factory",
+          "delivery",
+          "read-only",
+          "admin"
         ],
         "category": "core"
       },

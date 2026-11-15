@@ -1,0 +1,19 @@
+{
+  "catalogID": "artlist",
+  "kind": "native",
+  "name": "Artlist",
+  "description": "Pictures with Artlist (phase 1) — credits left, the image models, what a job would cost, and making 1 to 4 pictures. Making pictures spends credits and runs only after the person who asked confirms it with Face ID («confirmado por quem pediu, com Face ID»); no files, links or uploads.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 4,
+  "runtime": "butler-gateway",
+  "tags": [
+    "creative",
+    "images",
+    "artlist",
+    "spend"
+  ],
+  "category": "core"
+}

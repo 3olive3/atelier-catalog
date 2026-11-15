@@ -62,4 +62,11 @@ run 1 "compat-wrong-toolCount" "compat/mcps-catalog.json" "$ID"
 clean
 
 run 0 "rewrite-then-check"
+# A tool-less directory under mcp/ (the Artlist runner) that shares its id with a native
+# server must not block the sync: the native entry owns the id.
+mkdir -p "$T/atelier-butler/mcp/rn" "$T/atelier-butler/gateway"
+printf '{"name":"rn","version":"0.1.0"}\n' > "$T/atelier-butler/mcp/rn/package.json"
+printf '{"kind":"native","gatewayVersion":"1.0.0","servers":[{"id":"rn","name":"Rn","description":"native","tags":[],"tools":["rn.a"]}]}\n' > "$T/atelier-butler/gateway/native-servers.json"
+clean
+run 0 "runner-dir-shares-native-id" "rn"
 echo "all sync-catalog checks passed"

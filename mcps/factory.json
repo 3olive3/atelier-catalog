@@ -1,0 +1,19 @@
+{
+  "catalogID": "factory",
+  "kind": "native",
+  "name": "Factory",
+  "description": "The remote factory's door, read-only for admins — status of the run in progress, recent runs with their failed step, and the scorecard. Reads a snapshot and says could not check when it is stale. A gate is decided only on the Atelier app's Face ID card, bound to one commit; the tool never approves.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 7,
+  "runtime": "butler-gateway",
+  "tags": [
+    "factory",
+    "delivery",
+    "read-only",
+    "admin"
+  ],
+  "category": "core"
+}
