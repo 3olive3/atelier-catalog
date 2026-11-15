@@ -7,7 +7,7 @@
   "source": "butlerNative",
   "transport": "butler",
   "endpoint": "/api/v1/butler/mcp",
-  "toolCount": 5,
+  "toolCount": 8,
   "runtime": "butler-gateway",
   "tags": [
     "entertainment",

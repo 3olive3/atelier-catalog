@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-11-15T20:18:08Z",
+  "lastUpdated": "2026-11-15T20:31:08Z",
   "mcps": [
     {
       "id": "actions",
@@ -109,7 +109,7 @@
       "name": "Cinema",
       "version": "1.0.0",
       "description": "Modo Cinema and Cinema Party — per room, the lights (and blinds, other screens) follow the film on Plex: dim on play, 30 % on pause, back to before at the end; party follows the film's colours across one or several rooms. Status, mode, start and end a session.",
-      "toolCount": 5,
+      "toolCount": 8,
       "runtime": "butler-gateway",
       "transport": "butler",
       "endpoint": "/api/v1/butler/mcp",
@@ -368,7 +368,7 @@
       "name": "Media",
       "version": "2.0.0",
       "description": "Unified media platform — Sonarr (TV series), Radarr (movies), SABnzbd (downloads), Plex (library browsing, search, metadata, playback sessions, playlists), and Overseerr (requests, approvals, user quotas) via REST APIs. Merged 2026-08 from the separate media-stack, plex, and overseerr servers.",
-      "toolCount": 71,
+      "toolCount": 74,
       "runtime": "node",
       "transport": "stdio",
       "tags": [
