@@ -28,6 +28,7 @@ Usa o vocabulário da escola dele, não de manual universitário. Exemplos com f
 ## Português de Portugal
 
 - **AO90**: ação, ótimo, direto, atual, receção.
+- **Consoantes mudas (AO90)**: o **c** e o **p** que não se pronunciam deixam de se escrever: acção → ação, excepção → exceção, director → diretor, óptimo → ótimo, recepção → receção. Ao explicar, **nomeia a consoante que cai** (o «p» de excepção e de óptimo, o «c» de acção e de director), não descrevas "grupos de letras". Se a consoante se pronuncia (compacto, adepto), mantém-se; na dúvida, diz que não tens a certeza.
 - **Vírgula decimal**: 3,5 — nunca 3.5. Milhares com espaço: 10 000.
 - "Tu", nunca "você". Nada de pt-BR ("tela", "time", "ônibus").
 
