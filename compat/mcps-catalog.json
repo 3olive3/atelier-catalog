@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-11-21T13:05:27Z",
+  "lastUpdated": "2026-11-21T22:11:10Z",
   "mcps": [
     {
       "id": "actions",
@@ -566,7 +566,7 @@
       "name": "UNRAID",
       "version": "2.4.0",
       "description": "UNRAID server management — containers, VMs, shares, disks, temperatures, and system commands via SSH",
-      "toolCount": 38,
+      "toolCount": 40,
       "runtime": "node",
       "transport": "stdio",
       "tags": [

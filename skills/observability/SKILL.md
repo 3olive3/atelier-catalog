@@ -90,13 +90,33 @@ Every alert rule **must** carry these, and an investigator can rely on them:
 | `severity` | urgency | `critical`, `warning`, `info` |
 | `system` | what broke — the routing key | 19 values; see `incident-routing.json` |
 | `layer` | where it sits | `infrastructure`, `containers`, `applications`, `network`, `smarthome` |
-| `remediation_tier` | what automation may do | `notify-only`, `investigate` |
+| `remediation_tier` | what automation may do | `notify-only`, `investigate`, `auto` |
 
-!!! warning "`remediation_tier` is declarative only today"
+#### `remediation_tier: auto` (spec 024, self-healing)
+
+`notify-only` < `investigate` < `auto`. `auto` means: a runbook in Butler's closed registry
+(`gateway/src/remediation/registry.ts`, a constant reviewed in git) names this `alertname` and may
+try once to fix it. The label is the declaration in the rule; the registry is the permission.
+Neither is enough alone: a rule tagged `auto` with no runbook does nothing.
+
+- **Rules that carry it today (6):** `ConfigDrift`, `LowDiskSpace`, the two non-Minecraft
+  `UptimeKumaServiceDown` rules, the `warning` `TargetDown` rule (not the critical tier-1 one) and
+  `PostgresDeadTuplesHigh`. Minecraft's `UptimeKumaServiceDown` and every critical rule stay as they were.
+- **It still auto-investigates.** `maybeAutoInvestigate` treats `auto` like `investigate`
+  (`gateway/src/incidents/service.ts`): one read-only investigator run when the incident opens.
+  Note `ConfigDrift` is `severity: info`, so it opens no incident; its event still reaches the runner.
+- **Phase 1 only plans.** The runner is off by default (`enabled: false` in git) and no runbook can
+  go above `dry_run`: it records what it would do (`remediation.planned`) and changes nothing.
+  Turning it on, and any later `live` mode, is a reviewed git change, never a runtime switch.
+  The live file can only switch the runner off or lower a mode.
+- Do not add `auto` to a rule to "turn on" self-healing. A new runbook is a PR in the closed lane
+  (registry entry, host script, Guardian test, security review, Filipe's approval).
+
+!!! warning "`remediation_tier` is otherwise declarative"
     Workflows in `gateway/src/config/workflows.json` trigger on explicit
     `alertname`, not on tier. The matching engine supports arbitrary label
     matching (`gateway/src/workflows/matching.ts`), so the label *is* usable —
-    it simply is not used yet, and 72 of 78 rules do not set it. Do not assume
+    it simply is not used by workflows yet, and most rules do not set it. Do not assume
     an untiered alert is being held back by anything.
 
 ### Regenerating the catalogue
