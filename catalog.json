@@ -1,10 +1,10 @@
 {
   "name": "Atelier Official Catalog",
   "version": "2.0.0",
-  "lastUpdated": "2026-11-15T20:31:08Z",
+  "lastUpdated": "2026-11-21T13:05:27Z",
   "description": "Built-in and community catalog entries for the Atelier platform",
   "repository": "https://github.com/3olive3/atelier-catalog",
-  "totalEntries": 141,
+  "totalEntries": 142,
   "types": {
     "guardrails": [
       {
@@ -432,6 +432,24 @@
           "device-profiles",
           "access-groups"
         ]
+      },
+      {
+        "catalogID": "decisions",
+        "kind": "native",
+        "name": "Decisões",
+        "description": "Decision cards in «À espera de ti» (spec 023): post one question for Filipe with one or two buttons, read the answer back, withdraw it, and consume a Face ID consent once for its exact version. A card grants nothing by itself; callers see only their own cards.",
+        "version": "1.0.0",
+        "source": "butlerNative",
+        "transport": "butler",
+        "endpoint": "/api/v1/butler/mcp",
+        "toolCount": 4,
+        "runtime": "butler-gateway",
+        "tags": [
+          "decisions",
+          "approvals",
+          "awareness"
+        ],
+        "category": "core"
       },
       {
         "catalogID": "duplicacy",

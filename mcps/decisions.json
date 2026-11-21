@@ -1,0 +1,18 @@
+{
+  "catalogID": "decisions",
+  "kind": "native",
+  "name": "Decisões",
+  "description": "Decision cards in «À espera de ti» (spec 023): post one question for Filipe with one or two buttons, read the answer back, withdraw it, and consume a Face ID consent once for its exact version. A card grants nothing by itself; callers see only their own cards.",
+  "version": "1.0.0",
+  "source": "butlerNative",
+  "transport": "butler",
+  "endpoint": "/api/v1/butler/mcp",
+  "toolCount": 4,
+  "runtime": "butler-gateway",
+  "tags": [
+    "decisions",
+    "approvals",
+    "awareness"
+  ],
+  "category": "core"
+}
