@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-11-15T20:31:08Z",
+  "lastUpdated": "2026-11-21T13:05:27Z",
   "mcps": [
     {
       "id": "actions",
@@ -139,6 +139,22 @@
         "gateway",
         "device-profiles",
         "access-groups"
+      ]
+    },
+    {
+      "id": "decisions",
+      "kind": "native",
+      "name": "Decisões",
+      "version": "1.0.0",
+      "description": "Decision cards in «À espera de ti» (spec 023): post one question for Filipe with one or two buttons, read the answer back, withdraw it, and consume a Face ID consent once for its exact version. A card grants nothing by itself; callers see only their own cards.",
+      "toolCount": 4,
+      "runtime": "butler-gateway",
+      "transport": "butler",
+      "endpoint": "/api/v1/butler/mcp",
+      "tags": [
+        "decisions",
+        "approvals",
+        "awareness"
       ]
     },
     {
