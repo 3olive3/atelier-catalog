@@ -16,7 +16,7 @@
     "UNRAID_PASSWORD": ""
   },
   "category": "core",
-  "toolCount": 40,
+  "toolCount": 48,
   "runtime": "node",
   "tags": [
     "infrastructure",
