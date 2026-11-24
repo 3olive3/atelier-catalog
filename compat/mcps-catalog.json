@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-11-22T15:17:05Z",
+  "lastUpdated": "2026-11-24T10:13:11Z",
   "mcps": [
     {
       "id": "actions",
@@ -292,7 +292,7 @@
       "name": "HPE iLO",
       "version": "1.0.0",
       "description": "HPE iLO 4 server management — system info, processors, memory, storage, network adapters, temperatures, fans, power supplies, power control, indicator LED, iLO management, event logs, firmware inventory, virtual media, and license info via Redfish REST API",
-      "toolCount": 23,
+      "toolCount": 24,
       "runtime": "node",
       "transport": "stdio",
       "tags": [

@@ -16,7 +16,7 @@
     "ILO_INSECURE_TLS": ""
   },
   "category": "hardware",
-  "toolCount": 23,
+  "toolCount": 24,
   "runtime": "node",
   "tags": [
     "infrastructure",
