@@ -8,6 +8,7 @@ The agents' `IDENTITY.md`, `SOUL.md` and `USER.md` live in the Bridge workspaces
 | filipe | IDENTITY, SOUL | no more Kimchi, `sessions_spawn`, `agents_list`, the scout/builder/Content Factory classifier, "never say I can't", "update these files". His USER.md stays as is. |
 | vice, chico | IDENTITY, SOUL | `sessions_spawn` → `Agent` (SDK sub-agent); Minecraft: own server only, via `minecraft.*` |
 | guida | SOUL, USER | "actualizo" removed (preferences now go to Atelier Memory) |
+| artist | SOUL | the two house rules that never depend on the skill being loaded: no voice cloning for anyone, family photos and looks never leave the house (2026-11-26, safety evals) |
 | guest | IDENTITY, SOUL | lights in the guest zone + film requests (Filipe, 2026-10-18); never the family's viewing |
 
 Rules:
